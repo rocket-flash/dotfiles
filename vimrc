@@ -11,12 +11,11 @@ syntax enable
 
 set pastetoggle=<F2>
 
-set t_Co=256
-colorscheme inkpot
-
 if has("gui_running")
     set lines=46
     set columns=146
-"else
+else
+    set t_Co=256
+    colorscheme inkpot
 "    set background=dark
 endif
