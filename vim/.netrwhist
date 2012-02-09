@@ -1,0 +1,5 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_1='/home/mathieu/src/aur/sabnzbd-0.6.5'
+let g:netrw_dirhist_2='/home/mathieu/src/jeux/ps3/jeux/ps3raw-0.1.0/pkg'
+let g:netrw_dirhist_3='/home/mathieu/tmp/emu_project/nes/doc/links.txt'
