@@ -1,0 +1,5 @@
+alias make='make -j4'
+alias thormount='sshfs thor:/home/mathieu /mnt/thor'
+alias thorwmount='sshfs thorw:/home/mathieu /mnt/thor'
+alias thorumount='fusermount -u /mnt/thor'
+alias mcadmin='screen -x'

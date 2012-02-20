@@ -1,0 +1,26 @@
+# ls aliases
+alias ls='ls --color=auto'
+alias ll='ls -lh'
+alias la='ls -A'
+alias lk='ls -l --block-size=1k'
+alias lm='ls -l --block-size=1m'
+alias lr='ls -lArth'
+
+# grep aliases
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+# Renaming aliases
+alias lower='rename '\''y/\ A-Z/_a-z/'\'''
+alias rename='perl-rename'
+
+alias jgrep='grep -r --include='\''*.java'\'''
+alias astyle='astyle --style=java --formatted --suffix=.bak'
+alias diff='colordiff -u'
+alias svn_clean='svn status --no-ignore | egrep "^[\?I]" | awk '\''{print $2}'\'' | xargs rm -rf'
+alias hd='hexdump -C'
+alias t='thunar'
+
+# Load this host's specific aliases
+[[ -f ~/.zsh_aliases.host ]] && source ~/.zsh_aliases.host
