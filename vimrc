@@ -14,6 +14,7 @@ set pastetoggle=<F2>
 if has("gui_running")
     set lines=46
     set columns=146
+    colorscheme inkpot_gui
 else
     set t_Co=256
     colorscheme inkpot
