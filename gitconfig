@@ -1,17 +1,19 @@
 [color]
-diff = auto
-status = auto
-branch = auto
-ui = true
+    diff = auto
+    status = auto
+    branch = auto
+    ui = true
 [color "diff"]
-whitespace = red reverse
+    whitespace = red reverse
 [core]
-whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
+    whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
 [user]
-name = acidrain42
-email = acidrain1@gmail.com
+    name = acidrain42
+    email = acidrain1@gmail.com
 [alias]
     st = status
     co = checkout
 [gui]
-	editor = SciTE
+    editor = SciTE
+    fontui = -family \"Droid Sans\" -size 10 -weight normal -slant roman -underline 0 -overstrike 0
+    fontdiff = -family \"Droid Sans Mono\" -size 10 -weight normal -slant roman -underline 0 -overstrike 0
