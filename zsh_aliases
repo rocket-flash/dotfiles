@@ -15,6 +15,7 @@ alias egrep='egrep --color=auto'
 alias lower='rename '\''y/\ A-Z/_a-z/'\'''
 alias rename='perl-rename'
 
+alias up='sudo pacman -Syu'
 alias jgrep='grep -r --include='\''*.java'\'''
 alias astyle='astyle --style=java --formatted --suffix=.bak'
 alias diff='colordiff -u'
