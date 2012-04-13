@@ -97,25 +97,10 @@ if [ -d /opt/sdk/ps3/psl1ght ]; then
     export PSL1GHT=/opt/sdk/ps3/psl1ght
 fi
 
-#PS3SDK 1.92
-if [ -d /opt/sdk/cell ]; then
-    export CELL_SDK=/opt/sdk/cell
-    #export PATH=$PATH:$CELL_SDK/host-linux/bin
-    #export PATH=$PATH:$CELL_SDK/host-linux/Cg/bin
-    #export PATH=$PATH:$CELL_SDK/host-linux/ppu/bin
-    #export PATH=$PATH:$CELL_SDK/host-linux/spu/bin
-fi
-
 #DevKitPRO
 if [ -d /opt/sdk/devkitpro ]; then
     export DEVKITPRO=/opt/sdk/devkitpro
     export DEVKITARM=${DEVKITPRO}/devkitARM
     export DEVKITPPC=${DEVKITPRO}/devkitPPC
     export PATH="$PATH:$DEVKITARM/bin:$DEVKITPPC/bin"
-fi
-
-# PS3Tools
-if [ -d /home/mathieu/src/jeux/ps3/tools ]; then
-    export PATH=$PATH:/home/mathieu/src/jeux/ps3/tools/ps3tools
-    export PATH=$PATH:/home/mathieu/src/jeux/ps3/tools/ps3utils
 fi
