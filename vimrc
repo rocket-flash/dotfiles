@@ -8,6 +8,7 @@ set ruler
 set nocompatible
 
 syntax enable
+au BufNewFile,BufRead *.bf set filetype=brainfuck
 
 set pastetoggle=<F2>
 
