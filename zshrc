@@ -9,7 +9,7 @@ promptinit
 colors
 
 # bind special keys according to readline configuration
-eval "$(sed -n 's/^/bindkey /; s/: / /p' /etc/inputrc)"
+eval "$(sed -n 's/^/bindkey /; s/: / /p' /etc/inputrc)" > /dev/null
 
 bindkey "^[[A" history-search-backward
 bindkey "^[[B" history-search-forward
@@ -59,6 +59,7 @@ PS2='> '
 RPROMPT=$'$(vcs_info_wrapper)'"%(?.${FG_BRIGHT_GREEN}.${FG_BRIGHT_RED})[%?]${COLOR_RESET}"
 
 [[ -f ~/.zsh_aliases ]] && source ~/.zsh_aliases
+[[ -f ~/.zsh_functions ]] && source ~/.zsh_functions
 
 export EDITOR="/usr/bin/vim"
 export PAGER="/usr/bin/most"
