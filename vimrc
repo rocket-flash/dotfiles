@@ -1,12 +1,28 @@
+" Remove vi compatibility
+set nocompatible
+
+" Indent settings
 set expandtab
 set tabstop=4
 set shiftwidth=4
 set autoindent
 set smartindent
+
+" Other settings
 set backspace=2
 set ruler
-set nocompatible
+set number
+set nowrap
 
+" Set to auto read when a file is changed from the outside
+set autoread
+
+"Key remaps
+noremap <Space> <PageDown>
+nnoremap <tab> %
+vnoremap <tab> %
+
+" Syntaxes
 syntax enable
 au BufNewFile,BufRead *.bf set filetype=brainfuck
 
@@ -19,5 +35,4 @@ if has("gui_running")
 else
     set t_Co=256
     colorscheme inkpot
-"    set background=dark
 endif
