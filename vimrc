@@ -8,11 +8,17 @@ set shiftwidth=4
 set autoindent
 set smartindent
 
+" Search settings
+set ignorecase
+set smartcase
+set incsearch
+
 " Other settings
 set backspace=2
 set ruler
 set number
 set nowrap
+set pastetoggle=<F2>
 
 " Set to auto read when a file is changed from the outside
 set autoread
@@ -25,8 +31,6 @@ vnoremap <tab> %
 " Syntaxes
 syntax enable
 au BufNewFile,BufRead *.bf set filetype=brainfuck
-
-set pastetoggle=<F2>
 
 " Pathogen
 call pathogen#infect()
