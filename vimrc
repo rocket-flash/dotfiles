@@ -40,3 +40,8 @@ else
     set t_Co=256
     colorscheme inkpot
 endif
+
+" --- PLUGINS ---
+" Tagbar
+nmap <leader>l :TagbarToggle<cr>
+imap <leader>l <ESC>:TagbarToggle<cr>i
