@@ -28,6 +28,10 @@ au BufNewFile,BufRead *.bf set filetype=brainfuck
 
 set pastetoggle=<F2>
 
+" Pathogen
+call pathogen#infect()
+filetype plugin indent on
+
 if has("gui_running")
     set lines=46
     set columns=146
