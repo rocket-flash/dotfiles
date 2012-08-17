@@ -24,5 +24,5 @@ alias svn_clean='svn status --no-ignore | egrep "^[\?I]" | awk '\''{print $2}'\'
 alias hd='hexdump -C'
 alias t='thunar'
 
-# Load this host's specific aliases
-[[ -f ~/.zsh_aliases.host ]] && source ~/.zsh_aliases.host
+# Load local aliases
+[[ -f ~/.zsh_aliases.local ]] && source ~/.zsh_aliases.local
