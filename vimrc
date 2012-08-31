@@ -19,6 +19,7 @@ set ruler
 set number
 set nowrap
 set pastetoggle=<F2>
+set showcmd
 
 " Set to auto read when a file is changed from the outside
 set autoread
@@ -55,6 +56,7 @@ let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplModSelTarget = 1
+let g:miniBufExplForceSyntaxEnable = 1
 
 " NERDTree
 nnoremap <C-n> :NERDTreeToggle<cr>
