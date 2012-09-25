@@ -32,6 +32,7 @@ vnoremap <tab> %
 " Syntaxes
 syntax enable
 au BufNewFile,BufRead *.bf set filetype=brainfuck
+au BufWritePost *.c,*.cpp,*.h silent! !ctags -R &
 
 " Pathogen
 call pathogen#infect()
@@ -40,10 +41,10 @@ filetype plugin indent on
 if has("gui_running")
     set lines=46
     set columns=146
-    colorscheme inkpot_gui
+    colorscheme ir_dark
 else
     set t_Co=256
-    colorscheme inkpot
+    colorscheme ir_black
 endif
 
 " --- PLUGINS ---
