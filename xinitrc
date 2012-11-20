@@ -15,4 +15,4 @@ if [ -f $HOME/.Xmodmap ]; then
     /usr/bin/xmodmap $HOME/.Xmodmap
 fi
 
-exec dbus-launch --exit-with-session startxfce4
+exec startxfce4
