@@ -62,7 +62,6 @@ RPROMPT=$'$(vcs_info_wrapper)'"%(?.${FG_BRIGHT_GREEN}.${FG_BRIGHT_RED})[%?]${COL
 [[ -f ~/.zsh_functions ]] && source ~/.zsh_functions
 
 export EDITOR="/usr/bin/vim"
-export PAGER="/usr/bin/most"
 export MEDIA="/run/media/$USER"
 
 # Enable core dumps

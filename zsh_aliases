@@ -6,16 +6,12 @@ alias lk='ls -l --block-size=1k'
 alias lm='ls -l --block-size=1m'
 alias lr='ls -lArth'
 
-# grep aliases
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
-
 # Renaming aliases
 alias lower='rename '\''y/\ A-Z/_a-z/'\'''
 alias rename='perl-rename'
 alias fix-song-title='rename '\''s/_/./'\'''
 
+alias grep='grep --color=auto'
 alias up='sudo pacman -Syu'
 alias jgrep='grep -r --include='\''*.java'\'''
 alias astyle='astyle --style=java --formatted --suffix=.bak'
@@ -23,7 +19,7 @@ alias diff='colordiff'
 alias svn_clean='svn status --no-ignore | egrep "^[\?I]" | awk '\''{print $2}'\'' | xargs rm -rf'
 alias hd='hexdump -C'
 alias t='thunar'
-alias steam='SDL_AUDIODRIVER=alsa xdg-open steam://open/games'
+alias steam='SDL_AUDIODRIVER=alsa steam'
 
 # Load local aliases
 [[ -f ~/.zsh_aliases.local ]] && source ~/.zsh_aliases.local
