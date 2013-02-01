@@ -2,12 +2,13 @@
 alias ls='ls --color=auto'
 alias ll='ls -lh'
 alias la='ls -A'
+alias lf='ls -lhA'
 alias lk='ls -l --block-size=1k'
 alias lm='ls -l --block-size=1m'
 alias lr='ls -lArth'
 
 # Renaming aliases
-alias lower='rename '\''y/\ A-Z/_a-z/'\'''
+alias lower='rename '\''y/\ \.A-Z/__a-z/'\'''
 alias rename='perl-rename'
 alias fix-song-title='rename '\''s/_/./'\'''
 
