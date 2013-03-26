@@ -15,6 +15,11 @@ if [ -f $HOME/.Xmodmap ]; then
     /usr/bin/xmodmap $HOME/.Xmodmap
 fi
 
-systemd --user &
-
-exec startxfce4
+case $1 in
+blackbox)
+    exec blackbox
+    ;;
+xfce4|*)
+    exec startxfce4
+    ;;
+esac
