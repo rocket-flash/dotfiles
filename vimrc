@@ -20,6 +20,7 @@ set number
 set nowrap
 set pastetoggle=<F2>
 set showcmd
+set scrolloff=3
 
 " Set to auto read when a file is changed from the outside
 set autoread
