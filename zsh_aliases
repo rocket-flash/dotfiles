@@ -22,7 +22,7 @@ alias diff='colordiff'
 alias svn_clean='svn status --no-ignore | egrep "^[\?I]" | awk '\''{print $2}'\'' | xargs rm -rf'
 alias hd='hexdump -C'
 alias t='thunar'
-alias steam='SDL_AUDIODRIVER=alsa steam'
+alias steam='STEAM_FRAME_FORCE_CLOSE=1 SDL_AUDIODRIVER=alsa steam'
 
 # Load local aliases
 [[ -f ~/.zsh_aliases.local ]] && source ~/.zsh_aliases.local
