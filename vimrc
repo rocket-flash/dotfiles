@@ -25,7 +25,7 @@ set scrolloff=3
 " Set to auto read when a file is changed from the outside
 set autoread
 
-"Key remaps
+" Key remaps
 noremap <Space> <PageDown>
 nnoremap <tab> %
 vnoremap <tab> %
@@ -39,15 +39,14 @@ inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
 
+nmap <leader>d :bp<bar>sp<bar>bn<bar>bd<CR>
+
 " Syntaxes
 syntax enable
 au BufNewFile,BufRead *.bf set filetype=brainfuck
-au BufWritePost *.c,*.cpp,*.h silent! !ctags -R &
+"au BufWritePost *.c,*.cpp,*.h silent! !ctags -R &
 
-" Pathogen
-call pathogen#infect()
-filetype plugin indent on
-
+" Color / Window size
 if has("gui_running")
     set lines=46
     set columns=146
@@ -58,6 +57,10 @@ else
 endif
 
 " --- PLUGINS ---
+" Pathogen
+call pathogen#infect()
+filetype plugin indent on
+
 " Tagbar
 nmap <leader>l :TagbarToggle<cr>
 imap <leader>l <ESC>:TagbarToggle<cr>i
