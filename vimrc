@@ -39,12 +39,12 @@ inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
 
+" Close current buffer but keep window
 nmap <leader>d :bp<bar>sp<bar>bn<bar>bd<CR>
 
 " Syntaxes
 syntax enable
 au BufNewFile,BufRead *.bf set filetype=brainfuck
-"au BufWritePost *.c,*.cpp,*.h silent! !ctags -R &
 
 " Color / Window size
 if has("gui_running")
