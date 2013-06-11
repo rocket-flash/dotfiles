@@ -10,4 +10,3 @@ ln -s .dotfiles/Xmodmap .Xmodmap
 ln -s .dotfiles/SciTEUser.properties .SciTEUser.properties
 ln -s .dotfiles/gitconfig .gitconfig
 ln -s .dotfiles/templates .templates
-ln -s .dotfiles/tmux.conf .tmux.conf
