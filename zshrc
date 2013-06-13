@@ -61,6 +61,10 @@ PS1="%(!.${FG_BRIGHT_RED}.${FG_BRIGHT_GREEN})%n@%m${COLOR_RESET}:${FG_BRIGHT_BLU
 PS2='> '
 RPROMPT=$'$(vcs_info_wrapper)'"[%*]""%(?.${FG_BRIGHT_GREEN}.${FG_BRIGHT_RED})[%?]${COLOR_RESET}"
 
+# Highlight broken links in red
+# http://www.bigsoft.co.uk/blog/index.php/2008/04/11/configuring-ls_colors
+export LS_COLORS="or=97;41:mi=00;97"
+
 [[ -f ~/.zsh_aliases ]] && source ~/.zsh_aliases
 [[ -f ~/.zsh_functions ]] && source ~/.zsh_functions
 
