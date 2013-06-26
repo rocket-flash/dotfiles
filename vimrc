@@ -25,6 +25,10 @@ set scrolloff=3
 " Set to auto read when a file is changed from the outside
 set autoread
 
+" Whitespaces
+set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
+set list
+
 " Key remaps
 noremap <Space> <PageDown>
 nnoremap <tab> %
