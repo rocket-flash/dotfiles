@@ -43,6 +43,11 @@ inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
 
+noremap <C-J>     <C-W>j
+noremap <C-K>     <C-W>k
+noremap <C-H>     <C-W>h
+noremap <C-L>     <C-W>l
+
 " Close current buffer but keep window
 nmap <leader>d :bp<bar>sp<bar>bn<bar>bd<CR>
 
