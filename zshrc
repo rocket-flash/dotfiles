@@ -9,7 +9,7 @@ promptinit
 colors
 
 # bind special keys according to readline configuration
-eval "$(sed -n 's/^/bindkey /; s/: / /p' /etc/inputrc)" > /dev/null
+[[ -f /etc/inputrc ]] && eval "$(sed -n 's/^/bindkey /; s/: / /p' /etc/inputrc)" > /dev/null
 
 bindkey "^[[A" history-search-backward
 bindkey "^[[B" history-search-forward
@@ -40,10 +40,10 @@ zstyle ':vcs_info:*' enable git cvs svn
 
 # or use pre_cmd, see man zshcontrib
 vcs_info_wrapper() {
-  vcs_info
-  if [ -n "$vcs_info_msg_0_" ]; then
-    echo "%{$fg[grey]%}${vcs_info_msg_0_}%{$reset_color%}$del"
-  fi
+    vcs_info
+    if [ -n "$vcs_info_msg_0_" ]; then
+        echo "%{$fg[grey]%}${vcs_info_msg_0_}%{$reset_color%}$del"
+    fi
 }
 
 # make less more friendly for non-text input files, see lesspipe(1)
@@ -76,13 +76,13 @@ ulimit -c unlimited
 
 # Personal bin folder
 if [ -d $HOME/.bin ]; then
-	export PATH=$HOME/.bin:$PATH
+    export PATH=$HOME/.bin:$PATH
 fi
 
 # Android SDK tools
 if [ -d $HOME/android/sdk ]; then
-	export PATH=$PATH:$HOME/android/sdk/tools
-	export PATH=$PATH:$HOME/android/sdk/platform-tools
+    export PATH=$PATH:$HOME/android/sdk/tools
+    export PATH=$PATH:$HOME/android/sdk/platform-tools
 fi
 
 #PSPToolChain
