@@ -59,7 +59,7 @@ COLOR_RESET="%{$reset_color%}"
 
 PS1="%(!.${FG_BRIGHT_RED}.${FG_BRIGHT_GREEN})%n@%m${COLOR_RESET}:${FG_BRIGHT_BLUE}%1~${COLOR_RESET}%(!.#.$) "
 PS2='> '
-RPROMPT=$'$(vcs_info_wrapper)'"[%*]""%(?.${FG_BRIGHT_GREEN}.${FG_BRIGHT_RED})[%?]${COLOR_RESET}"
+RPROMPT=$'$(vcs_info_wrapper)'"[%D{%T}]""%(?.${FG_BRIGHT_GREEN}.${FG_BRIGHT_RED})[%?]${COLOR_RESET}"
 
 # Highlight broken links in red
 # http://www.bigsoft.co.uk/blog/index.php/2008/04/11/configuring-ls_colors
