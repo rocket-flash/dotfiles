@@ -1,6 +1,3 @@
-" Remove vi compatibility
-set nocompatible
-
 " Indent settings
 set expandtab
 set tabstop=4
@@ -17,6 +14,7 @@ set incsearch
 set backspace=2
 set ruler
 set number
+set relativenumber
 set nowrap
 set pastetoggle=<F2>
 set showcmd
