@@ -1,3 +1,7 @@
 function bak() {
     tar Jcf ${1%/}.$(date +%Y%m%d-%H%M%S).tar.xz ${1%/}
 }
+
+function md() {
+    mkdir -p $1 && cd $1
+}
