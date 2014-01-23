@@ -52,6 +52,7 @@ nmap <leader>d :bp<bar>sp<bar>bn<bar>bd<CR>
 " Syntaxes
 syntax enable
 au BufNewFile,BufRead *.bf set filetype=brainfuck
+au BufNewFile,BufRead *.asm set filetype=nasm
 
 " Color / Window size
 if has("gui_running")

@@ -1,11 +1,14 @@
-alias acidrain='ssh -p 1722 -D 1080 mathieu@acidrain.no-ip.org'
+alias acidrain='ssh -D 1080 acidrain.no-ip.org'
 alias ragnarokmount='sshfs ragnarok:/home/mathieu /home/mathieu/misc/ragnarok'
 alias ragnarokumount='fusermount -uz /home/mathieu/misc/ragnarok'
 
-alias _srv='ssh mlemay@proto-srv'
-alias _sql='ssh mlemay@proto-sql'
-alias _data='ssh cms@proto-data'
 alias up='sudo apt-get update && sudo apt-get upgrade'
 alias p='python3'
 
 alias svnm='svn diff --diff-cmd meld'
+
+alias sqldev='psql -h CMSDEV-SQL -U cmsuser -d eservices'
+alias sqlqa='psql -h CMSQA3-SQL -U admin -d eservices'
+alias sqlprod='psql -h CMSPROD3-SQL -U cmsuser -d eservices'
+
+unalias rename
