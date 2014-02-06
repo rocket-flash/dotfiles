@@ -1,5 +1,6 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
+#[[ -z "$TMUX" ]] && exec tmux -2
 
 autoload -U compinit promptinit colors
 autoload -Uz vcs_info
@@ -51,13 +52,17 @@ vcs_info_wrapper() {
 
 # Color shortcuts
 for COLOR in BLACK RED GREEN YELLOW BLUE MAGENTA CYAN WHITE; do
-    eval FG_$COLOR='%{$fg[${(L)COLOR}]%}'
+    eval FG_$COLOR='%{$fg_no_bold[${(L)COLOR}]%}'
     eval FG_BRIGHT_$COLOR='%{$fg_bold[${(L)COLOR}]%}'
     eval BG_$COLOR='%{$bg[${(L)COLOR}]%}'
 done
 COLOR_RESET="%{$reset_color%}"
 
-PS1="%(!.${FG_BRIGHT_RED}.${FG_BRIGHT_GREEN})%n@%m${COLOR_RESET}:${FG_BRIGHT_BLUE}%1~${COLOR_RESET}%(!.#.$) "
+if [[ ! -z "$SSH_CLIENT" ]]; then
+    PS1="%(!.${FG_BRIGHT_RED}.${FG_BRIGHT_GREEN})%n@%m${FG_BRIGHT_RED}[ssh]${COLOR_RESET}:${FG_BRIGHT_BLUE}%1~${COLOR_RESET}%(!.#.$) "
+else
+    PS1="%(!.${FG_BRIGHT_RED}.${FG_BRIGHT_GREEN})%n@%m${COLOR_RESET}:${FG_BRIGHT_BLUE}%1~${COLOR_RESET}%(!.#.$) "
+fi
 PS2='> '
 RPROMPT=$'$(vcs_info_wrapper)'"[%D{%T}]""%(?.${FG_BRIGHT_GREEN}.${FG_BRIGHT_RED})[%?]${COLOR_RESET}"
 
