@@ -72,6 +72,7 @@ export LS_COLORS="or=97;41:mi=00;97"
 
 [[ -f ~/.zsh_aliases ]] && source ~/.zsh_aliases
 [[ -f ~/.zsh_functions ]] && source ~/.zsh_functions
+[[ -f /usr/share/doc/pkgfile/command-not-found.zsh ]] && source /usr/share/doc/pkgfile/command-not-found.zsh
 
 export EDITOR="/usr/bin/vim"
 export MEDIA="/run/media/$USER"
