@@ -12,13 +12,15 @@ set smartcase
 set incsearch
 
 " Other settings
-set backspace=2
 set ruler
 set number
 set relativenumber
 set nowrap
-set pastetoggle=<F2>
 set showcmd
+set cursorline
+set wildmenu
+set backspace=2
+set pastetoggle=<F2>
 set scrolloff=3
 
 " Set to auto read when a file is changed from the outside
