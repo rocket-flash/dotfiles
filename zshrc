@@ -15,9 +15,6 @@ colors
 bindkey "^[[A" history-search-backward
 bindkey "^[[B" history-search-forward
 
-# set zsh in emacs mode
-bindkey -e
-
 setopt APPEND_HISTORY
 setopt HIST_IGNORE_DUPS
 setopt HIST_IGNORE_SPACE
