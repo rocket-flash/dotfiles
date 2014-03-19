@@ -1,6 +1,13 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
-#[[ -z "$TMUX" ]] && exec tmux -2
+
+# Launch tmux automatically if not already running
+if [ -z "$TMUX" ]; then
+    # For some reason, vim gets bold color if TERM is not explictly set
+    # before launching tmux, even if default-terminal is set in tmux.conf
+    export TERM=screen-256color
+    exec tmux
+fi
 
 autoload -U compinit promptinit colors
 autoload -Uz vcs_info
