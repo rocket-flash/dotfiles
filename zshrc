@@ -5,7 +5,7 @@
 if [ -z "$TMUX" ]; then
     # For some reason, vim gets bold color if TERM is not explictly set
     # before launching tmux, even if default-terminal is set in tmux.conf
-    export TERM=screen-256color
+    [[ -n "$COLORTERM" ]] && export TERM=screen-256color
     exec tmux
 fi
 
