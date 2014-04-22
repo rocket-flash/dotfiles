@@ -59,8 +59,8 @@ au BufNewFile,BufRead *.asm set filetype=nasm
 
 " Color / Window size
 if has("gui_running")
-    set lines=46
-    set columns=146
+    set lines=48
+    set columns=200
     colorscheme ir_dark
 else
     set t_Co=256
