@@ -2,7 +2,7 @@
 [[ $- != *i* ]] && return
 
 # Launch tmux automatically if not already running
-if [ -z "$TMUX" ]; then
+if [ -z "$TMUX" -a $EUID -ne 0 ]; then
     # For some reason, vim gets bold color if TERM is not explictly set
     # before launching tmux, even if default-terminal is set in tmux.conf
     [[ -n "$COLORTERM" ]] && export TERM=screen-256color
