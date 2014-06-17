@@ -14,7 +14,6 @@ set incsearch
 " Other settings
 set ruler
 set number
-set relativenumber
 set nowrap
 set showcmd
 set cursorline
