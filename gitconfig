@@ -18,7 +18,5 @@
 	editor = SciTE
 	fontui = -family \"Droid Sans\" -size 10 -weight normal -slant roman -underline 0 -overstrike 0
 	fontdiff = -family \"Droid Sans Mono\" -size 10 -weight normal -slant roman -underline 0 -overstrike 0
-[push]
-	default = matching
 [fetch]
 	prune = true
