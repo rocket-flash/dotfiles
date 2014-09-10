@@ -18,6 +18,7 @@ set nowrap
 set showcmd
 set cursorline
 set wildmenu
+set modeline
 set backspace=2
 set pastetoggle=<F2>
 set scrolloff=3
