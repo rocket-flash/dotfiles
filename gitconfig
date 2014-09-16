@@ -20,3 +20,5 @@
 	fontdiff = -family \"Droid Sans Mono\" -size 10 -weight normal -slant roman -underline 0 -overstrike 0
 [fetch]
 	prune = true
+[push]
+	default = simple
