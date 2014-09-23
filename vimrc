@@ -56,6 +56,7 @@ nmap <leader>d :bp<bar>sp<bar>bn<bar>bd<CR>
 syntax enable
 au BufNewFile,BufRead *.bf set filetype=brainfuck
 au BufNewFile,BufRead *.asm set filetype=nasm
+au BufNewFile,BufRead *.sql set filetype=pgsql
 
 " Color / Window size
 if has("gui_running")
