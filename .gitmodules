@@ -19,3 +19,6 @@
 [submodule "vim/bundle/vim-tbone"]
 	path = vim/bundle/vim-tbone
 	url = https://github.com/tpope/vim-tbone.git
+[submodule "vim/bundle/pgsql.vim"]
+	path = vim/bundle/pgsql.vim
+	url = https://github.com/exu/pgsql.vim.git
