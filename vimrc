@@ -1,3 +1,25 @@
+set nocompatible            " be iMproved, required
+filetype off                " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle (required!)
+Plugin 'gmarik/Vundle.vim'
+
+Plugin 'bundle/minibufexpl'
+Plugin 'bundle/nerdcommenter'
+Plugin 'bundle/nerdtree'
+Plugin 'bundle/pgsql.vim'
+Plugin 'bundle/tagbar'
+Plugin 'bundle/vim-better-whitespace'
+Plugin 'bundle/vim-gitgutter'
+Plugin 'bundle/vim-tbone'
+
+call vundle#end()           " required
+filetype plugin indent on   " required
+
 " Indent settings
 set expandtab
 set tabstop=4
@@ -84,10 +106,6 @@ endif
 endfunction
 
 " --- PLUGINS ---
-" Pathogen
-call pathogen#infect()
-filetype plugin indent on
-
 " Tagbar
 nmap <leader>l :TagbarToggle<cr>
 imap <leader>l <ESC>:TagbarToggle<cr>i
