@@ -8,14 +8,14 @@ call vundle#begin()
 " let Vundle manage Vundle (required!)
 Plugin 'gmarik/Vundle.vim'
 
-Plugin 'bundle/minibufexpl'
-Plugin 'bundle/nerdcommenter'
-Plugin 'bundle/nerdtree'
-Plugin 'bundle/pgsql.vim'
-Plugin 'bundle/tagbar'
-Plugin 'bundle/vim-better-whitespace'
-Plugin 'bundle/vim-gitgutter'
-Plugin 'bundle/vim-tbone'
+Plugin 'fholgado/minibufexpl.vim'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/nerdtree'
+Plugin 'exu/pgsql.vim'
+Plugin 'majutsushi/tagbar'
+Plugin 'ntpeters/vim-better-whitespace'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-tbone'
 
 call vundle#end()           " required
 filetype plugin indent on   " required
