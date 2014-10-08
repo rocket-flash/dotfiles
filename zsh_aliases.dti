@@ -9,10 +9,12 @@ alias p='python3'
 alias svnm='svn diff --diff-cmd meld'
 
 alias sqldev='psql -h CMSDEV-SQL -U cmsuser -d eservices'
+alias sqlmatt='psql -h CMSDEV-SQL -U cmsuser -d eservices_matt'
 alias sqlqa='psql -h CMSQA3-SQL -U cmsuser -d eservices'
 alias sqltest='psql -h CMSTEST3-SQL -U cmsuser -d eservices'
 alias sqlprod='psql -h CMSPROD3-SQL -U cmsuser -d eservices'
 
 alias pep8='pep8 --max-line-length=120 --ignore=E251'
+alias vim='nvim'
 
 unalias rename
