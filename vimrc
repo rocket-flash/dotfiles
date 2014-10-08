@@ -1,24 +1,5 @@
-set nocompatible            " be iMproved, required
-filetype off                " required
-
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" let Vundle manage Vundle (required!)
-Plugin 'gmarik/Vundle.vim'
-
-Plugin 'fholgado/minibufexpl.vim'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/nerdtree'
-Plugin 'exu/pgsql.vim'
-Plugin 'majutsushi/tagbar'
-Plugin 'ntpeters/vim-better-whitespace'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'tpope/vim-tbone'
-
-call vundle#end()           " required
-filetype plugin indent on   " required
+" Load plugins first
+source ~/.vimrc.vundles
 
 " Indent settings
 set expandtab
@@ -107,8 +88,8 @@ endfunction
 
 " --- PLUGINS ---
 " Tagbar
-nmap <leader>l :TagbarToggle<cr>
-imap <leader>l <ESC>:TagbarToggle<cr>i
+nmap <leader>l :TagbarToggle<CR>
+imap <leader>l <ESC>:TagbarToggle<CR>i
 
 " MiniBufExpl
 let g:miniBufExplMapWindowNavVim = 1
@@ -118,7 +99,7 @@ let g:miniBufExplModSelTarget = 1
 let g:miniBufExplForceSyntaxEnable = 1
 
 " NERDTree
-nnoremap <C-n> :NERDTreeToggle<cr>
+nnoremap <C-n> :NERDTreeToggle<CR>
 
 " tbone
 " Write whole buffer
@@ -127,3 +108,6 @@ nnoremap <C-c>a :%Twrite last<CR>
 nnoremap <C-c>c :Twrite last<CR>
 " Write selection
 vnoremap <C-c>c :Twrite last<CR>
+
+" vim-better-whitespace
+nnoremap <leader>ws :StripWhitespace<CR>
