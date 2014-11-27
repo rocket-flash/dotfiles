@@ -1,4 +1,4 @@
-alias acidrain='ssh -D 1080 acidrain.no-ip.org'
+alias acidrain='ssh -D 1080 -X acidrain.no-ip.org'
 alias ragnarokmount='sshfs ragnarok:/home/mathieu /home/mathieu/misc/ragnarok'
 alias ragnarokumount='fusermount -uz /home/mathieu/misc/ragnarok'
 
@@ -15,6 +15,5 @@ alias sqltest='psql -h CMSTEST3-SQL -U cmsuser -d eservices'
 alias sqlprod='psql -h CMSPROD3-SQL -U cmsuser -d eservices'
 
 alias pep8='pep8 --max-line-length=120 --ignore=E251'
-alias vim='nvim'
 
 unalias rename
