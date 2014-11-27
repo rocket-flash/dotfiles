@@ -1,5 +1,26 @@
 " Load plugins first
-source ~/.vimrc.vundles
+set nocompatible            " be iMproved, required
+filetype off                " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle (required!)
+Plugin 'gmarik/Vundle.vim'
+
+Plugin 'fholgado/minibufexpl.vim'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/nerdtree'
+Plugin 'exu/pgsql.vim'
+Plugin 'majutsushi/tagbar'
+Plugin 'ntpeters/vim-better-whitespace'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-tbone'
+Plugin 'twerth/ir_black'
+
+call vundle#end()           " required
+filetype plugin indent on   " required
 
 " Indent settings
 set expandtab
