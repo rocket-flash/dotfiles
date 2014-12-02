@@ -13,6 +13,8 @@ alias rename='perl-rename'
 alias fix-song-title='rename '\''s/_/./'\'''
 
 alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
 alias cower='cower --color=auto'
 alias up='sudo pacman -Syu'
 alias jgrep='grep -nr --include='\''*.java'\'''
