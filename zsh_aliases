@@ -30,7 +30,7 @@ alias td='(thunar --daemon &>/dev/null &)'
 #alias steam='STEAM_FRAME_FORCE_CLOSE=1 SDL_AUDIODRIVER=alsa steam'
 alias steam='STEAM_FRAME_FORCE_CLOSE=1 steam'
 
-alias notmux='(TMUX="x" xfce4-terminal --disable-server &> /dev/null &) && exit'
+alias notmux='(NOTMUX="y" xfce4-terminal --disable-server &> /dev/null &) && exit'
 
 if which nvim > /dev/null; then
     alias vim='nvim'

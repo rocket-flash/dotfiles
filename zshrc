@@ -1,8 +1,14 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+if [ -n "$NOTMUX" ]; then
+    unset TMUX
+    unset TMUX_PANE
+fi
+
 # Launch tmux automatically if not already running
-if [ -z "$TMUX" -a $EUID -ne 0 ]; then
+if [ -z "$TMUX" -a -z "$NOTMUX" -a $EUID -ne 0 ]; then
+
     # For some reason, vim gets bold color if TERM is not explictly set
     # before launching tmux, even if default-terminal is set in tmux.conf
     [[ -n "$COLORTERM" ]] && export TERM=screen-256color
@@ -71,7 +77,6 @@ PS2='> '
 RPROMPT=$'$(vcs_info_wrapper)'"[%D{%T}]""%(?.${FG_BRIGHT_GREEN}.${FG_BRIGHT_RED})[%?]${COLOR_RESET}"
 
 if [ -x /usr/bin/dircolors ]; then
-    #test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     [ -r ~/.dircolors ] && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 fi
 
