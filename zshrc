@@ -6,12 +6,10 @@ if [ -n "$NOTMUX" ]; then
     unset TMUX_PANE
 fi
 
+[[ -n "$COLORTERM" ]] || [[ -n "$SSH_CONNECTION" ]] && export TERM=xterm-256color
+
 # Launch tmux automatically if not already running
 if [ -z "$TMUX" -a -z "$NOTMUX" -a $EUID -ne 0 ]; then
-
-    # For some reason, vim gets bold color if TERM is not explictly set
-    # before launching tmux, even if default-terminal is set in tmux.conf
-    [[ -n "$COLORTERM" ]] && export TERM=screen-256color
     exec tmux
 fi
 
