@@ -1,3 +1,5 @@
+alias sudo='sudo '  # Enable aliases when using sudo
+
 # ls aliases
 alias ls='ls --color=auto'
 alias ll='ls -lh'
