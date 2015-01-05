@@ -87,8 +87,11 @@ if has("gui_running")
     set columns=200
     colorscheme ir_dark
 else
-    set t_Co=256
-    colorscheme ir_black
+    let colorterm=$COLORTERM
+    if colorterm != ''
+        set t_Co=256
+        colorscheme ir_black
+    endif
 endif
 
 noremap <F8> :call HexMe()<CR>
