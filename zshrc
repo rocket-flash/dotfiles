@@ -6,7 +6,11 @@ if [ -n "$NOTMUX" ]; then
     unset TMUX_PANE
 fi
 
-[[ -n "$COLORTERM" ]] || [[ -n "$SSH_CONNECTION" ]] && export TERM=xterm-256color
+if [ -n "$COLORTERM" -o -n "$SSH_CONNECTION" ]; then
+    export TERM=xterm-256color
+else
+    export TERM=xterm
+fi
 
 # Launch tmux automatically if not already running
 if [ -z "$TMUX" -a -z "$NOTMUX" -a $EUID -ne 0 ]; then
@@ -88,9 +92,13 @@ export MEDIA="/run/media/$USER"
 # Enable core dumps
 ulimit -c unlimited
 
-# Personal bin folder
-if [ -d $HOME/.bin ]; then
-    export PATH=$HOME/.bin:$PATH
+# Default cflags
+export CFLAGS="-O2 -march=native -fstack-protector-strong"
+
+# Personal usr folder
+if [ -d $HOME/usr ]; then
+    export PATH="$HOME/usr/bin:$PATH"
+    export LD_LIBRARY_PATH="$HOME/usr/lib:$LD_LIBRARY_PATH"
 fi
 
 # Android SDK tools
