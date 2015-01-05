@@ -9,7 +9,7 @@ fi
 if [ -n "$COLORTERM" -o -n "$SSH_CONNECTION" ]; then
     export TERM=xterm-256color
 else
-    export TERM=xterm
+    export TERM=screen
 fi
 
 # Launch tmux automatically if not already running
