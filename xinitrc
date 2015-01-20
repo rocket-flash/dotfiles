@@ -13,6 +13,8 @@ fi
 
 setxkbmap -option "caps:escape"
 
+export __GL_YIELD="USLEEP"
+
 case $1 in
 blackbox)
     exec blackbox
