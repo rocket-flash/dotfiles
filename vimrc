@@ -50,7 +50,7 @@ set scrolloff=3
 set autoread
 
 " Whitespaces
-set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
+set listchars=tab:>-,trail:~
 set list
 
 " Key remaps
