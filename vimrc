@@ -87,8 +87,8 @@ if has("gui_running")
     set columns=200
     colorscheme ir_dark
 else
-    let colorterm=$COLORTERM
-    if colorterm != ''
+    let current_term=$TERM
+    if current_term == 'screen-256color'
         set t_Co=256
         colorscheme ir_black
     endif

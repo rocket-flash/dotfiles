@@ -6,15 +6,9 @@ if [ -n "$NOTMUX" ]; then
     unset TMUX_PANE
 fi
 
-if [ -n "$COLORTERM" -o -n "$SSH_CONNECTION" ]; then
-    export TERM=xterm-256color
-else
-    export TERM=screen
-fi
-
 # Launch tmux automatically if not already running
 if [ -z "$TMUX" -a -z "$NOTMUX" -a $EUID -ne 0 ]; then
-    exec tmux
+    exec tmux -2
 fi
 
 autoload -U compinit promptinit colors
