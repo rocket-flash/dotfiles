@@ -85,13 +85,11 @@ au BufNewFile,BufRead *.sql set filetype=pgsql
 if has("gui_running")
     set lines=48
     set columns=200
+    set guifont=Source\ Code\ Pro\ Semi-Light\ 10
     colorscheme ir_dark
 else
-    let current_term=$TERM
-    if current_term == 'screen-256color'
-        set t_Co=256
-        colorscheme ir_black
-    endif
+    set t_Co=256
+    colorscheme ir_black
 endif
 
 noremap <F8> :call HexMe()<CR>
