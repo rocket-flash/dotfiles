@@ -15,11 +15,4 @@ setxkbmap -option "caps:escape"
 
 export __GL_YIELD="USLEEP"
 
-case $1 in
-blackbox)
-    exec blackbox
-    ;;
-xfce4|*)
-    exec startxfce4
-    ;;
-esac
+exec $1
