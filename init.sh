@@ -1,13 +1,18 @@
-#! /bin/sh
+#! /bin/bash
 
-ln -s .dotfiles/zshrc .zshrc
-ln -s .dotfiles/zsh_aliases .zsh_aliases
-ln -s .dotfiles/zsh_functions .zsh_functions
-ln -s .dotfiles/vim .vim
-ln -s .dotfiles/vimrc .vimrc
-ln -s .dotfiles/xinitrc .xinitrc
-ln -s .dotfiles/Xmodmap .Xmodmap
-ln -s .dotfiles/SciTEUser.properties .SciTEUser.properties
-ln -s .dotfiles/gitconfig .gitconfig
-ln -s .dotfiles/templates .templates
-ln -s .dotfiles/tmux.conf .tmux.conf
+FILES=( 'zshrc' 'zsh_aliases' 'zsh_functions' 'vim' 'vimrc' 'xinitrc' 'Xmodmap' 'SciTEUser.properties' 'gitconfig' 'templates' 'tmux.conf' )
+
+cd $HOME
+
+for file in ${FILES[@]}; do
+    if [ -e ".${file}" ]; then
+        mv ".${file}" ".${file}.bak"
+    fi
+
+    ln -s ".dotfiles/${file}" ".${file}"
+done
+
+if [ ! -d .vim/bundle/Vundle.vim ]; then
+    mkdir -p .vim/bundle
+    git clone https://github.com/gmarik/Vundle.vim.git .vim/bundle/Vundle.vim
+fi
