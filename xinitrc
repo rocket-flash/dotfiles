@@ -13,6 +13,4 @@ fi
 
 setxkbmap -option "caps:escape"
 
-export __GL_YIELD="USLEEP"
-
 exec $1
