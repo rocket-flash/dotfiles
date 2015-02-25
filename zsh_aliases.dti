@@ -1,19 +1,15 @@
-alias acidrain='ssh -D 1080 -X acidrain.no-ip.org'
+alias acidrain='ssh -D 1088 -X acidrain.no-ip.org'
 alias ragnarokmount='sshfs ragnarok:/home/mathieu /home/mathieu/misc/ragnarok'
 alias ragnarokumount='fusermount -uz /home/mathieu/misc/ragnarok'
 
 alias make='make -j8'
-alias up='sudo apt-get update && sudo apt-get upgrade'
 alias p='python3'
 
 alias svnm='svn diff --diff-cmd meld'
 
 alias sqldev='psql -h CMSDEV-SQL -U cmsuser -d eservices'
+alias sqlvirt='psql -h CMSVIRT-SQL -U cmsuser -d eservices'
 alias sqlmatt='psql -h CMSDEV-SQL -U cmsuser -d eservices_matt'
 alias sqlqa='psql -h CMSQA3-SQL -U cmsuser -d eservices'
 alias sqltest='psql -h CMSTEST3-SQL -U cmsuser -d eservices'
 alias sqlprod='psql -h CMSPROD3-SQL -U cmsuser -d eservices'
-
-alias pep8='pep8 --max-line-length=120 --ignore=E251'
-
-unalias rename
