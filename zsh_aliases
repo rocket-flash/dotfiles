@@ -34,9 +34,9 @@ alias steam='STEAM_FRAME_FORCE_CLOSE=1 steam'
 
 alias notmux='(NOTMUX="y" xfce4-terminal --disable-server &> /dev/null &) && exit'
 
-if which nvim > /dev/null; then
-    alias vim='nvim'
-fi
+#if which nvim > /dev/null; then
+    #alias vim='nvim'
+#fi
 
 # Load local aliases
 [[ -f ~/.zsh_aliases.local ]] && source ~/.zsh_aliases.local
