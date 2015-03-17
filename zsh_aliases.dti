@@ -13,3 +13,5 @@ alias sqlmatt='psql -h CMSDEV-SQL -U cmsuser -d eservices_matt'
 alias sqlqa='psql -h CMSQA3-SQL -U cmsuser -d eservices'
 alias sqltest='psql -h CMSTEST3-SQL -U cmsuser -d eservices'
 alias sqlprod='psql -h CMSPROD3-SQL -U cmsuser -d eservices'
+
+alias loadenv='. ~/src/envs/dti_services/bin/activate'

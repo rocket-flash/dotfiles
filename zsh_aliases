@@ -38,5 +38,9 @@ if which nvim > /dev/null; then
     alias vim='nvim'
 fi
 
+if [ -n "$SSH_AGENT_PID" ]; then
+    alias ssh='ssh-add -l >/dev/null || ssh-add && unalias ssh; ssh'
+fi
+
 # Load local aliases
 [[ -f ~/.zsh_aliases.local ]] && source ~/.zsh_aliases.local
