@@ -30,6 +30,7 @@ setopt APPEND_HISTORY
 setopt HIST_IGNORE_DUPS
 setopt HIST_IGNORE_SPACE
 setopt prompt_subst
+setopt correct
 
 HISTFILE=~/.zsh_history
 HISTSIZE=5000
