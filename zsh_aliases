@@ -1,7 +1,7 @@
 alias sudo='sudo '  # Enable aliases when using sudo
 
 # ls aliases
-alias ls='ls --color=auto'
+alias ls='ls --color=auto -v'
 alias ll='ls -lh'
 alias la='ls -A'
 alias lf='ls -lhA'
@@ -21,13 +21,15 @@ alias cower='cower --color=auto'
 alias up='sudo pacman -Syu'
 alias jgrep='grep -nr --include='\''*.java'\'''
 alias csgrep='grep -nr --include='\''*.cs'\'''
-alias pygrep='grep -nr --include='\''*.py'\'''
+alias pygrep='grep -nr --include='\''*.py'\'' --exclude=env'
 alias astyle='astyle --style=java --formatted --suffix=.bak'
 alias diff='colordiff -u'
 alias svn_clean='svn status --no-ignore | egrep "^[\?I]" | awk '\''{print $2}'\'' | xargs rm -rf'
 alias hd='hexdump -C'
 alias t='thunar'
 alias td='(thunar --daemon &>/dev/null &)'
+alias tmux='tmux -2'
+alias tmuxtmp='tmux -S $(mktemp)'
 
 #alias steam='STEAM_FRAME_FORCE_CLOSE=1 SDL_AUDIODRIVER=alsa steam'
 alias steam='STEAM_FRAME_FORCE_CLOSE=1 steam'
