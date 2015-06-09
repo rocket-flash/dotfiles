@@ -15,7 +15,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'majutsushi/tagbar'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'tpope/vim-tbone'
+Plugin 'mhinz/vim-tmuxify'
 Plugin 'twerth/ir_black'
 
 call vundle#end()           " required
