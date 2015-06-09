@@ -122,13 +122,5 @@ let g:miniBufExplForceSyntaxEnable = 1
 " NERDTree
 nnoremap <C-n> :NERDTreeToggle<CR>
 
-" tbone
-" Write whole buffer
-nnoremap <C-c>a :%Twrite last<CR>
-" Write current line
-nnoremap <C-c>c :Twrite last<CR>
-" Write selection
-vnoremap <C-c>c :Twrite last<CR>
-
 " vim-better-whitespace
 nnoremap <leader>ws :StripWhitespace<CR>
