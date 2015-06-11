@@ -103,31 +103,3 @@ if [ -d $HOME/android/sdk ]; then
     export PATH=$PATH:$HOME/android/sdk/tools
     export PATH=$PATH:$HOME/android/sdk/platform-tools
 fi
-
-#PSPToolChain
-if [ -d /opt/sdk/psp ]; then
-    export PSPDEV=/opt/sdk/psp
-    export PSPSDK=$PSPDEV/psp/sdk
-    export PATH=$PATH:$PSPDEV/bin:$PSPSDK/bin
-fi
-
-#PS3ToolChain
-if [ -d /opt/sdk/ps3 ]; then
-    export PS3DEV=/opt/sdk/ps3
-    export PATH=$PATH:$PS3DEV/bin
-    export PATH=$PATH:$PS3DEV/ppu/bin
-    export PATH=$PATH:$PS3DEV/spu/bin
-fi
-
-#PSL1GTH
-if [ -d /opt/sdk/ps3/psl1ght ]; then
-    export PSL1GHT=/opt/sdk/ps3/psl1ght
-fi
-
-#DevKitPRO
-if [ -d /opt/sdk/devkitpro ]; then
-    export DEVKITPRO=/opt/sdk/devkitpro
-    export DEVKITARM=${DEVKITPRO}/devkitARM
-    export DEVKITPPC=${DEVKITPRO}/devkitPPC
-    export PATH="$PATH:$DEVKITARM/bin:$DEVKITPPC/bin"
-fi
