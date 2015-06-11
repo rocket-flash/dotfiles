@@ -90,8 +90,12 @@ if has("gui_running")
     set guifont=Source\ Code\ Pro\ Semi-Light\ 10
     colorscheme ir_dark
 else
-    set t_Co=256
-    colorscheme ir_black
+    let term=$TERM
+    if term == "screen-256color"
+        colorscheme ir_black
+    else
+        colorscheme desert
+    endif
 endif
 
 noremap <F8> :call HexMe()<CR>

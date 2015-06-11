@@ -1,24 +1,14 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-if which tmux > /dev/null; then
-    if [ -n "$NOTMUX" ]; then
-        unset TMUX
-        unset TMUX_PANE
-    fi
-
-    # Launch tmux automatically if not already running
-    if [ -z "$TMUX" -a -z "$NOTMUX" -a $EUID -ne 0 ]; then
-        exec tmux -2
-    fi
-fi
-
 autoload -U compinit promptinit colors
 autoload -Uz vcs_info
 
 compinit
 promptinit
 colors
+
+[[ -e $HOME/.tmux.zsh ]] && source $HOME/.tmux.zsh
 
 # bind special keys according to readline configuration
 [[ -f /etc/inputrc ]] && eval "$(sed -n 's/^/bindkey /; s/: / /p' /etc/inputrc)" > /dev/null

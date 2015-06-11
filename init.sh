@@ -1,6 +1,6 @@
 #! /bin/bash
 
-FILES=( 'zshrc' 'zsh_aliases' 'zsh_functions' 'vim' 'vimrc' 'xprofile' 'Xmodmap' 'SciTEUser.properties' 'gitconfig' 'templates' 'tmux.conf' )
+FILES=( 'zshrc' 'zsh_aliases' 'zsh_functions' 'vim' 'vimrc' 'xprofile' 'Xmodmap' 'SciTEUser.properties' 'gitconfig' 'templates' 'tmux.conf' 'tmux.zsh' )
 
 cd $HOME
 
