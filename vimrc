@@ -16,7 +16,9 @@ Plugin 'majutsushi/tagbar'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'mhinz/vim-tmuxify'
+Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'twerth/ir_black'
+Plugin 'tpope/vim-surround'
 
 call vundle#end()           " required
 filetype plugin indent on   " required
@@ -124,3 +126,8 @@ nnoremap <C-n> :NERDTreeToggle<CR>
 
 " vim-better-whitespace
 nnoremap <leader>ws :StripWhitespace<CR>
+
+" Indent Guide
+let g:indent_guides_guide_size = 1
+let g:indent_guides_start_level = 2
+let g:indent_guides_enable_on_vim_startup = 1
