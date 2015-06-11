@@ -74,7 +74,7 @@ if which tmux &> /dev/null; then
     alias tmux=_zsh_tmux_plugin_run
 
     # Autostart if not already in tmux and enabled.
-    if [[ ! -n "$TMUX" && "$ZSH_TMUX_AUTOSTART" == "true" ]]
+    if [[ ! -n "$TMUX" && "$ZSH_TMUX_AUTOSTART" == "true" && $EUID != 0 ]]
     then
         # Actually don't autostart if we already did and multiple autostarts are disabled.
         if [[ "$ZSH_TMUX_AUTOSTART_ONCE" == "false" || "$ZSH_TMUX_AUTOSTARTED" != "true" ]]
