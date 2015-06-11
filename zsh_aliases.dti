@@ -1,4 +1,4 @@
-alias acidrain='ssh -D 1088 -L 5901:localhost:5901 -Y acidrain.no-ip.org'
+alias acidrain='ssh -D 1088 -L 5901:localhost:5901 -Y acidrain.duckdns.org'
 alias ragnarokmount='sshfs ragnarok:/home/mathieu /home/mathieu/misc/ragnarok'
 alias ragnarokumount='fusermount -uz /home/mathieu/misc/ragnarok'
 
@@ -14,4 +14,4 @@ alias sqlqa='psql -h CMSQA3-SQL -U cmsuser -d eservices'
 alias sqltest='psql -h CMSTEST3-SQL -U cmsuser -d eservices'
 alias sqlprod='psql -h CMSPROD3-SQL -U cmsuser -d eservices'
 
-alias cms_env='. ~/src/dti_services/env/bin/activate'
+alias flake8='flake8 --ignore=E251 --max-line-length=120'
