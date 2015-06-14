@@ -1,2 +1,7 @@
+if [ -d $HOME/usr ]; then
+    export PATH="$HOME/usr/bin:$PATH"
+    export LD_LIBRARY_PATH="$HOME/usr/lib:$LD_LIBRARY_PATH"
+fi
+
 export LC_TIME='en_DK.UTF-8'
-export TERMINAL='xfce4-terminal'
+export TERMINAL='termite'
