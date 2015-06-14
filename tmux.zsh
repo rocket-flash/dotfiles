@@ -46,7 +46,7 @@ if which tmux &> /dev/null; then
             return 1
         fi
     }
-    alias tq='touch $ZSH_TMUX_NO_AUTOQUIT_FILE && exit'
+    alias tq="[[ -n \"$TMUX\" ]] && touch $ZSH_TMUX_NO_AUTOQUIT_FILE && exit"
 
     # Wrapper function for tmux.
     function _zsh_tmux_plugin_run()
