@@ -1,6 +1,6 @@
 #! /bin/bash
 
-FILES=( 'zshrc' 'zsh_aliases' 'zsh_functions' 'vim' 'vimrc' 'xprofile' 'Xmodmap' 'SciTEUser.properties' 'gitconfig' 'templates' 'tmux.conf' 'tmux.zsh' 'i3' )
+FILES=( 'zshrc' 'zsh_aliases' 'zsh_functions' 'vim' 'vimrc' 'xprofile' 'Xmodmap' 'SciTEUser.properties' 'gitconfig' 'tmux.conf' 'tmux.zsh' 'i3' )
 
 cd $HOME
 
@@ -10,6 +10,14 @@ for file in ${FILES[@]}; do
 
     ln -s ".dotfiles/${file}" ".${file}"
 done
+
+[[ -L ".templates" ]] && rm ".templates"
+[[ -d ".templates" ]] && mv ".templates" ".templates.bak"
+ln -s "$HOME/.dotfiles/termite" ".templates"
+
+[[ -L ".config/termite" ]] && rm ".config/termite"
+[[ -d ".config/termite" ]] && mv ".config/termite" ".config/termite.bak"
+ln -s "$HOME/.dotfiles/termite" ".config/termite"
 
 if [ ! -d .vim/bundle/Vundle.vim ]; then
     mkdir -p .vim/bundle
