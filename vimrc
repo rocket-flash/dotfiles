@@ -20,6 +20,10 @@ Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'twerth/ir_black'
 Plugin 'tpope/vim-surround'
 
+" Colorschemes
+Plugin 'ciaranm/inkpot'
+Plugin 'altercation/vim-colors-solarized'
+
 call vundle#end()           " required
 filetype plugin indent on   " required
 
@@ -90,9 +94,8 @@ if has("gui_running")
     set guifont=Source\ Code\ Pro\ Semi-Light\ 10
     colorscheme ir_dark
 else
-    let term=$TERM
-    if term == "screen-256color"
-        colorscheme ir_black
+    if substitute(system('tput colors'), '\n', '', '') == "256"
+        colorscheme ir_dark
     else
         colorscheme desert
     endif
