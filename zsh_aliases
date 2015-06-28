@@ -33,7 +33,7 @@ alias td='(thunar --daemon &>/dev/null &)'
 alias steam='STEAM_FRAME_FORCE_CLOSE=1 steam'
 
 if which nvim > /dev/null; then
-    alias vim='NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim'
+    alias vim='nvim'
 fi
 
 if [ -n "$SSH_AGENT_PID" ]; then

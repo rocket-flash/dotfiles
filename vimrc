@@ -95,6 +95,7 @@ if has("gui_running")
     colorscheme ir_dark
 else
     if substitute(system('tput colors'), '\n', '', '') == "256"
+        let $NVIM_TUI_ENABLE_TRUE_COLOR=1
         colorscheme ir_dark
     else
         colorscheme desert
