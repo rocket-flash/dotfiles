@@ -17,12 +17,13 @@ Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'mhinz/vim-tmuxify'
 Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'twerth/ir_black'
 Plugin 'tpope/vim-surround'
 
 " Colorschemes
+Plugin 'twerth/ir_black'
 Plugin 'ciaranm/inkpot'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'Wutzara/vim-materialtheme'
 
 call vundle#end()           " required
 filetype plugin indent on   " required
