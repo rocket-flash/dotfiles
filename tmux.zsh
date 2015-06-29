@@ -23,7 +23,7 @@ if which tmux &> /dev/null; then
     # systems without the proper terminfo
     [[ -n "$ZSH_TMUX_FIXTERM_WITH_256COLOR" ]] || ZSH_TMUX_FIXTERM_WITH_256COLOR="screen-256color"
     # Temporary file to disable autoquit
-    ZSH_TMUX_NO_AUTOQUIT_FILE="/tmp/zsh_tmux_no_autoquit"
+    ZSH_TMUX_NO_AUTOQUIT_FILE="/tmp/zsh_tmux_no_autoquit.${USER}"
 
     # Determine if the terminal supports 256 colors
     if [[ `tput colors` == "256" ]]
