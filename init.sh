@@ -13,7 +13,7 @@ done
 
 [[ -L ".templates" ]] && rm ".templates"
 [[ -d ".templates" ]] && mv ".templates" ".templates.bak"
-ln -s "$HOME/.dotfiles/termite" ".templates"
+ln -s "$HOME/.dotfiles/templates" ".templates"
 
 [[ -L ".config/termite" ]] && rm ".config/termite"
 [[ -d ".config/termite" ]] && mv ".config/termite" ".config/termite.bak"
