@@ -23,3 +23,12 @@ if [ ! -d .vim/bundle/Vundle.vim ]; then
     mkdir -p .vim/bundle
     git clone https://github.com/gmarik/Vundle.vim.git .vim/bundle/Vundle.vim
 fi
+
+# Regenerate screen and screen-256color terminfo to fix C-h problem with neovim
+# https://github.com/christoomey/vim-tmux-navigator/issues/71
+TERMS=( 'screen' 'screen-256color' )
+for term in ${TERMS[@]}; do
+    infocmp $term | sed 's/kbs=^[hH]/kbs=\\177/' > ${term}.ti
+    tic ${term}.ti
+    rm ${term}.ti
+done
