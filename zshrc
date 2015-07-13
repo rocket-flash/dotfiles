@@ -73,7 +73,12 @@ fi
 [[ -f ~/.zsh_functions ]] && source ~/.zsh_functions
 [[ -f /usr/share/doc/pkgfile/command-not-found.zsh ]] && source /usr/share/doc/pkgfile/command-not-found.zsh
 
-export EDITOR="/usr/bin/vim"
+if which nvim > /dev/null; then
+    export EDITOR="nvim"
+else
+    export EDITOR="vim"
+fi
+export PAGER="less"
 export MEDIA="/run/media/$USER"
 
 # Enable core dumps
