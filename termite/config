@@ -11,7 +11,7 @@ font = Source Code Pro 10
 scrollback_lines = 10000
 search_wrap = true
 icon_name = terminal
-geometry = 1024x576
+geometry = 1018x580
 maximized = true
 
 # "system", "on" or "off"
