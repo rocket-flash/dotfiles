@@ -8,10 +8,13 @@ alias p='python3'
 alias svnm='svn diff --diff-cmd meld'
 
 alias sqldev='psql -h CMSDEV-SQL -U cmsuser -d eservices'
-alias sqlvirt='psql -h CMSVIRT-SQL -U cmsuser -d eservices'
 alias sqlmatt='psql -h CMSDEV-SQL -U cmsuser -d eservices_matt'
 alias sqlqa='psql -h CMSQA3-SQL -U cmsuser -d eservices'
 alias sqltest='psql -h CMSTEST3-SQL -U cmsuser -d eservices'
 alias sqlprod='psql -h CMSPROD3-SQL -U cmsuser -d eservices'
 
 alias flake8='flake8 --ignore=E251 --max-line-length=120'
+
+if [ -n "$SSH_AGENT_PID" ]; then
+    alias ssh='ssh-add -l >/dev/null || ssh-add && alias ssh="TERM=xterm-256color ssh"; TERM=xterm-256color ssh'
+fi
