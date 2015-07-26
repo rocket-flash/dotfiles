@@ -16,6 +16,7 @@
 	ci = commit
 	m = difftool -y
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
+	edit = "!vim `git ls-files -m`"
 [gui]
 	editor = SciTE
 	fontui = -family \"Droid Sans\" -size 10 -weight normal -slant roman -underline 0 -overstrike 0
@@ -26,3 +27,5 @@
 	default = simple
 [diff]
 	tool = meld
+
+# vim: set noexpandtab:
