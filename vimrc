@@ -18,6 +18,8 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'mhinz/vim-tmuxify'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'tpope/vim-surround'
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-easytags'
 
 " Colorschemes
 Plugin 'twerth/ir_black'
@@ -26,6 +28,7 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'Wutzara/vim-materialtheme'
 Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'alem0lars/vim-colorscheme-darcula'
+Plugin 'gosukiwi/vim-atom-dark'
 
 call vundle#end()           " required
 filetype plugin indent on   " required
@@ -99,7 +102,8 @@ if has("gui_running")
 else
     if substitute(system('tput colors'), '\n', '', '') == "256"
         let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-        colorscheme ir_dark
+        colorscheme PaperColor
+        set bg=dark
     else
         colorscheme desert
     endif
