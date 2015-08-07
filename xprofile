@@ -3,5 +3,8 @@ if [ -d $HOME/usr ]; then
     export LD_LIBRARY_PATH="$HOME/usr/lib:$LD_LIBRARY_PATH"
 fi
 
-export LC_TIME='en_DK.UTF-8'
+export LC_TIME='en_DK.UTF-8' # Get proper date format
 export TERMINAL='termite'
+export MOZ_USE_OMTC=1        # Force hardware acceleration for firefox
+
+# vim: syntax=sh:
