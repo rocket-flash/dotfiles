@@ -11,12 +11,20 @@ for file in ${FILES[@]}; do
     ln -s ".dotfiles/${file}" ".${file}"
 done
 
+[[ -L ".nvim" ]] && rm ".nvim"
+[[ -d ".nvim" ]] && mv ".nvim" ".nvim.bak"
+ln -s ".vim" ".nvim"
+
+[[ -L ".nvimrc" ]] && rm ".nvimrc"
+[[ -f ".nvimrc" ]] && mv ".nvimrc" ".nvimrc.bak"
+ln -s ".vimrc" ".nvimrc"
+
 [[ -L ".templates" ]] && rm ".templates"
 [[ -d ".templates" ]] && mv ".templates" ".templates.bak"
-ln -s "$HOME/.dotfiles/templates" ".templates"
+ln -s ".dotfiles/templates" ".templates"
 
 [[ -L ".config/termite" ]] && rm ".config/termite"
-[[ -d ".config/termite" ]] && mv ".config/termite" ".config/termite.bak"
+[[ -f ".config/termite" ]] && mv ".config/termite" ".config/termite.bak"
 ln -s "$HOME/.dotfiles/termite" ".config/termite"
 
 if [ ! -d .vim/bundle/Vundle.vim ]; then
