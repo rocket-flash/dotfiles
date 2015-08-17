@@ -102,7 +102,13 @@ if has("gui_running")
 else
     if substitute(system('tput colors'), '\n', '', '') == "256"
         let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-        colorscheme PaperColor
+
+        if &diff
+            colorscheme ir_dark
+        else
+            colorscheme PaperColor
+        endif
+
         set bg=dark
     else
         colorscheme desert
@@ -138,6 +144,9 @@ let g:miniBufExplForceSyntaxEnable = 1
 
 " NERDTree
 nnoremap <C-n> :NERDTreeToggle<CR>
+nnoremap <leader>nn :NERDTreeToggle<CR>
+nnoremap <leader>nc :NERDTreeCWD<CR>
+nnoremap <leader>nf :NERDTreeFind<CR>
 
 " vim-better-whitespace
 nnoremap <leader>ws :StripWhitespace<CR>
