@@ -93,9 +93,3 @@ if [ -d $HOME/usr ]; then
     export PATH="$HOME/usr/bin:$PATH"
     export LD_LIBRARY_PATH="$HOME/usr/lib:$LD_LIBRARY_PATH"
 fi
-
-# Android SDK tools
-if [ -d $HOME/android/sdk ]; then
-    export PATH=$PATH:$HOME/android/sdk/tools
-    export PATH=$PATH:$HOME/android/sdk/platform-tools
-fi
