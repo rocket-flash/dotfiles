@@ -15,7 +15,6 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'majutsushi/tagbar'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'mhinz/vim-tmuxify'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'tpope/vim-surround'
 Plugin 'xolox/vim-misc'
@@ -70,22 +69,35 @@ noremap <Space> <PageDown>
 nnoremap <tab> %
 vnoremap <tab> %
 
-noremap <up> <nop>
-noremap <down> <nop>
-noremap <left> <nop>
-noremap <right> <nop>
-inoremap <up> <nop>
-inoremap <down> <nop>
-inoremap <left> <nop>
+noremap <up>     <nop>
+noremap <down>   <nop>
+noremap <left>   <nop>
+noremap <right>  <nop>
+inoremap <up>    <nop>
+inoremap <down>  <nop>
+inoremap <left>  <nop>
 inoremap <right> <nop>
 
-noremap <C-J>     <C-W>j
-noremap <C-K>     <C-W>k
-noremap <C-H>     <C-W>h
-noremap <C-L>     <C-W>l
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-h> <C-w>h
+noremap <C-l> <C-w>l
 
 " Close current buffer but keep window
 nmap <leader>d :bp<bar>sp<bar>bn<bar>bd<CR>
+
+if has('nvim')
+    " Send all/line to terminal
+    nnoremap <leader>na ggyG<C-w>wpi<CR><C-\><C-n><C-w>p``
+    nnoremap <leader>nl yy<C-w>wpi<CR><C-\><C-n><C-w>p
+    inoremap <leader>na <ESC>ggyG<C-w>wpi<CR><C-\><C-n><C-w>p``a
+    inoremap <leader>nl <ESC>yy<C-w>wpi<CR><C-\><C-n><C-w>pa
+
+    " Send current selection to terminal
+    vnoremap <leader>ns y<C-w>wpi<CR><C-\><C-n><C-w>p
+
+    tnoremap <ESC><ESC> <C-\><C-n>
+endif
 
 " Syntaxes
 syntax enable
@@ -133,7 +145,7 @@ endfunction
 " --- PLUGINS ---
 " Tagbar
 nmap <leader>l :TagbarToggle<CR>
-imap <leader>l <ESC>:TagbarToggle<CR>i
+imap <leader>l <ESC>:TagbarToggle<CR>a
 
 " MiniBufExpl
 let g:miniBufExplMapWindowNavVim = 1
