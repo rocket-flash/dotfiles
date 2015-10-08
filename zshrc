@@ -70,9 +70,10 @@ if [ -x /usr/bin/dircolors ]; then
     [ -r ~/.dircolors ] && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 fi
 
-[[ -f ~/.zsh_aliases ]] && source ~/.zsh_aliases
-[[ -f ~/.zsh_functions ]] && source ~/.zsh_functions
-[[ -f /usr/share/doc/pkgfile/command-not-found.zsh ]] && source /usr/share/doc/pkgfile/command-not-found.zsh
+[[ -f ~/.zsh_aliases ]] && . ~/.zsh_aliases
+[[ -f ~/.zsh_functions ]] && . ~/.zsh_functions
+[[ -f /usr/bin/virtualenvwrapper.sh ]] && . /usr/bin/virtualenvwrapper.sh
+[[ -f /usr/share/doc/pkgfile/command-not-found.zsh ]] && . /usr/share/doc/pkgfile/command-not-found.zsh
 
 if which nvim > /dev/null; then
     export EDITOR="nvim"
@@ -93,5 +94,3 @@ if [ -d $HOME/usr ]; then
     export PATH="$HOME/usr/bin:$PATH"
     export LD_LIBRARY_PATH="$HOME/usr/lib:$LD_LIBRARY_PATH"
 fi
-
-[[ -f /usr/bin/virtualenvwrapper.sh ]] && . /usr/bin/virtualenvwrapper.sh
