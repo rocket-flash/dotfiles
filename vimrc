@@ -19,6 +19,7 @@ Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'tpope/vim-surround'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-easytags'
+Plugin 'vim-scripts/auto-pairs-gentle'
 
 " Colorschemes
 Plugin 'twerth/ir_black'
