@@ -88,13 +88,13 @@ nmap <leader>d :bp<bar>sp<bar>bn<bar>bd<CR>
 
 if has('nvim')
     " Send all/line to terminal
-    nnoremap <leader>na ggyG<C-w>wpi<CR><C-\><C-n><C-w>p``
-    nnoremap <leader>nl yy<C-w>wpi<CR><C-\><C-n><C-w>p
-    inoremap <leader>na <ESC>ggyG<C-w>wpi<CR><C-\><C-n><C-w>p``a
-    inoremap <leader>nl <ESC>yy<C-w>wpi<CR><C-\><C-n><C-w>pa
+    nnoremap <leader>sa ggyG<C-w>wpi<CR><C-\><C-n><C-w>p``
+    nnoremap <leader>sl yy<C-w>wpi<CR><C-\><C-n><C-w>p
+    inoremap <leader>sa <ESC>ggyG<C-w>wpi<CR><C-\><C-n><C-w>p``a
+    inoremap <leader>sl <ESC>yy<C-w>wpi<CR><C-\><C-n><C-w>pa
 
     " Send current selection to terminal
-    vnoremap <leader>ns y<C-w>wpi<CR><C-\><C-n><C-w>p
+    vnoremap <leader>ss y<C-w>wpi<CR><C-\><C-n><C-w>p
 
     tnoremap <ESC><ESC> <C-\><C-n>
 endif
