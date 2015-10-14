@@ -45,6 +45,8 @@ set smartindent
 set ignorecase
 set smartcase
 set incsearch
+" turn off search highlight
+nnoremap <leader><space> :nohlsearch<CR>
 
 " Other settings
 set ruler
