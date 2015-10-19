@@ -18,7 +18,6 @@ alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias cower='cower --color=auto'
-alias up='sudo pacman -Syu'
 alias jgrep='grep -nr --include='\''*.java'\'''
 alias csgrep='grep -nr --include='\''*.cs'\'''
 alias pygrep='grep -nr --include='\''*.py'\'''
@@ -31,6 +30,12 @@ alias td='(thunar --daemon &>/dev/null &)'
 
 #alias steam='STEAM_FRAME_FORCE_CLOSE=1 SDL_AUDIODRIVER=alsa steam'
 alias steam='STEAM_FRAME_FORCE_CLOSE=1 steam'
+
+if which pacaur > /dev/null; then
+    alias up='pacaur -Syu'
+else
+    alias up='sudo pacman -Syu'
+fi
 
 if which nvim > /dev/null; then
     alias vim='nvim'
