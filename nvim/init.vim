@@ -30,6 +30,8 @@ Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'alem0lars/vim-colorscheme-darcula'
 Plugin 'gosukiwi/vim-atom-dark'
 
+Plugin 'benmills/vimux'
+
 call vundle#end()           " required
 filetype plugin indent on   " required
 
@@ -46,7 +48,7 @@ set ignorecase
 set smartcase
 set incsearch
 " turn off search highlight
-nnoremap <leader><space> :nohlsearch<CR>
+noremap <leader><space> :nohlsearch<CR>
 
 " Other settings
 set ruler
@@ -173,3 +175,6 @@ let g:indent_guides_enable_on_vim_startup = 1
 
 " vim-easytag
 let g:easytags_async = 1
+
+" vimux
+nnoremap <leader>r :VimuxRunLastCommand<CR>

@@ -1,35 +1,36 @@
 #! /bin/bash
 
-FILES=( 'zshrc' 'zsh_aliases' 'zsh_functions' 'vim' 'vimrc' 'xprofile' 'Xmodmap' 'SciTEUser.properties' 'gitconfig' 'tmux.conf' 'tmux.zsh' 'dircolors' )
+FILES=( 'zshrc' 'zsh_aliases' 'zsh_functions' 'xprofile' 'Xmodmap' 'SciTEUser.properties' 'gitconfig' 'tmux.conf' 'tmux.zsh' 'dircolors' )
 
 cd $HOME
 
 for file in ${FILES[@]}; do
-    [[ -L ".${file}" ]] && rm ".${file}"
-    [[ -f ".${file}" ]] && mv ".${file}" ".${file}.bak"
+    [[ -L "$HOME/.${file}" ]] && rm "$HOME/.${file}"
+    [[ -f "$HOME/.${file}" ]] && mv "$HOME/.${file}" "$HOME/.${file}.bak"
 
-    ln -s ".dotfiles/${file}" ".${file}"
+    ln -s "$HOME/.dotfiles/${file}" "$HOME/.${file}"
 done
 
-[[ -L ".nvim" ]] && rm ".nvim"
-[[ -d ".nvim" ]] && mv ".nvim" ".nvim.bak"
-ln -s ".vim" ".nvim"
+[[ -L "$HOME/.config/nvim" ]] && rm "$HOME/.config/nvim"
+ln -s "$HOME/.dotfiles/nvim" "$HOME/.config/nvim"
 
-[[ -L ".nvimrc" ]] && rm ".nvimrc"
-[[ -f ".nvimrc" ]] && mv ".nvimrc" ".nvimrc.bak"
-ln -s ".vimrc" ".nvimrc"
+[[ -L "$HOME/.vim" ]] && rm "$HOME/.vim"
+ln -s "$HOME/.config/nvim" "$HOME/.vim"
 
-[[ -L ".templates" ]] && rm ".templates"
-[[ -d ".templates" ]] && mv ".templates" ".templates.bak"
-ln -s ".dotfiles/templates" ".templates"
+[[ -L "$HOME/.vimrc" ]] && rm "$HOME/.vimrc"
+ln -s "$HOME/.config/nvim/init.vim" "$HOME/.vimrc"
 
-[[ -L ".config/termite" ]] && rm ".config/termite"
-[[ -f ".config/termite" ]] && mv ".config/termite" ".config/termite.bak"
-ln -s "$HOME/.dotfiles/termite" ".config/termite"
+[[ -L "$HOME/.templates" ]] && rm "$HOME/.templates"
+[[ -d "$HOME/.templates" ]] && mv "$HOME/.templates" "$HOME/.templates.bak"
+ln -s "$HOME/.dotfiles/templates" "$HOME/.templates"
 
-if [ ! -d .vim/bundle/Vundle.vim ]; then
-    mkdir -p .vim/bundle
-    git clone https://github.com/gmarik/Vundle.vim.git .vim/bundle/Vundle.vim
+[[ -L "$HOME/.config/termite" ]] && rm "$HOME/.config/termite"
+[[ -f "$HOME/.config/termite" ]] && mv "$HOME/.config/termite" "$HOME/.config/termite.bak"
+ln -s "$HOME/.dotfiles/termite" "$HOME/.config/termite"
+
+if [ ! -d $HOME/.config/nvim/bundle ]; then
+    mkdir -p $HOME/.config/nvim/bundle
+    git clone https://github.com/gmarik/Vundle.vim.git $HOME/.config/nvim/bundle/Vundle.vim
 fi
 
 # Regenerate screen and screen-256color terminfo to fix C-h problem with neovim
