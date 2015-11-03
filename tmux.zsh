@@ -1,5 +1,5 @@
 # Only run if tmux is actually installed
-if which tmux &> /dev/null; then
+if tmux -V &> /dev/null; then
     # xfce4-terminal sets TERM to "xterm"
     [[ "$COLORTERM" == "xfce4-terminal" ]] && export TERM=screen-256color
 
