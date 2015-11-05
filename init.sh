@@ -35,7 +35,7 @@ fi
 
 # Regenerate screen and screen-256color terminfo to fix C-h problem with neovim
 # https://github.com/christoomey/vim-tmux-navigator/issues/71
-TERMS=( 'screen' 'screen-256color' )
+TERMS=( 'screen' 'screen-256color' 'tmux' 'tmux-256color' )
 for term in ${TERMS[@]}; do
     infocmp $term | sed 's/kbs=^[hH]/kbs=\\177/' > ${term}.ti
     tic ${term}.ti
