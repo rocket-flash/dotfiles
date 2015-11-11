@@ -6,13 +6,13 @@ mouse_autohide = true
 allow_bold = true
 dynamic_title = true
 urgent_on_bell = true
-clickable_url = false
+clickable_url = true
 font = Source Code Pro 10
 scrollback_lines = 10000
 search_wrap = true
+maximized = true
 icon_name = terminal
 geometry = 1018x580
-maximized = true
 
 # "system", "on" or "off"
 cursor_blink = system
@@ -26,12 +26,14 @@ cursor_shape = block
 # set size hints for the window
 #size_hints = false
 
+# Hide links that are no longer valid in url select overlay mode
+filter_unmatched_urls = true
+
 # emit escape sequences for other keys modified by Control
 #modify_other_keys = false
 
 [colors]
 #cursor = #dcdccc
-#foreground = #dcdccc
 foreground = #ffffff
 foreground_bold = #ffffff
 
