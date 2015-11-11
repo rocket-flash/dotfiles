@@ -19,7 +19,7 @@ alias sqlmatt='psql -h CMSDEV-SQL -U cmsuser -d matt'
 alias sqlcdev='psql -h CMSDEV-SQL -U cmsuser -d eservices'
 alias sqlcqa='psql -h CMSQA3-SQL -U cmsuser -d eservices'
 alias sqlctest='psql -h CMSTEST3-SQL -U cmsuser -d eservices'
-alias sqlprod='psql -h CMSPROD3-SQL -U cmsuser -d eservices'
+alias sqlcprod='psql -h CMSPROD3-SQL -U cmsuser -d eservices'
 
 # Airtime CMS
 alias sqlatest='psql -h airtime-cms-test-sql-1 -U cmsuser -d airtime_cms'
