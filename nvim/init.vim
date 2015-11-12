@@ -7,7 +7,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " let Vundle manage Vundle (required!)
-Plugin 'gmarik/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'fholgado/minibufexpl.vim'
 Plugin 'scrooloose/nerdcommenter'
@@ -29,8 +29,6 @@ Plugin 'Wutzara/vim-materialtheme'
 Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'alem0lars/vim-colorscheme-darcula'
 Plugin 'gosukiwi/vim-atom-dark'
-
-Plugin 'benmills/vimux'
 
 call vundle#end()           " required
 filetype plugin indent on   " required
@@ -176,6 +174,8 @@ let g:indent_guides_enable_on_vim_startup = 1
 
 " vim-easytag
 let g:easytags_async = 1
+let g:easytags_file = '~/.vim/gtags'
+let g:easytags_by_filetype = '~/.vim/tags/'
 
 " vimux
 nnoremap <leader>r :VimuxRunLastCommand<CR>
