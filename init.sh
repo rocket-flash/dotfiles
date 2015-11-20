@@ -28,9 +28,10 @@ ln -s "$HOME/.dotfiles/templates" "$HOME/.templates"
 [[ -f "$HOME/.config/termite" ]] && mv "$HOME/.config/termite" "$HOME/.config/termite.bak"
 ln -s "$HOME/.dotfiles/termite" "$HOME/.config/termite"
 
-if [ ! -d $HOME/.config/nvim/bundle ]; then
-    mkdir -p $HOME/.config/nvim/bundle
-    git clone https://github.com/gmarik/Vundle.vim.git $HOME/.config/nvim/bundle/Vundle.vim
+if [ ! -d $HOME/.config/nvim/autoload/plug.vim ]; then
+    curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    # TERM workaround to avoid loading non existing color scheme
+    TERM=xterm vim +PlugInstall +qall
 fi
 
 # Regenerate screen and screen-256color terminfo to fix C-h problem with neovim

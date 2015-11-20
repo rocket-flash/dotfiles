@@ -1,37 +1,28 @@
 " Load plugins first
-set nocompatible            " be iMproved, required
-filetype off                " required
+call plug#begin()
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" let Vundle manage Vundle (required!)
-Plugin 'VundleVim/Vundle.vim'
-
-Plugin 'fholgado/minibufexpl.vim'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/nerdtree'
-Plugin 'majutsushi/tagbar'
-Plugin 'ntpeters/vim-better-whitespace'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'tpope/vim-surround'
-Plugin 'xolox/vim-misc'
-Plugin 'xolox/vim-easytags'
-Plugin 'vim-scripts/auto-pairs-gentle'
+Plug 'fholgado/minibufexpl.vim'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
+Plug 'majutsushi/tagbar'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'airblade/vim-gitgutter'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'tpope/vim-surround'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-easytags'
+Plug 'vim-scripts/auto-pairs-gentle'
 
 " Colorschemes
-Plugin 'twerth/ir_black'
-Plugin 'ciaranm/inkpot'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'Wutzara/vim-materialtheme'
-Plugin 'NLKNguyen/papercolor-theme'
-Plugin 'alem0lars/vim-colorscheme-darcula'
-Plugin 'gosukiwi/vim-atom-dark'
+Plug 'twerth/ir_black'
+Plug 'ciaranm/inkpot'
+Plug 'altercation/vim-colors-solarized'
+Plug 'Wutzara/vim-materialtheme'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'alem0lars/vim-colorscheme-darcula'
+Plug 'gosukiwi/vim-atom-dark'
 
-call vundle#end()           " required
-filetype plugin indent on   " required
+call plug#end()
 
 " Indent settings
 set expandtab
