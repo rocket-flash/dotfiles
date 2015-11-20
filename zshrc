@@ -64,7 +64,7 @@ else
     PS1="%(!.${FG_BRIGHT_RED}.${FG_BRIGHT_GREEN})%n@%m${COLOR_RESET}:${FG_BRIGHT_BLUE}%1~${COLOR_RESET}%(!.#.$) "
 fi
 PS2='> '
-RPROMPT=$'$(vcs_info_wrapper)'"[%D{%T}]""%(?.${FG_BRIGHT_GREEN}.${FG_BRIGHT_RED})[%?]${COLOR_RESET}"
+RPROMPT=$'$(vcs_info_wrapper)'"%(1j.[%jbg].)[%D{%T}]%(?.${FG_BRIGHT_GREEN}.${FG_BRIGHT_RED})[%?]${COLOR_RESET}"
 
 if [ -x /usr/bin/dircolors ]; then
     [ -r ~/.dircolors ] && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -93,4 +93,8 @@ export CFLAGS="-O2 -march=native -fstack-protector-strong"
 if [ -d $HOME/usr ]; then
     export PATH="$HOME/usr/bin:$PATH"
     export LD_LIBRARY_PATH="$HOME/usr/lib:$LD_LIBRARY_PATH"
+fi
+
+if [ -f "$HOME/.pythonrc" ]; then
+    export PYTHONSTARTUP="$HOME/.pythonrc"
 fi
