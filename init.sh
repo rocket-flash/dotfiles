@@ -2,17 +2,17 @@
 
 FILES=( 'zshrc' 'zsh_aliases' 'zsh_functions' 'xprofile' 'Xmodmap' 'SciTEUser.properties' 'gitconfig' 'tmux.conf' 'tmux.zsh' 'dircolors' )
 
-cd $HOME
+DOTFILES_DIR="$(readlink -f "$(dirname ${BASH_SOURCE[0]})")"
 
 for file in ${FILES[@]}; do
     [[ -L "$HOME/.${file}" ]] && rm "$HOME/.${file}"
     [[ -f "$HOME/.${file}" ]] && mv "$HOME/.${file}" "$HOME/.${file}.bak"
 
-    ln -s "$HOME/.dotfiles/${file}" "$HOME/.${file}"
+    ln -s "$DOTFILES_DIR/${file}" "$HOME/.${file}"
 done
 
 [[ -L "$HOME/.config/nvim" ]] && rm "$HOME/.config/nvim"
-ln -s "$HOME/.dotfiles/nvim" "$HOME/.config/nvim"
+ln -s "$DOTFILES_DIR/nvim" "$HOME/.config/nvim"
 
 [[ -L "$HOME/.vim" ]] && rm "$HOME/.vim"
 ln -s "$HOME/.config/nvim" "$HOME/.vim"
@@ -22,11 +22,11 @@ ln -s "$HOME/.config/nvim/init.vim" "$HOME/.vimrc"
 
 [[ -L "$HOME/.templates" ]] && rm "$HOME/.templates"
 [[ -d "$HOME/.templates" ]] && mv "$HOME/.templates" "$HOME/.templates.bak"
-ln -s "$HOME/.dotfiles/templates" "$HOME/.templates"
+ln -s "$DOTFILES_DIR/templates" "$HOME/.templates"
 
 [[ -L "$HOME/.config/termite" ]] && rm "$HOME/.config/termite"
 [[ -f "$HOME/.config/termite" ]] && mv "$HOME/.config/termite" "$HOME/.config/termite.bak"
-ln -s "$HOME/.dotfiles/termite" "$HOME/.config/termite"
+ln -s "$DOTFILES_DIR/termite" "$HOME/.config/termite"
 
 if [ ! -d $HOME/.config/nvim/autoload/plug.vim ]; then
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
