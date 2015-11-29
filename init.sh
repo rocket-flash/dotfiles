@@ -11,6 +11,8 @@ for file in ${FILES[@]}; do
     ln -s "$DOTFILES_DIR/${file}" "$HOME/.${file}"
 done
 
+[[ -d "$HOME/.config" ]] || mkdir .config
+
 [[ -L "$HOME/.config/nvim" ]] && rm "$HOME/.config/nvim"
 ln -s "$DOTFILES_DIR/nvim" "$HOME/.config/nvim"
 
