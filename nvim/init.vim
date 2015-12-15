@@ -86,6 +86,9 @@ inoremap <C-l> <right>
 " Close current buffer but keep window
 nmap <leader>d :bp<bar>sp<bar>bn<bar>bd<CR>
 
+" JSON Tidy: Reformat JSON file
+nmap <leader>jt :%!python -m json.tool<CR>
+
 if has('nvim')
     " Send all/line to terminal
     nnoremap <leader>sa ggyG<C-w>wpi<CR><C-\><C-n><C-w>p``
