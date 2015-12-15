@@ -33,10 +33,10 @@ alias td='(thunar --daemon &>/dev/null &)'
 
 if which pacaur > /dev/null; then
     alias up='pacaur -Syu'
-    alias pac='pacaur'
+    alias pm='pacaur'
 else
     alias up='sudo pacman -Syu'
-    alias pac='pacman'
+    alias pm='pacman'
 fi
 
 if which nvim > /dev/null; then
