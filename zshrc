@@ -73,7 +73,11 @@ fi
 # SSH Agent detection
 if [ -z "$SSH_AUTH_SOCK" -a -f ~/.ssh-find-agent.sh ]; then
     source ~/.ssh-find-agent.sh
+
+    # Script doesn't work well with zsh.. lazy fix
+    emulate sh
     ssh-find-agent -a
+    emulate zsh
 
     if [ -z "$SSH_AUTH_SOCK" ]; then
         eval $(ssh-agent) > /dev/null
