@@ -9,8 +9,10 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'airblade/vim-gitgutter'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'tpope/vim-surround'
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-easytags'
+if executable('ctags')
+    Plug 'xolox/vim-misc'
+    Plug 'xolox/vim-easytags'
+endif
 Plug 'vim-scripts/auto-pairs-gentle'
 
 " Colorschemes
