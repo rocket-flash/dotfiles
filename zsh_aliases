@@ -27,9 +27,7 @@ alias svn_clean='svn status --no-ignore | egrep "^[\?I]" | awk '\''{print $2}'\'
 alias hd='hexdump -C'
 alias t='thunar'
 alias td='(thunar --daemon &>/dev/null &)'
-
-#alias steamalsa='STEAM_FRAME_FORCE_CLOSE=1 SDL_AUDIODRIVER=alsa steam'
-#alias steam='STEAM_FRAME_FORCE_CLOSE=1 steam'
+alias dd='dd status=progress'
 
 if which pacaur > /dev/null; then
     alias up='pacaur -Syu'
