@@ -31,7 +31,7 @@ ln -s "$DOTFILES_DIR/templates" "$HOME/.templates"
 [[ -f "$HOME/.config/termite" ]] && mv "$HOME/.config/termite" "$HOME/.config/termite.bak"
 ln -s "$DOTFILES_DIR/termite" "$HOME/.config/termite"
 
-if [ ! -d $HOME/.config/nvim/autoload/plug.vim ]; then
+if [ ! -e $HOME/.config/nvim/autoload/plug.vim ]; then
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     # TERM workaround to avoid loading non existing color scheme
     TERM=xterm vim +PlugInstall +qall
