@@ -70,6 +70,20 @@ if [ -x /usr/bin/dircolors ]; then
     [ -r ~/.dircolors ] && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 fi
 
+# SSH Agent detection
+if [ -z "$SSH_AUTH_SOCK" -a -f ~/.ssh-find-agent.sh ]; then
+    source ~/.ssh-find-agent.sh
+    ssh-find-agent -a
+
+    if [ -z "$SSH_AUTH_SOCK" ]; then
+        eval $(ssh-agent) > /dev/null
+    fi
+fi
+
+if [ -n "$SSH_AUTH_SOCK" ]; then
+    ssh-add -l > /dev/null || ssh-add
+fi
+
 [[ -f ~/.zsh_aliases ]] && . ~/.zsh_aliases
 [[ -f ~/.zsh_functions ]] && . ~/.zsh_functions
 [[ -f /usr/bin/virtualenvwrapper.sh ]] && . /usr/bin/virtualenvwrapper.sh
