@@ -17,12 +17,8 @@ Plug 'vim-scripts/auto-pairs-gentle'
 
 " Colorschemes
 Plug 'twerth/ir_black'
-Plug 'ciaranm/inkpot'
-Plug 'altercation/vim-colors-solarized'
-Plug 'Wutzara/vim-materialtheme'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'alem0lars/vim-colorscheme-darcula'
-Plug 'gosukiwi/vim-atom-dark'
 
 call plug#end()
 
