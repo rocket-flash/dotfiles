@@ -14,6 +14,7 @@ if executable('ctags')
     Plug 'xolox/vim-easytags'
 endif
 Plug 'vim-scripts/auto-pairs-gentle'
+Plug '907th/vim-auto-save'
 
 " Colorschemes
 Plug 'twerth/ir_black'
@@ -56,6 +57,12 @@ set autoread
 " Whitespaces
 set listchars=tab:>-,trail:~
 set list
+
+"Use persistent undo
+set undodir=~/.vim/undo
+set undofile
+set undolevels=1000 "maximum number of changes that can be undone
+set undoreload=10000 "maximum number lines to save for undo on a buffer reload
 
 " Key remaps
 noremap <Space> <PageDown>
@@ -128,21 +135,6 @@ else
     endif
 endif
 
-noremap <F8> :call HexMe()<CR>
-
-let $in_hex=0
-function HexMe()
-    set binary
-    set noeol
-if $in_hex>0
-    :%!xxd -r
-    let $in_hex=0
-else
-    :%!xxd
-    let $in_hex=1
-endif
-endfunction
-
 " --- PLUGINS ---
 " Tagbar
 nmap <leader>l :TagbarToggle<CR>
@@ -174,5 +166,7 @@ let g:easytags_async = 1
 let g:easytags_file = '~/.vim/gtags'
 let g:easytags_by_filetype = '~/.vim/tags/'
 
-" vimux
-nnoremap <leader>r :VimuxRunLastCommand<CR>
+" vim-auto-save
+let g:auto_save = 1  " enable AutoSave on Vim startup
+let g:auto_save_in_insert_mode = 0  " do not save while in insert mode
+let g:auto_save_silent = 1  " do not display the auto-save notification
