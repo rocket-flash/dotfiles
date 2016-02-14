@@ -1,7 +1,7 @@
 #! /bin/bash
 
 FILES=( 'zshrc' 'zsh_aliases' 'zsh_functions' 'xprofile' 'Xmodmap' 'SciTEUser.properties'
-        'gitconfig' 'tmux.conf' 'tmux.zsh' 'dircolors' 'ssh-find-agent.sh' )
+        'gitconfig' 'tmux.conf' 'tmux.zsh' 'dircolors' 'ssh-find-agent.sh' 'conkyrc' )
 
 DOTFILES_DIR="$(readlink -f "$(dirname ${BASH_SOURCE[0]})")"
 
