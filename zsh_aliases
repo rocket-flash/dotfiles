@@ -1,7 +1,7 @@
 alias sudo='sudo '  # Enable aliases when using sudo
 
 # ls aliases
-alias ls='ls --color=auto -v'
+alias ls='ls --color=auto -v --group-directories-first'
 alias ll='ls -lh'
 alias la='ls -A'
 alias lf='ls -lhA'
