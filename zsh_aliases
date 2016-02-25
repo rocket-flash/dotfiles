@@ -28,6 +28,7 @@ alias hd='hexdump -C'
 alias t='thunar'
 alias td='(thunar --daemon &>/dev/null &)'
 alias dd='dd status=progress'
+alias rar='unrar'
 
 if which pacaur > /dev/null; then
     alias up='pacaur -Syu'
