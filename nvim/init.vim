@@ -50,6 +50,7 @@ set backspace=2
 set pastetoggle=<F2>
 set scrolloff=3
 set backupdir=.
+set colorcolumn=120
 
 " Set to auto read when a file is changed from the outside
 set autoread
