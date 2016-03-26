@@ -27,7 +27,7 @@ call plug#end()
 set expandtab
 set tabstop=4
 set softtabstop=4
-set shiftwidth=4
+set shiftwidth=0 " Same as tabstop
 set autoindent
 set smartindent
 
@@ -46,10 +46,11 @@ set showcmd
 set cursorline
 set wildmenu
 set modeline
-set backspace=2
+set backspace=indent,eol,start
 set pastetoggle=<F2>
 set scrolloff=3
 set colorcolumn=120
+set shortmess+=I " Remove intro text
 
 " Set to auto read when a file is changed from the outside
 set autoread
@@ -58,14 +59,13 @@ set autoread
 set listchars=tab:>-,trail:~
 set list
 
-"Use persistent undo
+" Use persistent undo
 set undodir=~/.vim/undo
 set undofile
-set undolevels=1000 "maximum number of changes that can be undone
-set undoreload=10000 "maximum number lines to save for undo on a buffer reload
+set undolevels=1000 " maximum number of changes that can be undone
+set undoreload=10000 " maximum number lines to save for undo on a buffer reload
 
 " Key remaps
-noremap <Space> <PageDown>
 nnoremap <tab> %
 vnoremap <tab> %
 
@@ -87,6 +87,11 @@ inoremap <C-k> <up>
 inoremap <C-j> <down>
 inoremap <C-h> <left>
 inoremap <C-l> <right>
+
+" Disable macro recording or whatever
+noremap q <nop>
+" Disable going in ex mode
+noremap Q <nop>
 
 " Close current buffer but keep window
 nmap <leader>d :bp<bar>sp<bar>bn<bar>bd<CR>
