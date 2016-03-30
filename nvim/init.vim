@@ -15,6 +15,7 @@ if executable('ctags')
 endif
 Plug 'vim-scripts/auto-pairs-gentle'
 Plug '907th/vim-auto-save'
+Plug 'yegappan/mru'
 
 " Colorschemes
 Plug 'twerth/ir_black'
@@ -51,6 +52,7 @@ set pastetoggle=<F2>
 set scrolloff=3
 set colorcolumn=120
 set shortmess+=I " Remove intro text
+set completeopt=menuone,longest " Show menu even if one possibility and stop on ambiguity
 
 " Set to auto read when a file is changed from the outside
 set autoread
@@ -157,6 +159,9 @@ nnoremap <C-n> :NERDTreeToggle<CR>
 nnoremap <leader>nn :NERDTreeToggle<CR>
 nnoremap <leader>nc :NERDTreeCWD<CR>
 nnoremap <leader>nf :NERDTreeFind<CR>
+
+" MRU
+nnoremap <Leader>m :MRU<CR>
 
 " vim-better-whitespace
 nnoremap <leader>ws :StripWhitespace<CR>
