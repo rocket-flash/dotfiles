@@ -46,6 +46,7 @@ set nowrap
 set showcmd
 set cursorline
 set wildmenu
+set wildmode=longest:full,full " Stop on ambiguity, then go through possibilities
 set modeline
 set backspace=indent,eol,start
 set pastetoggle=<F2>
