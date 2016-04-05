@@ -9,10 +9,6 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'airblade/vim-gitgutter'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'tpope/vim-surround'
-if executable('ctags')
-    Plug 'xolox/vim-misc'
-    Plug 'xolox/vim-easytags'
-endif
 Plug 'vim-scripts/auto-pairs-gentle'
 Plug '907th/vim-auto-save'
 Plug 'yegappan/mru'
