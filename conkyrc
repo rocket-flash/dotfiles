@@ -10,8 +10,11 @@ conky.config = {
     own_window = true,
     own_window_class = 'Conky',
 
-    -- Subtract file system buffers from used memory?
-    no_buffers = True,
+    -- Subtract file system buffers from used memory
+    no_buffers = true,
+
+    -- Prevent auto-reload of this file when modified
+    disable_auto_reload = true,
 
     -- To make conky stay visible when I click on the desktop
     -- Go to general prefs in compizcsm, uncheck "hide skip taskbar windows"
