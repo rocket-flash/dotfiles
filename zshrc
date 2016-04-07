@@ -16,6 +16,8 @@ colors
 
 bindkey "^[[A" history-search-backward
 bindkey "^[[B" history-search-forward
+bindkey "^[OA" history-search-backward
+bindkey "^[OB" history-search-forward
 
 setopt APPEND_HISTORY
 setopt HIST_IGNORE_DUPS
