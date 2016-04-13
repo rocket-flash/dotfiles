@@ -116,3 +116,6 @@ fi
 if [ -f "$HOME/.pythonrc" ]; then
     export PYTHONSTARTUP="$HOME/.pythonrc"
 fi
+
+# Put pacaur git clones back in /tmp
+export AURDEST="/tmp/pacaur-mathieu"
