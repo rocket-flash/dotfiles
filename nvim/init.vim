@@ -97,6 +97,8 @@ nmap <leader>d :bp<bar>sp<bar>bn<bar>bd<CR>
 
 " JSON Tidy: Reformat JSON file
 nmap <leader>jt :%!python -m json.tool<CR>
+" XML Tidy: Reformat XML file
+nmap <leader>xt :%!tidy -xml -i -w 2048 2>/dev/null<CR>
 
 if has('nvim')
     " Send all/line to terminal
