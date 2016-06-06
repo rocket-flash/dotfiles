@@ -118,4 +118,4 @@ if [ -f "$HOME/.pythonrc" ]; then
 fi
 
 # Put pacaur git clones back in /tmp
-export AURDEST="/tmp/pacaur-mathieu"
+export AURDEST="/tmp/pacaurclone-$USER"
