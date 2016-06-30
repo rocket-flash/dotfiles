@@ -1,5 +1,15 @@
 function bak() {
-    tar Jcf ${1%/}.$(date +%Y%m%d-%H%M%S).tar.xz ${1%/}
+    if [ $# -lt 1 ]; then
+        echo "Usage: $0 [-n] folder"
+        return 1
+    fi
+
+    if [ "$1" = "-n" ]; then
+        shift 1
+        tar cf ${1%/}.$(date +%Y%m%d-%H%M%S).tar ${1%/}
+    else
+        tar Jcf ${1%/}.$(date +%Y%m%d-%H%M%S).tar.xz ${1%/}
+    fi
 }
 
 function mcd() {
