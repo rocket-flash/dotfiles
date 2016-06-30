@@ -119,26 +119,18 @@ au BufNewFile,BufRead *.bf set filetype=brainfuck
 au BufNewFile,BufRead *.asm set filetype=nasm
 au BufNewFile,BufRead *.sql set filetype=pgsql
 
-" Color / Window size
-if has("gui_running")
-    set lines=48
-    set columns=200
-    set guifont=Source\ Code\ Pro\ Semi-Light\ 10
-    colorscheme ir_dark
-else
-    if substitute(system('tput colors'), '\n', '', '') == "256"
-        let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-
-        if &diff
-            colorscheme ir_dark
-        else
-            colorscheme PaperColor
-        endif
-
-        set bg=dark
+" Color
+if substitute(system('tput colors'), '\n', '', '') == "256"
+    if &diff
+        colorscheme ir_dark
     else
-        colorscheme desert
+        set termguicolors
+        colorscheme PaperColor
     endif
+
+    set bg=dark
+else
+    colorscheme desert
 endif
 
 " --- PLUGINS ---
