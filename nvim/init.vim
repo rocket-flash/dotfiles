@@ -119,7 +119,7 @@ au BufNewFile,BufRead *.bf set filetype=brainfuck
 au BufNewFile,BufRead *.asm set filetype=nasm
 au BufNewFile,BufRead *.sql set filetype=pgsql
 
-" Color
+" Colors
 if substitute(system('tput colors'), '\n', '', '') == "256"
     if &diff
         colorscheme ir_dark
@@ -131,6 +131,11 @@ if substitute(system('tput colors'), '\n', '', '') == "256"
     set bg=dark
 else
     colorscheme desert
+endif
+
+" vimdiff
+if &diff
+    set diffopt+=iwhite " Ignore changes in amount of white space.
 endif
 
 " --- PLUGINS ---
