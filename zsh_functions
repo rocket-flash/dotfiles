@@ -15,3 +15,17 @@ function bak() {
 function mcd() {
     mkdir -p "$1" && cd "$1"
 }
+
+function get_ext() {
+    # http://reasoniamhere.com/2014/01/11/outrageously-useful-tips-to-master-your-z-shell/
+    # :e -> Ext
+    echo ${1:e}
+}
+
+function remove_ext() {
+    # http://reasoniamhere.com/2014/01/11/outrageously-useful-tips-to-master-your-z-shell/
+    # :t -> Tail (basename)
+    # :r -> Remove ext?
+    #echo ${1:t:r}
+    echo ${1:r}
+}
