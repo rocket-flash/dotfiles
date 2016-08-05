@@ -125,6 +125,7 @@ if substitute(system('tput colors'), '\n', '', '') == "256"
         colorscheme ir_dark
     else
         set termguicolors
+        let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
         colorscheme PaperColor
     endif
 
