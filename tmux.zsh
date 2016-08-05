@@ -14,6 +14,8 @@ if tmux -V &> /dev/null; then
     [[ -n "$ZSH_TMUX_AUTOCONNECT" ]] || ZSH_TMUX_AUTOCONNECT=false
     # Automatically close the terminal when tmux exits
     [[ -n "$ZSH_TMUX_AUTOQUIT" ]] || ZSH_TMUX_AUTOQUIT=$ZSH_TMUX_AUTOSTART
+    # Name of the tmux socket
+    [[ -n "$ZSH_TMUX_SOCKET_NAME" ]] || ZSH_TMUX_SOCKET_NAME="default"
     # The TERM to use for non-256 color terminals.
     # Tmux states this should be screen, but you may need to change it on
     # systems without the proper terminfo
@@ -54,15 +56,15 @@ if tmux -V &> /dev/null; then
         # We have other arguments, just run them
         if [[ -n "$@" ]]
         then
-            \tmux $@
+            \tmux -L "$ZSH_TMUX_SOCKET_NAME" $@
         # Try to connect to an existing session.
         elif [[ "$ZSH_TMUX_AUTOCONNECT" == "true" ]]
         then
-            \tmux attach || \tmux new-session
+            \tmux -L "$ZSH_TMUX_SOCKET_NAME" attach || \tmux -L "$ZSH_TMUX_SOCKET_NAME" new-session
             _zsh_tmux_is_autoquit && exit
         # Just run tmux, fixing the TERM variable if requested.
         else
-            \tmux
+            \tmux -L "$ZSH_TMUX_SOCKET_NAME"
             _zsh_tmux_is_autoquit && exit
         fi
     }
