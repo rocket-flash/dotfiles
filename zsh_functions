@@ -29,3 +29,14 @@ function remove_ext() {
     #echo ${1:t:r}
     echo ${1:r}
 }
+
+function pacaur_clean() {
+    [[ -z "$AURDEST" ]] && return
+
+    cd "$AURDEST"
+    for d in *; do
+        pushd $d
+        git clean -xdf
+        popd
+    done
+}
