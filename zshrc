@@ -99,7 +99,7 @@ fi
 
 [[ -f ~/.zsh_aliases ]] && . ~/.zsh_aliases
 [[ -f ~/.zsh_functions ]] && . ~/.zsh_functions
-[[ -f /usr/bin/virtualenvwrapper.sh ]] && . /usr/bin/virtualenvwrapper.sh
+[[ -f /usr/bin/virtualenvwrapper_lazy.sh ]] && . /usr/bin/virtualenvwrapper_lazy.sh
 [[ -f /usr/share/doc/pkgfile/command-not-found.zsh ]] && . /usr/share/doc/pkgfile/command-not-found.zsh
 
 if which nvim > /dev/null; then
