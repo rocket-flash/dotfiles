@@ -33,10 +33,20 @@ function remove_ext() {
 function pacaur_clean() {
     [[ -z "$AURDEST" ]] && return
 
-    cd "$AURDEST"
+    pushd "$AURDEST"
+
     for d in *; do
-        pushd $d
-        git clean -xdf
-        popd
+        if pacman -Qi $d &> /dev/null; then
+            pushd $d
+            git clean -xdf
+            popd
+        else
+            if read -s -q "?Delete $d [y/N]? "; then
+                rm -rf $d
+            fi
+            echo
+        fi
     done
+
+    popd
 }
