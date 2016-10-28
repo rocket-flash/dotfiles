@@ -181,4 +181,4 @@ let g:auto_save_silent = 1  " do not display the auto-save notification
 " GitGutter
 nnoremap <leader>gp :GitGutterPrevHunk<CR>
 nnoremap <leader>gn :GitGutterNextHunk<CR>
-nnoremap <leader>gr :GitGutterRevertHunk<CR>
+nnoremap <leader>gr :GitGutterUndoHunk<CR>
