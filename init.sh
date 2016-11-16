@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/bash -eu
 
 FILES=( 'zshrc' 'zsh_aliases' 'zsh_functions' 'pam_environment' 'Xmodmap' 'SciTEUser.properties'
         'gitconfig' 'tmux.conf' 'tmux.zsh' 'dircolors' 'ssh-find-agent.sh' 'conkyrc' )
