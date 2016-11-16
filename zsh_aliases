@@ -33,9 +33,11 @@ alias rar='unrar'
 if which pacaur > /dev/null; then
     alias up='pacaur -Syu'
     alias pm='pacaur'
-else
+elif which pacman > /dev/null; then
     alias up='sudo pacman -Syu'
     alias pm='pacman'
+elif which apt > /dev/null; then
+    alias up='sudo apt update && sudo apt full-upgrade'
 fi
 
 if which nvim > /dev/null; then
