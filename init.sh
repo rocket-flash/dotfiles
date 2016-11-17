@@ -12,7 +12,7 @@ for file in ${FILES[@]}; do
     ln -s "$DOTFILES_DIR/${file}" "$HOME/.${file}"
 done
 
-[[ -e "$DOTFILES_DIR/zsh_aliases.$(hostname)" ]] && ln -s "$DOTFILES_DIR/zsh_aliases.$(hostname)" "$HOME/.zsh_aliases.local"
+[[ -e "$DOTFILES_DIR/zsh_aliases.$(hostname)" ]] && ln -sf "$DOTFILES_DIR/zsh_aliases.$(hostname)" "$HOME/.zsh_aliases.local"
 
 [[ -d "$HOME/.config" ]] || mkdir .config
 
