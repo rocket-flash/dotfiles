@@ -13,7 +13,8 @@ function bak() {
 }
 
 function mcd() {
-    mkdir -p "$1" && cd "$1"
+    [[ -d "$1" ]] || mkdir -p "$1"
+    cd "$1"
 }
 
 function get_ext() {
