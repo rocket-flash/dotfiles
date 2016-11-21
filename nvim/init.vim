@@ -117,7 +117,6 @@ endif
 syntax enable
 au BufNewFile,BufRead *.bf set filetype=brainfuck
 au BufNewFile,BufRead *.asm set filetype=nasm
-au BufNewFile,BufRead *.sql set filetype=pgsql
 
 " Colors
 if substitute(system('tput colors'), '\n', '', '') == "256"
