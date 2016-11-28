@@ -79,23 +79,10 @@ if [ -x /usr/bin/dircolors ]; then
     [ -r ~/.dircolors ] && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 fi
 
-# SSH Agent detection
-if [ -z "$SSH_AUTH_SOCK" -a -f ~/.ssh-find-agent.sh ]; then
-    source ~/.ssh-find-agent.sh
-
-    # Script doesn't work well with zsh.. lazy fix
-    emulate sh
-    ssh-find-agent -a
-    emulate zsh
-
-    if [ -z "$SSH_AUTH_SOCK" ]; then
-        eval $(ssh-agent) > /dev/null
-    fi
-fi
-
-if [ -n "$SSH_AUTH_SOCK" ]; then
-    ssh-add -l > /dev/null || ssh-add
-fi
+# SSH Agent
+export SSH_AUTH_SOCK="/tmp/ssh-agent.${EUID}.socket"
+[[ -S "${SSH_AUTH_SOCK}" ]] || ssh-agent -s -a "${SSH_AUTH_SOCK}" > /dev/null
+ssh-add -l > /dev/null || ssh-add
 
 [[ -f ~/.zsh_aliases ]] && . ~/.zsh_aliases
 [[ -f ~/.zsh_functions ]] && . ~/.zsh_functions
