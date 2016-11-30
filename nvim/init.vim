@@ -25,6 +25,7 @@ set expandtab
 set tabstop=4
 set softtabstop=4
 set shiftwidth=0 " Same as tabstop
+set shiftround
 set autoindent
 set smartindent
 
