@@ -27,6 +27,7 @@ bindkey "^[[A" history-search-backward
 bindkey "^[[B" history-search-forward
 bindkey "^[OA" history-search-backward
 bindkey "^[OB" history-search-forward
+bindkey "^W" backward-kill-word
 
 setopt APPEND_HISTORY
 setopt HIST_IGNORE_DUPS
@@ -70,7 +71,7 @@ done
 COLOR_RESET="%{$reset_color%}"
 
 PS1="%(!.${FG_BRIGHT_RED}.${FG_BRIGHT_GREEN})%n@%m"
-[[ ! -z "$SSH_CLIENT" ]] && PS1="${PS1}${FG_BRIGHT_RED}[ssh]"
+[[ ! -z "$SSH_CLIENT" ]] && PS1="${PS1}%(!.${FG_BRIGHT_GREEN}.${FG_BRIGHT_RED})[ssh]"
 PS1="${PS1}${COLOR_RESET}:${FG_BRIGHT_BLUE}%1~${COLOR_RESET}%(!.#.$) "
 PS2='> '
 RPROMPT=$'$(vcs_info_wrapper)'"%(1j.[%jbg].)[%D{%T}]%(?.${FG_BRIGHT_GREEN}.${FG_BRIGHT_RED})[%?]${COLOR_RESET}"
