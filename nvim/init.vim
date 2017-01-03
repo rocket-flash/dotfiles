@@ -56,7 +56,7 @@ set completeopt=menuone,longest " Show menu even if one possibility and stop on 
 set autoread
 
 " Whitespaces
-set listchars=tab:>-,trail:~
+set listchars=tab:→\ ,trail:~
 set list
 
 " Use persistent undo
