@@ -53,18 +53,25 @@ if tmux -V &> /dev/null; then
     # Wrapper function for tmux.
     function _zsh_tmux_plugin_run()
     {
+        # For some reason, launching tmux when TERM is xterm-termite, true color won't work properly
+        prev_term=$TERM
+        [[ "$TERM" == "xterm-termite" ]] && export TERM=xterm-256color
+
         # We have other arguments, just run them
         if [[ -n "$@" ]]
         then
             \tmux -L "$ZSH_TMUX_SOCKET_NAME" $@
+            export TERM=$prev_term
         # Try to connect to an existing session.
         elif [[ "$ZSH_TMUX_AUTOCONNECT" == "true" ]]
         then
             \tmux -L "$ZSH_TMUX_SOCKET_NAME" attach || \tmux -L "$ZSH_TMUX_SOCKET_NAME" new-session
+            export TERM=$prev_term
             _zsh_tmux_is_autoquit && exit
         # Just run tmux, fixing the TERM variable if requested.
         else
             \tmux -L "$ZSH_TMUX_SOCKET_NAME"
+            export TERM=$prev_term
             _zsh_tmux_is_autoquit && exit
         fi
     }
