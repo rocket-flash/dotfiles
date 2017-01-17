@@ -1,6 +1,6 @@
 #! /bin/bash -eu
 
-FILES=( 'zshrc' 'zsh_aliases' 'zsh_functions' 'xsessionrc' 'Xmodmap' 'SciTEUser.properties'
+FILES=( 'zshrc' 'zsh_aliases' 'zsh_functions' 'profile' 'Xmodmap' 'SciTEUser.properties'
         'gitconfig' 'tmux.conf' 'tmux.zsh' 'dircolors' 'conkyrc' )
 
 DOTFILES_DIR="$(readlink -f "$(dirname ${BASH_SOURCE[0]})")"
