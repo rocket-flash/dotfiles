@@ -32,7 +32,8 @@ function remove_ext() {
 }
 
 function pacaur_clean() {
-    [[ -z "$AURDEST" ]] && return
+    [[ -z "$AURDEST" ]] && AURDEST="$HOME/.cache/pacaur"
+    [[ ! -d "$AURDEST" ]] && return
 
     pushd -q "$AURDEST"
 
