@@ -29,6 +29,7 @@ alias t='thunar'
 alias td='(thunar --daemon &>/dev/null &)'
 alias dd='dd status=progress'
 alias rar='unrar'
+alias rf='readlink -f'
 
 if which pacaur > /dev/null; then
     alias up='pacaur -Syu'
