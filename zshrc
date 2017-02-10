@@ -17,7 +17,6 @@ compinit
 promptinit
 colors
 
-[[ -n "$SSH_CLIENT" ]] || [[ "$TERM" = "linux" ]] && export ZSH_TMUX_AUTOSTART=false
 [[ -e $HOME/.tmux.zsh ]] && source $HOME/.tmux.zsh
 
 # bind special keys according to readline configuration
