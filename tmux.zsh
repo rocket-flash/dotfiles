@@ -55,7 +55,9 @@ if tmux -V &> /dev/null; then
     {
         # For some reason, launching tmux when TERM is xterm-termite, true color won't work properly
         prev_term=$TERM
-        [[ "$TERM" == "xterm-termite" ]] && export TERM=xterm-256color
+        if [ $(tput colors) -eq 256 ]; then
+            export TERM=xterm-256color
+        fi
 
         # We have other arguments, just run them
         if [[ -n "$@" ]]
