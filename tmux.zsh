@@ -14,23 +14,30 @@ fi
 #
 # Automatically start tmux
 [[ -n "$ZSH_TMUX_AUTOSTART" ]] || ZSH_TMUX_AUTOSTART=true
+
 # Only autostart once. If set to false, tmux will attempt to
 # autostart every time your zsh configs are reloaded.
 [[ -n "$ZSH_TMUX_AUTOSTART_ONCE" ]] || ZSH_TMUX_AUTOSTART_ONCE=true
+
 # Automatically connect to a previous session if it exists
 [[ -n "$ZSH_TMUX_AUTOCONNECT" ]] || ZSH_TMUX_AUTOCONNECT=false
+
 # Automatically close the terminal when tmux exits
 [[ -n "$ZSH_TMUX_AUTOQUIT" ]] || ZSH_TMUX_AUTOQUIT=$ZSH_TMUX_AUTOSTART
+
 # Name of the tmux socket
 [[ -n "$ZSH_TMUX_SOCKET_NAME" ]] || ZSH_TMUX_SOCKET_NAME="default"
+
 # The TERM to use for non-256 color terminals.
 # Tmux states this should be screen, but you may need to change it on
 # systems without the proper terminfo
 [[ -n "$ZSH_TMUX_FIXTERM_WITHOUT_256COLOR" ]] || ZSH_TMUX_FIXTERM_WITHOUT_256COLOR="tmux"
+
 # The TERM to use for 256 color terminals.
 # Tmux states this should be screen-256color, but you may need to change it on
 # systems without the proper terminfo
 [[ -n "$ZSH_TMUX_FIXTERM_WITH_256COLOR" ]] || ZSH_TMUX_FIXTERM_WITH_256COLOR="tmux-256color"
+
 # Temporary file to disable autoquit
 ZSH_TMUX_NO_AUTOQUIT_FILE="/tmp/zsh_tmux_no_autoquit.${USER}"
 
@@ -63,6 +70,7 @@ function _zsh_tmux_plugin_run()
     prev_term=$TERM
     if [ $(tput colors) -eq 256 ]; then
         export TERM=xterm-256color
+        export ZSH_TRUE_COLOR=1
     fi
 
     # We have other arguments, just run them
