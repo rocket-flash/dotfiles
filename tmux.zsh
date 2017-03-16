@@ -48,8 +48,7 @@ else
     export ZSH_TMUX_TERM=$ZSH_TMUX_FIXTERM_WITHOUT_256COLOR
 fi
 
-function _zsh_tmux_is_autoquit()
-{
+function _zsh_tmux_is_autoquit() {
     if [[ "$ZSH_TMUX_AUTOQUIT" == "true" ]]; then
         if [ -e "$ZSH_TMUX_NO_AUTOQUIT_FILE" ]; then
             rm "$ZSH_TMUX_NO_AUTOQUIT_FILE"
@@ -64,8 +63,7 @@ function _zsh_tmux_is_autoquit()
 alias tq="[[ -n \"$TMUX\" ]] && touch $ZSH_TMUX_NO_AUTOQUIT_FILE && exit"
 
 # Wrapper function for tmux.
-function _zsh_tmux_plugin_run()
-{
+function _zsh_tmux_plugin_run() {
     # For some reason, launching tmux when TERM is xterm-termite, true color won't work properly
     prev_term=$TERM
     if [ $(tput colors) -eq 256 ]; then
@@ -97,11 +95,9 @@ compdef _tmux _zsh_tmux_plugin_run
 alias tmux=_zsh_tmux_plugin_run
 
 # Autostart if not already in tmux and enabled.
-if [[ ! -n "$TMUX" && "$ZSH_TMUX_AUTOSTART" == "true" ]]
-then
+if [[ ! -n "$TMUX" && "$ZSH_TMUX_AUTOSTART" == "true" ]]; then
     # Actually don't autostart if we already did and multiple autostarts are disabled.
-    if [[ "$ZSH_TMUX_AUTOSTART_ONCE" == "false" || "$ZSH_TMUX_AUTOSTARTED" != "true" ]]
-    then
+    if [[ "$ZSH_TMUX_AUTOSTART_ONCE" == "false" || "$ZSH_TMUX_AUTOSTARTED" != "true" ]]; then
         export ZSH_TMUX_AUTOSTARTED=true
         _zsh_tmux_plugin_run
     fi
