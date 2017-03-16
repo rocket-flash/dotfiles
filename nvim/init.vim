@@ -51,6 +51,7 @@ set scrolloff=3
 set colorcolumn=120
 set shortmess+=I " Remove intro text
 set completeopt=menuone,longest " Show menu even if one possibility and stop on ambiguity
+set mouse=a
 
 " Set to auto read when a file is changed from the outside
 set autoread
@@ -69,6 +70,7 @@ set undoreload=10000 " maximum number lines to save for undo on a buffer reload
 nnoremap <tab> %
 vnoremap <tab> %
 
+" Disable arrow keys
 noremap <up>     <nop>
 noremap <down>   <nop>
 noremap <left>   <nop>
@@ -78,15 +80,21 @@ inoremap <down>  <nop>
 inoremap <left>  <nop>
 inoremap <right> <nop>
 
+" Move while in insert mode
 nnoremap <C-k> <C-w>k
 nnoremap <C-j> <C-w>j
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
+" Switch panes
 inoremap <C-k> <up>
 inoremap <C-j> <down>
 inoremap <C-h> <left>
 inoremap <C-l> <right>
+
+" Start/End of line
+nnoremap H ^
+nnoremap L $
 
 " Disable macro recording or whatever
 noremap q <nop>
@@ -118,6 +126,13 @@ endif
 syntax enable
 au BufNewFile,BufRead *.bf set filetype=brainfuck
 au BufNewFile,BufRead *.asm set filetype=nasm
+
+function DisableStuffForBigFiles()
+    syntax off
+    set nocursorline
+endfunction
+
+au BufReadPre * if getfsize(expand("%")) > 1048576 | :call DisableStuffForBigFiles() | endif
 
 " Colors
 if substitute(system('tput colors'), '\n', '', '') == "256"
