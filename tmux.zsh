@@ -69,8 +69,10 @@ function _zsh_tmux_is_autoquit() {
 
 function _zsh_tmux_cleanup() {
     export TERM=$ZSH_TMUX_PREVIOUS_TERM
-    unset ZSH_TMUX_TERM
+    unset ZSH_TMUX_AUTOSTARTED
     unset ZSH_TMUX_PREVIOUS_TERM
+    unset ZSH_TMUX_TERM
+    unset ZSH_TRUE_COLOR
 }
 
 # Wrapper function for tmux.
