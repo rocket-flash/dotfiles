@@ -51,7 +51,11 @@ else
 fi
 
 function _is_truecolor() {
-    return $ZSH_TRUE_COLOR
+    if [ $ZSH_TRUE_COLOR -eq 1 ]; then
+        return 0;
+    else
+        return 1;
+    fi
 }
 
 function _zsh_tmux_is_autoquit() {
