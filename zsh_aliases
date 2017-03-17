@@ -1,4 +1,5 @@
 alias sudo='sudo '  # Enable aliases when using sudo
+alias exec='exec '  # Enable aliases when using exec
 
 # ls aliases
 alias ls='ls --color=auto -v --group-directories-first'
