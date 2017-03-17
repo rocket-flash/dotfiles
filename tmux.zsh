@@ -44,9 +44,15 @@ ZSH_TMUX_NO_AUTOQUIT_FILE="/tmp/zsh_tmux_no_autoquit.${USER}"
 # Determine if the terminal supports 256 colors
 if [ $(tput colors) -eq 256 ]; then
     export ZSH_TMUX_TERM=$ZSH_TMUX_FIXTERM_WITH_256COLOR
+    export ZSH_TRUE_COLOR=1
 else
     export ZSH_TMUX_TERM=$ZSH_TMUX_FIXTERM_WITHOUT_256COLOR
+    export ZSH_TRUE_COLOR=0
 fi
+
+function _is_truecolor() {
+    return $ZSH_TRUE_COLOR
+}
 
 function _zsh_tmux_is_autoquit() {
     if [[ "$ZSH_TMUX_AUTOQUIT" == "true" ]]; then
@@ -60,30 +66,34 @@ function _zsh_tmux_is_autoquit() {
         return 1
     fi
 }
-alias tq="[[ -n \"$TMUX\" ]] && touch $ZSH_TMUX_NO_AUTOQUIT_FILE && exit"
+
+function _zsh_tmux_cleanup() {
+    export TERM=$ZSH_TMUX_PREVIOUS_TERM
+    unset ZSH_TMUX_TERM
+    unset ZSH_TMUX_PREVIOUS_TERM
+}
 
 # Wrapper function for tmux.
 function _zsh_tmux_plugin_run() {
     # For some reason, launching tmux when TERM is xterm-termite, true color won't work properly
-    prev_term=$TERM
-    if [ $(tput colors) -eq 256 ]; then
+    export ZSH_TMUX_PREVIOUS_TERM=$TERM
+    if _is_truecolor; then
         export TERM=xterm-256color
-        export ZSH_TRUE_COLOR=1
     fi
 
     # We have other arguments, just run them
     if [[ -n "$@" ]]; then
         \tmux -L "$ZSH_TMUX_SOCKET_NAME" $@
-        export TERM=$prev_term
+        _zsh_tmux_cleanup
     # Try to connect to an existing session.
     elif [[ "$ZSH_TMUX_AUTOCONNECT" == "true" ]]; then
         \tmux -L "$ZSH_TMUX_SOCKET_NAME" attach || \tmux -L "$ZSH_TMUX_SOCKET_NAME" new-session
-        export TERM=$prev_term
+        _zsh_tmux_cleanup
         _zsh_tmux_is_autoquit && exit
     # Just run tmux, fixing the TERM variable if requested.
     else
         \tmux -L "$ZSH_TMUX_SOCKET_NAME"
-        export TERM=$prev_term
+        _zsh_tmux_cleanup
         _zsh_tmux_is_autoquit && exit
     fi
 }
@@ -94,6 +104,9 @@ compdef _tmux _zsh_tmux_plugin_run
 # Alias tmux to our wrapper function.
 alias tmux=_zsh_tmux_plugin_run
 
+# Alias to for one-time disable of autoquit
+alias tq="[[ -n \"$TMUX\" ]] && touch $ZSH_TMUX_NO_AUTOQUIT_FILE && exit"
+
 # Autostart if not already in tmux and enabled.
 if [[ ! -n "$TMUX" && "$ZSH_TMUX_AUTOSTART" == "true" ]]; then
     # Actually don't autostart if we already did and multiple autostarts are disabled.
@@ -102,3 +115,5 @@ if [[ ! -n "$TMUX" && "$ZSH_TMUX_AUTOSTART" == "true" ]]; then
         _zsh_tmux_plugin_run
     fi
 fi
+
+# vim: et
