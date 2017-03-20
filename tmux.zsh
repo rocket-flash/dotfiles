@@ -41,20 +41,18 @@ fi
 # Temporary file to disable autoquit
 ZSH_TMUX_NO_AUTOQUIT_FILE="/tmp/zsh_tmux_no_autoquit.${USER}"
 
-# Determine if the terminal supports 256 colors
-if [ $(tput colors) -eq 256 ]; then
-    export ZSH_TMUX_TERM=$ZSH_TMUX_FIXTERM_WITH_256COLOR
-    export ZSH_TRUE_COLOR=1
-else
-    export ZSH_TMUX_TERM=$ZSH_TMUX_FIXTERM_WITHOUT_256COLOR
-    export ZSH_TRUE_COLOR=0
-fi
+function _zsh_tmux_setup_term() {
+    export ZSH_TMUX_PREVIOUS_TERM=$TERM
+    # Determine if the terminal supports 256 colors
+    if [ $(tput colors) -eq 256 ]; then
+        export ZSH_TMUX_TERM=$ZSH_TMUX_FIXTERM_WITH_256COLOR
+        export ZSH_TRUE_COLOR=1
 
-function _is_truecolor() {
-    if [ $ZSH_TRUE_COLOR -eq 1 ]; then
-        return 0;
+        # For some reason, launching tmux when TERM is xterm-termite, true color won't work properly
+        export TERM=xterm-256color
     else
-        return 1;
+        export ZSH_TMUX_TERM=$ZSH_TMUX_FIXTERM_WITHOUT_256COLOR
+        export ZSH_TRUE_COLOR=0
     fi
 }
 
@@ -81,11 +79,7 @@ function _zsh_tmux_cleanup() {
 
 # Wrapper function for tmux.
 function _zsh_tmux_plugin_run() {
-    # For some reason, launching tmux when TERM is xterm-termite, true color won't work properly
-    export ZSH_TMUX_PREVIOUS_TERM=$TERM
-    if _is_truecolor; then
-        export TERM=xterm-256color
-    fi
+    _zsh_tmux_setup_term
 
     # We have other arguments, just run them
     if [[ -n "$@" ]]; then
