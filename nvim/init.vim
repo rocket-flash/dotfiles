@@ -12,6 +12,7 @@ Plug 'tpope/vim-surround'
 Plug 'vim-scripts/auto-pairs-gentle'
 Plug '907th/vim-auto-save'
 Plug 'yegappan/mru'
+Plug 'junegunn/vim-slash'
 
 " Colorschemes
 Plug 'twerth/ir_black'
