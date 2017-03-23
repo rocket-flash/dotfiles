@@ -33,6 +33,10 @@ ln -s "$DOTFILES_DIR/templates" "$HOME/.templates"
 [[ -f "$HOME/.config/termite" ]] && mv "$HOME/.config/termite" "$HOME/.config/termite.bak"
 ln -s "$DOTFILES_DIR/termite" "$HOME/.config/termite"
 
+[[ -L "$HOME/.config/compton.conf" ]] && rm "$HOME/.config/compton.conf"
+[[ -f "$HOME/.config/compton.conf" ]] && mv "$HOME/.config/compton.conf" "$HOME/.config/compton.conf.bak"
+ln -s "$DOTFILES_DIR/compton.conf" "$HOME/.config/compton.conf"
+
 if [ ! -e $HOME/.config/nvim/autoload/plug.vim ]; then
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     # TERM workaround to avoid loading non existing color scheme
