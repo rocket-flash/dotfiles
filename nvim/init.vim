@@ -137,14 +137,12 @@ au BufReadPre * if getfsize(expand("%")) > 1048576 | :call DisableStuffForBigFil
 
 " Colors
 if substitute(system('tput colors'), '\n', '', '') == "256"
-    if &diff
-        colorscheme ir_dark
-    else
+    if has('nvim')
         set termguicolors
         let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
-        colorscheme PaperColor
     endif
 
+    colorscheme PaperColor
     set bg=dark
 else
     colorscheme desert
