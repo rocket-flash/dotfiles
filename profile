@@ -10,4 +10,8 @@ export MOZ_USE_OMTC=1
 # Personal usr folder
 [[ -d $HOME/usr ]] && export PATH="$HOME/usr/bin:$PATH"
 
+# Prevent Wine from taking over file associations
+# https://wiki.archlinux.org/index.php/wine#Prevent_new_Wine_file_associations
+export WINEDLLOVERRIDES="winemenubuilder.exe=d"
+
 # vim: ft=sh
