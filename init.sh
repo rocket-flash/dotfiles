@@ -51,3 +51,5 @@ for term in ${TERMS[@]}; do
     tic ${term}.ti
     rm ${term}.ti
 done
+
+crontab "$DOTFILES_DIR/crontab"
