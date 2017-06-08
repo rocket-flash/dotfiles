@@ -14,6 +14,10 @@ Plug '907th/vim-auto-save'
 Plug 'yegappan/mru'
 Plug 'junegunn/vim-slash'
 
+if has('nvim') || (v:version >= 800)
+    Plug 'w0rp/ale'
+endif
+
 " Colorschemes
 Plug 'twerth/ir_black'
 Plug 'NLKNguyen/papercolor-theme'
@@ -139,7 +143,6 @@ au BufReadPre * if getfsize(expand("%")) > 1048576 | :call DisableStuffForBigFil
 if substitute(system('tput colors'), '\n', '', '') == "256"
     if has('nvim')
         set termguicolors
-        let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
     endif
 
     colorscheme PaperColor
