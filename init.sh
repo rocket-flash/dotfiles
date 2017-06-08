@@ -3,9 +3,9 @@
 FILES=( 'zshrc' 'zsh_aliases' 'zsh_functions' 'profile' 'Xmodmap' 'SciTEUser.properties'
         'gitconfig' 'tmux.conf' 'tmux.zsh' 'dircolors' 'conkyrc' )
 
-DOTFILES_DIR="$(readlink -f "$(dirname ${BASH_SOURCE[0]})")"
+DOTFILES_DIR="$(readlink -f "$(dirname "${BASH_SOURCE[0]}")")"
 
-for file in ${FILES[@]}; do
+for file in "${FILES[@]}"; do
     [[ -L "$HOME/.${file}" ]] && rm "$HOME/.${file}"
     [[ -f "$HOME/.${file}" ]] && mv "$HOME/.${file}" "$HOME/.${file}.bak"
 
@@ -37,7 +37,7 @@ ln -s "$DOTFILES_DIR/termite" "$HOME/.config/termite"
 [[ -f "$HOME/.config/compton.conf" ]] && mv "$HOME/.config/compton.conf" "$HOME/.config/compton.conf.bak"
 ln -s "$DOTFILES_DIR/compton.conf" "$HOME/.config/compton.conf"
 
-if [ ! -e $HOME/.config/nvim/autoload/plug.vim ]; then
+if [ ! -e "$HOME/.config/nvim/autoload/plug.vim" ]; then
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     # TERM workaround to avoid loading non existing color scheme
     TERM=xterm vim +PlugInstall +qall
@@ -46,10 +46,10 @@ fi
 # Regenerate screen and screen-256color terminfo to fix C-h problem with neovim
 # https://github.com/christoomey/vim-tmux-navigator/issues/71
 TERMS=( 'screen' 'screen-256color' 'tmux' 'tmux-256color' )
-for term in ${TERMS[@]}; do
-    infocmp $term | sed 's/kbs=^[hH]/kbs=\\177/' > ${term}.ti
-    tic ${term}.ti
-    rm ${term}.ti
+for term in "${TERMS[@]}"; do
+    infocmp "$term" | sed 's/kbs=^[hH]/kbs=\\177/' > "${term}.ti"
+    tic "${term}.ti"
+    rm "${term}.ti"
 done
 
 crontab "$DOTFILES_DIR/crontab"
