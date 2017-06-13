@@ -143,6 +143,7 @@ au BufReadPre * if getfsize(expand("%")) > 1048576 | :call DisableStuffForBigFil
 if substitute(system('tput colors'), '\n', '', '') == "256"
     if has('nvim')
         set termguicolors
+        set guicursor=n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20
     endif
 
     colorscheme PaperColor
