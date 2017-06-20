@@ -39,7 +39,9 @@
 	default = simple
 [diff]
 	tool = meld
-
-# vim: set noexpandtab:
+[merge]
+	conflictstyle = diff3
 [cola]
 	spellcheck = false
+
+# vim: set noexpandtab:
