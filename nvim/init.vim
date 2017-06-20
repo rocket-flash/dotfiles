@@ -9,7 +9,7 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'airblade/vim-gitgutter'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'tpope/vim-surround'
-Plug 'vim-scripts/auto-pairs-gentle'
+Plug 'jiangmiao/auto-pairs'
 Plug '907th/vim-auto-save'
 Plug 'yegappan/mru'
 Plug 'junegunn/vim-slash'
@@ -132,7 +132,7 @@ syntax enable
 au BufNewFile,BufRead *.bf set filetype=brainfuck
 au BufNewFile,BufRead *.asm set filetype=nasm
 
-function DisableStuffForBigFiles()
+function! DisableStuffForBigFiles()
     syntax off
     set nocursorline
 endfunction
@@ -200,3 +200,6 @@ let g:auto_save_silent = 1  " do not display the auto-save notification
 nnoremap <leader>gp :GitGutterPrevHunk<CR>
 nnoremap <leader>gn :GitGutterNextHunk<CR>
 nnoremap <leader>gr :GitGutterUndoHunk<CR>
+
+" Ale
+let g:ale_sh_shellcheck_options = '-x'
