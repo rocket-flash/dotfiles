@@ -113,9 +113,6 @@ if [ -f "$HOME/.pythonrc" ]; then
     export PYTHONSTARTUP="$HOME/.pythonrc"
 fi
 
-# Put pacaur git clones back in /tmp
-export AURDEST="/tmp/pacaurclone-$USER"
-
 if [[ "$PROFILE_STARTUP" == true ]]; then
     unsetopt xtrace
     exec 2>&3 3>&-
