@@ -1,49 +1,57 @@
 [options]
-scroll_on_output = false
-scroll_on_keystroke = true
-audible_bell = false
-mouse_autohide = true
-allow_bold = true
-dynamic_title = true
-urgent_on_bell = true
-clickable_url = true
+#allow_bold = true
+#audible_bell = false
+#clickable_url = true
+#dynamic_title = true
 font = Source Code Pro 10
-scrollback_lines = 10000
-search_wrap = true
-maximized = true
-icon_name = terminal
+#fullscreen = true
+#maximized = false
 geometry = 120x36
-
-# "system", "on" or "off"
-cursor_blink = system
-
-# "block", "underline" or "ibeam"
-cursor_shape = block
+#icon_name = terminal
+#mouse_autohide = true
+#scroll_on_output = false
+#scroll_on_keystroke = true
+# Length of the scrollback buffer, 0 disabled the scrollback buffer
+# and setting it to a negative value means "infinite scrollback"
+scrollback_lines = 10000
+#search_wrap = true
+#urgent_on_bell = true
 
 # $BROWSER is used by default if set, with xdg-open as a fallback
 #browser = xdg-open
 
+# "system", "on" or "off"
+#cursor_blink = system
+
+# "block", "underline" or "ibeam"
+#cursor_shape = block
+
+# Hide links that are no longer valid in url select overlay mode
+#filter_unmatched_urls = true
+
+# Emit escape sequences for extra modified keys
+#modify_other_keys = false
+
 # set size hints for the window
 size_hints = true
 
-# Hide links that are no longer valid in url select overlay mode
-filter_unmatched_urls = true
-
-# emit escape sequences for other keys modified by Control
-#modify_other_keys = false
-
 [colors]
+# If both of these are unset, cursor falls back to the foreground color,
+# and cursor_foreground falls back to the background color.
 #cursor = #dcdccc
+#cursor_foreground = #dcdccc
+
 foreground = #ffffff
-foreground_bold = #ffffff
+#foreground_bold = #ffffff
+background = #323232
 
-# 10% background transparency (requires a compositor)
-background = rgba(50, 50, 50, 0.9)
+# 20% background transparency (requires a compositor)
+#background = rgba(63, 63, 63, 0.8)
 
-# if unset, will reverse foreground and background
+# If unset, will reverse foreground and background
 highlight = #101010
 
-# colors from color0 to color254 can be set
+# Colors from color0 to color254 can be set
 color0 = #2e3436
 color1 = #cc0000
 color2 = #4e9a06
