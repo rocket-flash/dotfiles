@@ -132,12 +132,30 @@ syntax enable
 au BufNewFile,BufRead *.bf set filetype=brainfuck
 au BufNewFile,BufRead *.asm set filetype=nasm
 
+" Disable stuff that slow down vim when working with big files
 function! DisableStuffForBigFiles()
     syntax off
     set nocursorline
 endfunction
 
+" Manually set file encodings
+function! SetFileEncodings(encodings)
+    let b:fileencodingsbak=&fileencodings
+    let &fileencodings=a:encodings
+endfunction
+
+" Restore previous file encodings
+function! RestoreFileEncodings()
+    let &fileencodings=b:fileencodingsbak
+    unlet b:fileencodingsbak
+endfunction
+
+" Prevent slow downs when opening files bigger than 1MiB
 au BufReadPre * if getfsize(expand("%")) > 1048576 | :call DisableStuffForBigFiles() | endif
+
+" Make NFOs nice!
+au BufReadPre *.nfo call SetFileEncodings('cp437')|set ambiwidth=single
+au BufReadPost *.nfo call RestoreFileEncodings()
 
 " Colors
 if substitute(system('tput colors'), '\n', '', '') == "256"
