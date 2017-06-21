@@ -221,3 +221,5 @@ nnoremap <leader>gr :GitGutterUndoHunk<CR>
 
 " Ale
 let g:ale_sh_shellcheck_options = '-x'
+nmap <silent> <C-Up> <Plug>(ale_previous_wrap)
+nmap <silent> <C-Down> <Plug>(ale_next_wrap)
