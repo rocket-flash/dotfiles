@@ -16,7 +16,7 @@
 	ci = commit
 	gud = pull
 	m = difftool -y
-	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset %C(bold magenta)(%G?)%Creset' --abbrev-commit
 	edit = "!vim `git ls-files -m`"
 
 	# Get the current branch name (not so useful in itself, but used in
