@@ -220,6 +220,9 @@ nnoremap <leader>gn :GitGutterNextHunk<CR>
 nnoremap <leader>gr :GitGutterUndoHunk<CR>
 
 " Ale
-let g:ale_sh_shellcheck_options = '-x'
+nnoremap <leader>ad :ALEDisable<CR>
+nnoremap <leader>ae :ALEEnable<CR>
+nnoremap <leader>at :ALEToggle<CR>
 nmap <silent> <C-Up> <Plug>(ale_previous_wrap)
 nmap <silent> <C-Down> <Plug>(ale_next_wrap)
+let g:ale_sh_shellcheck_options = '-x'  " Allow source outside of FILES
