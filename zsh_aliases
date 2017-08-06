@@ -44,6 +44,7 @@ fi
 
 if which nvim > /dev/null; then
     alias vim='nvim'
+    alias vimdiff='nvim -d'
 fi
 
 # Load local aliases
