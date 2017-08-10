@@ -32,17 +32,17 @@ alias dd='dd status=progress'
 alias rar='unrar'
 alias rf='readlink -f'
 
-if which pacaur > /dev/null; then
+if which pacaur &> /dev/null; then
     alias up='pacaur -Syu'
     alias pm='pacaur'
-elif which pacman > /dev/null; then
+elif which pacman &> /dev/null; then
     alias up='sudo pacman -Syu'
     alias pm='pacman'
-elif which apt > /dev/null; then
+elif which apt &> /dev/null; then
     alias up='sudo apt update && sudo apt full-upgrade'
 fi
 
-if which nvim > /dev/null; then
+if which nvim &> /dev/null; then
     alias vim='nvim'
     alias vimdiff='nvim -d'
 fi

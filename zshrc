@@ -89,7 +89,7 @@ ssh-add -l > /dev/null || ssh-add
 [[ -f /usr/bin/virtualenvwrapper_lazy.sh ]] && . /usr/bin/virtualenvwrapper_lazy.sh
 [[ -f /usr/share/doc/pkgfile/command-not-found.zsh ]] && . /usr/share/doc/pkgfile/command-not-found.zsh
 
-if which nvim > /dev/null; then
+if which nvim &> /dev/null; then
     export EDITOR="nvim"
 else
     export EDITOR="vim"
