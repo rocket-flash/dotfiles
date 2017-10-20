@@ -9,10 +9,12 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'airblade/vim-gitgutter'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
 Plug 'jiangmiao/auto-pairs'
 Plug '907th/vim-auto-save'
 Plug 'yegappan/mru'
 Plug 'junegunn/vim-slash'
+Plug 'junegunn/vim-easy-align'
 
 if has('nvim') || (v:version >= 800)
     Plug 'w0rp/ale'
@@ -226,3 +228,10 @@ nnoremap <leader>at :ALEToggle<CR>
 nmap <silent> <C-Up> <Plug>(ale_previous_wrap)
 nmap <silent> <C-Down> <Plug>(ale_next_wrap)
 let g:ale_sh_shellcheck_options = '-x'  " Allow source outside of FILES
+
+" EasyAlign
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
