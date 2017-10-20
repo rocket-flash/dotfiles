@@ -4,11 +4,20 @@ function bak() {
         return 1
     fi
 
+    xz=1
     if [ "$1" = "-n" ]; then
         shift 1
-        tar cf ${1%/}.$(date +%Y%m%d-%H%M%S).tar ${1%/}
+        xz=0
+    fi
+
+    input="$(basename "$1")"
+    dir="$(dirname "$1")"
+    output="${input#.}.$(date +%Y%m%d-%H%M%S).tar"
+
+    if [ "$xz" -eq 1 ]; then
+        tar Jcf "${output}.xz" -C "$dir" "${input}"
     else
-        tar Jcf ${1%/}.$(date +%Y%m%d-%H%M%S).tar.xz ${1%/}
+        tar cf "${output}" -C "$dir" "${input}"
     fi
 }
 
