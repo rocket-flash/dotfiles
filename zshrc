@@ -88,6 +88,7 @@ ssh-add -l > /dev/null || ssh-add
 [[ -f ~/.zsh_functions ]] && . ~/.zsh_functions
 [[ -f /usr/bin/virtualenvwrapper_lazy.sh ]] && . /usr/bin/virtualenvwrapper_lazy.sh
 [[ -f /usr/share/doc/pkgfile/command-not-found.zsh ]] && . /usr/share/doc/pkgfile/command-not-found.zsh
+[[ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && . /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 if which nvim &> /dev/null; then
     export EDITOR="nvim"
