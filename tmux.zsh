@@ -42,14 +42,10 @@ fi
 ZSH_TMUX_NO_AUTOQUIT_FILE="/tmp/zsh_tmux_no_autoquit.${USER}"
 
 function _zsh_tmux_setup_term() {
-    export ZSH_TMUX_PREVIOUS_TERM=$TERM
     # Determine if the terminal supports 256 colors
     if [ $(tput colors) -eq 256 ]; then
         export ZSH_TMUX_TERM=$ZSH_TMUX_FIXTERM_WITH_256COLOR
         export ZSH_TRUE_COLOR=1
-
-        # For some reason, launching tmux when TERM is xterm-termite, true color won't work properly
-        export TERM=xterm-256color
     else
         export ZSH_TMUX_TERM=$ZSH_TMUX_FIXTERM_WITHOUT_256COLOR
         export ZSH_TRUE_COLOR=0
@@ -70,9 +66,7 @@ function _zsh_tmux_is_autoquit() {
 }
 
 function _zsh_tmux_cleanup() {
-    export TERM=$ZSH_TMUX_PREVIOUS_TERM
     unset ZSH_TMUX_AUTOSTARTED
-    unset ZSH_TMUX_PREVIOUS_TERM
     unset ZSH_TMUX_TERM
     unset ZSH_TRUE_COLOR
 }
