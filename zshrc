@@ -105,15 +105,25 @@ ulimit -c unlimited
 # Default cflags
 export CFLAGS="-O2 -march=native -fstack-protector-strong"
 
-# Personal usr folder
-if [ -d $HOME/usr ]; then
-    export PATH="$HOME/usr/bin:$PATH"
-    export LD_LIBRARY_PATH="$HOME/usr/lib:$LD_LIBRARY_PATH"
+# Setup a few PATHs
+[[ -d "$HOME/usr/bin" ]] && export PATH="$HOME/usr/bin:$PATH"
+[[ -d "$HOME/usr/lib" ]] && export LD_LIBRARY_PATH="$HOME/usr/lib:$LD_LIBRARY_PATH"
+[[ -d "$HOME/usr/lib/pkgconfig" ]] && export PKG_CONFIG_PATH="$HOME/usr/lib/pkgconfig:$PKG_CONFIG_PATH"
+
+# Go path
+export GOPATH="$HOME/usr/go"
+
+# Rust's cargo path
+export CARGO_HOME="$HOME/usr/cargo"
+[[ -d "$CARGO_HOME/bin" ]] && export PATH="$CARGO_HOME/bin:$PATH"
+
+ANDROID_HOME="$HOME/Android/Sdk"
+if [ -d "$ANDROID_HOME" ]; then
+    export ANDROID_HOME
+    export PATH="$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$PATH"
 fi
 
-if [ -f "$HOME/.pythonrc" ]; then
-    export PYTHONSTARTUP="$HOME/.pythonrc"
-fi
+[[ -f "$HOME/.pythonrc" ]] && export PYTHONSTARTUP="$HOME/.pythonrc"
 
 if [[ "$PROFILE_STARTUP" == true ]]; then
     unsetopt xtrace
