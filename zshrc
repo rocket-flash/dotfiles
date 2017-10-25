@@ -27,6 +27,7 @@ bindkey "^[[B" history-search-forward
 bindkey "^[OA" history-search-backward
 bindkey "^[OB" history-search-forward
 bindkey "^W" backward-kill-word
+bindkey "^R" history-incremental-search-backward
 
 setopt APPEND_HISTORY
 setopt HIST_IGNORE_DUPS
