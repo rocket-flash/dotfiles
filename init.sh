@@ -33,6 +33,10 @@ ln -s "$DOTFILES_DIR/templates" "$HOME/.templates"
 [[ -f "$HOME/.config/termite" ]] && mv "$HOME/.config/termite" "$HOME/.config/termite.bak"
 ln -s "$DOTFILES_DIR/termite" "$HOME/.config/termite"
 
+[[ -L "$HOME/.config/cmus" ]] && rm "$HOME/.config/cmus"
+[[ -f "$HOME/.config/cmus" ]] && mv "$HOME/.config/cmus" "$HOME/.config/cmus.bak"
+ln -s "$DOTFILES_DIR/cmus" "$HOME/.config/cmus"
+
 [[ -L "$HOME/.config/compton.conf" ]] && rm "$HOME/.config/compton.conf"
 [[ -f "$HOME/.config/compton.conf" ]] && mv "$HOME/.config/compton.conf" "$HOME/.config/compton.conf.bak"
 ln -s "$DOTFILES_DIR/compton.conf" "$HOME/.config/compton.conf"
