@@ -15,6 +15,7 @@ Plug '907th/vim-auto-save'
 Plug 'yegappan/mru'
 Plug 'junegunn/vim-slash'
 Plug 'junegunn/vim-easy-align'
+Plug 'easymotion/vim-easymotion'
 
 if has('nvim') || (v:version >= 800)
     Plug 'w0rp/ale'
@@ -172,8 +173,8 @@ if substitute(system('tput colors'), '\n', '', '') == "256"
         set guicursor=n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20
     endif
 
-    colorscheme PaperColor
     set bg=dark
+    colorscheme darcula
 else
     colorscheme desert
 endif
@@ -234,6 +235,7 @@ nnoremap <leader>at :ALEToggle<CR>
 nmap <silent> <C-Up> <Plug>(ale_previous_wrap)
 nmap <silent> <C-Down> <Plug>(ale_next_wrap)
 let g:ale_sh_shellcheck_options = '-x'  " Allow source outside of FILES
+let g:ale_python_flake8_options = '--max-line-length 120'
 
 " EasyAlign
 " Start interactive EasyAlign in visual mode (e.g. vipga)
