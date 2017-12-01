@@ -10,6 +10,8 @@
 [user]
 	name = Mathieu Lemay
 	email = acidrain1@gmail.com
+[commit]
+	gpgsign = true
 [alias]
 	st = status
 	co = checkout
@@ -17,6 +19,7 @@
 	gud = pull
 	m = difftool -y
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset %C(bold magenta)(%G?)%Creset' --abbrev-commit
+	fixup = commit --amend --no-edit
 	edit = "!vim `git ls-files -m`"
 
 	# Get the current branch name (not so useful in itself, but used in
@@ -39,10 +42,11 @@
 [push]
 	default = simple
 [diff]
-	tool = meld
+	tool = vimdiff
 [merge]
 	conflictstyle = diff3
 [cola]
 	spellcheck = false
+	tabwidth = 4
 
 # vim: set noexpandtab:
