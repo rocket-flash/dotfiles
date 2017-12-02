@@ -1,0 +1,30 @@
+#! /bin/bash
+
+branches_gone=$(git branch -vv | awk '/: gone]/{print $1}')
+branches_merged=$(git branch --merged | grep -E -v "(^\*|master|dev)" | sed -E 's/^[ ]+//')
+
+if [ -z "${branches_gone}" ] && [ -z "${branches_merged}" ]; then
+    echo "No branches to delete"
+    exit 0
+fi
+
+if [ -n "${branches_gone}" ]; then
+    echo "Branches gone:"
+    for b in ${branches_gone}; do
+        echo "  $b"
+    done
+fi
+
+if [ -n "${branches_merged}" ]; then
+    echo "Branches merged:"
+    for b in ${branches_merged}; do
+        echo "  $b"
+    done
+fi
+
+read -r -p "Delete branches? [Y/n] " response
+response=${response,,}    # tolower
+
+if [[ ${response,,} != "n" ]]; then
+    printf "%s\n%s\n" "${branches_gone}" "${branches_merged}" | sort | uniq | xargs git branch -D
+fi
