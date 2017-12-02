@@ -1,0 +1,128 @@
+#! /usr/bin/env python3
+
+"""
+A script to make all the file names in the folder
+changed according to certain rules:
+    all small letters
+    has only a-z, 0-9, - and _
+
+vsbabu AT hotmail DOT com
+acidrain1 AT gmail DOT com
+
+I use it fairly often to rename files sent to me by
+Microsoft Windows users, before uploading them to
+any unix machine.
+
+Unhandled error conditions include:
+- no graceful processing if a target filename already exists.
+"""
+import re
+import os
+
+
+valid_chars = re.compile(r"^[a-zA-z0-9_-]+$")
+invalid_chars = re.compile(r"[^a-zA-z0-9_-]+")
+
+
+def replace_invalid_chars(strname):
+    strname = re.sub("[éèêë]", "e", strname)
+    strname = re.sub("[áàâä]", "a", strname)
+    strname = re.sub("[úùûü]", "u", strname)
+    strname = re.sub("[óòôö]", "o", strname)
+    strname = re.sub("[íìîï]", "i", strname)
+    strname = re.sub("[ýÿ]", "y", strname)
+    strname = re.sub("[ç]", "c", strname)
+    strname = re.sub("[&]", "and", strname)
+
+    return strname
+
+
+def cleanup_foldername(strname):
+    """
+    Cleans up the given folder name.
+    Folder name should start and end with an alphabet
+    and can have only a-z, 0-9 , - and _ in between.
+    """
+
+    strname = strname.lower()
+    strname = replace_invalid_chars(strname)
+    strname = re.sub("^[^\w]+", "", strname)  # trim the beginning
+    strname = re.sub("[^\w]+$", "", strname)  # trim the end
+    strname = invalid_chars.sub("_", strname.strip())  # replace invalid stuff by _
+    strname = re.sub("_+", "_", strname)  # squeeze continuous _ to one _
+
+    return strname if valid_chars.match(strname) else ""
+
+
+def cleanup_filename(strname):
+    """
+    Cleans up for a file name.
+    File name rules are similar to folder names, but it
+    can have an extension.
+    """
+
+    strname = strname.lower()
+    (strfile, strext) = os.path.splitext(strname)
+
+    strext = strext[1:].strip()
+    strfile = strfile.replace('.', '_')
+
+    strfile = cleanup_foldername(strfile)
+    if strfile == '':
+        return ''
+
+    if strext != '':
+        strext = cleanup_foldername(strext)
+        if strext == '':
+            return ''
+
+    if strext != '':
+        strfile += '.' + strext
+
+    return strfile
+
+
+def ren_folder(basedir, f):
+    """
+    rename the folder according to the rules
+    """
+
+    c = cleanup_foldername(f)
+    if c != '' and c != f:
+        src = os.path.join(basedir, f)
+        dst = os.path.join(basedir, c)
+
+        print("{} -> {}".format(src, dst))
+        os.rename(src, dst)
+
+
+def ren_file(basedir, f):
+    """
+    rename the file according to the rules
+    """
+
+    c = cleanup_filename(f)
+    if c != '' and c != f:
+        src = os.path.join(basedir, f)
+        dst = os.path.join(basedir, c)
+
+        print("{} -> {}".format(src, dst))
+        os.rename(src, dst)
+
+
+def process_dir(basedir):
+    """
+    process all files in the folder
+    """
+
+    for f in os.listdir(basedir):
+        file = os.path.join(basedir, f)
+        if os.path.isdir(file):
+            process_dir(file)
+            ren_folder(basedir, f)
+        else:
+            ren_file(basedir, f)
+
+
+if __name__ == '__main__':
+    process_dir('.')
