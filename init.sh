@@ -34,6 +34,7 @@ function create_link() {
 }
 
 [[ -d "$HOME/.config" ]] || mkdir "$HOME/.config"
+[[ -d "$HOME/usr/bin" ]] || mkdir "$HOME/usr/bin"
 
 for file in "${DOTFILES[@]}"; do
     create_link "$HOME/.${file}" "$DOTFILES_DIR/${file}"
@@ -43,6 +44,9 @@ for file in "${CONFIG_FILES[@]}"; do
     create_link "$HOME/.config/${file}" "$DOTFILES_DIR/${file}"
 done
 
+for file in $DOTFILES_DIR/usr/bin/*; do
+    create_link "$HOME/usr/bin/$(basename $file)" "$file"
+done
 
 [[ -e "$DOTFILES_DIR/zsh_aliases.$(hostname)" ]] && ln -sf "$DOTFILES_DIR/zsh_aliases.$(hostname)" "$HOME/.zsh_aliases.local"
 

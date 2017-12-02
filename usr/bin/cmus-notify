@@ -1,0 +1,69 @@
+#! /bin/bash
+
+# shellcheck disable=SC2154
+# SC2154: var is referenced but not assigned.
+
+NOW="$(date "+%Y-%m-%d %H:%M:%S")"
+
+DEBUG=0
+function debug() {
+    [[ $DEBUG -ne 0 ]] && echo "$NOW [cmus-notify] $*" >> ~/debug.log
+}
+
+function format_track() {
+    if [ -n "$1" ]; then
+        echo "disc $1, track $2"
+    else
+        echo "track $2"
+    fi
+}
+
+function format_time() {
+    h=$(($1 / 3600))
+    m=$(($1 % 3600))
+
+    d=""
+    [[ $h -gt 0 ]] && d=$(printf '%02d' "$h")
+
+    echo "$d$(printf '%02d:%02d' $((m / 60)) $((m % 60)))"
+}
+
+function format_position() {
+    if [ -z "$1" ] || [ -z "$2" ]; then
+        return
+    fi
+
+    echo "$(format_time "$1") / $(format_time "$2")"
+}
+
+function get_cover() {
+    [[ -z "${_file}" ]] && return
+
+    dir=$(dirname "${_file}")
+
+    find "$dir" -name "cover.*"
+}
+
+while [ $# -gt 0 ]; do
+    debug "_$1='$2'"
+    eval "_$1='${2//\'/\'\\\'\'}'"
+    shift 2
+done
+
+COVER=$(get_cover)
+POSTITION=$(format_position "$_position" "$_duration")
+
+if [ "${_status}" = "playing" ]; then
+    TITLE="${_artist} - ${_title}"
+    BODY="${_album} $(format_track "${_discnumber}" "${_tracknumber}")"
+    [[ -n "$POSTITION" ]] && BODY="$BODY\n$POSTITION"
+elif [ "${_status}" = "paused" ]; then
+    TITLE="C* Music Player"
+    BODY="Paused"
+elif [ "${_status}" = "stopped" ]; then
+    TITLE="C* Music Player"
+    BODY="Stopped"
+fi
+
+debug "notify-send --icon '${COVER:-applications-multimedia}' '${TITLE}' '${BODY}'"
+notify-send --icon "${COVER:-applications-multimedia}" "${TITLE}" "${BODY}"
