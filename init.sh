@@ -1,45 +1,56 @@
 #! /bin/bash -eu
 
-FILES=( 'zshrc' 'zsh_aliases' 'zsh_functions' 'profile' 'Xmodmap' 'SciTEUser.properties'
-        'gitconfig' 'tmux.conf' 'tmux.zsh' 'dircolors' 'conkyrc' )
+fatal()   { echo -e "\e[35m[FATAL]\e[39m   $*" 1>&2 ; exit 1 ; }
+
+DOTFILES=(
+    'SciTEUser.properties'
+    'Xmodmap'
+    'conkyrc'
+    'dircolors'
+    'gitconfig'
+    'profile'
+    'templates'
+    'tmux.conf'
+    'tmux.zsh'
+    'zsh_aliases'
+    'zsh_functions'
+    'zshrc'
+)
+
+CONFIG_FILES=(
+    'cmus'
+    'compton.conf'
+    'nvim'
+    'termite'
+)
 
 DOTFILES_DIR="$(readlink -f "$(dirname "${BASH_SOURCE[0]}")")"
 
-for file in "${FILES[@]}"; do
-    [[ -L "$HOME/.${file}" ]] && rm "$HOME/.${file}"
-    [[ -f "$HOME/.${file}" ]] && mv "$HOME/.${file}" "$HOME/.${file}.bak"
+function create_link() {
+    [[ -L "$1" ]] && rm "$1"
+    [[ -e "$1" ]] && mv "$1" "${1}.bak"
 
-    ln -s "$DOTFILES_DIR/${file}" "$HOME/.${file}"
+    ln -s "$2" "$1"
+}
+
+[[ -d "$HOME/.config" ]] || mkdir "$HOME/.config"
+
+for file in "${DOTFILES[@]}"; do
+    create_link "$HOME/.${file}" "$DOTFILES_DIR/${file}"
 done
 
+for file in "${CONFIG_FILES[@]}"; do
+    create_link "$HOME/.config/${file}" "$DOTFILES_DIR/${file}"
+done
+
+
 [[ -e "$DOTFILES_DIR/zsh_aliases.$(hostname)" ]] && ln -sf "$DOTFILES_DIR/zsh_aliases.$(hostname)" "$HOME/.zsh_aliases.local"
-
-[[ -d "$HOME/.config" ]] || mkdir .config
-
-[[ -L "$HOME/.config/nvim" ]] && rm "$HOME/.config/nvim"
-ln -s "$DOTFILES_DIR/nvim" "$HOME/.config/nvim"
 
 [[ -L "$HOME/.vim" ]] && rm "$HOME/.vim"
 ln -s "$HOME/.config/nvim" "$HOME/.vim"
 
 [[ -L "$HOME/.vimrc" ]] && rm "$HOME/.vimrc"
 ln -s "$HOME/.config/nvim/init.vim" "$HOME/.vimrc"
-
-[[ -L "$HOME/.templates" ]] && rm "$HOME/.templates"
-[[ -d "$HOME/.templates" ]] && mv "$HOME/.templates" "$HOME/.templates.bak"
-ln -s "$DOTFILES_DIR/templates" "$HOME/.templates"
-
-[[ -L "$HOME/.config/termite" ]] && rm "$HOME/.config/termite"
-[[ -f "$HOME/.config/termite" ]] && mv "$HOME/.config/termite" "$HOME/.config/termite.bak"
-ln -s "$DOTFILES_DIR/termite" "$HOME/.config/termite"
-
-[[ -L "$HOME/.config/cmus" ]] && rm "$HOME/.config/cmus"
-[[ -f "$HOME/.config/cmus" ]] && mv "$HOME/.config/cmus" "$HOME/.config/cmus.bak"
-ln -s "$DOTFILES_DIR/cmus" "$HOME/.config/cmus"
-
-[[ -L "$HOME/.config/compton.conf" ]] && rm "$HOME/.config/compton.conf"
-[[ -f "$HOME/.config/compton.conf" ]] && mv "$HOME/.config/compton.conf" "$HOME/.config/compton.conf.bak"
-ln -s "$DOTFILES_DIR/compton.conf" "$HOME/.config/compton.conf"
 
 if [ ! -e "$HOME/.config/nvim/autoload/plug.vim" ]; then
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
