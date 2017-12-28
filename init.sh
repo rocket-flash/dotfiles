@@ -22,6 +22,7 @@ CONFIG_FILES=(
     'compton.conf'
     'nvim'
     'termite'
+    'trizen'
 )
 
 DOTFILES_DIR="$(readlink -f "$(dirname "${BASH_SOURCE[0]}")")"

@@ -32,7 +32,10 @@ alias dd='dd status=progress'
 alias rar='unrar'
 alias rf='readlink -f'
 
-if which pacaur &> /dev/null; then
+if which trizen &> /dev/null; then
+    alias up='trizen -Syu'
+    alias pm='trizen'
+elif which pacaur &> /dev/null; then
     alias up='pacaur -Syu'
     alias pm='pacaur'
 elif which pacman &> /dev/null; then
