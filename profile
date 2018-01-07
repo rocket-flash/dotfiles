@@ -15,6 +15,7 @@ if [ -d "$JETBRAINS_JDK" ]; then
     export PYCHARM_JDK="${JETBRAINS_JDK}" # PyCharm
     export STUDIO_JDK="${JETBRAINS_JDK}"  # AndroidStudio
     export WEBIDE_JDK="${JETBRAINS_JDK}"  # WebStorm
+    export RIDER_JDK="${JETBRAINS_JDK}"   # Rider
 fi
 
 # Personal usr folder
