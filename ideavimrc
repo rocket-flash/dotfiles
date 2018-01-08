@@ -1,0 +1,37 @@
+set surround
+set incsearch
+
+" Key remaps
+nnoremap <tab> %
+vnoremap <tab> %
+
+" Disable arrow keys
+noremap <up>     <nop>
+noremap <down>   <nop>
+noremap <left>   <nop>
+noremap <right>  <nop>
+inoremap <up>    <nop>
+inoremap <down>  <nop>
+inoremap <left>  <nop>
+inoremap <right> <nop>
+
+" Move while in insert mode
+nnoremap <C-k> <C-w>k
+nnoremap <C-j> <C-w>j
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+
+" Switch panes
+inoremap <C-k> <up>
+inoremap <C-j> <down>
+inoremap <C-h> <left>
+inoremap <C-l> <right>
+
+" Start/End of line
+nnoremap H ^
+nnoremap L $
+
+" Disable macro recording or whatever
+noremap q <nop>
+" Disable going in ex mode
+noremap Q <nop>

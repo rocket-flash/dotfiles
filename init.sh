@@ -8,6 +8,7 @@ DOTFILES=(
     'conkyrc'
     'dircolors'
     'gitconfig'
+    'ideavimrc'
     'profile'
     'templates'
     'tmux.conf'
