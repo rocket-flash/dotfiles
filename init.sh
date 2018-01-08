@@ -36,7 +36,7 @@ function create_link() {
 }
 
 [[ -d "$HOME/.config" ]] || mkdir "$HOME/.config"
-[[ -d "$HOME/usr/bin" ]] || mkdir "$HOME/usr/bin"
+[[ -d "$HOME/usr/bin" ]] || mkdir -p "$HOME/usr/bin"
 
 for file in "${DOTFILES[@]}"; do
     create_link "$HOME/.${file}" "$DOTFILES_DIR/${file}"
