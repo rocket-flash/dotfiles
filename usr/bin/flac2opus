@@ -13,18 +13,19 @@ cur_file = nb_files = 0
 mutex = threading.Lock()
 
 
-def has_opusenc():
+def has_command(cmd_name):
     def is_exe(fpath):
         return os.path.isfile(fpath) and os.access(fpath, os.X_OK)
 
-    opusenc = 'opusenc.exe' if sys.platform == 'win32' else 'opusenc'
+    if sys.platform == 'win32':
+        cmd_name += '.exe'
 
-    if is_exe(opusenc):
+    if is_exe(cmd_name):
         return True
     else:
         path = os.getenv('PATH').split(os.pathsep)
         for p in path:
-            if is_exe(os.path.join(p, opusenc)):
+            if is_exe(os.path.join(p, cmd_name)):
                 return True
 
     return False
@@ -43,9 +44,8 @@ def convert_file(flac_file):
 
     try:
         err_msg = None
-        subprocess.call(['opusenc', '--bitrate', BITRATE, flac_file, opus_file],
-                        stdout=subprocess.DEVNULL,
-                        stderr=subprocess.DEVNULL)
+        subprocess.call(('metaflac', '--remove-replay-gain', flac_file))
+        subprocess.call(('opusenc', '--quiet', '--bitrate', BITRATE, flac_file, opus_file))
     except Exception as e:
         err_msg = str(e)
 
@@ -75,9 +75,10 @@ def is_flac(path):
 
 
 def main():
-    if not has_opusenc():
-        print('Error: opusenc not found')
-        exit(-1)
+    for cmd in ('metaflac', 'opusenc'):
+        if not has_command(cmd):
+            print('Error: %s not found' % cmd)
+            sys.exit(1)
 
     files = set(f for f in sys.argv[1:] if is_flac(f))
 
@@ -86,7 +87,7 @@ def main():
 
     if nb_files == 0:
         print('No files specified')
-        exit(-2)
+        sys.exit(2)
 
     print_progress()
 
