@@ -50,7 +50,7 @@ if which nvim &> /dev/null; then
     alias vimdiff='nvim -d'
 fi
 
-if [ "$TERM" = "xterm-termite" ]; then
+if [ "$TERM" = "xterm-termite" ] || [ "$TERM" = "tmux-256color" ]; then
     alias ssh='TERM=xterm-256color ssh'
 fi
 
