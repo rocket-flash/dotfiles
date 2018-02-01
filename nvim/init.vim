@@ -16,6 +16,7 @@ Plug 'yegappan/mru'
 Plug 'junegunn/vim-slash'
 Plug 'junegunn/vim-easy-align'
 Plug 'easymotion/vim-easymotion'
+Plug 'junegunn/fzf'
 
 if has('nvim') || (v:version >= 800)
     Plug 'w0rp/ale'
@@ -243,3 +244,6 @@ xmap ga <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+
+" FZF
+nnoremap <leader>f :FZF<CR>
