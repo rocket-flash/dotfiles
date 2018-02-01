@@ -1,6 +1,6 @@
 #! /bin/bash -eu
 
-fatal()   { echo -e "\e[35m[FATAL]\e[39m   $*" 1>&2 ; exit 1 ; }
+fatal()   { echo -e "\\e[35m[FATAL]\\e[39m   $*" 1>&2 ; exit 1 ; }
 
 DOTFILES=(
     'SciTEUser.properties'
@@ -24,6 +24,13 @@ CONFIG_FILES=(
     'nvim'
     'termite'
     'trizen'
+)
+
+APPS=(
+    'fzf'
+    'rg'
+    'tmux'
+    'xsel'
 )
 
 DOTFILES_DIR="$(readlink -f "$(dirname "${BASH_SOURCE[0]}")")"
@@ -79,3 +86,10 @@ for term in "${TERMS[@]}"; do
 done
 
 crontab "$DOTFILES_DIR/crontab"
+
+MISSING_APPS=""
+for app in "${APPS[@]}"; do
+    type "$app" &> /dev/null || MISSING_APPS="${MISSING_APPS}${app} "
+done
+
+[[ -z "$MISSING_APPS" ]] || printf "Don't forget to install the following:\\n  %s\\n" "$MISSING_APPS"
