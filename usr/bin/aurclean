@@ -1,0 +1,20 @@
+#! /bin/zsh
+
+TRIZEN_CACHE="${TRIZEN_CACHE:-$HOME/.cache/trizen}"
+
+source "$HOME/usr/lib/log.sh"
+
+if [ ! -d "$TRIZEN_CACHE" ]; then
+    fatal "$TRIZEN_CACHE folder does not exist"
+fi
+
+info "Deleting old packages"
+for d in $(\diff --new-line-format="" --unchanged-line-format="" <(ls "$TRIZEN_CACHE") <(pacman -Qqm)); do
+    rm -rf $TRIZEN_CACHE/$d
+done
+
+info "Cleaning git repositories"
+for d in $(ls "$TRIZEN_CACHE"); do
+    cd $TRIZEN_CACHE/$d
+    git clean -xdf
+done
