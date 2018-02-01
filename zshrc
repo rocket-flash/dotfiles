@@ -91,6 +91,7 @@ ssh-add -l > /dev/null || ssh-add
 [[ -f /usr/share/doc/pkgfile/command-not-found.zsh ]] && . /usr/share/doc/pkgfile/command-not-found.zsh
 [[ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && . /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+# Setup default apps
 if which nvim &> /dev/null; then
     export EDITOR="nvim"
 else
@@ -98,6 +99,17 @@ else
 fi
 export PAGER="less"
 export MEDIA="/run/media/$USER"
+
+# Setup FZF
+if [[ -d /usr/share/fzf ]]; then
+    . /usr/share/fzf/key-bindings.zsh
+    . /usr/share/fzf/completion.zsh
+
+    # --files: List files that would be searched but do not search
+    # --follow: Follow symlinks
+    export FZF_DEFAULT_COMMAND='rg --files --follow'
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+fi
 
 # Enable core dumps
 ulimit -c unlimited
