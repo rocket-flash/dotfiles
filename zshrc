@@ -109,8 +109,7 @@ if [[ -d /usr/share/fzf ]]; then
     export FZF_DEFAULT_OPTS='--reverse'
     # --files: List files that would be searched but do not search
     # --follow: Follow symlinks
-    # --hidden: Search hidden files and folders
-    export FZF_DEFAULT_COMMAND='rg --files --follow --hidden 2>/dev/null'
+    export FZF_DEFAULT_COMMAND='rg --files --follow 2>/dev/null'
     export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 fi
 
