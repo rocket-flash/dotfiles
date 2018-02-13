@@ -29,9 +29,21 @@ bindkey "^[OB" history-search-forward
 bindkey "^W" backward-kill-word
 bindkey "^R" history-incremental-search-backward
 
-setopt APPEND_HISTORY
+## Write to the history file immediately, not when the shell exits.
+#setopt INC_APPEND_HISTORY
+## Share history between all sessions.
+#setopt SHARE_HISTORY
+# Don't record an entry that was just recorded again.
 setopt HIST_IGNORE_DUPS
+# Don't record an entry that was just recorded again.
+setopt HIST_IGNORE_ALL_DUPS
+# Don't record an entry starting with a space.
 setopt HIST_IGNORE_SPACE
+# Don't write duplicate entries in the history file.
+setopt HIST_SAVE_NO_DUPS
+# Remove superfluous blanks before recording entry.
+setopt HIST_REDUCE_BLANKS
+
 setopt prompt_subst
 setopt correct
 
