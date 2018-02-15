@@ -35,7 +35,7 @@ bindkey "^R" history-incremental-search-backward
 #setopt SHARE_HISTORY
 # Don't record an entry that was just recorded again.
 setopt HIST_IGNORE_DUPS
-# Don't record an entry that was just recorded again.
+# Delete old recorded entry if new entry is a duplicate.
 setopt HIST_IGNORE_ALL_DUPS
 # Don't record an entry starting with a space.
 setopt HIST_IGNORE_SPACE
