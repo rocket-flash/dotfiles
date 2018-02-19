@@ -62,6 +62,8 @@ for file in $DOTFILES_DIR/usr/lib/*; do
     create_link "$HOME/usr/lib/$(basename "$file")" "$file"
 done
 
+find "$HOME/usr" -xtype l -print0 | xargs -0 rm
+
 [[ -e "$DOTFILES_DIR/zsh_aliases.$(hostname)" ]] && ln -sf "$DOTFILES_DIR/zsh_aliases.$(hostname)" "$HOME/.zsh_aliases.local"
 
 [[ -L "$HOME/.vim" ]] && rm "$HOME/.vim"

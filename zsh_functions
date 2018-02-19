@@ -40,25 +40,22 @@ function remove_ext() {
     echo ${1:r}
 }
 
-function pacaur_clean() {
-    [[ -z "$AURDEST" ]] && AURDEST="$HOME/.cache/pacaur"
-    [[ ! -d "$AURDEST" ]] && return
+function aur_clean() {
+    AUR_CACHE="${TRIZEN_CACHE:-$HOME/.cache/trizen}"
+    [[ -d "$AUR_CACHE" ]] || return
 
-    pushd -q "$AURDEST"
+    pushd -q "$AUR_CACHE"
 
-    for d in *; do
-        if pacman -Qi $d &> /dev/null; then
-            echo $d
-            pushd -q $d
-            git clean -xdf
-            popd -q
-        else
-            if read -s -q "?Delete $d [y/N]? "; then
-                rm -rf $d
-            fi
-            echo
+    for d in $(\diff --new-line-format="" --unchanged-line-format="" <(ls) <(pacman -Qqm)); do
+        if read -s -q "?Delete $d [y/N]? "; then
+            rm -rf "$d"
         fi
     done
 
-    popd -q
+    for d in *; do
+        echo $d
+        pushd -q "$d"
+        git clean -xdf
+        popd -q
+    done
 }
