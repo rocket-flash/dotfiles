@@ -131,6 +131,9 @@ ulimit -c unlimited
 # Default cflags
 export CFLAGS="-O2 -march=native -fstack-protector-strong"
 
+# Remove / from WORDCHARS, ie. make / a word delimiter
+export WORDCHARS=${WORDCHARS/\//}
+
 # Setup a few PATHs
 [[ -d "$HOME/usr/bin" ]] && export PATH="$HOME/usr/bin:$PATH"
 [[ -d "$HOME/usr/lib" ]] && export LD_LIBRARY_PATH="$HOME/usr/lib:$LD_LIBRARY_PATH"
