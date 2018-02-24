@@ -69,6 +69,8 @@ function aur_clean() {
         git clean -xdf
         popd -q
     done
+
+    popd -q
 }
 
 function tctest() {
