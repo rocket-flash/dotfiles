@@ -32,6 +32,8 @@
 
 	# Delete the remote version of the current branch
 	unpublish = "!git push origin :$(git branch-name)"
+
+	exclude = "!sh -c 'echo "$1" >> .git/info/exclude' -"
 [gui]
 	editor = mousepad
 	fontui = -family \"Noto Sans\" -size 10 -weight normal -slant roman -underline 0 -overstrike 0
