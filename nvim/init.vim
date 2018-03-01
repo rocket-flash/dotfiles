@@ -109,7 +109,8 @@ noremap q <nop>
 " Disable going in ex mode
 noremap Q <nop>
 
-" Insert at end of selected lines
+" Insert at beginning / end of selected lines
+vnoremap I <C-V>^I
 vnoremap A <C-V>$A
 
 " Close current buffer but keep window
