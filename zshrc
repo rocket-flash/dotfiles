@@ -103,6 +103,9 @@ ssh-add -l > /dev/null || ssh-add
 [[ -f /usr/share/doc/pkgfile/command-not-found.zsh ]] && . /usr/share/doc/pkgfile/command-not-found.zsh
 [[ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && . /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+# Load local stuff
+[[ -f ~/.zsh.local ]] && source ~/.zsh.local
+
 # Setup default apps
 if which nvim &> /dev/null; then
     export EDITOR="nvim"

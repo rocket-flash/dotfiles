@@ -35,6 +35,11 @@ APPS=(
 
 DOTFILES_DIR="$(readlink -f "$(dirname "${BASH_SOURCE[0]}")")"
 
+function installed() {
+    type "$1" &> /dev/null
+    return $?
+}
+
 function create_link() {
     [[ -L "$1" ]] && rm "$1"
     [[ -e "$1" ]] && mv "$1" "${1}.bak"
@@ -64,7 +69,7 @@ done
 
 find "$HOME/usr" -xtype l -print0 | xargs --no-run-if-empty -0 rm
 
-[[ -e "$DOTFILES_DIR/zsh_aliases.$(hostname)" ]] && ln -sf "$DOTFILES_DIR/zsh_aliases.$(hostname)" "$HOME/.zsh_aliases.local"
+[[ -e "$DOTFILES_DIR/zsh.$(hostname)" ]] && ln -sf "$DOTFILES_DIR/zsh.$(hostname)" "$HOME/.zsh.local"
 
 [[ -L "$HOME/.vim" ]] && rm "$HOME/.vim"
 ln -s "$HOME/.config/nvim" "$HOME/.vim"
@@ -72,10 +77,12 @@ ln -s "$HOME/.config/nvim" "$HOME/.vim"
 [[ -L "$HOME/.vimrc" ]] && rm "$HOME/.vimrc"
 ln -s "$HOME/.config/nvim/init.vim" "$HOME/.vimrc"
 
-if [ ! -e "$HOME/.config/nvim/autoload/plug.vim" ]; then
-    curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    # TERM workaround to avoid loading non existing color scheme
-    TERM=xterm vim +PlugInstall +qall
+if installed vim; then
+    if [ ! -e "$HOME/.config/nvim/autoload/plug.vim" ]; then
+        curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        # TERM workaround to avoid loading non existing color scheme
+        TERM=xterm vim +PlugInstall +qall
+    fi
 fi
 
 # Regenerate screen and screen-256color terminfo to fix C-h problem with neovim
@@ -87,11 +94,11 @@ for term in "${TERMS[@]}"; do
     rm "${term}.ti"
 done
 
-crontab "$DOTFILES_DIR/crontab"
+installed crontab && crontab "$DOTFILES_DIR/crontab"
 
 MISSING_APPS=""
 for app in "${APPS[@]}"; do
-    type "$app" &> /dev/null || MISSING_APPS="${MISSING_APPS}${app} "
+    installed "$app" || MISSING_APPS="${MISSING_APPS}${app} "
 done
 
 [[ -z "$MISSING_APPS" ]] || printf "Don't forget to install the following:\\n  %s\\n" "$MISSING_APPS"

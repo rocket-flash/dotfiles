@@ -1,4 +1,0 @@
-alias make='make -j8'
-alias thormount='sshfs thor:/home/mathieu /mnt/thor'
-alias thorwmount='sshfs thorw:/home/mathieu /mnt/thor'
-alias thorumount='fusermount -u /mnt/thor'
