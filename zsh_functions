@@ -40,7 +40,7 @@ function remove_ext() {
     echo ${1:r}
 }
 
-function aur_get() {
+function aur-get() {
     if [ $# -lt 1 ]; then
         echo "Usage: $0 packages"
         exit 1
@@ -51,7 +51,7 @@ function aur_get() {
     done
 }
 
-function aur_clean() {
+function aur-clean() {
     AUR_CACHE="${TRIZEN_CACHE:-$HOME/.cache/trizen}"
     [[ -d "$AUR_CACHE" ]] || return
 
