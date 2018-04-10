@@ -21,6 +21,7 @@
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset %C(bold magenta)(%G?)%Creset' --abbrev-commit
 	fixup = commit --amend --no-edit
 	edit = "!vim `git ls-files -m`"
+	pushfl = push --force-with-lease
 
 	# Get the current branch name (not so useful in itself, but used in
 	# other aliases)
