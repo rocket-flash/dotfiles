@@ -56,7 +56,7 @@ POSTITION=$(format_position "$_position" "$_duration")
 if [ "${_status}" = "playing" ]; then
     TITLE="${_artist} - ${_title}"
     BODY="${_album} $(format_track "${_discnumber}" "${_tracknumber}")"
-    [[ -n "$POSTITION" ]] && BODY="$BODY\n$POSTITION"
+    [[ -n "$POSTITION" ]] && BODY="$BODY\\n$POSTITION"
 elif [ "${_status}" = "paused" ]; then
     TITLE="C* Music Player"
     BODY="Paused"
@@ -65,5 +65,5 @@ elif [ "${_status}" = "stopped" ]; then
     BODY="Stopped"
 fi
 
-debug "notify-send --icon '${COVER:-applications-multimedia}' '${TITLE}' '${BODY}'"
-notify-send --icon "${COVER:-applications-multimedia}" "${TITLE}" "${BODY}"
+debug "notify-send --hint=int:transient:1 --icon '${COVER:-applications-multimedia}' '${TITLE}' '${BODY}'"
+notify-send --hint=int:transient:1 --icon "${COVER:-applications-multimedia}" "${TITLE}" "${BODY}"
