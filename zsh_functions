@@ -61,6 +61,7 @@ function aur-clean() {
         if read -s -q "?Delete $d [y/N]? "; then
             rm -rf "$d"
         fi
+        echo
     done
 
     for d in *; do
