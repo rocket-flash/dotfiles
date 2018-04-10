@@ -26,28 +26,33 @@ alias astyle='astyle --style=java --formatted --suffix=.bak'
 alias diff='colordiff -u'
 alias svn_clean='svn status --no-ignore | egrep "^[\?I]" | awk '\''{print $2}'\'' | xargs rm -rf'
 alias hd='hexdump -C'
-alias t='thunar'
-alias td='(thunar --daemon &>/dev/null &)'
 alias dd='dd status=progress'
 alias rar='unrar'
 alias rf='readlink -f'
 
-if which trizen &> /dev/null; then
+if installed trizen; then
     alias up='trizen -Syu'
     alias pm='trizen'
-elif which pacaur &> /dev/null; then
+elif installed pacaur; then
     alias up='pacaur -Syu'
     alias pm='pacaur'
-elif which pacman &> /dev/null; then
+elif installed pacman; then
     alias up='sudo pacman -Syu'
     alias pm='pacman'
-elif which apt &> /dev/null; then
+elif installed apt; then
     alias up='sudo apt update && sudo apt full-upgrade'
 fi
 
-if which nvim &> /dev/null; then
+if installed nvim; then
     alias vim='nvim'
     alias vimdiff='nvim -d'
+fi
+
+if installed thunar; then
+    alias f='thunar'
+    alias td='(thunar --daemon &>/dev/null &)'
+elif installed nautilus; then
+    alias f='(nautilus . &> /dev/null &)'
 fi
 
 if [ "$TERM" = "xterm-termite" ] || [ "$TERM" = "tmux-256color" ]; then

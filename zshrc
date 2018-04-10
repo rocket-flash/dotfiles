@@ -47,6 +47,11 @@ setopt HIST_REDUCE_BLANKS
 setopt prompt_subst
 setopt correct
 
+function installed() {
+    type "$1" &> /dev/null
+    return $?
+}
+
 HISTFILE=~/.zsh_history
 HISTSIZE=5000
 SAVEHIST=5000
