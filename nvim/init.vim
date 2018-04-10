@@ -110,8 +110,8 @@ noremap q <nop>
 noremap Q <nop>
 
 " Insert at beginning / end of selected lines
-vnoremap I <C-V>^I
-vnoremap A <C-V>$A
+vnoremap i <C-V>^I
+vnoremap a <C-V>$A
 
 " Close current buffer but keep window
 nmap <leader>d :bp<bar>sp<bar>bn<bar>bd<CR>
