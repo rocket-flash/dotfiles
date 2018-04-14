@@ -23,7 +23,6 @@ alias jgrep='grep -nr --include='\''*.java'\'''
 alias csgrep='grep -nr --include='\''*.cs'\'''
 alias pygrep='grep -nr --include='\''*.py'\'''
 alias astyle='astyle --style=java --formatted --suffix=.bak'
-alias diff='colordiff -u'
 alias svn_clean='svn status --no-ignore | egrep "^[\?I]" | awk '\''{print $2}'\'' | xargs rm -rf'
 alias hd='hexdump -C'
 alias dd='dd status=progress'
@@ -53,6 +52,10 @@ if installed thunar; then
     alias td='(thunar --daemon &>/dev/null &)'
 elif installed nautilus; then
     alias f='(nautilus . &> /dev/null &)'
+fi
+
+if installed colordiff; then
+    alias diff='colordiff -u'
 fi
 
 if [ "$TERM" = "xterm-termite" ] || [ "$TERM" = "tmux-256color" ]; then

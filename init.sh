@@ -1,6 +1,6 @@
 #! /bin/bash -eu
 
-fatal()   { echo -e "\\e[35m[FATAL]\\e[39m   $*" 1>&2 ; exit 1 ; }
+fatal()   { printf "\\e[35m[FATAL]\\e[39m   %s\\n" "$*" 1>&2 ; exit 1 ; }
 
 DOTFILES=(
     'SciTEUser.properties'

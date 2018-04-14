@@ -19,16 +19,6 @@ colors
 
 [[ -e $HOME/.tmux.zsh ]] && source $HOME/.tmux.zsh
 
-# bind special keys according to readline configuration
-[[ -f /etc/inputrc ]] && eval "$(sed -n 's/^/bindkey /; s/: / /p' /etc/inputrc)" > /dev/null
-
-bindkey "^[[A" history-search-backward
-bindkey "^[[B" history-search-forward
-bindkey "^[OA" history-search-backward
-bindkey "^[OB" history-search-forward
-bindkey "^W" backward-kill-word
-bindkey "^R" history-incremental-search-backward
-
 ## Write to the history file immediately, not when the shell exits.
 #setopt INC_APPEND_HISTORY
 ## Share history between all sessions.
@@ -47,10 +37,18 @@ setopt HIST_REDUCE_BLANKS
 setopt prompt_subst
 setopt correct
 
+# bind special keys according to readline configuration
+[ -f /etc/inputrc ] && eval "$(sed -n 's/^/bindkey /; s/: / /p' /etc/inputrc)" > /dev/null
+
 function installed() {
     type "$1" &> /dev/null
     return $?
 }
+
+bindkey "^[[A" history-search-backward
+bindkey "^[[B" history-search-forward
+bindkey "^W" backward-kill-word
+bindkey "^R" history-incremental-search-backward
 
 HISTFILE=~/.zsh_history
 HISTSIZE=5000
@@ -93,7 +91,7 @@ PS1="${PS1}${COLOR_RESET}:${FG_BRIGHT_BLUE}%1~${COLOR_RESET}%(!.#.$) "
 PS2='> '
 RPROMPT=$'$(vcs_info_wrapper)'"%(1j.[%jbg].)[%D{%T}]%(?.${FG_BRIGHT_GREEN}.${FG_BRIGHT_RED})[%?]${COLOR_RESET}"
 
-if [ -x /usr/bin/dircolors ]; then
+if installed dircolors; then
     [ -r ~/.dircolors ] && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 fi
 
@@ -105,14 +103,14 @@ ssh-add -l > /dev/null || ssh-add
 [[ -f ~/.zsh_aliases ]] && . ~/.zsh_aliases
 [[ -f ~/.zsh_functions ]] && . ~/.zsh_functions
 [[ -f /usr/bin/virtualenvwrapper_lazy.sh ]] && . /usr/bin/virtualenvwrapper_lazy.sh
-[[ -f /usr/share/doc/pkgfile/command-not-found.zsh ]] && . /usr/share/doc/pkgfile/command-not-found.zsh
 [[ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && . /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+[[ -f /usr/share/doc/pkgfile/command-not-found.zsh ]] && . /usr/share/doc/pkgfile/command-not-found.zsh
 
 # Load local stuff
 [[ -f ~/.zsh.local ]] && source ~/.zsh.local
 
 # Setup default apps
-if which nvim &> /dev/null; then
+if installed nvim; then
     export EDITOR="nvim"
 else
     export EDITOR="vim"
@@ -161,6 +159,8 @@ if [ -d "$ANDROID_HOME" ]; then
 fi
 
 [[ -f "$HOME/.pythonrc" ]] && export PYTHONSTARTUP="$HOME/.pythonrc"
+
+unset -f installed
 
 if [[ "$PROFILE_STARTUP" == true ]]; then
     unsetopt xtrace
