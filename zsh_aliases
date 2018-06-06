@@ -29,12 +29,9 @@ alias dd='dd status=progress'
 alias rar='unrar'
 alias rf='readlink -f'
 
-if installed trizen; then
-    alias up='trizen -Syu'
-    alias pm='trizen'
-elif installed pacaur; then
-    alias up='pacaur -Syu'
-    alias pm='pacaur'
+if installed yay; then
+    alias up='yay -Syu'
+    alias pm='yay'
 elif installed pacman; then
     alias up='sudo pacman -Syu'
     alias pm='pacman'
