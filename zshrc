@@ -131,6 +131,7 @@ if [[ -d /usr/share/fzf ]]; then
     # --follow: Follow symlinks
     export FZF_DEFAULT_COMMAND='rg --files --follow 2>/dev/null'
     export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+    export FZF_CTRL_T_OPTS="--tiebreak=end"
 fi
 
 # Enable core dumps
@@ -154,10 +155,10 @@ export GOPATH="$HOME/usr/go"
 export CARGO_HOME="$HOME/usr/cargo"
 [[ -d "$CARGO_HOME/bin" ]] && export PATH="$CARGO_HOME/bin:$PATH"
 
-ANDROID_HOME="$HOME/Android/Sdk"
-if [ -d "$ANDROID_HOME" ]; then
-    export ANDROID_HOME
-    export PATH="$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$PATH"
+ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+if [ -d "$ANDROID_SDK_ROOT" ]; then
+    export ANDROID_SDK_ROOT
+    export PATH="$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools:$PATH"
 fi
 
 [[ -f "$HOME/.pythonrc" ]] && export PYTHONSTARTUP="$HOME/.pythonrc"
