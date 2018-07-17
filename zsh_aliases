@@ -53,6 +53,8 @@ fi
 
 if installed colordiff; then
     alias diff='colordiff -u'
+else
+    alias diff='diff -u'
 fi
 
 if [ "$TERM" = "xterm-termite" ] || [ "$TERM" = "tmux-256color" ]; then
