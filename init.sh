@@ -89,11 +89,11 @@ for term in "${TERMS[@]}"; do
 done
 
 if installed tmux; then
-    if [ ! -e "$HOME/.config/tmux/plugins/tpm" ]; then
-        mkdir -p "$HOME/.config/tmux/plugins"
-        git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
+    if [ ! -e "$HOME/.local/share/tmux/tpm" ]; then
+        mkdir -p "$HOME/.local/share/tmux"
+        git clone https://github.com/tmux-plugins/tpm ~/.local/share/tmux/tpm
     else
-        pushd -q "$HOME/.config/tmux/plugins/tpm"
+        pushd -q "$HOME/.local/share/tmux/tpm"
         git pull
         popd -q
     fi
