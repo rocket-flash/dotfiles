@@ -10,6 +10,8 @@ if [[ "$PROFILE_STARTUP" == true ]]; then
     setopt xtrace prompt_subst
 fi
 
+fpath=("$HOME/.local/share/zsh/completions" $fpath)
+
 autoload -U compinit promptinit colors
 autoload -Uz vcs_info
 
