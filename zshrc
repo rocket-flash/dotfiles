@@ -36,6 +36,8 @@ setopt HIST_REDUCE_BLANKS
 
 setopt prompt_subst
 setopt correct
+setopt auto_pushd
+setopt pushd_ignore_dups
 
 # bind special keys according to readline configuration
 [ -f /etc/inputrc ] && eval "$(sed -n 's/^/bindkey /; s/: / /p' /etc/inputrc)" > /dev/null
