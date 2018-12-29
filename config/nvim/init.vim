@@ -19,6 +19,7 @@ Plug '907th/vim-auto-save'
 Plug 'junegunn/vim-slash'
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/fzf'
+Plug 'junegunn/vim-peekaboo'
 Plug 'easymotion/vim-easymotion'
 
 if has('nvim') || (v:version >= 800)
