@@ -1,6 +1,9 @@
 " Load plugins first
 call plug#begin()
 
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'fholgado/minibufexpl.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
@@ -15,11 +18,8 @@ Plug 'jiangmiao/auto-pairs'
 Plug '907th/vim-auto-save'
 Plug 'junegunn/vim-slash'
 Plug 'junegunn/vim-easy-align'
-Plug 'easymotion/vim-easymotion'
 Plug 'junegunn/fzf'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'easymotion/vim-easymotion'
 
 if has('nvim') || (v:version >= 800)
     Plug 'w0rp/ale'
