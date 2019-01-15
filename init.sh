@@ -20,6 +20,7 @@ DOTFILES=(
 )
 
 APPS=(
+    'cargo'
     'colordiff'
     'fd'
     'fzf'
@@ -98,6 +99,19 @@ if installed tmux; then
         git pull
         popd
     fi
+fi
+
+if installed cargo; then
+    pushd /tmp
+    git clone https://github.com/mathieu-lemay/cmus-notify.git
+
+    pushd cmus-notify
+    cargo build --release
+    mv target/release/cmus-notify "$HOME/usr/bin"
+    popd
+
+    rm -rf cmus-notify
+    popd
 fi
 
 installed crontab && crontab "$DOTFILES_DIR/crontab"
