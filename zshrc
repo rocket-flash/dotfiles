@@ -1,6 +1,8 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+# Profiling {{{
+
 # https://kev.inburke.com/kevin/profiling-zsh-startup-time/
 PROFILE_STARTUP=false
 if [[ "$PROFILE_STARTUP" == true ]]; then
@@ -10,6 +12,9 @@ if [[ "$PROFILE_STARTUP" == true ]]; then
     setopt xtrace prompt_subst
 fi
 
+# }}}
+
+# Modules Initializing {{{
 fpath=("$HOME/.local/share/zsh/completions" $fpath)
 
 autoload -U compinit promptinit
@@ -20,39 +25,52 @@ promptinit
 
 [[ -e $HOME/.tmux.zsh ]] && source $HOME/.tmux.zsh
 
-## Write to the history file immediately, not when the shell exits.
-setopt INC_APPEND_HISTORY
-## Share history between all sessions.
-#setopt SHARE_HISTORY
-# Don't record an entry that was just recorded again.
-setopt HIST_IGNORE_DUPS
-# Delete old recorded entry if new entry is a duplicate.
-setopt HIST_IGNORE_ALL_DUPS
-# Don't record an entry starting with a space.
-setopt HIST_IGNORE_SPACE
-# Don't write duplicate entries in the history file.
-setopt HIST_SAVE_NO_DUPS
-# Remove superfluous blanks before recording entry.
-setopt HIST_REDUCE_BLANKS
+# }}}
 
-setopt prompt_subst
-setopt correct
-setopt auto_pushd
-setopt pushd_ignore_dups
+# Options {{{
 
-# bind special keys according to readline configuration
-[ -f /etc/inputrc ] && eval "$(sed -n 's/^/bindkey /; s/: / /p' /etc/inputrc)" > /dev/null
+setopt prompt_subst      # Enable parameter expansion for prompts
+setopt correct           # Enable autocorrect
+setopt auto_pushd        # Make cd push the old directory onto the directory stack
+setopt pushd_ignore_dups # Ignore duplicates when pushing directory on the stack
 
-function installed() {
+# }}}
+
+# History {{{
+
+HISTFILE=~/.zsh_history
+HISTSIZE=5000
+SAVEHIST=5000
+
+setopt INC_APPEND_HISTORY   # Write to the history file immediately, not when the shell exits.
+#setopt SHARE_HISTORY       # Share history between all sessions.
+setopt HIST_IGNORE_DUPS     # Don't record an entry that was just recorded again.
+setopt HIST_IGNORE_ALL_DUPS # Delete old recorded entry if new entry is a duplicate.
+setopt HIST_IGNORE_SPACE    # Don't record an entry starting with a space.
+setopt HIST_SAVE_NO_DUPS    # Don't write duplicate entries in the history file.
+setopt HIST_REDUCE_BLANKS   # Remove superfluous blanks before recording entry.
+
+# }}}
+
+# Helper functions {{{
+
+installed() {
     type "$1" &> /dev/null
     return $?
 }
+
+# }}}
+
+# Key Bindings {{{
 
 # Use VI mode
 bindkey -v
 
 # Reduce ESC delay to 0.1s
 export KEYTIMEOUT=1
+
+# bind special keys according to readline configuration
+[ -f /etc/inputrc ] && eval "$(sed -n 's/^/bindkey /; s/: / /p' /etc/inputrc)" > /dev/null
 
 bindkey "^[[A" history-search-backward
 bindkey "^[[B" history-search-forward
@@ -63,9 +81,9 @@ bindkey "^R" history-incremental-search-backward
 bindkey '^?' backward-delete-char
 bindkey '^h' backward-delete-char
 
-HISTFILE=~/.zsh_history
-HISTSIZE=5000
-SAVEHIST=5000
+# }}}
+
+# ZStyle options {{{
 
 # Add completion for cd ..
 zstyle ':completion:*' special-dirs true
@@ -79,8 +97,9 @@ zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{3}%r'
 
 zstyle ':vcs_info:*' enable git svn
 
-# make less more friendly for non-text input files, see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+# }}}
+
+# Prompt {{{
 
 # Color shortcuts
 let idx=0
@@ -156,14 +175,17 @@ function zle-keymap-select {
 
 zle -N zle-keymap-select
 
-if installed dircolors; then
-    [ -r ~/.dircolors ] && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-fi
+# }}}
 
-# SSH Agent
+# SSH Agent {{{
+
 export SSH_AUTH_SOCK="/tmp/ssh-agent.${EUID}.socket"
 [[ -S "${SSH_AUTH_SOCK}" ]] || ssh-agent -s -a "${SSH_AUTH_SOCK}" > /dev/null
 ssh-add -l > /dev/null || ssh-add
+
+# }}}
+
+# Source extra files {{{
 
 [[ -f ~/.zsh_aliases ]] && . ~/.zsh_aliases
 [[ -f ~/.zsh_functions ]] && . ~/.zsh_functions
@@ -171,19 +193,13 @@ ssh-add -l > /dev/null || ssh-add
 [[ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && . /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 [[ -f /usr/share/doc/pkgfile/command-not-found.zsh ]] && . /usr/share/doc/pkgfile/command-not-found.zsh
 
-# Load local stuff
+# Source machine specific config
 [[ -f ~/.zsh.local ]] && source ~/.zsh.local
 
-# Setup default apps
-if installed nvim; then
-    export EDITOR="nvim"
-else
-    export EDITOR="vim"
-fi
-export PAGER="less"
-export MEDIA="/run/media/$USER"
+# }}}
 
-# Setup FZF
+# FZF Config {{{
+
 if [[ -d /usr/share/fzf ]]; then
     . /usr/share/fzf/key-bindings.zsh
     . /usr/share/fzf/completion.zsh
@@ -204,8 +220,26 @@ if [[ -d /usr/share/fzf ]]; then
     }
 fi
 
+# }}}
+
+# Misc configs and env vars {{{
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+if installed dircolors; then
+    [ -r ~/.dircolors ] && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+fi
+
 # Enable core dumps
 ulimit -c unlimited
+
+# Setup default apps
+if installed nvim; then
+    export EDITOR="nvim"
+else
+    export EDITOR="vim"
+fi
 
 # Default cflags
 export CFLAGS="-O2 -march=native -fstack-protector-strong"
@@ -213,7 +247,11 @@ export CFLAGS="-O2 -march=native -fstack-protector-strong"
 # Remove / from WORDCHARS, ie. make / a word delimiter
 export WORDCHARS=${WORDCHARS/\//}
 
-# Setup a few PATHs
+# }}}
+
+# Setup a few PATHs {{{
+
+# Personal usr folder
 [[ -d "$HOME/usr/bin" ]] && export PATH="$HOME/usr/bin:$PATH"
 [[ -d "$HOME/usr/lib" ]] && export LD_LIBRARY_PATH="$HOME/usr/lib:$LD_LIBRARY_PATH"
 [[ -d "$HOME/usr/lib/pkgconfig" ]] && export PKG_CONFIG_PATH="$HOME/usr/lib/pkgconfig:$PKG_CONFIG_PATH"
@@ -225,13 +263,19 @@ export GOPATH="$HOME/usr/go"
 export CARGO_HOME="$HOME/usr/cargo"
 [[ -d "$CARGO_HOME/bin" ]] && export PATH="$CARGO_HOME/bin:$PATH"
 
+# Android
 ANDROID_SDK_ROOT="$HOME/Android/Sdk"
 if [ -d "$ANDROID_SDK_ROOT" ]; then
     export ANDROID_SDK_ROOT
     export PATH="$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools:$PATH"
 fi
 
+# Python
 [[ -f "$HOME/.pythonrc" ]] && export PYTHONSTARTUP="$HOME/.pythonrc"
+
+# }}}
+
+# Cleanup {{{
 
 unset -f installed
 
@@ -239,3 +283,7 @@ if [[ "$PROFILE_STARTUP" == true ]]; then
     unsetopt xtrace
     exec 2>&3 3>&-
 fi
+
+# }}}
+
+# vi: foldmethod=marker
