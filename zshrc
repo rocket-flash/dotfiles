@@ -129,7 +129,7 @@ nvm_info() {
 vi_mode_info() {
     case "${KEYMAP:-main}" in
         main|viins)
-            echo "%F{${bright_blue}}%F{${black}}%K{${bright_blue}} INSERT "
+            echo "%F{${bright_green}}%F{${black}}%K{${bright_green}} INSERT "
             ;;
         vicmd)
             echo "%F{${bright_red}}%F{${black}}%K{${bright_red}} NORMAL "
@@ -162,7 +162,7 @@ build_ps1() {
     p_directory="%1~ "
     p_sep2="%k%F{${c_dir}} "
 
-    echo "%B%K{${c_base}} ${p_exit_code}${p_root_warning}${p_host}${p_sep1}${p_directory}${p_sep2}${color_reset}%b"
+    echo "%B%K{${c_base}}${p_exit_code}${p_root_warning}${p_host}${p_sep1}${p_directory}${p_sep2}${color_reset}%b"
 }
 
 PS1="$(build_ps1)"
