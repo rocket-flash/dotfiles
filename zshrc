@@ -93,6 +93,7 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
 # Version Control System
 zstyle ':vcs_info:*' enable git svn
+zstyle ':vcs_info:*' check-for-changes true
 
 # }}}
 
@@ -111,21 +112,33 @@ unset idx idx_bright
 color_reset="%f%k"
 
 # Version Control System
-zstyle ':vcs_info:*' actionformats '%F{5}[%F{2}%b%F{3}|%F{1}%a%F{5}]%f'
-zstyle ':vcs_info:*' formats '%F{5}[%F{2}%b%F{5}]%f'
-branch_fmt="%F{${bright_green}}%F{${black}}%K{${bright_green}} %b  %f"
+branch_fmt="%F{_GIT_BRANCH_PROMPT_COLOR_}%F{${black}}%K{_GIT_BRANCH_PROMPT_COLOR_} %c%u %b  %f"
 action_fmt="%F{${red}}%F{${black}}%K{${red}} %a "
 
+zstyle ':vcs_info:*' unstagedstr "●"
+zstyle ':vcs_info:*' stagedstr "✚"
 zstyle ':vcs_info:*' formats "${branch_fmt}"
 zstyle ':vcs_info:*' actionformats "${action_fmt}${branch_fmt}"
 zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{3}%r'
 
 unset branch_fmt action_fmt
 
+git_branch_prompt_color() {
+  local STATUS=''
+  STATUS=$(command git status --porcelain --untracked-files=no 2> /dev/null | tail -n1)
+
+  if [[ -n "$STATUS" ]]; then
+    echo "${bright_yellow}"
+  else
+    echo "${bright_green}"
+  fi
+}
+
 vcs_info_wrapper() {
     vcs_info
     if [ -n "$vcs_info_msg_0_" ]; then
-        echo "${vcs_info_msg_0_}"
+        # Hack to remove double spaces when there are no changes
+        echo "${${vcs_info_msg_0_/  / }//_GIT_BRANCH_PROMPT_COLOR_/$(git_branch_prompt_color)}"
     fi
 }
 
