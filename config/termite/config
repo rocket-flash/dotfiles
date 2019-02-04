@@ -4,7 +4,7 @@
 bold_is_bright = false
 #clickable_url = true
 #dynamic_title = true
-font = Source Code Pro 10
+font = Input Mono 10
 #fullscreen = true
 maximized = true
 #icon_name = terminal
@@ -34,7 +34,7 @@ urgent_on_bell = false
 #modify_other_keys = false
 
 # set size hints for the window
-size_hints = true
+#size_hints = false
 
 # "off", "left" or "right"
 #scrollbar = off
