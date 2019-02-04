@@ -15,6 +15,7 @@ fi
 # }}}
 
 # Modules Initializing {{{
+
 fpath=("$HOME/.local/share/zsh/completions" $fpath)
 
 autoload -U compinit promptinit
@@ -129,10 +130,10 @@ nvm_info() {
 vi_mode_info() {
     case "${KEYMAP:-main}" in
         main|viins)
-            echo "%F{${bright_green}}%F{${black}}%K{${bright_green}} INSERT "
+            echo "%F{${black}}%K{${bright_green}} I %K{${black}}%F{${bright_green}}"
             ;;
         vicmd)
-            echo "%F{${bright_red}}%F{${black}}%K{${bright_red}} NORMAL "
+            echo "%F{${black}}%K{${bright_red}} N %K{${black}}%F{${bright_red}}"
             ;;
         *)
             echo "N/A"
@@ -147,27 +148,21 @@ build_ps1() {
         c_host="${bright_green}"
     fi
 
-    c_base="${black}"
-    c_dir="${bright_green}"
-    c_success="${bright_green}"
-    c_warn="${bright_yellow}"
-    c_err="${bright_red}"
+    #p_exit_code="%(?.%F{${bright_green}}✔.%F{${bright_red}}✘) "
+    p_exit_code="%(?..%F{${red}}✘ )"
+    p_root_warning="%(!.%F{${bright_yellow}}⚡ .)"
 
-    #p_exit_code="%(?.%F{${c_success}}✔.%F{${c_err}}✘) "
-    p_exit_code="%(?..%F{${c_err}}✘ )"
-    p_root_warning="%(!.%F{${c_warn}}⚡.)"
-
-    p_host="%F{${c_host}}%n@%m "
-    p_sep1="%K{${c_dir}}%F{${black}} "
+    p_host="%K{${black}}%F{${c_host}}%n@%m "
+    p_sep1="%K{${bright_green}}%F{${black}} "
     p_directory="%1~ "
-    p_sep2="%k%F{${c_dir}} "
+    p_sep2="%k%F{${bright_green}} "
 
-    echo "%B%K{${c_base}}${p_exit_code}${p_root_warning}${p_host}${p_sep1}${p_directory}${p_sep2}${color_reset}%b"
+    echo "%K{${black}}"'$(vi_mode_info)'" ${p_exit_code}${p_host}${p_root_warning}${p_sep1}${p_directory}${p_sep2}${color_reset}"
 }
 
 PS1="$(build_ps1)"
 PS2='> '
-RPROMPT='$(nvm_info)$(vcs_info_wrapper)%B$(vi_mode_info)'"${color_reset}%b"
+RPROMPT='$(nvm_info)$(vcs_info_wrapper)'
 
 function zle-keymap-select {
     zle reset-prompt
