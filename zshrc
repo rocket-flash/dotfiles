@@ -92,10 +92,6 @@ zstyle ':completion:*' special-dirs true
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
 # Version Control System
-zstyle ':vcs_info:*' actionformats '%F{5}[%F{2}%b%F{3}|%F{1}%a%F{5}]%f '
-zstyle ':vcs_info:*' formats '%F{5}[%F{2}%b%F{5}]%f '
-zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{3}%r'
-
 zstyle ':vcs_info:*' enable git svn
 
 # }}}
@@ -114,10 +110,22 @@ done
 unset idx idx_bright
 color_reset="%f%k"
 
+# Version Control System
+zstyle ':vcs_info:*' actionformats '%F{5}[%F{2}%b%F{3}|%F{1}%a%F{5}]%f'
+zstyle ':vcs_info:*' formats '%F{5}[%F{2}%b%F{5}]%f'
+branch_fmt="%F{${bright_green}}%F{${black}}%K{${bright_green}} %b  %f"
+action_fmt="%F{${red}}%F{${black}}%K{${red}} %a "
+
+zstyle ':vcs_info:*' formats "${branch_fmt}"
+zstyle ':vcs_info:*' actionformats "${action_fmt}${branch_fmt}"
+zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{3}%r'
+
+unset branch_fmt action_fmt
+
 vcs_info_wrapper() {
     vcs_info
     if [ -n "$vcs_info_msg_0_" ]; then
-        echo "%{$fg[grey]%}${vcs_info_msg_0_}%{$reset_color%}$del"
+        echo "${vcs_info_msg_0_}"
     fi
 }
 
