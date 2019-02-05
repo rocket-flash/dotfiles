@@ -148,6 +148,13 @@ nvm_info() {
     fi
 }
 
+venv_info() {
+    [[ -z "$VIRTUAL_ENV" ]] && return
+
+    # Strip out the path and just leave the env name
+    echo "(${VIRTUAL_ENV##*/}) "
+}
+
 vi_mode_info() {
     case "${KEYMAP:-main}" in
         main|viins)
@@ -173,12 +180,12 @@ build_ps1() {
     p_exit_code="%(?..%F{${red}}✘ )"
     p_root_warning="%(!.%F{${bright_yellow}}⚡ .)"
 
-    p_host="%K{${black}}%F{${c_host}}%n@%m "
+    p_host="%K{${black}}%F{${c_host}}"'$(venv_info)'"%n@%m "
     p_sep1="%K{${bright_green}}%F{${black}} "
     p_directory="%1~ "
     p_sep2="%k%F{${bright_green}} "
 
-    echo "%K{${black}}"'$(vi_mode_info)'" ${p_exit_code}${p_host}${p_root_warning}${p_sep1}${p_directory}${p_sep2}${color_reset}"
+    echo '$(vi_mode_info)'" ${p_exit_code}${p_host}${p_root_warning}${p_sep1}${p_directory}${p_sep2}${color_reset}"
 }
 
 PS1="$(build_ps1)"
@@ -262,6 +269,9 @@ export CFLAGS="-O2 -march=native -fstack-protector-strong"
 
 # Remove / from WORDCHARS, ie. make / a word delimiter
 export WORDCHARS=${WORDCHARS/\//}
+
+# Don't prepend virtual env name to PS1
+export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 # }}}
 
