@@ -40,8 +40,8 @@ setopt pushd_ignore_dups # Ignore duplicates when pushing directory on the stack
 # History {{{
 
 HISTFILE=~/.zsh_history
-HISTSIZE=5000
-SAVEHIST=5000
+HISTSIZE=25000
+SAVEHIST=25000
 
 setopt INC_APPEND_HISTORY   # Write to the history file immediately, not when the shell exits.
 #setopt SHARE_HISTORY       # Share history between all sessions.
