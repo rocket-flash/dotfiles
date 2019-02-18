@@ -36,6 +36,7 @@ endif
 "Plug 'NLKNguyen/papercolor-theme'
 "Plug 'alem0lars/vim-colorscheme-darcula'
 Plug 'jnurmine/Zenburn'
+Plug 'arcticicestudio/nord-vim'
 
 call plug#end()
 
@@ -185,7 +186,11 @@ if substitute(system('tput colors'), '\n', '', '') == "256"
     endif
 
     set bg=dark
-    colorscheme zenburn
+    if &diff
+        colorscheme nord
+    else
+        colorscheme zenburn
+    endif
 else
     colorscheme desert
 endif
