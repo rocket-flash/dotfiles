@@ -17,6 +17,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'easymotion/vim-easymotion'
+Plug 'ryanoasis/vim-devicons'
 
 if !&diff
     Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --rust-completer' }
@@ -29,6 +30,8 @@ if !&diff
     if has('nvim') || (v:version >= 800)
         Plug 'w0rp/ale'
     endif
+
+    Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 endif
 
 " Colorschemes
