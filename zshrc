@@ -171,7 +171,7 @@ vi_mode_info() {
 
 build_ps1() {
     if [[ -n "$SSH_CLIENT" ]]; then
-        c_host="${bright_magenta}"
+        c_host="${bright_yellow}"
     else
         c_host="${bright_green}"
     fi
