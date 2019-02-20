@@ -5,7 +5,6 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'scrooloose/nerdcommenter'
-Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'mhinz/vim-signify'
 Plug 'nathanaelkane/vim-indent-guides'
@@ -23,6 +22,7 @@ if !&diff
     Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --rust-completer' }
     Plug 'fholgado/minibufexpl.vim'
     Plug 'scrooloose/nerdtree'
+    Plug 'Xuyuanp/nerdtree-git-plugin'
     Plug 'junegunn/vim-peekaboo'
     Plug 'majutsushi/tagbar'
 
