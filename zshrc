@@ -175,17 +175,16 @@ build_ps1() {
     else
         c_host="${bright_green}"
     fi
+    c_main="%(!.${bright_red}.${bright_green})"
 
-    #p_exit_code="%(?.%F{${bright_green}}✔.%F{${bright_red}}✘) "
     p_exit_code="%(?..%F{${red}}✘ )"
-    p_root_warning="%(!.%F{${bright_yellow}}⚡ .)"
 
     p_host="%K{${black}}%F{${c_host}}"'$(venv_info)'"%n@%m "
-    p_sep1="%K{${bright_green}}%F{${black}} "
+    p_sep1="%K{${c_main}}%F{${black}} "
     p_directory="%1~ "
-    p_sep2="%k%F{${bright_green}} "
+    p_sep2="%k%F{${c_main}} "
 
-    echo '$(vi_mode_info)'" ${p_exit_code}${p_host}${p_root_warning}${p_sep1}${p_directory}${p_sep2}${color_reset}"
+    echo '$(vi_mode_info)'" ${p_exit_code}${p_host}${p_sep1}${p_directory}${p_sep2}${color_reset}"
 }
 
 PS1="$(build_ps1)"
