@@ -4,7 +4,7 @@
 bold_is_bright = false
 #clickable_url = true
 #dynamic_title = true
-font = Hack Nerd Font 10
+font = Input Mono Nerd Font Mono 10
 #fullscreen = true
 maximized = true
 #icon_name = terminal
