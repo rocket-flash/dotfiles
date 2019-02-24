@@ -55,6 +55,10 @@ for file in "${DOTFILES_DIR}"/config/*; do
     create_link "$HOME/.config/$(basename "$file")" "$file"
 done
 
+for file in "${DOTFILES_DIR}"/fonts/*; do
+    create_link "$HOME/.fonts/$(basename "$file")" "$file"
+done
+
 for file in "${DOTFILES_DIR}"/usr/bin/*; do
     create_link "$HOME/usr/bin/$(basename "$file")" "$file"
 done
