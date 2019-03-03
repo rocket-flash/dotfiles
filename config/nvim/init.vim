@@ -107,8 +107,6 @@ inoremap <right> <nop>
 nnoremap H ^
 nnoremap L $
 
-" Disable macro recording or whatever
-noremap q <nop>
 " Disable going in ex mode
 noremap Q <nop>
 
