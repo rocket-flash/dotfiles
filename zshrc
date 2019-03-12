@@ -60,6 +60,31 @@ installed() {
     return $?
 }
 
+contains() {
+    string="$1"
+    substring="$2"
+    if test "${string#*$substring}" != "$string"
+    then
+        return 0    # $substring is in $string
+    else
+        return 1    # $substring is not in $string
+    fi
+}
+
+load_vcs_info() {
+    vcs_info
+
+    if contains "${vcs_info_msg_0_}" "|"; then
+        vcs_action_msg="$(cut -d '|' -f1 <<< ${vcs_info_msg_0_})"
+        # Hack to remove leading space when there are no changes
+        vcs_branch_msg="$(cut -d '|' -f2 <<< ${vcs_info_msg_0_} | awk '{$1=$1};1')"
+    else
+        vcs_action_msg=""
+        # Hack to remove leading space when there are no changes
+        vcs_branch_msg="$(awk '{$1=$1};1' <<< ${vcs_info_msg_0_})"
+    fi
+}
+
 # }}}
 
 # Key Bindings {{{
@@ -99,7 +124,30 @@ zstyle ':vcs_info:*' check-for-changes true
 
 # Prompt {{{
 
-# Color shortcuts
+# Vars {{{
+
+CURRENT_BG=''
+SEP=''
+RSEP=''
+GIT_UNSTAGED="●"
+GIT_STAGED="✚"
+
+# Version Control System
+branch_fmt="%c%u %b  "
+action_fmt="%a"
+
+zstyle ':vcs_info:*' unstagedstr "${GIT_UNSTAGED}"
+zstyle ':vcs_info:*' stagedstr "${GIT_STAGED}"
+zstyle ':vcs_info:*' formats "${branch_fmt}"
+zstyle ':vcs_info:*' actionformats "${action_fmt}|${branch_fmt}"
+zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{3}%r'
+
+unset branch_fmt action_fmt
+
+# }}}
+
+# Color shortcuts {{{
+
 let idx=0
 let idx_bright=8
 for color in black red green yellow blue magenta cyan white; do
@@ -111,57 +159,38 @@ done
 unset idx idx_bright
 color_reset="%f%k"
 
-# Version Control System
-branch_fmt="%F{_GIT_BRANCH_PROMPT_COLOR_}%F{${black}}%K{_GIT_BRANCH_PROMPT_COLOR_} %c%u %b  %f"
-action_fmt="%F{${red}}%F{${black}}%K{${red}} %a "
+# }}}
 
-zstyle ':vcs_info:*' unstagedstr "●"
-zstyle ':vcs_info:*' stagedstr "✚"
-zstyle ':vcs_info:*' formats "${branch_fmt}"
-zstyle ':vcs_info:*' actionformats "${action_fmt}${branch_fmt}"
-zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{3}%r'
+# Left Prompt {{{
 
-unset branch_fmt action_fmt
-
-git_branch_prompt_color() {
-  local STATUS=''
-  STATUS=$(command git status --porcelain --untracked-files=no 2> /dev/null | tail -n1)
-
-  if [[ -n "$STATUS" ]]; then
-    echo "${bright_yellow}"
-  else
-    echo "${bright_green}"
-  fi
-}
-
-vcs_info_wrapper() {
-    vcs_info
-    if [ -n "$vcs_info_msg_0_" ]; then
-        # Hack to remove double spaces when there are no changes
-        echo "${${vcs_info_msg_0_/  / }//_GIT_BRANCH_PROMPT_COLOR_/$(git_branch_prompt_color)}"
+prompt_segment() {
+    if [[ ${CURRENT_BG} != '' && ${CURRENT_BG} != ${1} ]]; then
+        sep=" %K{${1}}%F{${CURRENT_BG}}$SEP%F{$2}"
+    else
+        sep="%K{${1}}%F{${2}}"
     fi
+
+    CURRENT_BG=$1
+
+    echo -n "${sep} $3"
 }
 
-nvm_info() {
-    if [ -n "$NVM_BIN" ]; then
-        echo "[node $(basename $(dirname $NVM_BIN))] "
+prompt_end() {
+    if [[ -n "$CURRENT_BG" ]]; then
+        echo -n " %k%F{$CURRENT_BG}${SEP}%f "
+    else
+        echo -n "%k%f"
     fi
+    CURRENT_BG=''
 }
 
-venv_info() {
-    [[ -z "$VIRTUAL_ENV" ]] && return
-
-    # Strip out the path and just leave the env name
-    echo "(${VIRTUAL_ENV##*/}) "
-}
-
-vi_mode_info() {
+prompt_vi_mode() {
     case "${KEYMAP:-main}" in
         main|viins)
-            echo "%F{${black}}%K{${bright_green}} I %K{${black}}%F{${bright_green}}"
+            prompt_segment ${bright_green} ${black} "I"
             ;;
         vicmd)
-            echo "%F{${black}}%K{${bright_red}} N %K{${black}}%F{${bright_red}}"
+            prompt_segment ${bright_red} ${black} "N"
             ;;
         *)
             echo "N/A"
@@ -169,27 +198,103 @@ vi_mode_info() {
     esac
 }
 
-build_ps1() {
-    if [[ -n "$SSH_CLIENT" ]]; then
-        c_host="${bright_yellow}"
-    else
-        c_host="${bright_green}"
-    fi
-    c_main="%(!.${bright_red}.${bright_green})"
+prompt_status() {
+    local -a _status
+    [[ $RETVAL -ne 0 ]] && _status+="✘"
 
-    p_exit_code="%(?..%F{${red}}✘ )"
-
-    p_host="%K{${black}}%F{${c_host}}"'$(venv_info)'"%n@%m "
-    p_sep1="%K{${c_main}}%F{${black}} "
-    p_directory="%1~ "
-    p_sep2="%k%F{${c_main}} "
-
-    echo '$(vi_mode_info)'" ${p_exit_code}${p_host}${p_sep1}${p_directory}${p_sep2}${color_reset}"
+    [[ -n "${_status}" ]] && prompt_segment ${black} ${red} "${_status}"
 }
 
-PS1="$(build_ps1)"
+prompt_host() {
+    if [[ -n "$SSH_CLIENT" ]]; then
+        fg="${bright_yellow}"
+    else
+        fg="${bright_green}"
+    fi
+
+    prompt_segment ${black} ${fg} "%n@%m"
+}
+
+prompt_dir() {
+    fg="%(!.${bright_red}.${bright_green})"
+    prompt_segment ${fg} ${black} "%1~"
+}
+
+build_ps1() {
+    RETVAL=$?
+
+    prompt_vi_mode
+    prompt_status
+    prompt_host
+    prompt_dir
+    prompt_end
+}
+
+PS1='$(build_ps1)'
 PS2='> '
-RPROMPT='$(nvm_info)$(vcs_info_wrapper)'
+
+# }}}
+
+# Right Prompt {{{
+
+rprompt_segment() {
+    if [[ ${CURRENT_BG} == '' ]]; then
+        sep="%F{${1}}${RSEP}%K{${1}}%F{${2}}"
+    elif [[ ${CURRENT_BG} != ${1} ]]; then
+        sep=" %F{${1}}${RSEP}%K{${1}}%F{${2}}"
+    else
+        sep="%K{${1}}%F{${2}}"
+    fi
+
+    CURRENT_BG=$1
+
+    echo -n "${sep} $3"
+}
+
+rprompt_end() {
+    echo -n " %k%f"
+    CURRENT_BG=''
+}
+
+prompt_git_action() {
+    [[ -n "${vcs_action_msg}" ]] && rprompt_segment ${red} ${black} "${vcs_action_msg}"
+}
+
+prompt_git_branch() {
+    [[ -z "${vcs_branch_msg}" ]] && return
+    local bg
+    if contains "${vcs_branch_msg}" "${GIT_STAGED}" || contains "${vcs_branch_msg}" "${GIT_UNSTAGED}"; then
+        bg="${bright_yellow}"
+    else
+        bg="${bright_green}"
+    fi
+
+    rprompt_segment ${bg} ${black} "${vcs_branch_msg}"
+}
+
+prompt_venv() {
+    # Strip out the path and just leave the env name
+    [[ -n "$VIRTUAL_ENV" ]] && rprompt_segment ${magenta} ${black} "${VIRTUAL_ENV##*/}"
+}
+
+prompt_nvm() {
+    # extract dirname -> basename
+    [[ -n "$NVM_BIN" ]] && rprompt_segment ${black} ${magenta} "node ${${NVM_BIN%/*}##*/}"
+}
+
+build_rprompt() {
+    load_vcs_info
+
+    prompt_nvm
+    prompt_venv
+    prompt_git_action
+    prompt_git_branch
+    rprompt_end
+}
+
+RPROMPT='$(build_rprompt)'
+
+# }}}
 
 function zle-keymap-select {
     zle reset-prompt
