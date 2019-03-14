@@ -81,17 +81,23 @@ function _zsh_tmux_plugin_run() {
     # We have other arguments, just run them
     if [[ -n "$@" ]]; then
         \tmux -L "$ZSH_TMUX_SOCKET_NAME" $@
+        ret=$?
         _zsh_tmux_cleanup
+        return $ret
     # Try to connect to an existing session.
     elif [[ "$ZSH_TMUX_AUTOCONNECT" == "true" ]]; then
         \tmux -L "$ZSH_TMUX_SOCKET_NAME" attach || \tmux -L "$ZSH_TMUX_SOCKET_NAME" new-session
+        ret=$?
         _zsh_tmux_cleanup
         _zsh_tmux_is_autoquit && exit
+        return $ret
     # Just run tmux, fixing the TERM variable if requested.
     else
         \tmux -L "$ZSH_TMUX_SOCKET_NAME"
+        ret=$?
         _zsh_tmux_cleanup
         _zsh_tmux_is_autoquit && exit
+        return $ret
     fi
 }
 
