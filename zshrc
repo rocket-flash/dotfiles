@@ -129,8 +129,8 @@ zstyle ':vcs_info:*' check-for-changes true
 CURRENT_BG=''
 SEP=''
 RSEP=''
-GIT_UNSTAGED="●"
-GIT_STAGED="✚"
+GIT_UNSTAGED="✘"
+GIT_STAGED="✔"
 
 # Version Control System
 branch_fmt="%c%u %b  "
