@@ -1,0 +1,46 @@
+#! /bin/bash -eu
+
+info()    { printf "\\e[32m[INFO]\\e[0m    %s\\n" "$*" >&2 ; }
+info2()   { printf "\\e[32m[INFO]\\e[0m    %s"    "$*" >&2 ; }
+fatal()   { printf "\\e[35m[FATAL]\\e[0m   %s\\n" "$*" >&2 ; exit 1 ; }
+
+IMAGE="blaiseio/acestream:1.1.1"
+PORT="6878"
+
+if [ $# -ne 1 ]; then
+    fatal "Usage: $0 stream_id"
+fi
+
+stream_id="$1"
+
+export PATH="$PATH:/usr/local/bin"
+
+if ! docker ps &> /dev/null; then
+    fatal "Docker not running"
+fi
+
+# Start acestream server if not running
+if ! nc -z 127.0.0.1 "$PORT" &> /dev/null; then
+    info2 "Starting acestream server"
+    docker run --rm --detach \
+        --publish "$PORT:$PORT" \
+        --name="acestream-server" "$IMAGE" 1> /dev/null
+
+    # Wait until acestream server runs
+    until curl "http://127.0.0.1:${PORT}/webui/api/service?method=get_version" &> /dev/null; do
+        printf "."
+        sleep 0.5
+    done
+    printf "\n"
+fi
+info "Acestream server is running"
+
+# Open stream in VLC
+stream="http://127.0.0.1:${PORT}/ace/getstream?id=${stream_id}"
+
+info "Opening stream: $stream"
+mpv "${stream}" || true
+
+info "Stopping acestream server"
+docker stop "acestream-server" > /dev/null
+info "Done"
