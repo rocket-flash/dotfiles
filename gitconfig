@@ -23,6 +23,7 @@
 	rc = rebase --continue
 	m = difftool -y
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset %C(bold magenta)(%G?)%Creset' --abbrev-commit
+	cia = commit --amend
 	fixup = commit --amend --no-edit
 	edit = "!vim `git ls-files -m`"
 	pf = push --force-with-lease
