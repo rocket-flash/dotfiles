@@ -187,11 +187,7 @@ if substitute(system('tput colors'), '\n', '', '') == "256"
     endif
 
     set bg=dark
-    if &diff
-        colorscheme nord
-    else
-        colorscheme zenburn
-    endif
+    colorscheme zenburn
 else
     colorscheme desert
 endif
