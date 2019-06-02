@@ -44,6 +44,7 @@ function create_link() {
 }
 
 [[ -d "$HOME/.config" ]] || mkdir "$HOME/.config"
+[[ -d "$HOME/.fonts" ]] || mkdir "$HOME/.fonts"
 [[ -d "$HOME/usr/bin" ]] || mkdir -p "$HOME/usr/bin"
 [[ -d "$HOME/usr/lib" ]] || mkdir -p "$HOME/usr/lib"
 
