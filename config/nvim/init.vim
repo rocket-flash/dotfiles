@@ -30,11 +30,6 @@ if !&diff
     if has('nvim') || has('patch-8.0-1453')
         Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
     endif
-
-    if has('nvim') || (v:version >= 800)
-        Plug 'w0rp/ale'
-    endif
-
 endif
 
 " Colorschemes
@@ -236,22 +231,6 @@ let g:indent_guides_enable_on_vim_startup = 1
 let g:auto_save = 1  " enable AutoSave on Vim startup
 let g:auto_save_in_insert_mode = 0  " do not save while in insert mode
 let g:auto_save_silent = 1  " do not display the auto-save notification
-" }}}
-
-" Ale {{{
-nnoremap <leader>ad :ALEDisable<CR>
-nnoremap <leader>ae :ALEEnable<CR>
-nnoremap <leader>at :ALEToggle<CR>
-nmap <silent> <C-Up> <Plug>(ale_previous_wrap)
-nmap <silent> <C-Down> <Plug>(ale_next_wrap)
-
-let g:ale_set_signs = 1
-let g:ale_lint_on_text_changed = 'normal'
-let g:ale_lint_on_insert_leave = 1
-let g:ale_lint_delay = 0
-
-let g:ale_sh_shellcheck_options = '-x'  " Allow source outside of FILES
-let g:ale_python_flake8_options = '--max-line-length 120'
 " }}}
 
 " EasyAlign {{{
