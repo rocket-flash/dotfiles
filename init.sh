@@ -85,7 +85,7 @@ if installed vim; then
     if [ ! -e "$HOME/.config/nvim/autoload/plug.vim" ]; then
         curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
         # TERM workaround to avoid loading non existing color scheme
-        TERM=xterm vim +PlugInstall +qall
+        TERM=xterm vim -S "$DOTFILES_DIR/vimplug.lock" +qall
     fi
 fi
 
