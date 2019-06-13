@@ -197,38 +197,45 @@ if &diff
     set diffopt+=iwhite " Ignore changes in amount of white space.
 endif
 
-" --- PLUGINS ---
-" Tagbar
+" Plugin Configurations {{{
+
+" Tagbar {{{
 nmap <leader>l :TagbarToggle<CR>
 imap <leader>l <ESC>:TagbarToggle<CR>a
+" }}}
 
-" MiniBufExpl
+" MiniBufExpl {{{
 let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplModSelTarget = 1
 let g:miniBufExplForceSyntaxEnable = 1
+" }}}
 
-" NERDTree
+" NERDTree {{{
 nnoremap <C-n> :NERDTreeToggle<CR>
 nnoremap <leader>nn :NERDTreeToggle<CR>
 nnoremap <leader>nc :NERDTreeCWD<CR>
 nnoremap <leader>nf :NERDTreeFind<CR>
+"}}}
 
-" vim-better-whitespace
+" vim-better-whitespace {{{
 nnoremap <leader>ws :StripWhitespace<CR>
+" }}}
 
-" Indent Guide
+" Indent Guide {{{
 let g:indent_guides_guide_size = 1
 let g:indent_guides_start_level = 2
 let g:indent_guides_enable_on_vim_startup = 1
+" }}}
 
-" vim-auto-save
+" vim-auto-save {{{
 let g:auto_save = 1  " enable AutoSave on Vim startup
 let g:auto_save_in_insert_mode = 0  " do not save while in insert mode
 let g:auto_save_silent = 1  " do not display the auto-save notification
+" }}}
 
-" Ale
+" Ale {{{
 nnoremap <leader>ad :ALEDisable<CR>
 nnoremap <leader>ae :ALEEnable<CR>
 nnoremap <leader>at :ALEToggle<CR>
@@ -242,16 +249,18 @@ let g:ale_lint_delay = 0
 
 let g:ale_sh_shellcheck_options = '-x'  " Allow source outside of FILES
 let g:ale_python_flake8_options = '--max-line-length 120'
+" }}}
 
-" EasyAlign
+" EasyAlign {{{
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
 xmap gs :EasyAlign *\ <CR>
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+" }}}
 
-" FZF
+" FZF {{{
 nnoremap <leader>fh :FZF ~<CR>
 nnoremap <leader>f. :FZF <CR>
 nnoremap <leader>ft :Tags <CR>
@@ -275,8 +284,9 @@ let g:fzf_colors =
   \ 'marker':  ['fg', 'Keyword'],
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
+" }}}
 
-" Airline
+" Airline {{{
 set noshowmode
 set laststatus=2
 let g:airline_theme='zenburn'
@@ -289,9 +299,15 @@ let g:airline_right_alt_sep = '<'
 let g:airline_section_z="%#__accent_bold#%4l/%L%#__restore__# :%3v"
 
 let g:airline#extensions#branch#enabled = 1
+" }}}
 
-" YouCompleteMe
+" YouCompleteMe {{{
 let g:ycm_global_ycm_extra_conf = '~/.ycm.conf.py'
 let g:ycm_autoclose_preview_window_after_completion = 1
 map <leader>gf  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 map <leader>gr  :YcmCompleter GoToReferences<CR>
+" }}}
+
+" }}}
+
+" vim: foldmethod=marker
