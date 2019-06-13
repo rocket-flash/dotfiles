@@ -24,9 +24,12 @@ APPS=(
     'colordiff'
     'fd'
     'fzf'
+    'node'
+    'npm'
     'rg'
     'tmux'
     'xsel'
+    'yarn'
 )
 
 DOTFILES_DIR="$(readlink -f "$(dirname "${BASH_SOURCE[0]}")")"
