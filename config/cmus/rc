@@ -8,6 +8,7 @@ set mouse=false
 set continue=true
 set repeat=true
 set resume=true
+set shuffle=false
 
 # Formatting
 set format_current= %a - %l - %{?D?%D.}%02n. %t%= %y 
