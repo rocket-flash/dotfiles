@@ -223,20 +223,10 @@ let g:indent_guides_guide_size = 1
 let g:indent_guides_start_level = 2
 let g:indent_guides_enable_on_vim_startup = 1
 
-" vim-easytag
-let g:easytags_async = 1
-let g:easytags_file = '~/.vim/gtags'
-let g:easytags_by_filetype = '~/.vim/tags/'
-
 " vim-auto-save
 let g:auto_save = 1  " enable AutoSave on Vim startup
 let g:auto_save_in_insert_mode = 0  " do not save while in insert mode
 let g:auto_save_silent = 1  " do not display the auto-save notification
-
-" GitGutter
-nnoremap <leader>gp :GitGutterPrevHunk<CR>
-nnoremap <leader>gn :GitGutterNextHunk<CR>
-nnoremap <leader>gr :GitGutterUndoHunk<CR>
 
 " Ale
 nnoremap <leader>ad :ALEDisable<CR>
