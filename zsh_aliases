@@ -32,8 +32,8 @@ alias rar='unrar'
 alias rf='readlink -f'
 
 if installed yay; then
-    alias up='yay -Syu'
-    alias pm='yay'
+    alias up='yay -Syu --removemake'
+    alias pm='yay --removemake'
 elif installed pacman; then
     alias up='sudo pacman -Syu'
     alias pm='pacman'
