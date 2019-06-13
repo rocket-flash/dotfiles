@@ -20,18 +20,21 @@ Plug 'easymotion/vim-easymotion'
 Plug 'ryanoasis/vim-devicons'
 
 if !&diff
-    Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --rust-completer' }
     Plug 'fholgado/minibufexpl.vim'
     Plug 'scrooloose/nerdtree'
     Plug 'Xuyuanp/nerdtree-git-plugin'
+    Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
     Plug 'junegunn/vim-peekaboo'
     Plug 'majutsushi/tagbar'
+
+    if has('nvim') || has('patch-8.0-1453')
+        Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+    endif
 
     if has('nvim') || (v:version >= 800)
         Plug 'w0rp/ale'
     endif
 
-    Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 endif
 
 " Colorschemes
@@ -265,7 +268,7 @@ nnoremap <leader>fh :FZF ~<CR>
 nnoremap <leader>f. :FZF <CR>
 nnoremap <leader>ft :Tags <CR>
 nnoremap <leader>fl :Lines <CR>
-nnoremap <C-P> :FZF <CR>
+nnoremap <C-f> :FZF <CR>
 
 let g:fzf_layout = { 'right': '~30%' }
 
@@ -301,11 +304,69 @@ let g:airline_section_z="%#__accent_bold#%4l/%L%#__restore__# :%3v"
 let g:airline#extensions#branch#enabled = 1
 " }}}
 
-" YouCompleteMe {{{
-let g:ycm_global_ycm_extra_conf = '~/.ycm.conf.py'
-let g:ycm_autoclose_preview_window_after_completion = 1
-map <leader>gf  :YcmCompleter GoToDefinitionElseDeclaration<CR>
-map <leader>gr  :YcmCompleter GoToReferences<CR>
+" Coc.nvim {{{
+let g:coc_global_extensions = [
+  \ 'coc-emoji',
+  \ 'coc-git',
+  \ 'coc-json',
+  \ 'coc-docker',
+  \ 'coc-sh',
+  \ 'coc-python',
+  \ 'coc-highlight',
+  \ 'coc-yaml'
+\ ]
+
+" Smaller updatetime for CursorHold & CursorHoldI
+set updatetime=300
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+" always show signcolumns
+set signcolumn=yes
+
+nnoremap <C-p> :CocCommand<CR>
+
+" Use `lp` and `ln` for navigate diagnostics
+nmap <silent> <C-Up> <Plug>(coc-diagnostic-prev)
+nmap <silent> <C-Down> <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> <leader>ld <Plug>(coc-definition)
+nmap <silent> <leader>lt <Plug>(coc-type-definition)
+nmap <silent> <leader>li <Plug>(coc-implementation)
+nmap <silent> <leader>lg <Plug>(coc-references)
+nmap <silent> <leader>lf <Plug>(coc-format)
+
+" Remap for rename current word
+nmap <leader>lr <Plug>(coc-rename)
+
+" Use K for show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+ if &filetype == 'vim'
+   execute 'h '.expand('<cword>')
+ else
+   call CocAction('doHover')
+ endif
+endfunction
+
+inoremap <silent><expr> <TAB>
+     \ pumvisible() ? "\<C-n>" :
+     \ <SID>check_back_space() ? "\<TAB>" :
+     \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
 " }}}
 
 " }}}
