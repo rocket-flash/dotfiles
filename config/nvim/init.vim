@@ -287,11 +287,12 @@ let g:airline#extensions#branch#enabled = 1
 let g:coc_global_extensions = [
   \ 'coc-emoji',
   \ 'coc-git',
-  \ 'coc-json',
   \ 'coc-docker',
-  \ 'coc-sh',
+  \ 'coc-ccls',
+  \ 'coc-json',
   \ 'coc-python',
-  \ 'coc-highlight',
+  \ 'coc-rls',
+  \ 'coc-sh',
   \ 'coc-yaml'
 \ ]
 
@@ -340,12 +341,15 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
+autocmd CursorHold * silent! call CocActionAsync('highlight')
 " }}}
 
 " }}}
