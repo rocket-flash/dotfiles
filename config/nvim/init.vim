@@ -247,9 +247,11 @@ nnoremap <leader>fh :FZF ~<CR>
 nnoremap <leader>f. :FZF <CR>
 nnoremap <leader>ft :Tags <CR>
 nnoremap <leader>fl :Lines <CR>
+nnoremap <leader>fg :Rg <CR>
+nnoremap <leader>m :History<CR>
 nnoremap <C-f> :FZF <CR>
 
-let g:fzf_layout = { 'right': '~30%' }
+let g:fzf_layout = { 'window': 'enew' }
 
 " Match vim colorscheme
 let g:fzf_colors =
@@ -296,6 +298,8 @@ let g:coc_global_extensions = [
   \ 'coc-yaml'
 \ ]
 
+" Better display for messages
+set cmdheight=2
 " Smaller updatetime for CursorHold & CursorHoldI
 set updatetime=300
 " don't give |ins-completion-menu| messages.
