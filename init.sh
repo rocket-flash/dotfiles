@@ -46,6 +46,13 @@ function create_link() {
     ln -s "$2" "$1"
 }
 
+function copy_file() {
+    [[ -L "$1" ]] && rm "$1"
+    [[ -e "$1" ]] && mv "$1" "${1}.bak"
+
+    cp "$2" "$1"
+}
+
 [[ -d "$HOME/.config" ]] || mkdir "$HOME/.config"
 [[ -d "$HOME/.fonts" ]] || mkdir "$HOME/.fonts"
 [[ -d "$HOME/usr/bin" ]] || mkdir -p "$HOME/usr/bin"
@@ -60,7 +67,7 @@ for file in "${DOTFILES_DIR}"/config/*; do
 done
 
 for file in "${DOTFILES_DIR}"/fonts/*; do
-    create_link "$HOME/.fonts/$(basename "$file")" "$file"
+    copy_file "$HOME/.fonts/$(basename "$file")" "$file"
 done
 
 for file in "${DOTFILES_DIR}"/usr/bin/*; do
