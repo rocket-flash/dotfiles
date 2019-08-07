@@ -21,4 +21,4 @@ set format_treewin=  %y. %l
 set format_treewin_artist=%{?A?%A?%a}
 
 # Notifications
-set status_display_program=cmus-notify
+set status_display_program=~/usr/bin/cmus-notify
