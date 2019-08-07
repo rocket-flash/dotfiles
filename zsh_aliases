@@ -30,7 +30,13 @@ alias hd='hexdump -C'
 alias dd='dd status=progress'
 alias rar='unrar'
 alias rf='readlink -f'
-alias f='xdg-open .'
+
+if installed xdg-open; then
+    alias open='xdg-open'
+elif installed exo-open; then
+    alias open='exo-open'
+fi
+alias f='open .'
 
 if installed yay; then
     alias up='yay -Syu --removemake'
