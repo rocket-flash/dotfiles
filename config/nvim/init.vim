@@ -320,6 +320,12 @@ nmap <silent> <leader>li <Plug>(coc-implementation)
 nmap <silent> <leader>lg <Plug>(coc-references)
 nmap <silent> <leader>lf <Plug>(coc-format)
 
+nmap <silent> <leader>gb :CocCommand git.showCommit<CR>
+nmap <silent> <leader>gi :CocCommand git.chunkInfo<CR>
+nmap <silent> <leader>gd :CocCommand git.diffCached<CR>
+nmap <silent> <leader>ga :CocCommand git.chunkStage<CR>
+nmap <silent> <leader>gr :CocCommand git.chunkUndo<CR>
+
 " Remap for rename current word
 nmap <leader>lr <Plug>(coc-rename)
 
