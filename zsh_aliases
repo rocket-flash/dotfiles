@@ -38,7 +38,10 @@ elif installed exo-open; then
 fi
 alias f='open .'
 
-if installed yay; then
+if installed pacaur; then
+    alias up='pacaur -Syu'
+    alias pm='pacaur'
+elif installed yay; then
     alias up='yay -Syu --removemake'
     alias pm='yay --removemake'
 elif installed pacman; then
