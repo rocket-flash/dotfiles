@@ -1,7 +1,12 @@
-#! /bin/bash
+#! /bin/bash -eu
 
 branches_gone=$(git branch -vv | awk '/: gone]/{print $1}')
-branches_merged=$(git branch --merged | sed -E 's/^ +//' | grep -E -v "^(\\*|master)")
+
+if [ $# -ge 1 ] && [ "$1" == "-a" ]; then
+    branches_merged=$(git branch --merged | sed -E 's/^ +//' | grep -E -v "^(\\*|master)")
+else
+    branches_merged=""
+fi
 
 if [ -z "${branches_gone}" ] && [ -z "${branches_merged}" ]; then
     echo "No branches to delete"
