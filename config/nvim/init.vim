@@ -285,6 +285,10 @@ let g:airline_section_z="%#__accent_bold#%4l/%L%#__restore__# :%3v"
 let g:airline#extensions#branch#enabled = 1
 " }}}
 
+" Peekaboo {{{
+let g:peekaboo_window='topleft new'
+" }}}
+
 " Coc.nvim {{{
 let g:coc_global_extensions = [
   \ 'coc-emoji',
@@ -358,8 +362,6 @@ inoremap <silent><expr> <c-space> coc#refresh()
 " Coc only does snippet and additional edit on confirm.
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
-" Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent! call CocActionAsync('highlight')
 " }}}
 
 " }}}
