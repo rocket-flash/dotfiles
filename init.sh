@@ -19,6 +19,14 @@ DOTFILES=(
     'zshrc'
 )
 
+DIRS=(
+    '.config'
+    '.fonts'
+    '.local/share'
+    'usr/bin'
+    'usr/lib'
+)
+
 APPS=(
     'cargo'
     'colordiff'
@@ -53,10 +61,9 @@ function copy_file() {
     cp "$2" "$1"
 }
 
-[[ -d "$HOME/.config" ]] || mkdir "$HOME/.config"
-[[ -d "$HOME/.fonts" ]] || mkdir "$HOME/.fonts"
-[[ -d "$HOME/usr/bin" ]] || mkdir -p "$HOME/usr/bin"
-[[ -d "$HOME/usr/lib" ]] || mkdir -p "$HOME/usr/lib"
+for dir in "${DIRS[@]}"; do
+    [[ -d "$HOME/${dir}" ]] || mkdir -p "$HOME/${dir}"
+done
 
 for file in "${DOTFILES[@]}"; do
     create_link "$HOME/.${file}" "$DOTFILES_DIR/${file}"
@@ -64,6 +71,10 @@ done
 
 for file in "${DOTFILES_DIR}"/config/*; do
     create_link "$HOME/.config/$(basename "$file")" "$file"
+done
+
+for file in "${DOTFILES_DIR}"/share/*; do
+    create_link "$HOME/.local/share/$(basename "$file")" "$file"
 done
 
 for file in "${DOTFILES_DIR}"/fonts/*; do

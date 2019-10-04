@@ -16,7 +16,7 @@ fi
 
 # Modules Initializing {{{
 
-fpath=("$HOME/.local/share/zsh/completions" $fpath)
+fpath=("$HOME/.zcompl" $fpath)
 
 autoload -U compinit promptinit
 autoload -Uz vcs_info
@@ -324,6 +324,14 @@ ssh-add -l > /dev/null || ssh-add
 
 # Source machine specific config
 [[ -f ~/.zsh.local ]] && source ~/.zsh.local
+
+# }}}
+
+# Plugins {{{
+
+for f in "${HOME}/.local/share/zsh/plugins"/*; do
+    . "$f"
+done
 
 # }}}
 
