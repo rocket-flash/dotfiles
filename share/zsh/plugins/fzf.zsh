@@ -1,6 +1,4 @@
-if [[ ! -d /usr/share/fzf ]]; then
-    return
-fi
+[[ -d /usr/share/fzf ]] || return
 
 . /usr/share/fzf/key-bindings.zsh
 . /usr/share/fzf/completion.zsh
