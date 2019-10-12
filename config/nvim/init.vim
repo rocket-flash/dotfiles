@@ -33,11 +33,7 @@ if !&diff
 endif
 
 " Colorschemes
-"Plug 'twerth/ir_black'
-"Plug 'NLKNguyen/papercolor-theme'
-"Plug 'alem0lars/vim-colorscheme-darcula'
 Plug 'jnurmine/Zenburn'
-Plug 'arcticicestudio/nord-vim'
 
 call plug#end()
 
