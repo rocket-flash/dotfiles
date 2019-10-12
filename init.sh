@@ -28,6 +28,7 @@ DIRS=(
 )
 
 APPS=(
+    'bat'
     'cargo'
     'colordiff'
     'fd'
