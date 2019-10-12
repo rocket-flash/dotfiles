@@ -37,22 +37,6 @@ setopt pushd_ignore_dups # Ignore duplicates when pushing directory on the stack
 
 # }}}
 
-# History {{{
-
-HISTFILE=~/.zsh_history
-HISTSIZE=25000
-SAVEHIST=25000
-
-setopt INC_APPEND_HISTORY   # Write to the history file immediately, not when the shell exits.
-#setopt SHARE_HISTORY       # Share history between all sessions.
-setopt HIST_IGNORE_DUPS     # Don't record an entry that was just recorded again.
-setopt HIST_IGNORE_ALL_DUPS # Delete old recorded entry if new entry is a duplicate.
-setopt HIST_IGNORE_SPACE    # Don't record an entry starting with a space.
-setopt HIST_SAVE_NO_DUPS    # Don't write duplicate entries in the history file.
-setopt HIST_REDUCE_BLANKS   # Remove superfluous blanks before recording entry.
-
-# }}}
-
 # Helper functions {{{
 
 installed() {
@@ -306,14 +290,6 @@ zle -N zle-keymap-select
 
 # }}}
 
-# SSH Agent {{{
-
-export SSH_AUTH_SOCK="/tmp/ssh-agent.${EUID}.socket"
-[[ -S "${SSH_AUTH_SOCK}" ]] || ssh-agent -s -a "${SSH_AUTH_SOCK}" > /dev/null
-ssh-add -l > /dev/null || ssh-add
-
-# }}}
-
 # Source extra files {{{
 
 [[ -f ~/.zsh_aliases ]] && . ~/.zsh_aliases
@@ -332,31 +308,6 @@ ssh-add -l > /dev/null || ssh-add
 for f in "${HOME}/.local/share/zsh/plugins"/*; do
     . "$f"
 done
-
-# }}}
-
-# FZF Config {{{
-
-if [[ -d /usr/share/fzf ]]; then
-    . /usr/share/fzf/key-bindings.zsh
-    . /usr/share/fzf/completion.zsh
-
-    # Show prompt on top
-    export FZF_DEFAULT_OPTS='--reverse'
-    # --files: List files that would be searched but do not search
-    # --follow: Follow symlinks
-    export FZF_DEFAULT_COMMAND='rg --files --follow 2>/dev/null'
-    export FZF_COMPLETION_TRIGGER='@@'
-    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-    export FZF_CTRL_T_OPTS="--tiebreak=end"
-
-    # Use ripgrep instead of the default find command for listing path candidates.
-    # - The first argument to the function ($1) is the base path to start traversal
-    # - See the source code (completion.{bash,zsh}) for the details.
-    function _fzf_compgen_path() {
-        rg --files --follow --glob '!Library/*' 2>/dev/null "$1" | sed 's@^\./@@'
-    }
-fi
 
 # }}}
 
