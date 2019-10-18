@@ -40,5 +40,5 @@ function aws-assume-role {
 [[ -d "$(dirname "${AWS_PROFILE_CACHE_FILE}")" ]] || mkdir -p "$(dirname "${AWS_PROFILE_CACHE_FILE}")"
 
 if [ -e "${AWS_PROFILE_CACHE_FILE}" ]; then
-    export AWS_PROFILE="$(cat "${AWS_PROFILE_CACHE_FILE}")"
+    export AWS_PROFILE="$(\cat "${AWS_PROFILE_CACHE_FILE}")"
 fi
