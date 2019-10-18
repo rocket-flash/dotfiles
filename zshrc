@@ -4,8 +4,7 @@
 # Profiling {{{
 
 # https://kev.inburke.com/kevin/profiling-zsh-startup-time/
-PROFILE_STARTUP=false
-if [[ "$PROFILE_STARTUP" == true ]]; then
+if [[ "${ZSH_PROFILE_STARTUP:-false}" == true ]]; then
     # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
     PS4=$'%D{%M.%S%.} %N:%i> '
     exec 3>&2 2>/tmp/startlog.$$
@@ -175,7 +174,7 @@ fi
 
 unset -f installed
 
-if [[ "$PROFILE_STARTUP" == true ]]; then
+if [[ "${ZSH_PROFILE_STARTUP:-false}" == true ]]; then
     unsetopt xtrace
     exec 2>&3 3>&-
 fi
