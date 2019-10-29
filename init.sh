@@ -1,6 +1,7 @@
 #! /bin/bash -eu
 
-fatal()   { printf "\\e[35m[FATAL]\\e[39m   %s\\n" "$*" 1>&2 ; exit 1 ; }
+fatal()        { printf "\\e[35m[FATAL]\\e[39m   %s\\n" "$*" 1>&2 ; exit 1 ; }
+prompt_no_nl() { printf "\\e[36m[PROMPT]\\e[0m  %s" "$*" >&2; read -r -n1 resp; echo "$resp" ; }
 
 DOTFILES=(
     'SciTEUser.properties'
@@ -46,6 +47,18 @@ DOTFILES_DIR="$(readlink -f "$(dirname "${BASH_SOURCE[0]}")")"
 function installed() {
     type "$1" &> /dev/null
     return $?
+}
+
+function ask_yes_no {
+    resp=$(prompt_no_nl "$1")
+
+    [[ -z "$resp" ]] && resp="$2" || echo
+
+    if [[ "$resp" = "y" ]] || [[ "$resp" = "Y" ]]; then
+        return 0
+    else
+        return 1
+    fi
 }
 
 function create_link() {
@@ -106,7 +119,10 @@ if installed vim; then
     fi
 
     # TERM workaround to avoid loading non existing color scheme
-    TERM=xterm vim -S "$DOTFILES_DIR/vimplug.lock" +qall
+
+    if ask_yes_no "Install vim plugins [y/N]? " "n"; then
+        TERM=xterm vim -S "$DOTFILES_DIR/vimplug.lock" +qall
+    fi
 fi
 
 # Regenerate screen and screen-256color terminfo to fix C-h problem with neovim
@@ -130,16 +146,18 @@ if installed tmux; then
 fi
 
 if installed cargo; then
-    pushd /tmp
-    git clone https://github.com/mathieu-lemay/cmus-notify.git
+    if ask_yes_no "Install cmus-notify [y/N]? " "n"; then
+        pushd /tmp
+        git clone https://github.com/mathieu-lemay/cmus-notify.git
 
-    pushd cmus-notify
-    cargo build --release
-    mv target/release/cmus-notify "$HOME/usr/bin"
-    popd
+        pushd cmus-notify
+        cargo build --release
+        mv target/release/cmus-notify "$HOME/usr/bin"
+        popd
 
-    rm -rf cmus-notify
-    popd
+        rm -rf cmus-notify
+        popd
+    fi
 fi
 
 installed crontab && crontab "$DOTFILES_DIR/crontab"
