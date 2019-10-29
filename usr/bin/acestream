@@ -4,7 +4,7 @@ info()    { printf "\\e[32m[INFO]\\e[0m    %s\\n" "$*" >&2 ; }
 info2()   { printf "\\e[32m[INFO]\\e[0m    %s"    "$*" >&2 ; }
 fatal()   { printf "\\e[35m[FATAL]\\e[0m   %s\\n" "$*" >&2 ; exit 1 ; }
 
-IMAGE="blaiseio/acestream:1.1.1"
+IMAGE="blaiseio/acestream"
 PORT="6878"
 
 if [ $# -ne 1 ]; then
@@ -35,7 +35,6 @@ if ! nc -z 127.0.0.1 "$PORT" &> /dev/null; then
 fi
 info "Acestream server is running"
 
-# Open stream in VLC
 stream="http://127.0.0.1:${PORT}/ace/getstream?id=${stream_id}"
 
 info "Opening stream: $stream"
