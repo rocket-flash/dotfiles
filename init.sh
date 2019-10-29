@@ -144,6 +144,8 @@ fi
 
 installed crontab && crontab "$DOTFILES_DIR/crontab"
 
+installed bat && bat cache --build
+
 MISSING_APPS=""
 for app in "${APPS[@]}"; do
     installed "$app" || MISSING_APPS="${MISSING_APPS}${app} "
