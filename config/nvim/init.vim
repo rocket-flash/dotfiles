@@ -287,6 +287,7 @@ let g:peekaboo_window='topleft new'
 
 " Coc.nvim {{{
 let g:coc_global_extensions = [
+  \ 'coc-diagnostic',
   \ 'coc-emoji',
   \ 'coc-git',
   \ 'coc-docker',
