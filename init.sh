@@ -160,6 +160,19 @@ if installed cargo; then
     fi
 fi
 
+if installed pyenv; then
+    pyenv_plugin_root="$(pyenv root)/plugins"
+
+    if [ -e "${pyenv_plugin_root}/xxenv-latest" ]; then
+        pushd "${pyenv_plugin_root}/xxenv-latest"
+        git pull
+        popd
+    else
+        [[ -d "$pyenv_plugin_root" ]] || mkdir -p "$pyenv_plugin_root"
+        git clone https://github.com/momo-lab/xxenv-latest.git "${pyenv_plugin_root}/xxenv-latest"
+    fi
+fi
+
 installed crontab && crontab "$DOTFILES_DIR/crontab"
 
 installed bat && bat cache --build
