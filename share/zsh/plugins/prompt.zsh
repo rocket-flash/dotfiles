@@ -16,6 +16,11 @@ color_reset="%f%k"
 # }}}
 
 function zsh-theme() {
+    if [[ -z "${1}" ]]; then
+        echo "Theme not specified"
+        return
+    fi
+
     local theme
     theme="${HOME}/.local/share/zsh/themes/${1}.zsh"
 
