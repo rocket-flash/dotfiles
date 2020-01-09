@@ -56,6 +56,8 @@ ZSH_THEME="powerline"
 
 if [[ "$TERM" == "linux" ]]; then
     ZSH_THEME="simple"
+elif [[ "$PYCHARM_TERM" == "1" ]]; then
+    ZSH_THEME="basic"
 fi
 
 zsh-theme "${ZSH_THEME}"

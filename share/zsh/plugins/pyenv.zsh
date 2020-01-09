@@ -17,7 +17,11 @@ pyenv() {
     rehash|shell)
         eval "$(pyenv "sh-$command" "$@")"
         ;;
-    install|uninstall)
+    install)
+        CONFIGURE_OPTS=--enable-shared command pyenv "$command" "$@"
+        pyenv rehash
+        ;;
+    uninstall)
         command pyenv "$command" "$@"
         pyenv rehash
         ;;
