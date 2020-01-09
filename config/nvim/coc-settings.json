@@ -7,5 +7,6 @@
     "python.linting.flake8Args": ["--ignore=E203,E501,W503"],
     "python.linting.pylintEnabled": true,
     "python.venvPath": "~/.virtualenvs",
-    "git.enableGutters": false
+    "git.enableGutters": false,
+    "yaml.customTags": [ "!GetAtt", "!Join", "!Ref", "!Sub"]
 }
