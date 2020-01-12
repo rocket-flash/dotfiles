@@ -21,7 +21,7 @@
 	"gpgflags": "",
 	"mflags": "",
 	"sortby": "votes",
-	"searchby": "name-desc",
+	"searchby": "name",
 	"gitflags": "",
 	"removemake": "ask",
 	"requestsplitn": 150,
@@ -38,6 +38,6 @@
 	"cleanmenu": true,
 	"diffmenu": true,
 	"editmenu": false,
-	"combinedupgrade": false,
+	"combinedupgrade": true,
 	"useask": false
 }
