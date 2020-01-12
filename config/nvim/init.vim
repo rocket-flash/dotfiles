@@ -44,7 +44,7 @@ set softtabstop=4
 set shiftwidth=0 " Same as tabstop
 set shiftround
 set autoindent
-set smartindent
+filetype plugin indent on
 
 " Search settings
 set ignorecase
@@ -117,12 +117,12 @@ command! Qa qa
 command! QA qa
 
 " Close current buffer but keep window
-nmap <leader>d :bp<bar>sp<bar>bn<bar>bd<CR>
+nnoremap <leader>d :bp<bar>sp<bar>bn<bar>bd<CR>
 
 " JSON Tidy: Reformat JSON file
-nmap <leader>jt :%!python -m json.tool<CR>
+nnoremap <leader>jt :%!python -m json.tool<CR>
 " XML Tidy: Reformat XML file
-nmap <leader>xt :%!tidy -xml -i -w 2048 2>/dev/null<CR>
+nnoremap <leader>xt :%!tidy -xml -i -w 2048 2>/dev/null<CR>
 
 if has('nvim')
     " Send all/line to terminal
@@ -143,19 +143,19 @@ au BufNewFile,BufRead *.bf set filetype=brainfuck
 au BufNewFile,BufRead *.asm set filetype=nasm
 
 " Disable stuff that slow down vim when working with big files
-function! DisableStuffForBigFiles()
+function! DisableStuffForBigFiles() abort
     syntax off
     set nocursorline
 endfunction
 
 " Manually set file encodings
-function! SetFileEncodings(encodings)
+function! SetFileEncodings(encodings) abort
     let b:fileencodingsbak=&fileencodings
     let &fileencodings=a:encodings
 endfunction
 
 " Restore previous file encodings
-function! RestoreFileEncodings()
+function! RestoreFileEncodings() abort
     let &fileencodings=b:fileencodingsbak
     unlet b:fileencodingsbak
 endfunction
@@ -194,8 +194,8 @@ endif
 " Plugin Configurations {{{
 
 " Tagbar {{{
-nmap <leader>l :TagbarToggle<CR>
-imap <leader>l <ESC>:TagbarToggle<CR>a
+nnoremap <leader>l :TagbarToggle<CR>
+inoremap <leader>l <ESC>:TagbarToggle<CR>a
 " }}}
 
 " MiniBufExpl {{{
@@ -321,11 +321,11 @@ nmap <silent> <leader>li <Plug>(coc-implementation)
 nmap <silent> <leader>lg <Plug>(coc-references)
 nmap <silent> <leader>lf <Plug>(coc-format)
 
-nmap <silent> <leader>gb :CocCommand git.showCommit<CR>
-nmap <silent> <leader>gi :CocCommand git.chunkInfo<CR>
-nmap <silent> <leader>gd :CocCommand git.diffCached<CR>
-nmap <silent> <leader>ga :CocCommand git.chunkStage<CR>
-nmap <silent> <leader>gr :CocCommand git.chunkUndo<CR>
+nnoremap <silent> <leader>gb :CocCommand git.showCommit<CR>
+nnoremap <silent> <leader>gi :CocCommand git.chunkInfo<CR>
+nnoremap <silent> <leader>gd :CocCommand git.diffCached<CR>
+nnoremap <silent> <leader>ga :CocCommand git.chunkStage<CR>
+nnoremap <silent> <leader>gr :CocCommand git.chunkUndo<CR>
 
 " Remap for rename current word
 nmap <leader>lr <Plug>(coc-rename)
@@ -333,7 +333,7 @@ nmap <leader>lr <Plug>(coc-rename)
 " Use K for show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-function! s:show_documentation()
+function! s:show_documentation() abort
  if &filetype == 'vim'
    execute 'h '.expand('<cword>')
  else
