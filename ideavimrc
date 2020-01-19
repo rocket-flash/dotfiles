@@ -1,5 +1,6 @@
 set surround
 set incsearch
+set ideajoin
 
 " Key remaps
 nnoremap <tab> %
