@@ -28,7 +28,7 @@ if !&diff
     Plug 'majutsushi/tagbar'
 
     if has('nvim') || has('patch-8.0-1453')
-        Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+        Plug 'neoclide/coc.nvim', {'branch': 'release'}
     endif
 endif
 
