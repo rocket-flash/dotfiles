@@ -37,6 +37,8 @@ Plug 'jnurmine/Zenburn'
 
 call plug#end()
 
+filetype plugin indent on
+
 " Indent settings
 set expandtab
 set tabstop=4
@@ -44,7 +46,6 @@ set softtabstop=4
 set shiftwidth=0 " Same as tabstop
 set shiftround
 set autoindent
-filetype plugin indent on
 
 " Search settings
 set ignorecase
