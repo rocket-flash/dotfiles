@@ -116,6 +116,8 @@ done
 
 # Misc configs and env vars {{{
 
+[[ -f ~/.profile ]] && source ~/.profile
+
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
@@ -141,22 +143,6 @@ export WORDCHARS=${WORDCHARS/\//}
 
 # Don't prepend virtual env name to PS1
 export VIRTUAL_ENV_DISABLE_PROMPT=1
-
-# }}}
-
-# Setup a few PATHs {{{
-
-# Personal usr folder
-[[ -d "$HOME/usr/bin" ]] && export PATH="$HOME/usr/bin:$PATH"
-[[ -d "$HOME/usr/lib" ]] && export LD_LIBRARY_PATH="$HOME/usr/lib:$LD_LIBRARY_PATH"
-[[ -d "$HOME/usr/lib/pkgconfig" ]] && export PKG_CONFIG_PATH="$HOME/usr/lib/pkgconfig:$PKG_CONFIG_PATH"
-
-# Go path
-export GOPATH="$HOME/usr/go"
-
-# Rust's cargo path
-export CARGO_HOME="$HOME/usr/cargo"
-[[ -d "$CARGO_HOME/bin" ]] && export PATH="$CARGO_HOME/bin:$PATH"
 
 # Android
 ANDROID_SDK_ROOT="$HOME/Android/Sdk"
