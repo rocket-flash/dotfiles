@@ -33,6 +33,7 @@ setopt prompt_subst      # Enable parameter expansion for prompts
 setopt correct           # Enable autocorrect
 setopt auto_pushd        # Make cd push the old directory onto the directory stack
 setopt pushd_ignore_dups # Ignore duplicates when pushing directory on the stack
+setopt extendedglob      # Treat the `#', `~' and `^' characters as part of patterns for filename generation, etc.
 
 # }}}
 
