@@ -1,22 +1,3 @@
-# Vars {{{
-
-GIT_UNSTAGED="x"
-GIT_STAGED="+"
-
-# Version Control System
-branch_fmt="%c%u %b "
-action_fmt="%a"
-
-zstyle ':vcs_info:*' unstagedstr "${GIT_UNSTAGED}"
-zstyle ':vcs_info:*' stagedstr "${GIT_STAGED}"
-zstyle ':vcs_info:*' formats "${branch_fmt}"
-zstyle ':vcs_info:*' actionformats "${action_fmt}|${branch_fmt}"
-zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{3}%r'
-
-unset branch_fmt action_fmt
-
-# }}}
-
 printc() {
     if [ $# -gt 1 ]; then
         c="%F{${1}}"
