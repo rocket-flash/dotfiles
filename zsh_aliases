@@ -34,8 +34,22 @@ if installed pacaur; then
     alias up='pacaur -Syu'
     alias pm='pacaur'
 elif installed yay; then
-    alias up='yay -Syu'
-    alias pm='yay'
+    pm() {
+        if [ -n "${VIRTUAL_ENV}" ]; then
+            echo "Can't run yay in venv"
+            return
+        fi
+
+        yay "$@"
+    }
+    up() {
+        if [ -n "${VIRTUAL_ENV}" ]; then
+            echo "Can't run yay in venv"
+            return
+        fi
+
+        yay -Syu "$@"
+    }
 elif installed pacman; then
     alias up='sudo pacman -Syu'
     alias pm='pacman'
