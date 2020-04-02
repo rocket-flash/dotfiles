@@ -1,0 +1,21 @@
+#! /bin/bash -eu
+
+if [ $# -lt 1 ]; then
+    echo "Usage: git f <search_term>"
+    exit 1
+fi
+
+branch_matches=$(git branch -a | sed 's/^\*//' | awk '{$1=$1};1' | sed 's@^remotes/origin/@@' | grep -i "$1" | sort | uniq)
+
+if [ -z "${branch_matches}" ]; then
+    echo "No branch found for $1"
+    exit 1
+fi
+
+if [ $(echo "${branch_matches}" | wc -l) -gt 1 ]; then
+    echo "Multiple branches found for $1:"
+    echo "${branch_matches}"
+    exit 1
+fi
+
+git checkout "${branch_matches}"
