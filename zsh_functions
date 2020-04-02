@@ -152,6 +152,8 @@ function colorsample {
     printf "\\n"
 
     printf " Styles\\n"
+    printf "\\e[1m 1. Bold\\e[0m\\n"
+    printf "\\e[2m 2. Dim\\e[0m\\n"
     printf "\\e[3m 3. Italic\\e[0m\\n"
     printf "\\e[4m 4. Underline\\e[0m\\n"
     printf "\\e[5m 5. Blink (Slow)\\e[0m\\n"
