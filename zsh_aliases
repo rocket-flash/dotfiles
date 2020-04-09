@@ -50,6 +50,7 @@ elif installed yay; then
 
         yay -Syu "$@"
     }
+    compdef pm='yay'
 elif installed pacman; then
     alias up='sudo pacman -Syu'
     alias pm='pacman'
