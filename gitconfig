@@ -22,6 +22,7 @@
 	ri = rebase -i
 	rc = rebase --continue
 	m = difftool -y
+	lp = log -p
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset %C(bold magenta)(%G?)%Creset' --abbrev-commit
 	cia = commit --amend
 	fixup = commit --amend --no-edit
