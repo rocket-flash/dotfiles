@@ -1,0 +1,17 @@
+#! /bin/zsh -eu
+
+if [ $# -ne 1 ]; then
+    echo "Usage: $0 <version>"
+    echo "Available versions are:"
+    pyenv versions
+    exit 1
+fi
+
+pyversion=$1
+
+if [[ ! -e "$HOME/.pyenv/versions/${pyversion}/bin/python" ]]; then
+    echo "Invalid python version: ${pyversion}"
+    exit 1
+fi
+
+sudo "$HOME/.pyenv/versions/${pyversion}/bin/python" "/opt/pycharm-professional/plugins/python/helpers/pydev/setup_cython.py" build_ext --build-temp build --build-lib .
