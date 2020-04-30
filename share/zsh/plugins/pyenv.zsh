@@ -6,27 +6,29 @@ export PYENV_SHELL=zsh
 # PyEnv doesn't play well with virtualenvwrapper
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
 
-pyenv() {
-    local command
-    command="${1:-}"
+function pyenv() {
+    local cmd
+    cmd="${1:-}"
     if [ "$#" -gt 0 ]; then
         shift
     fi
 
-    case "$command" in
+    case "$cmd" in
     rehash|shell)
-        eval "$(pyenv "sh-$command" "$@")"
+        eval "$(pyenv "sh-$cmd" "$@")"
         ;;
     install)
-        CONFIGURE_OPTS=--enable-shared command pyenv "$command" "$@"
+        CONFIGURE_OPTS=--enable-shared command pyenv "$cmd" "$@"
         pyenv rehash
         ;;
     uninstall)
-        command pyenv "$command" "$@"
+        command pyenv "$cmd" "$@"
         pyenv rehash
         ;;
     *)
-        command pyenv "$command" "$@"
+        command pyenv "$cmd" "$@"
         ;;
     esac
 }
+
+source /usr/share/zsh/site-functions/_pyenv
