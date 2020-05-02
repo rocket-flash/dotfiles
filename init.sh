@@ -36,7 +36,6 @@ APPS=(
     'fd'
     'fzf'
     'node'
-    'npm'
     'rg'
     'tmux'
     'xsel'
