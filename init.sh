@@ -42,15 +42,25 @@ APPS=(
 
 DOTFILES_DIR="$(readlink -f "$(dirname "${BASH_SOURCE[0]}")")"
 
+unattended=0
+
+if [[ $# -ge 1 ]] && [[ "$1" == "-u" ]]; then
+    unattended=1
+fi
+
 function installed() {
     type "$1" &> /dev/null
     return $?
 }
 
 function ask_yes_no {
-    resp=$(prompt_no_nl "$1")
+    if [[ "${unattended}" != 1 ]]; then
+        resp=$(prompt_no_nl "$1")
 
-    [[ -z "$resp" ]] && resp="$2" || echo
+        [[ -z "$resp" ]] && resp="$2" || echo
+    else
+        resp="$2"
+    fi
 
     if [[ "$resp" = "y" ]] || [[ "$resp" = "Y" ]]; then
         return 0
