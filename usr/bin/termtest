@@ -45,6 +45,7 @@ printf "\\e[30;47m 7. Light Grey \\e[107m15. White\\e[0m\\n"
 printf "\\n"
 
 printf " Styles\\n"
+printf "\\e[0m 0. Regular\\n"
 printf "\\e[1m 1. Bold\\e[0m\\n"
 printf "\\e[2m 2. Dim\\e[0m\\n"
 printf "\\e[3m 3. Italic\\e[0m\\n"
@@ -54,8 +55,15 @@ printf "\\e[6m 6. Blink (Fast)\\e[0m\\n"
 printf "\\e[7m 7. Reverse\\e[0m\\n"
 printf "\\e[8m 8. Hide\\e[0m[Hidden]\\n"
 printf "\\e[9m 9. Strikethrough\\e[0m\\n"
+printf "\\n"
 
-echo
+printf " Font\\n"
+printf " Regular: \\e[0m The quick brown fox jumps over the lazy dog\\n"
+printf " Bold:    \\e[1m The quick brown fox jumps over the lazy dog\\e[0m\\n"
+printf " Italic:  \\e[3m The quick brown fox jumps over the lazy dog\\e[0m\\n"
+printf " BoldIta: \\e[1m\\e[3m The quick brown fox jumps over the lazy dog\\e[0m\\n"
+printf "\\n"
+
 echo "True Color Support"
 
 awk 'BEGIN{
