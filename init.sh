@@ -1,6 +1,9 @@
 #! /bin/bash -eu
 
-fatal()        { printf "\\e[35m[FATAL]\\e[39m   %s\\n" "$*" 1>&2 ; exit 1 ; }
+info()         { printf "\\e[32m[INFO]\\e[0m    %s\\n" "$*" ; }
+warning()      { printf "\\e[33m[WARNING]\\e[0m %s\\n" "$*" ; }
+error()        { printf "\\e[31m[ERROR]\\e[0m   %s\\n" "$*" >&2 ; }
+fatal()        { printf "\\e[35m[FATAL]\\e[0m   %s\\n" "$*" >&2 ; exit 1 ; }
 prompt_no_nl() { printf "\\e[36m[PROMPT]\\e[0m  %s" "$*" >&2; read -r -n1 resp; echo "$resp" ; }
 
 DOTFILES=(
@@ -127,12 +130,12 @@ ln -s "$HOME/.config/nvim/init.vim" "$HOME/.vimrc"
 
 if installed vim; then
     if [ ! -e "$HOME/.config/nvim/autoload/plug.vim" ]; then
+        info "Installing vim-plug"
         curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     fi
 
-    # TERM workaround to avoid loading non existing color scheme
-
     if ask_yes_no "Install vim plugins [y/N]? " "n"; then
+        # TERM workaround to avoid loading non existing color scheme
         TERM=xterm vim -S "$DOTFILES_DIR/vimplug.lock" +qall
     fi
 fi
@@ -148,27 +151,29 @@ done
 
 if installed tmux; then
     if [ ! -e "$HOME/.local/share/tmux/tpm" ]; then
+        info "Installing tmux plugin manager"
         mkdir -p "$HOME/.local/share/tmux"
         git clone https://github.com/tmux-plugins/tpm ~/.local/share/tmux/tpm
     else
-        pushd "$HOME/.local/share/tmux/tpm"
+        info "Updating tmux plugin manager"
+        pushd "$HOME/.local/share/tmux/tpm" > /dev/null
         git pull
-        popd
+        popd > /dev/null
     fi
 fi
 
 if installed cargo; then
     if ask_yes_no "Install cmus-notify [y/N]? " "n"; then
-        pushd /tmp
+        pushd /tmp > /dev/null
         git clone https://github.com/mathieu-lemay/cmus-notify.git
 
-        pushd cmus-notify
+        pushd cmus-notify > /dev/null
         cargo build --release
         mv target/release/cmus-notify "$HOME/usr/bin"
-        popd
+        popd > /dev/null
 
         rm -rf cmus-notify
-        popd
+        popd > /dev/null
     fi
 fi
 
@@ -176,10 +181,12 @@ if installed pyenv; then
     pyenv_plugin_root="$(pyenv root)/plugins"
 
     if [ -e "${pyenv_plugin_root}/xxenv-latest" ]; then
-        pushd "${pyenv_plugin_root}/xxenv-latest"
+        info "Updating pyenv-latest plugin"
+        pushd "${pyenv_plugin_root}/xxenv-latest" > /dev/null
         git pull
-        popd
+        popd > /dev/null
     else
+        info "Installing pyenv-latest plugin"
         [[ -d "$pyenv_plugin_root" ]] || mkdir -p "$pyenv_plugin_root"
         git clone https://github.com/momo-lab/xxenv-latest.git "${pyenv_plugin_root}/xxenv-latest"
     fi
@@ -187,11 +194,14 @@ fi
 
 installed crontab && crontab "$DOTFILES_DIR/crontab"
 
-installed bat && bat cache --build
+if installed bat; then
+    info "Building bat cache"
+    bat cache --build > /dev/null
+fi
 
 MISSING_APPS=""
 for app in "${APPS[@]}"; do
     installed "$app" || MISSING_APPS="${MISSING_APPS}${app} "
 done
 
-[[ -z "$MISSING_APPS" ]] || printf "Don't forget to install the following:\\n  %s\\n" "$MISSING_APPS"
+[[ -z "$MISSING_APPS" ]] || info "Don't forget to install the following: ${MISSING_APPS}"
