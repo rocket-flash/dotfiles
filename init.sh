@@ -99,9 +99,13 @@ for file in "${DOTFILES_DIR}"/share/*; do
     create_link "$HOME/.local/share/$(basename "$file")" "$file"
 done
 
-for file in "${DOTFILES_DIR}"/fonts/*; do
-    copy_file "$HOME/.fonts/$(basename "$file")" "$file"
-done
+if ask_yes_no "Install fonts [y/N]? " "n"; then
+    for file in "${DOTFILES_DIR}"/fonts/*; do
+        cp "$file" "$HOME/.fonts/$(basename "$file")"
+    done
+
+    fc-cache -f
+fi
 
 for file in "${DOTFILES_DIR}"/usr/bin/*; do
     create_link "$HOME/usr/bin/$(basename "$file")" "$file"
