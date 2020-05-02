@@ -71,6 +71,10 @@ function ask_yes_no {
     fi
 }
 
+function hash() {
+    md5sum "$1" | cut -d ' ' -f 1
+}
+
 function create_link() {
     [[ -L "$1" ]] && rm "$1"
     [[ -e "$1" ]] && mv "$1" "${1}.bak"
@@ -79,10 +83,18 @@ function create_link() {
 }
 
 function copy_file() {
-    [[ -L "$1" ]] && rm "$1"
-    [[ -e "$1" ]] && mv "$1" "${1}.bak"
+    local dst="$1"
+    local src="$2"
 
-    cp "$2" "$1"
+    [[ -L "$dst" ]] && rm "$dst"
+
+    if [[ -e "$dst" ]]; then
+        [[ "$(hash "$src")" == "$(hash "$dst")" ]] && return
+
+        mv "$dst" "${dst}.bak"
+    fi
+
+    cp "$src" "$dst"
 }
 
 for dir in "${DIRS[@]}"; do
@@ -103,7 +115,7 @@ done
 
 if ask_yes_no "Install fonts [y/N]? " "n"; then
     for file in "${DOTFILES_DIR}"/fonts/*; do
-        cp "$file" "$HOME/.fonts/$(basename "$file")"
+        copy_file "$HOME/.fonts/$(basename "$file")" "$file"
     done
 
     fc-cache -f
