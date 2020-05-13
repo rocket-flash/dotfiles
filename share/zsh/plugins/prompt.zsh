@@ -54,9 +54,9 @@ zle -N zle-keymap-select
 
 ZSH_THEME="powerline"
 
-if [[ "$TERM" == "linux" ]]; then
+if [[ $(tput colors) -lt 256 ]]; then
     ZSH_THEME="simple"
-elif [[ "$PYCHARM_TERM" == "1" ]]; then
+elif [[ "$TERMINAL_EMULATOR" == *JetBrains* ]]; then
     ZSH_THEME="basic"
 fi
 
