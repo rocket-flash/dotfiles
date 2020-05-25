@@ -5,7 +5,7 @@ if [ $# -lt 1 ]; then
     exit 1
 fi
 
-branch_matches=$(git branch -a | sed 's/^\*//' | awk '{$1=$1};1' | sed 's@^remotes/origin/@@' | grep -i "$1" | sort | uniq)
+branch_matches=$(git branch -a | sed 's/^\*//' | awk '{$1=$1};1' | sed 's@^remotes/origin/@@' | grep -i -- "$1" | sort | uniq)
 
 if [ -z "${branch_matches}" ]; then
     echo "No branch found for $1"
