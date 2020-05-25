@@ -35,6 +35,7 @@ APPS=(
     'colordiff'
     'fd'
     'fzf'
+    'handlr'
     'node'
     'rg'
     'tmux'

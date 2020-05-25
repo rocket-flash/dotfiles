@@ -23,7 +23,9 @@ alias dd='dd status=progress'
 alias rar='unrar'
 alias rf='readlink -f'
 
-if installed xdg-open; then
+if installed handlr; then
+    alias open='handlr open'
+elif installed xdg-open; then
     alias open='xdg-open'
 elif installed exo-open; then
     alias open='exo-open'
