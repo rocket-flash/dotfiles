@@ -22,6 +22,7 @@ fi
 
 # Go path
 export GOPATH="$HOME/usr/go"
+[[ -d "$GOPATH/bin" ]] && export PATH="$GOPATH/bin:$PATH"
 
 # Rust's cargo path
 export CARGO_HOME="$HOME/usr/cargo"
