@@ -25,6 +25,7 @@ function mcd() {
     [[ -d "$1" ]] || mkdir -p "$1"
     cd "$1"
 }
+compdef mcd='mkdir'
 
 function get_ext() {
     # http://reasoniamhere.com/2014/01/11/outrageously-useful-tips-to-master-your-z-shell/
