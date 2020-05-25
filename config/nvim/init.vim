@@ -295,7 +295,7 @@ let g:coc_global_extensions = [
   \ 'coc-ccls',
   \ 'coc-json',
   \ 'coc-python',
-  \ 'coc-rls',
+  \ 'coc-rust-analyzer',
   \ 'coc-sh',
   \ 'coc-yaml'
 \ ]
