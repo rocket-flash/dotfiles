@@ -9,15 +9,13 @@ export LC_TIME="en_DK.UTF-8"
 # Force hardware acceleration for firefox
 export MOZ_USE_OMTC=1
 
-# Set JDK for JetBrains products
-JETBRAINS_JDK="/usr/lib/jvm/intellij-jdk"
-if [ -d "$JETBRAINS_JDK" ]; then
-    export IDEA_JDK="${JETBRAINS_JDK}"    # IntelliJ IDEA
-    export CL_JDK="${JETBRAINS_JDK}"      # CLion
-    export PYCHARM_JDK="${JETBRAINS_JDK}" # PyCharm
-    export STUDIO_JDK="${JETBRAINS_JDK}"  # AndroidStudio
-    export WEBIDE_JDK="${JETBRAINS_JDK}"  # WebStorm
-    export RIDER_JDK="${JETBRAINS_JDK}"   # Rider
+# Set JRE for JetBrains products
+JETBRAINS_JRE="/usr/lib/jvm/jetbrains-jre"
+if [ -d "$JETBRAINS_JRE" ]; then
+    export IDEA_JDK="${JETBRAINS_JRE}"    # IntelliJ IDEA
+    export CLION_JDK="${JETBRAINS_JRE}"   # CLion
+    export PYCHARM_JDK="${JETBRAINS_JRE}" # PyCharm
+    export STUDIO_JDK="${JETBRAINS_JRE}"  # AndroidStudio
 fi
 
 # Go path
