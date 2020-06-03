@@ -152,13 +152,9 @@ if installed vim; then
     fi
 fi
 
-# Regenerate screen and screen-256color terminfo to fix C-h problem with neovim
-# https://github.com/christoomey/vim-tmux-navigator/issues/71
-TERMS=( 'screen' 'screen-256color' 'tmux' 'tmux-256color' )
-for term in "${TERMS[@]}"; do
-    infocmp "$term" | sed 's/kbs=^[hH]/kbs=\\177/' > "${term}.ti"
-    tic "${term}.ti"
-    rm "${term}.ti"
+# Install modified terminfo
+for file in "${DOTFILES_DIR}"/terminfo/*; do
+    tic "${file}"
 done
 
 if installed tmux; then
