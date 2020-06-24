@@ -48,6 +48,8 @@
 	tabsize = 4
 [fetch]
 	prune = true
+[pull]
+	ff = only
 [push]
 	default = simple
 [diff]
