@@ -1,17 +1,21 @@
 AWS_PROFILE_CACHE_FILE="$HOME/.cache/zsh/aws-profile"
 
+function aws-list-profiles() {
+    grep -oE '\[profile [a-zA-Z0-9.-]+\]' ~/.aws/config | sed 's/[][]//g' | awk -F ' ' '{print $2}' | sed 's/^/  /'
+}
+
 function aws-switch-profile {
     local profile="${1:-}"
 
     if [ -z "${profile}" ]; then
         echo 'Available profiles:'
-        grep -oE '\[profile [a-zA-Z.]+\]' ~/.aws/config | sed 's/[][]//g' | awk -F ' ' '{print $2}' | sed 's/^/  /' | sort
+        aws-list-profiles | sort
 
         read "profile?New profile: "
     fi
 
     if [ -n "${profile}" ]; then
-        if ! grep -oE '\[profile [a-zA-Z.]+\]' ~/.aws/config | sed 's/[][]//g' | awk -F ' ' '{print $2}' | sed 's/^/  /' | grep "${profile}" > /dev/null; then
+        if ! aws-list-profiles | grep "${profile}" > /dev/null; then
             echo "Invalid profile: ${profile}"
             return
         fi
