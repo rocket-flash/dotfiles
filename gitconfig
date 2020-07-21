@@ -21,7 +21,8 @@
 	ap = add -p
 	ri = rebase -i
 	rc = rebase --continue
-	m = difftool -y
+	dtm = difftool -y --tool=meld
+	dtv = difftool -y --tool=vimdiff
 	lp = log -p
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset %C(bold magenta)(%G?)%Creset' --abbrev-commit
 	cia = commit --amend
@@ -53,7 +54,7 @@
 [push]
 	default = simple
 [diff]
-	tool = vimdiff
+	tool = meld
 [merge]
 	conflictstyle = diff3
 [cola]
