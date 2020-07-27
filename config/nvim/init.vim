@@ -292,7 +292,6 @@ let g:coc_global_extensions = [
   \ 'coc-emoji',
   \ 'coc-git',
   \ 'coc-docker',
-  \ 'coc-ccls',
   \ 'coc-json',
   \ 'coc-python',
   \ 'coc-rust-analyzer',
