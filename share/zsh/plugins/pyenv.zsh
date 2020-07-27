@@ -1,6 +1,6 @@
 type pyenv &> /dev/null || return
 
-export PATH="/home/mathieu/.pyenv/shims:${PATH}"
+export PATH="${PYENV_ROOT}/shims:${PATH}"
 export PYENV_SHELL=zsh
 
 # PyEnv doesn't play well with virtualenvwrapper
