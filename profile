@@ -6,6 +6,14 @@ export TERMINAL="kitty"
 # Get proper date format
 export LC_TIME="en_DK.UTF-8"
 
+# Respect XDG Base Directory spec
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_DATA_HOME="$HOME/.local/share"
+
+export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
+export VAGRANT_HOME="$XDG_DATA_HOME"/vagrant
+
 # Force hardware acceleration for firefox
 export MOZ_USE_OMTC=1
 
