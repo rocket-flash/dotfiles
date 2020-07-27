@@ -96,14 +96,18 @@ zstyle ':vcs_info:*' check-for-changes true
 
 # Source extra files {{{
 
-[[ -f ~/.zsh_aliases ]] && . ~/.zsh_aliases
-[[ -f ~/.zsh_functions ]] && . ~/.zsh_functions
-[[ -f /usr/bin/virtualenvwrapper_lazy.sh ]] && . /usr/bin/virtualenvwrapper_lazy.sh
-[[ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && . /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-[[ -f /usr/share/doc/pkgfile/command-not-found.zsh ]] && . /usr/share/doc/pkgfile/command-not-found.zsh
+ZSH_EXTRA_FILES=(
+    "${ZDOTDIR}/aliases"
+    "${ZDOTDIR}/functions"
+    "${ZDOTDIR}/local"
+    "/usr/bin/virtualenvwrapper_lazy.sh"
+    "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+    "/usr/share/doc/pkgfile/command-not-found.zsh"
+)
 
-# Source machine specific config
-[[ -f ~/.zsh.local ]] && source ~/.zsh.local
+for f in ${ZSH_EXTRA_FILES[@]}; do
+    [[ -f "$f" ]] && . "$f"
+done
 
 # }}}
 

@@ -16,9 +16,7 @@ DOTFILES=(
     'profile'
     'templates'
     'tmux.zsh'
-    'zsh_aliases'
-    'zsh_functions'
-    'zshrc'
+    'zshenv'
 )
 
 DIRS=(
