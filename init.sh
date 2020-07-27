@@ -7,9 +7,7 @@ fatal()        { printf "\\e[35m[FATAL]\\e[0m   %s\\n" "$*" >&2 ; exit 1 ; }
 prompt_no_nl() { printf "\\e[36m[PROMPT]\\e[0m  %s" "$*" >&2; read -r -n1 resp; echo "$resp" ; }
 
 DOTFILES=(
-    'SciTEUser.properties'
     'Xmodmap'
-    'conkyrc'
     'dircolors'
     'gitconfig'
     'ideavimrc'
