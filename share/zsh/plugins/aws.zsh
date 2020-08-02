@@ -1,7 +1,7 @@
 AWS_PROFILE_CACHE_FILE="$HOME/.cache/zsh/aws-profile"
 
 function aws-list-profiles() {
-    grep -oE '\[profile [a-zA-Z0-9.-]+\]' ~/.aws/config | sed 's/[][]//g' | awk -F ' ' '{print $2}' | sed 's/^/  /'
+    grep -oE '\[profile [a-zA-Z0-9.-]+\]' "${AWS_CONFIG_FILE}" | sed 's/[][]//g' | awk -F ' ' '{print $2}' | sed 's/^/  /'
 }
 
 function aws-switch-profile {

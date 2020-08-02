@@ -9,6 +9,8 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
 
+export AWS_SHARED_CREDENTIALS_FILE="$XDG_CONFIG_HOME/aws/credentials"
+export AWS_CONFIG_FILE="$XDG_CONFIG_HOME/aws/config"
 export DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
 export PYENV_ROOT="${XDG_DATA_HOME}/pyenv"
 export VAGRANT_HOME="${XDG_DATA_HOME}/vagrant"
