@@ -29,6 +29,7 @@ APPS=(
     'bat'
     'cargo'
     'colordiff'
+    'exa'
     'fd'
     'fzf'
     'handlr'
