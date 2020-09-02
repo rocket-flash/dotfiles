@@ -4,13 +4,21 @@ alias exec='exec '
 alias xargs='xargs '
 
 # ls aliases
-alias ls='ls --color=auto -v --group-directories-first'
-alias ll='ls -lh'
-alias la='ls -A'
-alias lf='ls -lhA'
-alias lk='ls -l --block-size=1k'
-alias lm='ls -l --block-size=1m'
-alias lr='ls -lArth'
+if installed 'exa'; then
+    alias ls='exa --group-directories-first'
+    alias ll='ls -l'
+    alias la='ls -a'
+    alias lf='ls -la'
+    alias lr='ls -la -smod'
+else
+    alias ls='ls --color=auto -v --group-directories-first'
+    alias ll='ls -lh'
+    alias la='ls -A'
+    alias lf='ls -lhA'
+    alias lk='ls -l --block-size=1k'
+    alias lm='ls -l --block-size=1m'
+    alias lr='ls -lArth'
+fi
 
 # Renaming aliases
 alias lower='rename '\''y/\ \.A-Z/__a-z/'\'''
