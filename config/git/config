@@ -27,8 +27,13 @@
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset %C(bold magenta)(%G?)%Creset' --abbrev-commit
 	cia = commit --amend
 	fixup = commit --amend --no-edit
+	fnv = commit --amend --no-edit --no-verify
 	edit = "!vim `git ls-files -m`"
+	pnv = push --no-verify
 	pf = push --force-with-lease
+	pfnv = push --force-with-lease --no-verify
+	track = update-index --no-assume-unchanged
+	untrack = update-index --assume-unchanged
 
 	# Get the current branch name (not so useful in itself, but used in
 	# other aliases)
