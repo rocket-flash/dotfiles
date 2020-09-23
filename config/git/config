@@ -21,6 +21,7 @@
 	ap = add -p
 	ri = rebase -i
 	rc = rebase --continue
+	ds = diff --staged
 	dtm = difftool -y --tool=meld
 	dtv = difftool -y --tool=vimdiff
 	lp = log -p
