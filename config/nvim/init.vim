@@ -21,9 +21,7 @@ Plug 'ryanoasis/vim-devicons'
 
 if !&diff
     Plug 'fholgado/minibufexpl.vim'
-    Plug 'scrooloose/nerdtree'
-    Plug 'Xuyuanp/nerdtree-git-plugin'
-    Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+    Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': ':UpdateRemotePlugins'}
     Plug 'junegunn/vim-peekaboo'
     Plug 'majutsushi/tagbar'
 
@@ -207,11 +205,11 @@ let g:miniBufExplModSelTarget = 1
 let g:miniBufExplForceSyntaxEnable = 1
 " }}}
 
-" NERDTree {{{
-nnoremap <C-n> :NERDTreeToggle<CR>
-nnoremap <leader>nn :NERDTreeToggle<CR>
-nnoremap <leader>nc :NERDTreeCWD<CR>
-nnoremap <leader>nf :NERDTreeFind<CR>
+" CHADTree {{{
+nnoremap <C-n> <cmd>CHADopen<cr>
+let g:chadtree_settings = {
+    \  "show_hidden": 0,
+    \ }
 "}}}
 
 " vim-better-whitespace {{{
