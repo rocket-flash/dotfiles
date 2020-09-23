@@ -1,0 +1,10 @@
+#! /bin/bash -eu
+
+if ! type fzf &> /dev/null; then
+    echo "fzf not installed"
+    exit 1
+fi
+
+branch=$(git branch -a | sed 's/^\*//' | awk '{$1=$1};1' | sed 's@^remotes/origin/@@' | sort | uniq | fzf -q "$@")
+
+[[ -n "${branch}" ]] && git checkout "${branch}"
