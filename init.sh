@@ -35,6 +35,7 @@ APPS=(
     'handlr'
     'node'
     'rg'
+    'sd'
     'tmux'
     'xsel'
     'yarn'
