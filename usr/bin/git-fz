@@ -5,6 +5,6 @@ if ! type fzf &> /dev/null; then
     exit 1
 fi
 
-branch=$(git branch -a | sed 's/^\*//' | awk '{$1=$1};1' | sed 's@^remotes/origin/@@' | sort | uniq | fzf -q "$@")
+branch=$(git branch -a | sed 's/^\*//' | awk '{$1=$1};1' | sed 's@^remotes/origin/@@' | sort | uniq | fzf -q "${@:-}")
 
 [[ -n "${branch}" ]] && git checkout "${branch}"
