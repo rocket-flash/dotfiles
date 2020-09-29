@@ -18,6 +18,7 @@
 	st = status
 	co = checkout
 	ci = commit
+	sw = switch
 	ap = add -p
 	ri = rebase -i
 	rc = rebase --continue
