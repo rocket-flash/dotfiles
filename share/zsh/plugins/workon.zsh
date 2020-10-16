@@ -7,12 +7,6 @@ function w() {
     fi
 
     local envname="$1"
-
-    if [[ -d "${venvdir}/${envname}" ]]; then
-        workon "${envname}"
-        return 0
-    fi
-
     local dir
 
     if hash -d | cut -d '=' -f1 | grep -q "${envname}"; then
