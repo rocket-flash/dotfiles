@@ -62,10 +62,87 @@ function aws-assume-role {
 }
 
 function aws-ecr-login() {
-    aws ecr get-login-password | docker login \
-        --username AWS --password-stdin \
-        "$(aws-get-account-id).dkr.ecr.$(aws-get-current-region).amazonaws.com"
+    local accountid region passwd
+    accountid="$(aws-get-account-id)"
+    region="$(aws-get-current-region)"
+    passwd="$(aws ecr get-login-password)"
 
+    echo "$passwd" | docker login --username AWS --password-stdin "${accountid}.dkr.ecr.${region}.amazonaws.com"
+}
+
+function aws-cf-get-stack-status() {
+    local stack="$1"
+    if [[ -z "${stack}" ]]; then
+        echo "Stack not specified"
+        return 1
+    fi
+
+    aws cloudformation describe-stacks --stack-name "${stack}" | jq -r '.Stacks[] | select(.StackId == "'"${stack}"'") | .StackStatus'
+}
+
+function aws-cf-delete-stack() {
+    local stack="$1" st
+    if [[ -z "${stack}" ]]; then
+        echo "Stack not specified"
+        return 1
+    fi
+
+    st="$(aws-cf-get-stack-status "${stack}")"
+
+    if [[ -z "${st}" ]] || [[ "${st}" == "DELETE_IN_PROGRESS" ]] || [[ "${st}" == "DELETE_COMPLETE" ]]; then
+        return
+    fi
+
+    aws cloudformation delete-stack --stack-name "${stack}"
+
+    while true; do
+        st="$(aws-cf-get-stack-status "${stack}")"
+        echo "${stack}: ${st}"
+
+        case "${st}" in
+            DELETE_COMPLETE|DELETE_FAILED)
+                break
+                ;;
+            CREATE_COMPLETE|DELETE_IN_PROGRESS)
+                sleep 2
+                ;;
+            *)
+                echo "Unknown status"
+                ;;
+        esac
+    done
+}
+
+function aws-cf-delete-stacks() {
+    local pattern="$1" stacks
+    if [[ -z "${pattern}" ]]; then
+        echo "Pattern not specified"
+        return 1
+    fi
+
+    stacks=($(aws cloudformation list-stacks | jq -r '.StackSummaries[] | select(.StackName | contains("'"${pattern}"'")) | select(.StackStatus != "DELETE_COMPLETE") | .StackId'))
+
+    if [[ -z "${stacks}" ]]; then
+        echo "No stacks to delete"
+        return 0
+    fi
+
+    echo "Stacks:"
+    echo ${stacks} | xargs -n1 echo "  "
+
+    echo -n "Delete stacks? [y/N] "
+    read -s -k response
+    echo ""
+
+    response="$(echo "$response" | tr '[:upper:]' '[:lower:]')"
+
+    if [[ "${response}" != "y" ]]; then
+        return 2
+    fi
+
+    for s in ${stacks}; do
+        aws-cf-delete-stack "${s}"
+    done
 }
 
 [[ -d "$(dirname "${AWS_PROFILE_CACHE_FILE}")" ]] || mkdir -p "$(dirname "${AWS_PROFILE_CACHE_FILE}")"
