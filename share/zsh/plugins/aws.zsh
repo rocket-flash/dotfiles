@@ -13,31 +13,21 @@ function aws-get-current-region() {
 }
 
 function aws-list-profiles() {
-    grep -oE '\[profile [a-zA-Z0-9.-]+\]' "${AWS_CONFIG_FILE}" | sed 's/[][]//g' | awk -F ' ' '{print $2}' | sed 's/^/  /'
+    grep -oE '\[profile .*?\]' "${AWS_CONFIG_FILE}" | sed -E 's/\[profile (.*?)\]/\1/g'
 }
 
 function aws-switch-profile {
-    local profile="${1:-}"
+    local profile=$(aws-list-profiles | fzf -q "$*")
 
-    if [ -z "${profile}" ]; then
-        echo 'Available profiles:'
-        aws-list-profiles | sort
+    [[ -n "${profile}" ]] || return
 
-        read "profile?New profile: "
-    fi
+    echo -n "${profile}" > "${AWS_PROFILE_CACHE_FILE}"
+    export AWS_PROFILE="${profile}"
+}
 
-    if [ -n "${profile}" ]; then
-        if ! aws-list-profiles | grep "${profile}" > /dev/null; then
-            echo "Invalid profile: ${profile}"
-            return
-        fi
-
-        echo -n "${profile}" > "${AWS_PROFILE_CACHE_FILE}"
-        export AWS_PROFILE=${profile}
-    else
-        rm "${AWS_PROFILE_CACHE_FILE}"
-        unset AWS_PROFILE
-    fi
+function aws-unset-profile {
+    [[ -e "${AWS_PROFILE_CACHE_FILE}" ]] && rm "${AWS_PROFILE_CACHE_FILE}"
+    unset AWS_PROFILE
 }
 
 function aws-assume-role {
