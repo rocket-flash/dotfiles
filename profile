@@ -44,6 +44,9 @@ export GOPATH="$HOME/usr/go"
 export CARGO_HOME="$HOME/usr/cargo"
 [[ -d "$CARGO_HOME/bin" ]] && export PATH="$CARGO_HOME/bin:$PATH"
 
+# Poetry
+[[ -d "$HOME/.poetry/bin" ]] && export PATH="$HOME/.poetry/bin:$PATH"
+
 # Personal usr folder
 [[ -d "$HOME/usr/bin" ]] && export PATH="$HOME/usr/bin:$PATH"
 [[ -d "$HOME/usr/lib" ]] && export LD_LIBRARY_PATH="$HOME/usr/lib:$LD_LIBRARY_PATH"
