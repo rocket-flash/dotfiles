@@ -8,7 +8,7 @@ export FZF_DEFAULT_OPTS='--reverse'
 # --files: List files that would be searched but do not search
 # --follow: Follow symlinks
 export FZF_DEFAULT_COMMAND='rg --files --follow 2>/dev/null'
-export FZF_COMPLETION_TRIGGER='@@'
+export FZF_COMPLETION_TRIGGER=';;'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_CTRL_T_OPTS="--tiebreak=end"
 
