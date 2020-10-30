@@ -4,7 +4,7 @@
 . /usr/share/fzf/completion.zsh
 
 # Show prompt on top
-export FZF_DEFAULT_OPTS='--reverse'
+export FZF_DEFAULT_OPTS='--reverse -1'
 # --files: List files that would be searched but do not search
 # --follow: Follow symlinks
 export FZF_DEFAULT_COMMAND='rg --files --follow 2>/dev/null'
