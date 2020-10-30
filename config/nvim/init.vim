@@ -141,6 +141,10 @@ syntax enable
 au BufNewFile,BufRead *.bf set filetype=brainfuck
 au BufNewFile,BufRead *.asm set filetype=nasm
 
+" Type specific configs
+autocmd FileType python setlocal foldmethod=indent foldnestmax=2 foldlevelstart=99
+autocmd FileType yaml setlocal tabstop=2 shiftwidth=2
+
 " Disable stuff that slow down vim when working with big files
 function! DisableStuffForBigFiles() abort
     syntax off
