@@ -6,10 +6,10 @@ alias xargs='xargs '
 # ls aliases
 if installed 'exa'; then
     alias ls='exa --group-directories-first'
-    alias ll='ls -l'
+    alias ll='ls -l --time-style=long-iso -b'
     alias la='ls -a'
-    alias lf='ls -la'
-    alias lr='ls -la -smod'
+    alias lf='ll -a'
+    alias lr='ll -a -smod'
 else
     alias ls='ls --color=auto -v --group-directories-first'
     alias ll='ls -lh'
