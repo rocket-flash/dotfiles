@@ -1,16 +1,12 @@
 AWS_PROFILE_CACHE_FILE="$HOME/.cache/zsh/aws-profile"
 
-function aws-get-account-id() {
-    aws sts get-caller-identity | jq -r '.Account'
-}
+[[ -d "$(dirname "${AWS_PROFILE_CACHE_FILE}")" ]] || mkdir -p "$(dirname "${AWS_PROFILE_CACHE_FILE}")"
 
-function aws-get-current-region() {
-    if [ -n "${AWS_PROFILE}" ]; then
-        aws configure get --profile "${AWS_PROFILE}" region
-    else
-        aws configure get region
-    fi
-}
+if [ -e "${AWS_PROFILE_CACHE_FILE}" ]; then
+    export AWS_PROFILE="$(< "${AWS_PROFILE_CACHE_FILE}")"
+fi
+
+# Profiles {{{
 
 function aws-list-profiles() {
     grep -oE '\[profile .*?\]' "${AWS_CONFIG_FILE}" | sed -E 's/\[profile (.*?)\]/\1/g'
@@ -29,6 +25,26 @@ function aws-unset-profile {
     [[ -e "${AWS_PROFILE_CACHE_FILE}" ]] && rm "${AWS_PROFILE_CACHE_FILE}"
     unset AWS_PROFILE
 }
+
+# }}}
+
+# Account Info {{{
+
+function aws-get-account-id() {
+    aws sts get-caller-identity | jq -r '.Account'
+}
+
+function aws-get-current-region() {
+    if [ -n "${AWS_PROFILE}" ]; then
+        aws configure get --profile "${AWS_PROFILE}" region
+    else
+        aws configure get region
+    fi
+}
+
+# }}}
+
+# Credentials {{{
 
 function aws-assume-role {
     if [ -z "$AWS_PROFILE" ]; then
@@ -59,6 +75,19 @@ function aws-ecr-login() {
 
     echo "$passwd" | docker login --username AWS --password-stdin "${accountid}.dkr.ecr.${region}.amazonaws.com"
 }
+
+function aws-eks-get-token() {
+    if [[ $# -ne 1 ]]; then
+        echo "Usage: $0 <cluster-name>" >&2
+        return 1
+    fi
+
+    aws eks get-token --cluster-name preprod | jq -r '.status.token'
+}
+
+# }}}
+
+# Cloud Formation {{{
 
 function aws-cf-get-stack-status() {
     local stack="$1"
@@ -135,8 +164,14 @@ function aws-cf-delete-stacks() {
     done
 }
 
-[[ -d "$(dirname "${AWS_PROFILE_CACHE_FILE}")" ]] || mkdir -p "$(dirname "${AWS_PROFILE_CACHE_FILE}")"
+# }}}
 
-if [ -e "${AWS_PROFILE_CACHE_FILE}" ]; then
-    export AWS_PROFILE="$(\cat "${AWS_PROFILE_CACHE_FILE}")"
-fi
+# Misc {{{
+
+function aws-get-ipgranges {
+    curl "https://ip-ranges.amazonaws.com/ip-ranges.json" | jq '.prefixes'
+}
+
+# }}}
+
+# vim: foldmethod=marker
