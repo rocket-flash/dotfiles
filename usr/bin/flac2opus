@@ -7,7 +7,7 @@ import sys
 import threading
 from concurrent.futures import ThreadPoolExecutor
 
-BITRATE = '256'
+BITRATE = "256"
 
 cur_file = nb_files = 0
 mutex = threading.Lock()
@@ -17,13 +17,13 @@ def has_command(cmd_name):
     def is_exe(fpath):
         return os.path.isfile(fpath) and os.access(fpath, os.X_OK)
 
-    if sys.platform == 'win32':
-        cmd_name += '.exe'
+    if sys.platform == "win32":
+        cmd_name += ".exe"
 
     if is_exe(cmd_name):
         return True
     else:
-        path = os.getenv('PATH').split(os.pathsep)
+        path = os.getenv("PATH").split(os.pathsep)
         for p in path:
             if is_exe(os.path.join(p, cmd_name)):
                 return True
@@ -32,20 +32,20 @@ def has_command(cmd_name):
 
 
 def print_progress():
-    print('\rProgress: [{}{}] {:02d}/{:02d}'.format('.' * cur_file,
-                                                    ' ' * (nb_files - cur_file),
-                                                    cur_file,
-                                                    nb_files),
-          end='')
+    progress = "." * cur_file, " " * (nb_files - cur_file)
+    print(
+        f"\rProgress: [{progress}] {cur_file:02d}/{nb_files:02d}",
+        end="",
+    )
 
 
 def convert_file(flac_file):
-    opus_file = os.path.splitext(flac_file)[0] + '.opus'
+    opus_file = os.path.splitext(flac_file)[0] + ".opus"
 
     try:
         err_msg = None
-        subprocess.call(('metaflac', '--remove-replay-gain', flac_file))
-        subprocess.call(('opusenc', '--quiet', '--discard-pictures', '--bitrate', BITRATE, flac_file, opus_file))
+        subprocess.call(("metaflac", "--remove-replay-gain", flac_file))
+        subprocess.call(("opusenc", "--quiet", "--discard-pictures", "--bitrate", BITRATE, flac_file, opus_file))
     except Exception as e:
         err_msg = str(e)
 
@@ -54,7 +54,7 @@ def convert_file(flac_file):
     mutex.acquire()
 
     if err_msg is not None:
-        print('\n' + err_msg)
+        print("\n" + err_msg)
 
     cur_file += 1
     print_progress()
@@ -64,29 +64,36 @@ def convert_file(flac_file):
 
 def is_flac(path):
     if not os.path.isfile(path):
-        print('{}: file not found'.format(path))
+        print(f"{path}: file not found")
         return False
 
-    if os.path.splitext(path)[1] != '.flac':
-        print('{}: not a flac'.format(path))
+    if os.path.splitext(path)[1] != ".flac":
+        print(f"{path}: not a flac")
         return False
 
     return True
 
 
 def main():
-    for cmd in ('metaflac', 'opusenc'):
+    for cmd in ("metaflac", "opusenc"):
         if not has_command(cmd):
-            print('Error: %s not found' % cmd)
+            print(f"Error: {cmd} not found")
             sys.exit(1)
 
-    files = set(f for f in sys.argv[1:] if is_flac(f))
+    delete = False
+    for opt in [a for a in sys.argv[1:] if a[0] == "-"]:
+        if opt == "-d":
+            delete = True
+        else:
+            raise ValueError(f"Invalid option: {opt}")
+
+    files = set(f for f in sys.argv[1:] if f[0] != "-" and is_flac(f))
 
     global nb_files
     nb_files = len(files)
 
     if nb_files == 0:
-        print('No files specified')
+        print("No files specified")
         sys.exit(2)
 
     print_progress()
@@ -94,7 +101,12 @@ def main():
     with ThreadPoolExecutor(max_workers=multiprocessing.cpu_count()) as e:
         for f in files:
             e.submit(convert_file, f)
-    print('')
+    print("")
 
-if __name__ == '__main__':
+    if delete:
+        for f in files:
+            os.unlink(f)
+
+
+if __name__ == "__main__":
     main()
