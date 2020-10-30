@@ -1,24 +1,17 @@
 function w() {
     local srcdir="${SRC_DIR:-${HOME}/src}"
-    local venvdir="${WORKON_HOME:-${HOME}/.virtualenvs}"
-    if [[ $# < 1 ]]; then
-        echo "Usage: $0 env [-s]"
-        return 1
+    local prj="$1"
+
+    if [[ -z "${prj}" ]]; then
+        prj=$(find ~/src -maxdepth 1 -mindepth 1 -print0 | xargs -0 -n1 basename | fzf)
     fi
 
-    local envname="$1"
-    local dir
-
-    if hash -d | cut -d '=' -f1 | grep -q "${envname}"; then
-        cd ~"${envname}"
-    elif [[ -d "${srcdir}/${envname}" ]]; then
-        cd "${srcdir}/${envname}"
+    if hash -d | cut -d '=' -f1 | grep -q "${prj}"; then
+        cd ~"${prj}"
+    elif [[ -d "${srcdir}/${prj}" ]]; then
+        cd "${srcdir}/${prj}"
     else
-        echo "Invalid environment: ${envname}" 1>&2
+        echo "Invalid environment: ${prj}" 1>&2
         return 1
-    fi
-
-    if [[ -e "pyproject.toml" ]] && [[ "${2:-}" == "-s" ]]; then
-        poetry shell
     fi
 }
