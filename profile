@@ -16,12 +16,13 @@ export PYENV_ROOT="${XDG_DATA_HOME}/pyenv"
 export VAGRANT_HOME="${XDG_DATA_HOME}/vagrant"
 
 # Set JRE for JetBrains products
-JETBRAINS_JRE="/usr/lib/jvm/jetbrains-jre"
+JETBRAINS_JRE="/usr/lib/jvm/jre-jetbrains"
 if [ -d "$JETBRAINS_JRE" ]; then
-    export IDEA_JDK="${JETBRAINS_JRE}"    # IntelliJ IDEA
-    export CLION_JDK="${JETBRAINS_JRE}"   # CLion
-    export PYCHARM_JDK="${JETBRAINS_JRE}" # PyCharm
-    export STUDIO_JDK="${JETBRAINS_JRE}"  # AndroidStudio
+    export IDEA_JDK="${JETBRAINS_JRE}"
+    export CLION_JDK="${JETBRAINS_JRE}"
+    export DATAGRIP_JDK="${JETBRAINS_JRE}"
+    export PYCHARM_JDK="${JETBRAINS_JRE}"
+    export STUDIO_JDK="${JETBRAINS_JRE}"
 fi
 
 # Prevent Wine from taking over file associations
