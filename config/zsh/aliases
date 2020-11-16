@@ -40,9 +40,24 @@ elif installed exo-open; then
 fi
 alias f='open .'
 
-if installed pacaur; then
-    alias up='pacaur -Syu'
-    alias pm='pacaur'
+if installed paru; then
+    pm() {
+        if [ -n "${VIRTUAL_ENV}" ]; then
+            echo "Can't run paru in venv"
+            return
+        fi
+
+        paru "$@"
+    }
+    up() {
+        if [ -n "${VIRTUAL_ENV}" ]; then
+            echo "Can't run paru in venv"
+            return
+        fi
+
+        paru -Syu "$@"
+    }
+    compdef pm='paru'
 elif installed yay; then
     pm() {
         if [ -n "${VIRTUAL_ENV}" ]; then
