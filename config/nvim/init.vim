@@ -20,7 +20,6 @@ Plug 'easymotion/vim-easymotion'
 Plug 'ryanoasis/vim-devicons'
 
 if !&diff
-    Plug 'fholgado/minibufexpl.vim'
     Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': ':UpdateRemotePlugins'}
     Plug 'junegunn/vim-peekaboo'
     Plug 'majutsushi/tagbar'
@@ -247,6 +246,7 @@ nnoremap <leader>f. :FZF <CR>
 nnoremap <leader>ft :Tags <CR>
 nnoremap <leader>fl :Lines <CR>
 nnoremap <leader>fg :Rg <CR>
+nnoremap <leader>fb :Buffers <CR>
 nnoremap <leader>m :History<CR>
 nnoremap <C-f> :FZF <CR>
 
