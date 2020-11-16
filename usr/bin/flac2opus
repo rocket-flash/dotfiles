@@ -32,7 +32,7 @@ def has_command(cmd_name):
 
 
 def print_progress():
-    progress = "." * cur_file, " " * (nb_files - cur_file)
+    progress = ("." * cur_file) + (" " * (nb_files - cur_file))
     print(
         f"\rProgress: [{progress}] {cur_file:02d}/{nb_files:02d}",
         end="",
