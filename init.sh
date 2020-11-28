@@ -33,6 +33,7 @@ APPS=(
     'fd'
     'fzf'
     'handlr'
+    'lrzip'
     'node'
     'rg'
     'sd'
