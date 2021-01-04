@@ -8,6 +8,14 @@ fi
 
 # Profiles {{{
 
+function aws-current-profile {
+    if [[ -n "${AWS_PROFILE}" ]]; then
+        echo "Current Profile: ${AWS_PROFILE}"
+    else
+        echo "Profile not set"
+    fi
+}
+
 function aws-list-profiles() {
     grep -oE '\[profile .*?\]' "${AWS_CONFIG_FILE}" | sed -E 's/\[profile (.*?)\]/\1/g'
 }
@@ -17,6 +25,7 @@ function aws-switch-profile {
 
     [[ -n "${profile}" ]] || return
 
+    echo "Switching to profile: ${profile}"
     echo -n "${profile}" > "${AWS_PROFILE_CACHE_FILE}"
     export AWS_PROFILE="${profile}"
 }
@@ -46,16 +55,25 @@ function aws-get-current-region() {
 
 # Credentials {{{
 
+function aws-mfa {
+    local mfa_code="$(ykman oath code -s broadsign-aws)"
+    echo -n "$mfa_code" | xsel -b
+    echo "$mfa_code"
+}
+
 function aws-assume-role {
     if [ -z "$AWS_PROFILE" ]; then
         printf "\\e[31m[ERROR]\\e[0m   %s\\n" "AWS_PROFILE not set" >&2
         return
     fi
 
-    account="$(aws-get-account-id)"
-    arn="arn:aws:iam::${account}:role/CrossAccountAdminRole"
+    role_arn="$(aws configure get role_arn)"
+    if [ $? -ne 0 ]; then
+        printf "\\e[31m[ERROR]\\e[0m   %s\\n" "Unable to get role arn" >&2
+        return
+    fi
 
-    credentials="$(aws sts assume-role --role-arn "$arn" --role-session-name "$AWS_PROFILE")"
+    credentials="$(aws sts assume-role --role-arn "${role_arn}" --role-session-name "admin@${AWS_PROFILE}")"
     if [ $? -ne 0 ]; then
         printf "\\e[31m[ERROR]\\e[0m   %s\\n" "Failed to get credentials" >&2
         return
@@ -64,7 +82,12 @@ function aws-assume-role {
     export AWS_ACCESS_KEY_ID="$(echo "$credentials" | jq -r '.Credentials.AccessKeyId')"
     export AWS_SECRET_ACCESS_KEY="$(echo "$credentials" | jq -r '.Credentials.SecretAccessKey')"
     export AWS_SESSION_TOKEN="$(echo "$credentials" | jq -r '.Credentials.SessionToken')"
-    set +x
+    expiry="$(echo "$credentials" | jq -r '.Credentials.Expiration')"
+    echo "Session expires on ${expiry}"
+}
+
+function aws-clear-session {
+    unset AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN
 }
 
 function aws-ecr-login() {
