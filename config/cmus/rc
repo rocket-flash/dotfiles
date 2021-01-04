@@ -3,6 +3,7 @@ colorscheme zenburn
 set start_view=playlist
 set follow=true
 set mouse=false
+set tree_width_percent=25
 
 # Playback
 set continue=true
