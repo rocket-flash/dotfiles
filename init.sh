@@ -9,7 +9,6 @@ prompt_no_nl() { printf "\\e[36m[PROMPT]\\e[0m  %s" "$*" >&2; read -r -n1 resp; 
 DOTFILES=(
     'Xmodmap'
     'dircolors'
-    'gitconfig'
     'ideavimrc'
     'profile'
     'templates'
