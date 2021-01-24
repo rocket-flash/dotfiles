@@ -61,4 +61,8 @@ function fix-perm {
     find -type d -not -perm 755 -print0 | xargs --no-run-if-empty -0 chmod 755
 }
 
+function f {
+    open "${@:-.}"
+}
+
 # vim: ft=zsh

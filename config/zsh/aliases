@@ -38,7 +38,6 @@ elif installed xdg-open; then
 elif installed exo-open; then
     alias open='exo-open'
 fi
-alias f='open .'
 
 if installed paru; then
     pm() {
