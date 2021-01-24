@@ -15,6 +15,9 @@ export DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
 export JFROG_CLI_HOME_DIR="${XDG_DATA_HOME}/jfrog"
 export PYENV_ROOT="${XDG_DATA_HOME}/pyenv"
 export VAGRANT_HOME="${XDG_DATA_HOME}/vagrant"
+export CARGO_HOME="${XDG_DATA_HOME}/cargo"
+export RUSTUP_HOME="${XDG_DATA_HOME}/rustup"
+export GOPATH="${XDG_DATA_HOME}/go"
 
 # Set JRE for JetBrains products
 JETBRAINS_JRE="/usr/lib/jvm/jre-jetbrains"
@@ -26,35 +29,32 @@ if [ -d "$JETBRAINS_JRE" ]; then
     export STUDIO_JDK="${JETBRAINS_JRE}"
 fi
 
+# Personal usr folder
+if [[ -d "${HOME}/usr/bin" ]] && [[ ":${PATH}:" != *":${HOME}/usr/bin:"* ]]; then
+    export PATH="${HOME}/usr/bin:${PATH}"
+fi
+if [[ -d "${HOME}/usr/lib" ]] && [[ ":${LD_LIBRARY_PATH}:" != *":${HOME}/usr/lib:"* ]]; then
+    export LD_LIBRARY_PATH="${HOME}/usr/lib:${LD_LIBRARY_PATH}"
+fi
+if [[ -d "${HOME}/usr/lib/pkgconfig" ]] && [[ ":${PKG_CONFIG_PATH}:" != *":${HOME}/usr/lib/pkgconfig:"* ]]; then
+    export PKG_CONFIG_PATH="${HOME}/usr/lib/pkgconfig:${PKG_CONFIG_PATH}"
+fi
+
+# Extra PATH
+paths=(
+    "${CARGO_HOME}/bin"
+    "${GOPATH}/bin"
+    "${HOME}/.poetry/bin"
+)
+for p in ${paths}; do
+    if [[ -d "${p}" ]] && [[ ":${PATH}:" != *":${p}:"* ]]; then
+        export PATH="${p}:${PATH}"
+    fi
+done
+unset paths
+
 # Prevent Wine from taking over file associations
 # https://wiki.archlinux.org/index.php/wine#Prevent_new_Wine_file_associations
 export WINEDLLOVERRIDES="winemenubuilder.exe=d"
-
-# Force hardware acceleration for firefox
-export MOZ_USE_OMTC=1
-
-export ANDROID_EMULATOR_USE_SYSTEM_LIBS=1
-
-# Stop here to prevent double adding to PATH and getting out of sync with DE
-[[ -n "${PROFILE_SOURCED}" ]] && return
-
-# Go path
-export GOPATH="$HOME/usr/go"
-[[ -d "$GOPATH/bin" ]] && export PATH="$GOPATH/bin:$PATH"
-
-# Rust's paths
-export CARGO_HOME="${XDG_DATA_HOME}/cargo"
-export RUSTUP_HOME="${XDG_DATA_HOME}/rustup"
-[[ -d "${CARGO_HOME}/bin" ]] && export PATH="${CARGO_HOME}/bin:${PATH}"
-
-# Poetry
-[[ -d "$HOME/.poetry/bin" ]] && export PATH="$HOME/.poetry/bin:$PATH"
-
-# Personal usr folder
-[[ -d "$HOME/usr/bin" ]] && export PATH="$HOME/usr/bin:$PATH"
-[[ -d "$HOME/usr/lib" ]] && export LD_LIBRARY_PATH="$HOME/usr/lib:$LD_LIBRARY_PATH"
-[[ -d "$HOME/usr/lib/pkgconfig" ]] && export PKG_CONFIG_PATH="$HOME/usr/lib/pkgconfig:$PKG_CONFIG_PATH"
-
-export PROFILE_SOURCED=1
 
 # vim: ft=sh
