@@ -9,20 +9,6 @@ printc() {
     echo -n "${c}$1"
 }
 
-prompt_vi_mode() {
-    case "${KEYMAP:-main}" in
-        main|viins)
-            printc ${green} "[I] "
-            ;;
-        vicmd)
-            printc ${red} "[N] "
-            ;;
-        *)
-            printc ${yellow} "[?] "
-            ;;
-    esac
-}
-
 prompt_venv() {
     # Strip out the path and just leave the env name
     [[ -n "$VIRTUAL_ENV" ]] && printc ${cyan} "[${VIRTUAL_ENV##*/}] "
@@ -57,7 +43,6 @@ prompt_end() {
 build_ps1() {
     RETVAL=$?
 
-    prompt_vi_mode
     prompt_venv
     prompt_status
     prompt_host
