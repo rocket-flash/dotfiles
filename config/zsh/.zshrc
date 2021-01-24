@@ -6,7 +6,7 @@
 # https://kev.inburke.com/kevin/profiling-zsh-startup-time/
 if [[ "${ZSH_PROFILE_STARTUP:-false}" == true ]]; then
     # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
-    PS4=$'%D{%M.%S%.} %N:%i> '
+    PS4=$'%D{%M%S%.} %N:%i> '
     exec 3>&2 2>/tmp/startlog.$$
     setopt xtrace prompt_subst
 fi
