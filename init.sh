@@ -130,8 +130,6 @@ done
 
 find "$HOME/usr" -xtype l -print0 | xargs --no-run-if-empty -0 rm
 
-[[ -e "$DOTFILES_DIR/zsh.$(hostname)" ]] && ln -sf "$DOTFILES_DIR/zsh.$(hostname)" "$HOME/.zsh.local"
-
 [[ -L "$HOME/.vim" ]] && rm "$HOME/.vim"
 ln -s "$HOME/.config/nvim" "$HOME/.vim"
 
