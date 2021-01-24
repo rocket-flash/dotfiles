@@ -20,7 +20,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'ryanoasis/vim-devicons'
 
 if !&diff
-    Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': ':UpdateRemotePlugins'}
+    Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
     Plug 'junegunn/vim-peekaboo'
     Plug 'majutsushi/tagbar'
 
@@ -210,9 +210,6 @@ let g:miniBufExplForceSyntaxEnable = 1
 
 " CHADTree {{{
 nnoremap <C-n> <cmd>CHADopen<cr>
-let g:chadtree_settings = {
-    \  "show_hidden": 0,
-    \ }
 "}}}
 
 " vim-better-whitespace {{{
