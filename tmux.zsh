@@ -8,7 +8,9 @@ fi
 
 # Disable autostart from ssh connections or from virtual terminal
 # Disable also for root as it's probably from sudo, which would result in nested tmux
-[[ -n "$SSH_CLIENT" || -n "$PYCHARM_TERM" || "$TERM" = "linux" || $EUID -eq 0 ]] && export ZSH_TMUX_AUTOSTART=false
+if [[ -n "$SSH_CLIENT" || "$TERMINAL_EMULATOR" = *JetBrains* || "$TERM" = "linux" || $EUID -eq 0 ]]; then
+    export ZSH_TMUX_AUTOSTART=false
+fi
 
 # Configuration variables
 #
@@ -39,7 +41,7 @@ fi
 [[ -n "$ZSH_TMUX_FIXTERM_WITH_256COLOR" ]] || ZSH_TMUX_FIXTERM_WITH_256COLOR="tmux-256color"
 
 # Temporary file to disable autoquit
-ZSH_TMUX_NO_AUTOQUIT_FILE="/tmp/zsh_tmux_no_autoquit.${USER}"
+[[ -z "$TMUX" ]] && export ZSH_TMUX_NO_AUTOQUIT_FILE="/tmp/zsh_tmux_no_autoquit.${PPID}"
 
 # Change TPM install path
 export TMUX_PLUGIN_MANAGER_PATH="$HOME/.local/share/tmux/plugins/"
