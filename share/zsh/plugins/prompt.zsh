@@ -52,15 +52,15 @@ function zle-keymap-select {
 
 zle -N zle-keymap-select
 
-ZSH_THEME="powerline"
+theme="powerline"
 
 if [[ $(tput colors) -lt 256 ]]; then
-    ZSH_THEME="simple"
-elif [[ "$TERMINAL_EMULATOR" == *JetBrains* ]]; then
-    ZSH_THEME="basic"
+    theme="simple"
 fi
 
-zsh-theme "${ZSH_THEME}"
+zsh-theme "${theme}"
+
+unset theme
 
 # vi: foldmethod=marker
 
