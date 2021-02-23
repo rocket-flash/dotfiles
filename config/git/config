@@ -21,6 +21,7 @@
 	ci = commit
 	sw = switch
 	ap = add -p
+	ai = add --intent-to-add
 	ri = rebase -i
 	rc = rebase --continue
 	ds = diff --staged
