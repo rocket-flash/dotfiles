@@ -30,7 +30,7 @@ function docker-grep-rmi() {
 }
 
 function docker-cleanup() {
-    ask-yes-no "Prune containers" "y" && docker container prune -f
-    ask-yes-no "Prune images" "y" && docker image prune -f
-    ask-yes-no "Prune volumes" "y" && docker volume prune -f
+    docker container prune "$@"
+    docker image prune "$@"
+    docker volume prune "$@"
 }

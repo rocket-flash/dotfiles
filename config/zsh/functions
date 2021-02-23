@@ -15,7 +15,7 @@ function bak() {
     output="${input#.}.$(date +%Y%m%d-%H%M%S).tar"
 
     if [ "$compress" -eq 1 ]; then
-        tar cf -C "$dir" "${input}" | lrzip > "${output}"
+        tar cf - -C "$dir" "${input}" | lrzip > "${output}.lrz"
     else
         tar cf "${output}" -C "$dir" "${input}"
     fi
@@ -63,6 +63,13 @@ function fix-perm {
 
 function f {
     open "${@:-.}"
+}
+
+function showargs() {
+    echo "Got $# argument(s):"
+    for arg; do
+        echo ">> $arg"
+    done
 }
 
 # vim: ft=zsh
