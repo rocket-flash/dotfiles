@@ -108,6 +108,19 @@ function aws-eks-get-token() {
     aws eks get-token --cluster-name preprod | jq -r '.status.token'
 }
 
+function aws-refresh-sso() {
+    local last_check_file="${XDG_CACHE_HOME:-${HOME}/.cache}/aws/last_sso_check"
+
+    if [ -e "${last_check_file}" ] && [ -z "$(find "${last_check_file}" -mmin +720 2>/dev/null)" ]; then
+        return
+    fi
+
+    if aws sso login; then
+        mkdir -p "$(dirname "${last_check_file}")"
+        touch "${last_check_file}"
+    fi
+}
+
 # }}}
 
 # Cloud Formation {{{
