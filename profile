@@ -13,7 +13,10 @@ export AWS_CONFIG_FILE="${XDG_CONFIG_HOME}/aws/config"
 export AWS_SHARED_CREDENTIALS_FILE="${XDG_CONFIG_HOME}/aws/credentials"
 export DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
 export JFROG_CLI_HOME_DIR="${XDG_DATA_HOME}/jfrog"
+export POETRY_HOME="${XDG_DATA_HOME}/poetry"
 export PYENV_ROOT="${XDG_DATA_HOME}/pyenv"
+export PIPX_HOME="${XDG_DATA_HOME}/pipx"
+export PIPX_BIN_DIR="${PIPX_HOME}/bin"
 export VAGRANT_HOME="${XDG_DATA_HOME}/vagrant"
 export CARGO_HOME="${XDG_DATA_HOME}/cargo"
 export RUSTUP_HOME="${XDG_DATA_HOME}/rustup"
@@ -44,7 +47,8 @@ fi
 paths=(
     "${CARGO_HOME}/bin"
     "${GOPATH}/bin"
-    "${HOME}/.poetry/bin"
+    "${POETRY_HOME}/bin"
+    "${PIPX_BIN_DIR}"
 )
 for p in ${paths}; do
     if [[ -d "${p}" ]] && [[ ":${PATH}:" != *":${p}:"* ]]; then
