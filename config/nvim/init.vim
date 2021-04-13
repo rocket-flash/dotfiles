@@ -19,6 +19,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'ryanoasis/vim-devicons'
 Plug 'Cespare/vim-toml'
+Plug 'ap/vim-css-color'
 
 if !&diff
     Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
@@ -31,6 +32,7 @@ if !&diff
 endif
 
 " Colorschemes
+let g:zenburn_italic_Comment=1
 Plug 'jnurmine/Zenburn'
 
 call plug#end()
