@@ -34,6 +34,7 @@ function pre-commit() {
 }
 
 function pre-push() {
+    [[ -e "./.git/hooks/pre-push" ]] || fatal "No pre-push hook"
     ./.git/hooks/pre-push << EOF
 a a a a
 EOF
@@ -57,11 +58,7 @@ function available_hooks() {
 
 [ -d ".git" ] || fatal "You must be in the root of the repo"
 
-if [ $# -ge 1 ]; then
-    hook="$1"
-else
-    hook="pre-push"
-fi
+hook="${1:-pre-push}"
 
 case "$hook" in
     "applypatch-msg")
