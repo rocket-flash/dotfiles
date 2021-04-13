@@ -1,12 +1,14 @@
 function docker-grep-rmi() {
-    if [[ $# -ne 1 ]]; then
-        echo "$0: pattern not specified"
-        return 1
-    fi
+    select_pattern="${1:?Pattern not specified}"
+    ignore_pattern="${2:-}"
 
     local images
 
-    images=$(docker images | grep -- "$1" | awk -F ' ' '{print $1 ":" $2}')
+    images=$(docker images | grep -- "${select_pattern}")
+    if [ -n "${ignore_pattern}" ]; then
+        images=$(echo "${images}" | grep -v -- "${ignore_pattern}")
+    fi
+    images=$(echo "${images}" | awk -F ' ' '{print $1 ":" $2}')
 
     if [[ -z "${images}" ]]; then
         echo "Nothing to delete"
@@ -33,4 +35,8 @@ function docker-cleanup() {
     docker container prune "$@"
     docker image prune "$@"
     docker volume prune "$@"
+}
+
+function dps() {
+    docker ps --format "table {{.Names}}\t{{.Command}}\t{{.Status}}\t{{printf \"%.65s\" .Image }}" $@
 }

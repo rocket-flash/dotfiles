@@ -91,7 +91,16 @@ function aws-clear-session {
 }
 
 function aws-ecr-login() {
-    local accountid region passwd
+    local accountid region passwd profile_name
+
+    profile_name="${1:-}"
+    if [ -n "${profile_name}" ]; then
+        echo "Using AWS Profile: ${profile_name}"
+        export AWS_PROFILE="${profile_name}"
+    else
+        echo "Using current AWS Profile: ${AWS_PROFILE:-}"
+    fi
+
     accountid="$(aws-get-account-id)"
     region="$(aws-get-current-region)"
     passwd="$(aws ecr get-login-password)"
