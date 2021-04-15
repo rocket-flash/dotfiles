@@ -10,6 +10,7 @@ if installed 'exa'; then
     alias la='ls -a'
     alias lf='ll -a'
     alias lr='ll -a -smod'
+    compdef ls='exa'
 else
     alias ls='ls --color=auto -v --group-directories-first'
     alias ll='ls -lh'
