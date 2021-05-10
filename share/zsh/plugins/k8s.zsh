@@ -12,3 +12,9 @@ function kubectl() {
 
     command kubectl "${=args}"
 }
+
+function k9s() {
+    aws-refresh-sso
+
+    command k9s
+}
