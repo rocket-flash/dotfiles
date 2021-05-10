@@ -1,13 +1,10 @@
 {
-    "python.formatting.blackPath": "/usr/bin/black",
     "python.formatting.provider": "black",
     "python.formatting.blackArgs": ["-l", "120"],
-    "python.jediEnabled": false,
-    "python.linting.flake8Enabled": false,
+    "python.linting.flake8Enabled": true,
     "python.linting.flake8Args": ["--ignore=E203,E501,W503"],
-    "python.linting.flake8Path": "/usr/bin/flake8",
     "python.venvPath": "~/.virtualenvs",
     "git.enableGutters": false,
     "yaml.customTags": [ "!GetAtt", "!Join", "!Ref", "!Sub"],
-    "rust-analyzer.serverPath": "/usr/bin/rust-analyzer"
+    "rust-analyzer.server.path": "/usr/bin/rust-analyzer"
 }
