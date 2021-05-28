@@ -219,4 +219,12 @@ function aws-get-ipgranges {
 
 # }}}
 
+# Completion {{{
+
+autoload bashcompinit
+bashcompinit
+complete -C aws_completer aws
+
+# }}}
+
 # vim: foldmethod=marker
