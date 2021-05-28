@@ -1,10 +1,14 @@
-#! /bin/bash -eu
+#! /bin/bash
+
+set -eu -o pipefail
 
 if ! type fzf &> /dev/null; then
     echo "fzf not installed"
     exit 1
 fi
 
-branch=$(git branch -a | sed 's/^\*//' | awk '{$1=$1};1' | sed 's@^remotes/origin/@@' | sort | uniq | fzf -q "${@:-}")
-
-[[ -n "${branch}" ]] && git switch "${branch}"
+branches=$(git branch -a | grep -Ev "(^\*| -> )" | awk '{$1=$1};1' | sort | uniq)
+echo "${branches}" \
+    | fzf-tmux ${FZF_TMUX_OPTS} -q "${@:-}" --preview 'git log --color -n 50 {} | head -200' \
+    | sed 's@^remotes/origin/@@' \
+    | xargs -r git switch
