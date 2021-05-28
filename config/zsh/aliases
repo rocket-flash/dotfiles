@@ -40,49 +40,6 @@ elif installed exo-open; then
     alias open='exo-open'
 fi
 
-if installed paru; then
-    pm() {
-        if [ -n "${VIRTUAL_ENV}" ]; then
-            echo "Can't run paru in venv"
-            return
-        fi
-
-        paru "$@"
-    }
-    up() {
-        if [ -n "${VIRTUAL_ENV}" ]; then
-            echo "Can't run paru in venv"
-            return
-        fi
-
-        paru -Syu "$@"
-    }
-    compdef pm='paru'
-elif installed yay; then
-    pm() {
-        if [ -n "${VIRTUAL_ENV}" ]; then
-            echo "Can't run yay in venv"
-            return
-        fi
-
-        yay "$@"
-    }
-    up() {
-        if [ -n "${VIRTUAL_ENV}" ]; then
-            echo "Can't run yay in venv"
-            return
-        fi
-
-        yay -Syu "$@"
-    }
-    compdef pm='yay'
-elif installed pacman; then
-    alias up='sudo pacman -Syu'
-    alias pm='pacman'
-elif installed apt; then
-    alias up='sudo apt update && sudo apt full-upgrade'
-fi
-
 if installed nvim; then
     alias vim='nvim'
     alias vimdiff='nvim -d'
