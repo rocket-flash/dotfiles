@@ -6,7 +6,7 @@ function kubectl() {
     if [[ -n "${KUBE_NAMESPACE}" ]]; then
         args="--namespace ${KUBE_NAMESPACE} $@"
     else
-        echo "WARN: KUBE_NAMESPACE not set"
+        echo "WARN: KUBE_NAMESPACE not set" >&2
         args="$@"
     fi
 
