@@ -121,7 +121,7 @@ command! QA qa
 nnoremap <leader>d :bp<bar>sp<bar>bn<bar>bd<CR>
 
 " JSON Tidy: Reformat JSON file
-nnoremap <leader>jt :%!python -m json.tool<CR>
+nnoremap <leader>jt :%!jq<CR>
 " XML Tidy: Reformat XML file
 nnoremap <leader>xt :%!tidy -xml -i -w 2048 2>/dev/null<CR>
 

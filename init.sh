@@ -32,6 +32,7 @@ APPS=(
     'fd'
     'fzf'
     'handlr'
+    'jq'
     'lrzip'
     'node'
     'rg'
