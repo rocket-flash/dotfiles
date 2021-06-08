@@ -22,6 +22,11 @@ function w() {
 
     prj=$(find ~/src -maxdepth 1 -mindepth 1 -print0 | xargs -0 -n1 basename | fzf -q "${@:-}")
 
+    if [[ -z "${prj}" ]]; then
+        echo "No project selected" 1>&2
+        return 2
+    fi
+
     local workondir="$(_get_workon_dir "${srcdir}" "${prj}")"
 
     if [[ -n "${workondir}" ]]; then
