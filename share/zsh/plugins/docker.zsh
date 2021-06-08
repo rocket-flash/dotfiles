@@ -40,3 +40,8 @@ function docker-cleanup() {
 function dps() {
     docker ps --format "table {{.Names}}\t{{.Command}}\t{{.Status}}\t{{printf \"%.65s\" .Image }}" $@
 }
+
+# Fix completion when optional arguments are combined (`-i -t` -> `-it`)
+# https://github.com/docker/cli/issues/993
+zstyle ':completion:*:*:docker:*' option-stacking yes
+zstyle ':completion:*:*:docker-*:*' option-stacking yes
