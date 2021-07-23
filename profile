@@ -28,7 +28,6 @@ if [ -d "$JETBRAINS_JRE" ]; then
     export IDEA_JDK="${JETBRAINS_JRE}"
     export CLION_JDK="${JETBRAINS_JRE}"
     export DATAGRIP_JDK="${JETBRAINS_JRE}"
-    export PYCHARM_JDK="${JETBRAINS_JRE}"
     export STUDIO_JDK="${JETBRAINS_JRE}"
 fi
 
