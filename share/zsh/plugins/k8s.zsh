@@ -1,7 +1,7 @@
 function kubectl() {
     local args
 
-    aws-refresh-sso
+    aws-sso-login
 
     if [[ -n "${KUBE_NAMESPACE}" ]]; then
         args="--namespace ${KUBE_NAMESPACE} $@"
@@ -14,7 +14,7 @@ function kubectl() {
 }
 
 function k9s() {
-    aws-refresh-sso
+    aws-sso-login
 
     command k9s
 }

@@ -117,7 +117,7 @@ function aws-eks-get-token() {
     aws eks get-token --cluster-name preprod | jq -r '.status.token'
 }
 
-function aws-refresh-sso() {
+function aws-sso-login() {
     local last_check_file="${XDG_CACHE_HOME:-${HOME}/.cache}/aws/last_sso_check"
 
     if [ -e "${last_check_file}" ] && [ -z "$(find "${last_check_file}" -mmin +720 2>/dev/null)" ]; then
@@ -134,47 +134,27 @@ function aws-refresh-sso() {
 
 # Cloud Formation {{{
 
-function aws-cf-get-stack-status() {
-    local stack="$1"
-    if [[ -z "${stack}" ]]; then
-        echo "Stack not specified"
-        return 1
-    fi
+function aws-cf-create-stack() {
+    local stack_name="${1:?Stack name not specified}"
+    local template_file="${2:?Template file not specified}"
 
-    aws cloudformation describe-stacks --stack-name "${stack}" | jq -r '.Stacks[] | select(.StackId == "'"${stack}"'") | .StackStatus'
+    aws cloudformation create-stack --stack-name "${stack_name}" --template-body "$(cat "${template_file}")"
+    aws cloudformation wait stack-create-complete --stack-name "${stack_name}"
+}
+
+function aws-cf-update-stack() {
+    local stack_name="${1:?Stack name not specified}"
+    local template_file="${2:?Template file not specified}"
+
+    aws cloudformation update-stack --stack-name "${stack_name}" --template-body "$(cat "${template_file}")"
+    aws cloudformation wait stack-update-complete --stack-name "${stack_name}"
 }
 
 function aws-cf-delete-stack() {
-    local stack="$1" st
-    if [[ -z "${stack}" ]]; then
-        echo "Stack not specified"
-        return 1
-    fi
+    local stack_name="${1:?Stack name not specified}"
 
-    st="$(aws-cf-get-stack-status "${stack}")"
-
-    if [[ -z "${st}" ]] || [[ "${st}" == "DELETE_IN_PROGRESS" ]] || [[ "${st}" == "DELETE_COMPLETE" ]]; then
-        return
-    fi
-
-    aws cloudformation delete-stack --stack-name "${stack}"
-
-    while true; do
-        st="$(aws-cf-get-stack-status "${stack}")"
-        echo "${stack}: ${st}"
-
-        case "${st}" in
-            DELETE_COMPLETE|DELETE_FAILED)
-                break
-                ;;
-            CREATE_COMPLETE|DELETE_IN_PROGRESS)
-                sleep 2
-                ;;
-            *)
-                echo "Unknown status"
-                ;;
-        esac
-    done
+    aws cloudformation delete-stack --stack-name "${stack_name}"
+    aws cloudformation wait stack-delete-complete --stack-name "${stack_name}"
 }
 
 function aws-cf-delete-stacks() {
