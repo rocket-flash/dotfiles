@@ -20,7 +20,7 @@ function w() {
         fi
     fi
 
-    prj=$(find ~/src -maxdepth 1 -mindepth 1 -print0 | xargs -0 -n1 basename | fzf -q "${@:-}")
+    prj=$(find ~/src -maxdepth 1 -mindepth 1 -print0 | xargs -0 -n1 basename | fzf-tmux "${=FZF_TMUX_OPTS:-}" -q "${@:-}")
 
     if [[ -z "${prj}" ]]; then
         echo "No project selected" 1>&2
