@@ -31,6 +31,7 @@ alias hd='hexdump -C'
 alias dd='dd status=progress'
 alias rar='unrar'
 alias rf='readlink -f'
+alias jdmesg='journalctl --dmesg -o short-monotonic --no-hostname --no-pager'
 
 if installed handlr; then
     alias open='handlr open'
