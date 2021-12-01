@@ -1,7 +1,7 @@
 [[ -d /usr/share/fzf ]] || return
 
 . /usr/share/fzf/key-bindings.zsh
-. /usr/share/fzf/completion.zsh
+[[ $- == *i* ]] && . "/usr/share/fzf/completion.zsh" 2> /dev/null
 
 preview_window_opts="--preview-window hidden --bind '?:toggle-preview'"
 
