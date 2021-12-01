@@ -20,7 +20,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'ryanoasis/vim-devicons'
 Plug 'Cespare/vim-toml'
 Plug 'ap/vim-css-color'
-Plug 'vmchale/just-vim'
+Plug 'NoahTheDuke/vim-just'
 
 if !&diff
     Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
@@ -144,6 +144,7 @@ endif
 syntax enable
 au BufNewFile,BufRead *.bf set filetype=brainfuck
 au BufNewFile,BufRead *.asm set filetype=nasm
+au BufNewFile,BufRead Justfile set filetype=just
 
 " Type specific configs
 autocmd FileType python setlocal foldmethod=indent foldnestmax=2 foldlevelstart=99
