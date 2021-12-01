@@ -32,14 +32,19 @@ function docker-grep-rmi() {
 }
 
 function docker-cleanup() {
-    docker container prune "$@"
-    docker image prune "$@"
-    docker volume prune "$@"
+    docker container prune -f
+    docker image prune -f
+    docker volume ls -qf dangling=true \
+        | xargs --no-run-if-empty docker inspect \
+        | jq -r '.[] | select((.Labels | has("com.docker.compose.project") | not) and (.Labels | has("org.acidrain.pipeline_runner.project") | not)).Name' \
+        | xargs --no-run-if-empty docker volume rm
 }
 
 function dps() {
     docker ps --format "table {{.Names}}\t{{.Command}}\t{{.Status}}\t{{printf \"%.65s\" .Image }}" $@
 }
+
+export DOCKER_BUILDKIT=1
 
 # Fix completion when optional arguments are combined (`-i -t` -> `-it`)
 # https://github.com/docker/cli/issues/993
