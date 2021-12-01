@@ -120,7 +120,7 @@ function aws-eks-get-token() {
 function aws-sso-login() {
     local last_check_file="${XDG_CACHE_HOME:-${HOME}/.cache}/aws/last_sso_check"
 
-    if [ -e "${last_check_file}" ] && [ -z "$(find "${last_check_file}" -mmin +720 2>/dev/null)" ]; then
+    if [ -e "${last_check_file}" ] && [ -z "$(find "${last_check_file}" -mmin +480 2>/dev/null)" ]; then
         return
     fi
 
