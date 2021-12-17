@@ -144,7 +144,6 @@ endif
 syntax enable
 au BufNewFile,BufRead *.bf set filetype=brainfuck
 au BufNewFile,BufRead *.asm set filetype=nasm
-au BufNewFile,BufRead Justfile set filetype=just
 
 " Type specific configs
 autocmd FileType python setlocal foldmethod=indent foldnestmax=2 foldlevelstart=99
