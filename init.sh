@@ -115,7 +115,7 @@ done
 
 if ask_yes_no "Install fonts [y/N]? " "n"; then
     for file in "${DOTFILES_DIR}"/fonts/*; do
-        copy_file "$HOME/.fonts/$(basename "$file")" "$file"
+        copy_file "$HOME/.local/share/fonts/$(basename "$file")" "$file"
     done
 
     fc-cache -f

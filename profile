@@ -21,6 +21,10 @@ export VAGRANT_HOME="${XDG_DATA_HOME}/vagrant"
 export CARGO_HOME="${XDG_DATA_HOME}/cargo"
 export RUSTUP_HOME="${XDG_DATA_HOME}/rustup"
 export GOPATH="${XDG_DATA_HOME}/go"
+export COOKIECUTTER_CONFIG="${XDG_CONFIG_HOME}/cookiecutterrc"
+export K9SCONFIG="${XDG_CONFIG_HOME}/k9s"
+export NVM_DIR="${XDG_DATA_HOME}/nvm"
+export npm_config_cache="${XDG_CONFIG_HOME}/npm"
 
 # Set JRE for JetBrains products
 JETBRAINS_JRE="/usr/lib/jvm/jre-jetbrains"
