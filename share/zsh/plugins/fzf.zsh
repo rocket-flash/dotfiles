@@ -3,13 +3,14 @@
 . /usr/share/fzf/key-bindings.zsh
 [[ $- == *i* ]] && . "/usr/share/fzf/completion.zsh" 2> /dev/null
 
+rg_opts="--files --follow --hidden --glob '!.git/*'"
 preview_window_opts="--preview-window hidden --bind '?:toggle-preview'"
 
 # Show prompt on top
 export FZF_DEFAULT_OPTS="--reverse -1"
 # --files: List files that would be searched but do not search
 # --follow: Follow symlinks
-export FZF_DEFAULT_COMMAND="rg --files --follow 2>/dev/null"
+export FZF_DEFAULT_COMMAND="rg ${=rg_opts} 2>/dev/null"
 export FZF_COMPLETION_TRIGGER=";;"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_CTRL_T_OPTS="--tiebreak=end --preview '(bat --color=always {} || cat {}) 2>/dev/null | head -200' ${=preview_window_opts}"
@@ -23,5 +24,5 @@ unset preview_window_opts
 # - The first argument to the function ($1) is the base path to start traversal
 # - See the source code (completion.{bash,zsh}) for the details.
 function _fzf_compgen_path() {
-    rg --files --follow --glob '!Library/*' 2>/dev/null "$1" | sed 's@^\./@@'
+    rg --files --follow --hidden --glob '!.git/*' 2>/dev/null "$1" | sed 's@^\./@@'
 }
