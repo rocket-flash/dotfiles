@@ -72,7 +72,7 @@ function ask_yes_no {
 }
 
 function hash() {
-    md5sum "$1" | cut -d ' ' -f 1
+    sha256sum "$1" | cut -d ' ' -f 1
 }
 
 function create_link() {
