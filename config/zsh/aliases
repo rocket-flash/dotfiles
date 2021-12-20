@@ -52,7 +52,7 @@ else
     alias diff='diff -u'
 fi
 
-installed bat && alias cat='bat'
+installed bat && alias cat='bat --'
 
 if [ "$TERM" != "xterm" ] && [ "$TERM" != "xterm-256color" ] && [ "$TERM" != "linux" ]; then
     alias ssh='TERM=xterm-256color ssh'
