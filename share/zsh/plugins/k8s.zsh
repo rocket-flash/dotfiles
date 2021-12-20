@@ -1,12 +1,14 @@
-function kctl() {
-    local args
+if command -v kubectl; then
+    function kctl() {
+        local args
 
-    aws-sso-login
+        aws-sso-login
 
-    kubectl "$@"
-}
+        kubectl "$@"
+    }
 
-compdef kctl='kubectl'
+    compdef kctl='kubectl'
+fi
 
 function k9s() {
     aws-sso-login
