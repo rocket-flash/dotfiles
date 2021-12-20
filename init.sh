@@ -137,7 +137,7 @@ ln -s "$HOME/.config/nvim" "$HOME/.vim"
 [[ -L "$HOME/.vimrc" ]] && rm "$HOME/.vimrc"
 ln -s "$HOME/.config/nvim/init.vim" "$HOME/.vimrc"
 
-if installed vim; then
+if installed nvim; then
     if [ ! -e "$HOME/.config/nvim/autoload/plug.vim" ]; then
         info "Installing vim-plug"
         curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -145,7 +145,7 @@ if installed vim; then
 
     if ask_yes_no "Install vim plugins [y/N]? " "n"; then
         # TERM workaround to avoid loading non existing color scheme
-        TERM=xterm vim -S "$DOTFILES_DIR/vimplug.lock" +qall
+        TERM=xterm nvim -S "$DOTFILES_DIR/vimplug.lock" +qall
     fi
 fi
 
