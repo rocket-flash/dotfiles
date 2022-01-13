@@ -1,4 +1,4 @@
-if command -v kubectl; then
+if command -v kubectl &>/dev/null; then
     function kctl() {
         local args
 
