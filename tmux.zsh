@@ -40,9 +40,6 @@ fi
 # systems without the proper terminfo
 [[ -n "$ZSH_TMUX_FIXTERM_WITH_256COLOR" ]] || ZSH_TMUX_FIXTERM_WITH_256COLOR="tmux-256color"
 
-# Temporary file to disable autoquit
-[[ -z "$TMUX" ]] && export ZSH_TMUX_NO_AUTOQUIT_FILE="/tmp/zsh_tmux_no_autoquit.${PPID}"
-
 # Change TPM install path
 export TMUX_PLUGIN_MANAGER_PATH="$HOME/.local/share/tmux/plugins/"
 
@@ -59,12 +56,7 @@ function _zsh_tmux_setup_term() {
 
 function _zsh_tmux_is_autoquit() {
     if [[ "$ZSH_TMUX_AUTOQUIT" == "true" ]]; then
-        if [ -e "$ZSH_TMUX_NO_AUTOQUIT_FILE" ]; then
-            rm "$ZSH_TMUX_NO_AUTOQUIT_FILE"
-            return 1
-        else
-            return 0
-        fi
+        return 0
     else
         return 1
     fi
@@ -110,7 +102,7 @@ compdef _tmux _zsh_tmux_plugin_run
 alias tmux=_zsh_tmux_plugin_run
 
 # Alias to for one-time disable of autoquit
-alias tq="[[ -n \"$TMUX\" ]] && touch $ZSH_TMUX_NO_AUTOQUIT_FILE && exit"
+alias tq="(ZSH_TMUX_AUTOSTART=false ${TERMINAL} &)"
 
 # Autostart if not already in tmux and enabled.
 if [[ ! -n "$TMUX" && "$ZSH_TMUX_AUTOSTART" == "true" ]]; then
