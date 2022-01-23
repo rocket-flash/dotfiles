@@ -10,8 +10,10 @@ if command -v kubectl &>/dev/null; then
     compdef kctl='kubectl'
 fi
 
-function k9s() {
-    aws-sso-login
+if command -v k9s &>/dev/null; then
+    function k9s() {
+        aws-sso-login
 
-    command k9s
-}
+        command k9s
+    }
+fi
