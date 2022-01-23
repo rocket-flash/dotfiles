@@ -23,3 +23,5 @@ set format_treewin_artist=%{?A?%A?%a}
 
 # Notifications
 set status_display_program=~/usr/bin/cmus-notify
+
+# vim: commentstring=#\ %s
