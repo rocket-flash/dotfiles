@@ -1,5 +1,5 @@
 # Set default terminal
-export TERMINAL="alacritty"
+export TERMINAL="kitty"
 
 # Get proper date format
 export LC_TIME="en_DK.UTF-8"
