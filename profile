@@ -33,6 +33,7 @@ if [ -d "$JETBRAINS_JRE" ]; then
     export CLION_JDK="${JETBRAINS_JRE}"
     export DATAGRIP_JDK="${JETBRAINS_JRE}"
     export STUDIO_JDK="${JETBRAINS_JRE}"
+    export GOLAND_JDK="${JETBRAINS_JRE}"
 fi
 
 # Personal usr folder
@@ -59,6 +60,9 @@ for p in ${paths}; do
     fi
 done
 unset paths
+
+# Firefox on Wayland
+MOZ_ENABLE_WAYLAND=1
 
 # Prevent Wine from taking over file associations
 # https://wiki.archlinux.org/index.php/wine#Prevent_new_Wine_file_associations
