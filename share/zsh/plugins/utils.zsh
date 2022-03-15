@@ -27,3 +27,16 @@ function ask-yes-no() {
 
     return 1
 }
+
+if command -v dotenv &> /dev/null; then
+    function dotenv() {
+        case "$1" in
+            load)
+                . <(dotenv list | sed -E 's/^([^=]+)=(.*)/export \1="\2"/')
+                ;;
+            *)
+                command dotenv "$@"
+                ;;
+        esac
+    }
+fi
