@@ -102,7 +102,7 @@ compdef _tmux _zsh_tmux_plugin_run
 alias tmux=_zsh_tmux_plugin_run
 
 # Alias to for one-time disable of autoquit
-alias tq="(ZSH_TMUX_AUTOSTART=false ${TERMINAL} &)"
+alias tq="(ZSH_TMUX_AUTOSTART=false ${TERMINAL} &>/dev/null &)"
 
 # Autostart if not already in tmux and enabled.
 if [[ ! -n "$TMUX" && "$ZSH_TMUX_AUTOSTART" == "true" ]]; then
