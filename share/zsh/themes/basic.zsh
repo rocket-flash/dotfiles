@@ -43,7 +43,6 @@ prompt_end() {
 build_ps1() {
     RETVAL=$?
 
-    prompt_venv
     prompt_status
     prompt_host
     prompt_dir
