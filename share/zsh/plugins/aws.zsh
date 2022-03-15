@@ -105,7 +105,10 @@ function aws-ecr-login() {
     region="$(aws-get-current-region)"
     passwd="$(aws ecr get-login-password)"
 
-    echo "$passwd" | docker login --username AWS --password-stdin "${accountid}.dkr.ecr.${region}.amazonaws.com"
+    repo="${accountid}.dkr.ecr.${region}.amazonaws.com"
+    echo "Logging in docker repository ${repo}"
+
+    echo "$passwd" | docker login --username AWS --password-stdin "${repo}"
 }
 
 function aws-eks-get-token() {
@@ -120,7 +123,7 @@ function aws-eks-get-token() {
 function aws-sso-login() {
     local last_check_file="${XDG_CACHE_HOME:-${HOME}/.cache}/aws/last_sso_check"
 
-    if [ -e "${last_check_file}" ] && [ -z "$(find "${last_check_file}" -mmin +480 2>/dev/null)" ]; then
+    if [[ "${1:-}" != "-f" ]] && [[ -e "${last_check_file}" ]] && [[ -z "$(find "${last_check_file}" -mmin +480 2>/dev/null)" ]]; then
         return
     fi
 
@@ -128,6 +131,50 @@ function aws-sso-login() {
         mkdir -p "$(dirname "${last_check_file}")"
         touch "${last_check_file}"
     fi
+}
+
+function __aws-sso-get-access-token {
+    for f in ~/.aws/sso/cache/*; do
+        token="$(jq -r '.accessToken | select(. != null)' < "${f}")"
+
+        [[ -z "${token}" ]] && continue
+
+        expiry="$(date -d "$(jq -r '.expiresAt' < "${f}")" "+%s")"
+
+        if [ "${expiry}" -gt "$(date "+%s")" ]; then
+            echo "${token}"
+        fi
+        return
+    done
+}
+
+function aws-sso-assume() {
+    local token accountid credentials
+
+    [[ -n "${AWS_PROFILE:-}" ]] || aws-switch-profile
+
+    aws-sso-login
+    aws-clear-session
+
+    token="$(__aws-sso-get-access-token)"
+
+    if [[ -z "${token}" ]]; then
+        echo "Unable to find access token." >&2
+        return 1
+    fi
+
+    accountid="$(aws-get-account-id)"
+    credentials="$(aws sso get-role-credentials --role-name AdminAccess --account-id "${accountid}" --access-token "${token}")"
+
+    if [[ -z "${credentials}" ]]; then
+        echo "Error fetching credentials" >&2
+        return 1
+    fi
+
+    export AWS_ACCESS_KEY_ID="$(echo "$credentials" | jq -r -e '.roleCredentials.accessKeyId')"
+    export AWS_SECRET_ACCESS_KEY="$(echo "$credentials" | jq -r -e '.roleCredentials.secretAccessKey')"
+    export AWS_SESSION_TOKEN="$(echo "$credentials" | jq -r -e '.roleCredentials.sessionToken')"
+    unset AWS_PROFILE
 }
 
 # }}}
@@ -196,6 +243,8 @@ function aws-cf-delete-stacks() {
 function aws-get-ipgranges {
     curl "https://ip-ranges.amazonaws.com/ip-ranges.json" | jq '.prefixes'
 }
+
+alias aws-local='aws --profile=default --endpoint-url=http://localhost:4566'
 
 # }}}
 
