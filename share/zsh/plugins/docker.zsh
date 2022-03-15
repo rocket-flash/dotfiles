@@ -40,6 +40,10 @@ function docker-cleanup() {
         | xargs --no-run-if-empty docker volume rm
 }
 
+function docker-kill-all() {
+    docker ps -q | xargs --no-run-if-empty docker kill
+}
+
 function dps() {
     docker ps --format "table {{.Names}}\t{{.Command}}\t{{.Status}}\t{{printf \"%.65s\" .Image }}" $@
 }
