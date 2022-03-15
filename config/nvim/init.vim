@@ -21,12 +21,10 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'cespare/vim-toml', { 'branch': 'main' }
 Plug 'ap/vim-css-color'
 Plug 'NoahTheDuke/vim-just'
+Plug 'Glench/Vim-Jinja2-Syntax'
 
 if !&diff
-    Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
     Plug 'junegunn/vim-peekaboo'
-    Plug 'majutsushi/tagbar'
-    Plug 'Glench/Vim-Jinja2-Syntax'
 
     if has('nvim') || has('patch-8.0-1453')
         Plug 'neoclide/coc.nvim', {'branch': 'release'}
