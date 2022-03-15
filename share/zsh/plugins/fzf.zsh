@@ -16,7 +16,7 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_CTRL_T_OPTS="--tiebreak=end --preview '(bat --color=always {} || cat {}) 2>/dev/null | head -200' ${=preview_window_opts}"
 export FZF_ALT_C_COMMAND="fd --type=d"
 export FZF_ALT_C_OPTS="--tiebreak=end --preview 'tree -C {} | head -200' ${=preview_window_opts}"
-export FZF_TMUX_OPTS="-p 75%,75%"
+[[ -n "${TMUX:-}" ]] && export FZF_TMUX_OPTS="-p 75%,75%"
 
 unset preview_window_opts
 
