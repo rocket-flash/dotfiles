@@ -1,4 +1,6 @@
-#! /bin/zsh -eu
+#! /bin/zsh
+
+set -eu
 
 if [ $# -ne 1 ]; then
     echo "Usage: $0 <version>"
@@ -15,4 +17,16 @@ if [[ ! -e "${pyexe}" ]]; then
     exit 1
 fi
 
-sudo "${pyexe}" "/opt/pycharm-professional/plugins/python/helpers/pydev/setup_cython.py" build_ext --build-temp build --build-lib .
+tmpdir="$(mktemp -d)"
+
+cleanup() {
+    sudo rm -rf "${tmpdir}"
+}
+
+trap cleanup EXIT
+
+virtualenv -p "${pyexe}" "${tmpdir}"
+source "${tmpdir}/bin/activate"
+pip install cython
+
+sudo python "/opt/pycharm-professional/plugins/python/helpers/pydev/setup_cython.py" build_ext --inplace --force-cython
