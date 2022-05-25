@@ -70,5 +70,7 @@
 [cola]
 	spellcheck = false
 	tabwidth = 4
+[url "https://"]
+	insteadOf = git://
 
 # vim: set noexpandtab:
