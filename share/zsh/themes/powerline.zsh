@@ -141,9 +141,17 @@ prompt_nvm() {
     [[ -n "$NVM_BIN" ]] && rprompt_segment ${black} ${magenta} "node ${${NVM_BIN%/*}##*/}"
 }
 
+prompt_shell_lvl() {
+    ((lvl = ${SHLVL} - 1))
+    [[ -n "${TMUX}" ]] && ((lvl--))
+    [[ -n "${POETRY_ACTIVE}" ]] && ((lvl--))
+    [[ ${lvl} -gt 0 ]] && rprompt_segment ${red} ${black} "Subshell ${lvl}"
+}
+
 build_rprompt() {
     load_vcs_info
 
+    prompt_shell_lvl
     prompt_nvm
     prompt_venv
     prompt_git_action

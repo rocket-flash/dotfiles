@@ -6,6 +6,12 @@ function _get_workon_dir() {
         echo ~"${prj}"
     elif [[ -d "${srcdir}/${prj}" ]]; then
         echo "${srcdir}/${prj}"
+    elif [[ -d "${srcdir}/direct/${prj}" ]]; then
+        echo "${srcdir}/direct/${prj}"
+    elif [[ -d "${srcdir}/devops/${prj}" ]]; then
+        echo "${srcdir}/devops/${prj}"
+    elif [[ -d "${srcdir}/private/${prj}" ]]; then
+        echo "${srcdir}/private/${prj}"
     fi
 }
 
@@ -20,7 +26,7 @@ function w() {
         fi
     fi
 
-    prj=$(find ~/src -maxdepth 1 -mindepth 1 -print0 | xargs -0 -n1 basename | fzf-tmux "${=FZF_TMUX_OPTS:-}" -q "${@:-}")
+    prj=$(find ~/src ~/src/direct ~/src/devops ~/src/private -maxdepth 1 -mindepth 1 -print0 | xargs -0 -n1 basename | fzf-tmux "${=FZF_TMUX_OPTS:-}" -q "${@:-}")
 
     if [[ -z "${prj}" ]]; then
         echo "No project selected" 1>&2
