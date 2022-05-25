@@ -4,11 +4,10 @@ function docker-grep-rmi() {
 
     local images
 
-    images=$(docker images | grep -- "${select_pattern}")
+    images=$(docker images --format="{{.Repository}}:{{.Tag}}" | grep -- "${select_pattern}")
     if [ -n "${ignore_pattern}" ]; then
         images=$(echo "${images}" | grep -v -- "${ignore_pattern}")
     fi
-    images=$(echo "${images}" | awk -F ' ' '{print $1 ":" $2}')
 
     if [[ -z "${images}" ]]; then
         echo "Nothing to delete"
@@ -46,6 +45,10 @@ function docker-kill-all() {
 
 function dps() {
     docker ps --format "table {{.Names}}\t{{.Command}}\t{{.Status}}\t{{printf \"%.65s\" .Image }}" $@
+}
+
+function dimg() {
+    docker images --format "table {{.Repository}}:{{.Tag}}\t{{.Size}}" $@
 }
 
 export DOCKER_BUILDKIT=1
