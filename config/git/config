@@ -72,5 +72,7 @@
 	tabwidth = 4
 [url "https://"]
 	insteadOf = git://
+[includeIf "gitdir:~/src/private/**"]
+	path = config.private
 
 # vim: set noexpandtab:
