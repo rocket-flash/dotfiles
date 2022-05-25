@@ -114,6 +114,7 @@ for file in "${DOTFILES_DIR}"/share/*; do
 done
 
 if ask_yes_no "Install fonts [y/N]? " "n"; then
+    mkdir -p "${HOME}/.local/share/fonts"
     for file in "${DOTFILES_DIR}"/fonts/*; do
         copy_file "$HOME/.local/share/fonts/$(basename "$file")" "$file"
     done
