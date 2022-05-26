@@ -36,14 +36,14 @@ if [ -d "$JETBRAINS_JRE" ]; then
     export GOLAND_JDK="${JETBRAINS_JRE}"
 fi
 
-# Personal usr folder
-if [[ -d "${HOME}/usr/bin" ]] && [[ ":${PATH}:" != *":${HOME}/usr/bin:"* ]]; then
-    export PATH="${HOME}/usr/bin:${PATH}"
+# Local prefix
+if [[ -d "${HOME}/.local/bin" ]] && [[ ":${PATH}:" != *":${HOME}/.local/bin:"* ]]; then
+    export PATH="${HOME}/.local/bin:${PATH}"
 fi
-if [[ -d "${HOME}/usr/lib" ]] && [[ ":${LD_LIBRARY_PATH}:" != *":${HOME}/usr/lib:"* ]]; then
-    export LD_LIBRARY_PATH="${HOME}/usr/lib:${LD_LIBRARY_PATH}"
+if [[ -d "${HOME}/.local/lib" ]] && [[ ":${LD_LIBRARY_PATH}:" != *":${HOME}/.local/lib:"* ]]; then
+    export LD_LIBRARY_PATH="${HOME}/.local/lib:${LD_LIBRARY_PATH}"
 fi
-if [[ -d "${HOME}/usr/lib/pkgconfig" ]] && [[ ":${PKG_CONFIG_PATH}:" != *":${HOME}/usr/lib/pkgconfig:"* ]]; then
+if [[ -d "${HOME}/.local/lib/pkgconfig" ]] && [[ ":${PKG_CONFIG_PATH}:" != *":${HOME}/.local/lib/pkgconfig:"* ]]; then
     export PKG_CONFIG_PATH="${HOME}/usr/lib/pkgconfig:${PKG_CONFIG_PATH}"
 fi
 

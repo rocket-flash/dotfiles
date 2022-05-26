@@ -21,10 +21,10 @@ DOTFILES=(
 
 DIRS=(
     '.config'
-    '.fonts'
+    '.local/bin'
+    '.local/lib'
     '.local/share'
-    'usr/bin'
-    'usr/lib'
+    '.local/share/fonts'
 )
 
 APPS=(
@@ -112,28 +112,22 @@ for file in "${DOTFILES_DIR}"/config/*; do
     create_link "$HOME/.config/$(basename "$file")" "$file"
 done
 
-for file in "${DOTFILES_DIR}"/share/*; do
-    create_link "$HOME/.local/share/$(basename "$file")" "$file"
+for dir in "${DOTFILES_DIR}"/local/*; do
+    dirname="$(basename "${dir}")"
+    for file in "${dir}"/*; do
+        create_link "$HOME/.local/${dirname}/$(basename "${file}")" "${file}"
+    done
 done
 
+find "${HOME}/.local/bin" "${HOME}/.local/lib" -xtype l -print0 | xargs --no-run-if-empty -0 rm -v
+
 if ask_yes_no "Install fonts [y/N]? " "n"; then
-    mkdir -p "${HOME}/.local/share/fonts"
     for file in "${DOTFILES_DIR}"/fonts/*; do
         copy_file "$HOME/.local/share/fonts/$(basename "$file")" "$file"
     done
 
     fc-cache -f
 fi
-
-for file in "${DOTFILES_DIR}"/usr/bin/*; do
-    create_link "$HOME/usr/bin/$(basename "$file")" "$file"
-done
-
-for file in "${DOTFILES_DIR}"/usr/lib/*; do
-    create_link "$HOME/usr/lib/$(basename "$file")" "$file"
-done
-
-find "$HOME/usr" -xtype l -print0 | xargs --no-run-if-empty -0 rm
 
 [[ -L "$HOME/.vim" ]] && rm "$HOME/.vim"
 ln -s "$HOME/.config/nvim" "$HOME/.vim"
