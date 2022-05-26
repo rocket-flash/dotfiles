@@ -1,4 +1,6 @@
-#! /bin/bash -eu
+#! /bin/bash
+
+set -euo pipefail
 
 info()         { printf "\\e[32m[INFO]\\e[0m    %s\\n" "$*" ; }
 warning()      { printf "\\e[33m[WARNING]\\e[0m %s\\n" "$*" ; }
@@ -51,7 +53,7 @@ if [[ $# -ge 1 ]] && [[ "$1" == "-u" ]]; then
 fi
 
 function installed() {
-    type "$1" &> /dev/null
+    command -v "$1" &> /dev/null
     return $?
 }
 
