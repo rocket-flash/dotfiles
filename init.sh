@@ -12,6 +12,7 @@ DOTFILES=(
     'Xmodmap'
     'dircolors'
     'ideavimrc'
+    'inputrc'
     'profile'
     'templates'
     'tmux.zsh'
