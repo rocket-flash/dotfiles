@@ -1,3 +1,4 @@
+prompt_simple_setup() {
 # Vars {{{
 
 GIT_UNSTAGED="x"
@@ -130,5 +131,6 @@ build_rprompt() {
 RPROMPT='$(build_rprompt)'
 
 # }}}
+}
 
-# vi: foldmethod=marker
+# vi: ft=zsh foldmethod=marker

@@ -1,4 +1,4 @@
-[[ -d "${HOME}/.local/share/zsh/themes" ]] || return
+[[ -d "${HOME}/.local/share/zsh/prompts" ]] || return
 
 # Color shortcuts {{{
 
@@ -14,23 +14,6 @@ unset idx idx_bright
 color_reset="%f%k"
 
 # }}}
-
-function zsh-theme() {
-    if [[ -z "${1}" ]]; then
-        echo "Theme not specified"
-        return
-    fi
-
-    local theme
-    theme="${HOME}/.local/share/zsh/themes/${1}.zsh"
-
-    if [[ ! -f "${theme}" ]]; then
-        echo "Theme not found: ${1}"
-        return
-    fi
-
-    . "${theme}"
-}
 
 load_vcs_info() {
     vcs_info
@@ -52,15 +35,10 @@ function zle-keymap-select {
 
 zle -N zle-keymap-select
 
-theme="powerline"
-
 if [[ $(tput colors) -lt 256 ]]; then
-    theme="simple"
+    prompt simple
+else
+    prompt powerline
 fi
 
-zsh-theme "${theme}"
-
-unset theme
-
 # vi: foldmethod=marker
-

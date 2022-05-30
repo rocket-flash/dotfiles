@@ -1,3 +1,4 @@
+prompt_powerline_setup() {
 # Vars {{{
 
 CURRENT_BG=''
@@ -162,5 +163,6 @@ build_rprompt() {
 RPROMPT='$(build_rprompt)'
 
 # }}}
+}
 
-# vi: foldmethod=marker
+# vi: ft=zsh foldmethod=marker

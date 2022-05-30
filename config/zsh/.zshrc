@@ -15,7 +15,7 @@ fi
 
 # Modules Initializing {{{
 
-fpath=("$HOME/.local/share/zsh/compl" $fpath)
+fpath=("$HOME/.local/share/zsh/compl" "$HOME/.local/share/zsh/prompts" $fpath)
 
 autoload -U compinit promptinit
 autoload -Uz vcs_info
