@@ -2,6 +2,15 @@
 
 set -eu
 
+if [ -e "/usr/share/pycharm/plugins/python-ce/helpers/pydev/setup_cython.py" ]; then
+    setup_cython_script="/usr/share/pycharm/plugins/python-ce/helpers/pydev/setup_cython.py"
+elif [ -e "/opt/pycharm-professional/plugins/python/helpers/pydev/setup_cython.py" ]; then
+    setup_cython_script="/opt/pycharm-professional/plugins/python/helpers/pydev/setup_cython.py"
+else
+    echo "Unable to find setup_cython.py" >&2
+    exit 1
+fi
+
 if [ $# -ne 1 ]; then
     echo "Usage: $0 <version>"
     echo "Available versions are:"
@@ -29,4 +38,4 @@ virtualenv -p "${pyexe}" "${tmpdir}"
 source "${tmpdir}/bin/activate"
 pip install cython
 
-sudo python "/opt/pycharm-professional/plugins/python/helpers/pydev/setup_cython.py" build_ext --inplace --force-cython
+sudo python "${setup_cython_script}" build_ext --inplace --force-cython
