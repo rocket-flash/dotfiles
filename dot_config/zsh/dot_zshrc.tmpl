@@ -170,6 +170,11 @@ export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
 # Don't prepend virtual env name to PS1
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
+if [[ "${XDG_SESSION_TYPE}" = "tty" ]]; then
+    # Fix GPG pinentry
+    GPG_TTY=$(tty); export GPG_TTY
+fi
+
 # Android
 ANDROID_SDK_ROOT="$HOME/Android/Sdk"
 if [ -d "$ANDROID_SDK_ROOT" ]; then
