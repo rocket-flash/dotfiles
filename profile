@@ -66,6 +66,8 @@ unset paths
 # Firefox on Wayland
 MOZ_ENABLE_WAYLAND=1
 
+# Set an invalid default prefix to ensure wine is always called with a non default prefix
+export WINEPREFIX=/dev/null
 # Prevent Wine from taking over file associations
 # https://wiki.archlinux.org/index.php/wine#Prevent_new_Wine_file_associations
 export WINEDLLOVERRIDES="winemenubuilder.exe=d"
