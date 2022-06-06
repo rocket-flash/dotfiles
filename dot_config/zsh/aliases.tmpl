@@ -23,15 +23,57 @@ fi
 
 # Renaming aliases
 alias lower='rename '\''y/\ \.A-Z/__a-z/'\'''
+{{- if eq .chezmoi.os "darwin" }}
+alias fix-song-title='rename -s "_" "."'
+{{- else}}
 alias rename='perl-rename'
 alias fix-song-title='rename '\''s/_/./'\'''
+{{- end}}
 
 alias grep='grep --color=auto'
 alias hd='hexdump -C'
 alias dd='dd status=progress'
 alias rf='readlink -f'
-alias jdmesg='journalctl --dmesg -o short-monotonic --no-hostname --no-pager'
 alias make='make -j {{ .makejobs }}'
+
+{{- if eq .chezmoi.os "darwin" }}
+alias f='open .'
+
+if installed brew; then
+    alias pm='brew'
+    alias up='brew upgrade && brew cask upgrade'
+fi
+
+GNU_UTILS=(
+    'cp'
+    'find'
+    'head'
+    'md5sum'
+    'mkdir'
+    'readlink'
+    'rm'
+    'sed'
+    'sha1sum'
+    'sha256sum'
+    'shred'
+    'tail'
+    'zcat'
+)
+
+# Replace utils by their gnu coreutils counterparts
+if installed gls; then
+    if ! installed 'exa'; then
+        alias ls='gls --color=auto -v --group-directories-first'
+    fi
+
+    for i in ${GNU_UTILS[@]}; do
+        alias $i="g$i"
+    done
+else
+    alias ls='ls -G'
+fi
+{{- else}}
+alias jdmesg='journalctl --dmesg -o short-monotonic --no-hostname --no-pager'
 
 if installed handlr; then
     alias open='handlr open'
@@ -40,6 +82,7 @@ elif installed xdg-open; then
 elif installed exo-open; then
     alias open='exo-open'
 fi
+{{- end}}
 
 if installed nvim; then
     alias vim='nvim'

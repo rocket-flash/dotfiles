@@ -1,7 +1,7 @@
 command -v fzf &> /dev/null || return
 
-. /usr/share/fzf/key-bindings.zsh
-[[ $- == *i* ]] && . "/usr/share/fzf/completion.zsh" 2> /dev/null
+. "{{ .path.fzf_key_bindings }}"
+[[ $- == *i* ]] && . "{{ .path.fzf_completion }}" 2> /dev/null
 
 rg_opts="--files --follow --hidden --glob '!.git/*'"
 preview_window_opts="--preview-window hidden --bind '?:toggle-preview'"
@@ -26,3 +26,5 @@ unset preview_window_opts
 function _fzf_compgen_path() {
     rg --files --follow --hidden --glob '!.git/*' 2>/dev/null "$1" | sed 's@^\./@@'
 }
+
+# vim: ft=zsh

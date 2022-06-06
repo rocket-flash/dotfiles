@@ -34,13 +34,13 @@ function docker-cleanup() {
     docker container prune -f
     docker image prune -f
     docker volume ls -qf dangling=true \
-        | xargs --no-run-if-empty docker inspect \
+        | xargs -r docker inspect \
         | jq -r '.[] | select((.Labels | has("com.docker.compose.project") | not) and (.Labels | has("org.acidrain.pipeline_runner.project") | not)).Name' \
-        | xargs --no-run-if-empty docker volume rm
+        | xargs -r docker volume rm
 }
 
 function docker-kill-all() {
-    docker ps -q | xargs --no-run-if-empty docker kill
+    docker ps -q | xargs -r docker kill
 }
 
 function dps() {

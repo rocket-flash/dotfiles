@@ -19,7 +19,11 @@ APPS=(
     'sd'
     'tmux'
     'yarn'
+    {{- if eq .chezmoi.os "darwin" }}
+    'terminal-notifier'
+    {{- else }}
     'xsel'
+    {{- end }}
 )
 
 MISSING_APPS=""
@@ -28,5 +32,10 @@ for app in "${APPS[@]}"; do
 done
 
 [[ -z "$MISSING_APPS" ]] || info "Don't forget to install the following: ${MISSING_APPS}"
+
+{{- if eq .chezmoi.os "darwin" }}
+# https://medium.com/@dubistkomisch/how-to-actually-get-italics-and-true-colour-to-work-in-iterm-tmux-vim-9ebe55ebc2be
+info "Don't forget to set xterm-256color-italic in iTerm2 profile"
+{{- end }}
 
 # vi: ft=sh

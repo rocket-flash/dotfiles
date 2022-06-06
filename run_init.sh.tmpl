@@ -137,7 +137,9 @@ install_pyenv_latest
 install_tmux_plugin_manager
 install_cmus_notify
 install_crontab
+{{- if eq .chezmoi.os "linux" }}
 rebuild_font_cache
+{{- end }}
 build_bat_cache
 compile_terminfo_entries
 

@@ -31,4 +31,6 @@ function pyenv() {
     esac
 }
 
-source /usr/share/zsh/site-functions/_pyenv
+[[ -e "{{ .path.pyenv_completion }}" ]] && . "{{ .path.pyenv_completion }}"
+
+# vim: ft=zsh

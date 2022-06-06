@@ -1,6 +1,12 @@
 # Set default terminal
 export TERMINAL="kitty"
 
+{{- if eq .chezmoi.os "darwin" }}
+
+# Set locale
+export LC_ALL="en_CA.UTF-8"
+{{- end }}
+
 # Use proper date format
 export LC_TIME="en_DK.UTF-8"
 

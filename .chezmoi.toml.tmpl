@@ -19,9 +19,37 @@
 {{-   $makejobs = promptInt "Number of Parallel Make Jobs" -}}
 {{- end -}}
 
+{{- $osid := .chezmoi.os -}}
+{{- if hasKey .chezmoi.osRelease "id" -}}
+{{-   $osid = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
+{{- end -}}
+
 [data]
     email = {{ $email | quote }}
     signingkey = {{ $signingkey | quote }}
     makejobs = {{ $makejobs }}
+    osid = {{ $osid | quote }}
+
+[data.command]
+    {{- if eq .chezmoi.os "darwin" }}
+    clip = "pbcopy"
+    {{- else }}
+    clip = "xsel --clipboard"
+    {{- end }}
+
+[data.path]
+    {{- if eq .chezmoi.os "darwin" }}
+    fzf_completion = "/usr/local/opt/fzf/shell/completion.zsh"
+    fzf_key_bindings = "/usr/local/opt/fzf/shell/key-bindings.zsh"
+    pyenv_completion = ""  # TODO
+    virtualenvwrapper_lazy = "/usr/local/bin/virtualenvwrapper_lazy.sh"
+    zsh_syntax_highlighting = "/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+    {{- else }}
+    fzf_completion = "/usr/share/fzf/completion.zsh"
+    fzf_key_bindings = "/usr/share/fzf/key-bindings.zsh"
+    pyenv_completion = "/usr/share/zsh/site-functions/_pyenv"
+    virtualenvwrapper_lazy = "/usr/bin/virtualenvwrapper_lazy.sh"
+    zsh_syntax_highlighting = "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+    {{- end }}
 
 # vim: ft=toml

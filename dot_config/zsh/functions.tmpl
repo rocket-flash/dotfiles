@@ -42,23 +42,12 @@ function remove_ext() {
 }
 
 function clip() {
-    cat "$1" | xsel --clipboard
-}
-
-function aur-get() {
-    if [ $# -lt 1 ]; then
-        echo "Usage: $0 packages"
-        exit 1
-    fi
-
-    for app in "$@"; do
-        git clone "https://aur.archlinux.org/${app}.git"
-    done
+    cat "$1" | {{ .command.clip }}
 }
 
 function fix-perm {
-    find -type f -not -perm 644 -print0 | xargs --no-run-if-empty -0 chmod 644
-    find -type d -not -perm 755 -print0 | xargs --no-run-if-empty -0 chmod 755
+    find -type f -not -perm 644 -print0 | xargs -r -0 chmod 644
+    find -type d -not -perm 755 -print0 | xargs -r -0 chmod 755
 }
 
 function f {
