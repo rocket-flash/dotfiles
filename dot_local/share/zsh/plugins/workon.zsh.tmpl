@@ -3,7 +3,11 @@ function w() {
     local -a searchdirs
 
     srcdir="${SRC_DIR:-${HOME}/src}"
+    {{- if eq .chezmoi.hostname "xenomorph" }}
+    searchdirs=("${HOME}/src" "${HOME}/src/private" "${HOME}/src/boost")
+    {{- else }}
     searchdirs=("${HOME}/src")
+    {{- end }}
 
     if [[ -n "${1:-}" ]]; then
         workondir="${srcdir}/${1}"
