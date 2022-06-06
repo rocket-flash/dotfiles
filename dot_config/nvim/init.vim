@@ -19,7 +19,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'ryanoasis/vim-devicons'
 Plug 'cespare/vim-toml', { 'branch': 'main' }
-Plug 'ap/vim-css-color'
 Plug 'NoahTheDuke/vim-just'
 Plug 'Glench/Vim-Jinja2-Syntax'
 
