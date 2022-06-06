@@ -1,0 +1,8 @@
+misc/
+terminfo/
+crontab
+vimplug.lock
+
+{{- if ne .chezmoi.osRelease.id "arch" }}
+.local/share/zsh/plugins/arch.zsh
+{{- end }}

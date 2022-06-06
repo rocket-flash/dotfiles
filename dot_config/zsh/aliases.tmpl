@@ -1,0 +1,61 @@
+# Enable aliases when using these commands
+alias sudo='sudo '
+alias exec='exec '
+alias xargs='xargs '
+
+# ls aliases
+if installed 'exa'; then
+    alias ls='exa --group-directories-first'
+    alias ll='ls -l --time-style=long-iso -b'
+    alias la='ls -a'
+    alias lf='ll -a'
+    alias lr='ll -a -smod'
+    compdef ls='exa'
+else
+    alias ls='ls --color=auto -v --group-directories-first'
+    alias ll='ls -lh'
+    alias la='ls -A'
+    alias lf='ls -lhA'
+    alias lk='ls -l --block-size=1k'
+    alias lm='ls -l --block-size=1m'
+    alias lr='ls -lArth'
+fi
+
+# Renaming aliases
+alias lower='rename '\''y/\ \.A-Z/__a-z/'\'''
+alias rename='perl-rename'
+alias fix-song-title='rename '\''s/_/./'\'''
+
+alias grep='grep --color=auto'
+alias hd='hexdump -C'
+alias dd='dd status=progress'
+alias rf='readlink -f'
+alias jdmesg='journalctl --dmesg -o short-monotonic --no-hostname --no-pager'
+alias make='make -j {{ .makejobs }}'
+
+if installed handlr; then
+    alias open='handlr open'
+elif installed xdg-open; then
+    alias open='xdg-open'
+elif installed exo-open; then
+    alias open='exo-open'
+fi
+
+if installed nvim; then
+    alias vim='nvim'
+    alias vimdiff='nvim -d'
+fi
+
+if installed colordiff; then
+    alias diff='colordiff -u'
+else
+    alias diff='diff -u'
+fi
+
+installed bat && alias cat='bat --'
+
+if [ "$TERM" != "xterm" ] && [ "$TERM" != "xterm-256color" ] && [ "$TERM" != "linux" ]; then
+    alias ssh='TERM=xterm-256color ssh'
+fi
+
+# vim: ft=zsh

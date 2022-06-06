@@ -1,0 +1,32 @@
+#! /bin/bash
+
+set -euo pipefail
+
+. ~/.local/lib/log.sh
+
+APPS=(
+    'bat'
+    'cargo'
+    'colordiff'
+    'exa'
+    'fd'
+    'fzf'
+    'handlr'
+    'jq'
+    'lrzip'
+    'node'
+    'rg'
+    'sd'
+    'tmux'
+    'yarn'
+    'xsel'
+)
+
+MISSING_APPS=""
+for app in "${APPS[@]}"; do
+    command -v "$app" &> /dev/null || MISSING_APPS="${MISSING_APPS}${app} "
+done
+
+[[ -z "$MISSING_APPS" ]] || info "Don't forget to install the following: ${MISSING_APPS}"
+
+# vi: ft=sh

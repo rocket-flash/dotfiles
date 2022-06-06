@@ -1,0 +1,27 @@
+{{- $email := "" -}}
+{{- if hasKey . "email" -}}
+{{-   $email = .email -}}
+{{- else -}}
+{{-   $email = promptString "Email Address" "acidrain1@gmail.com" -}}
+{{- end -}}
+
+{{- $signingkey := "" -}}
+{{- if hasKey . "signingkey" -}}
+{{-   $signingkey = .signingkey -}}
+{{- else -}}
+{{-   $signingkey = promptString "GPG Signing Key" -}}
+{{- end -}}
+
+{{- $makejobs := "" -}}
+{{- if hasKey . "makejobs" -}}
+{{-   $makejobs = .makejobs -}}
+{{- else -}}
+{{-   $makejobs = promptInt "Number of Parallel Make Jobs" -}}
+{{- end -}}
+
+[data]
+    email = {{ $email | quote }}
+    signingkey = {{ $signingkey | quote }}
+    makejobs = {{ $makejobs }}
+
+# vim: ft=toml

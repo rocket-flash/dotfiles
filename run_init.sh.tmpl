@@ -1,0 +1,144 @@
+#! /bin/bash
+
+set -euo pipefail
+
+. ~/.local/lib/log.sh
+
+ask_yes_no() {
+    local resp default
+
+    prompt="${1}"
+    default="${2:-n}"
+
+    printf "\\e[36m[PROMPT]\\e[0m  %s" "${prompt} " >&2
+
+    read -r -n1 -s resp;
+    echo "${resp:-${default}}"
+
+    resp=$(echo "${resp:-${default}}" | tr '[:upper:]' '[:lower:]' | xargs)
+
+    if [[ "${resp}" = "y" ]]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+install_nvim_plugins() {
+    if ! command -v nvim &> /dev/null; then
+        warning "$0: nvim not installed: skipping"
+        return
+    fi
+
+    if [ ! -e "${HOME}/.config/nvim/autoload/plug.vim" ]; then
+        info "Installing vim-plug"
+        curl --create-dirs -fLo "${HOME}/.config/nvim/autoload/plug.vim" \
+            https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    fi
+
+    if ask_yes_no "Install vim plugins [y/N]?" "n"; then
+        # TERM workaround to avoid loading non existing color scheme
+        TERM=xterm nvim -S "{{ .chezmoi.sourceDir }}/vimplug.lock" +qall
+    fi
+}
+
+install_pyenv_latest() {
+    if ! command -v pyenv &> /dev/null; then
+        warning "$0: pyenv not installed: skipping"
+        return
+    fi
+
+    pyenv_plugin_root="$(pyenv root)/plugins"
+
+    if [ -e "${pyenv_plugin_root}/xxenv-latest" ]; then
+        info "Updating pyenv-latest plugin"
+        pushd "${pyenv_plugin_root}/xxenv-latest" > /dev/null
+        git pull
+        popd > /dev/null
+    else
+        info "Installing pyenv-latest plugin"
+        [[ -d "$pyenv_plugin_root" ]] || mkdir -p "$pyenv_plugin_root"
+        git clone https://github.com/momo-lab/xxenv-latest.git "${pyenv_plugin_root}/xxenv-latest"
+    fi
+}
+
+install_tmux_plugin_manager() {
+    if ! command -v tmux &> /dev/null; then
+        warning "$0: tmux not installed: skipping"
+        return
+    fi
+
+    if [ ! -e "$HOME/.local/share/tmux/tpm" ]; then
+        info "Installing tmux plugin manager"
+        mkdir -p "$HOME/.local/share/tmux"
+        git clone https://github.com/tmux-plugins/tpm ~/.local/share/tmux/tpm
+    else
+        info "Updating tmux plugin manager"
+        pushd "$HOME/.local/share/tmux/tpm" > /dev/null
+        git pull
+        popd > /dev/null
+    fi
+}
+
+install_cmus_notify() {
+    if ! command -v cargo &> /dev/null; then
+        warning "$0: cargo not installed: skipping"
+        return
+    fi
+
+    if ask_yes_no "Install cmus-notify [y/N]?" "n"; then
+        cargo install --root ~/.local --git https://github.com/mathieu-lemay/cmus-notify --force
+    fi
+}
+
+install_crontab() {
+    if ! command -v crontab &> /dev/null; then
+        warning "$0: crontab not installed: skipping"
+        return
+    fi
+
+    crontab "{{ .chezmoi.sourceDir }}/crontab"
+}
+
+rebuild_font_cache() {
+    if ! command -v fc-cache &> /dev/null; then
+        warning "$0: fc-cache not installed: skipping"
+        return
+    fi
+
+    if ask_yes_no "Update font cache [y/N]?" "n"; then
+        fc-cache -f
+    fi
+}
+
+build_bat_cache() {
+    if ! command -v bat &> /dev/null; then
+        warning "$0: bat not installed: skipping"
+        return
+    fi
+
+    info "Building bat cache"
+    bat cache --build > /dev/null
+}
+
+compile_terminfo_entries() {
+    if ! command -v tic &> /dev/null; then
+        warning "$0: tic not installed: skipping"
+        return
+    fi
+
+    for file in "{{ .chezmoi.sourceDir }}"/terminfo/*; do
+        tic "${file}"
+    done
+}
+
+install_nvim_plugins
+install_pyenv_latest
+install_tmux_plugin_manager
+install_cmus_notify
+install_crontab
+rebuild_font_cache
+build_bat_cache
+compile_terminfo_entries
+
+# vi: ft=sh

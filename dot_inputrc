@@ -1,0 +1,4 @@
+$include /etc/inputrc
+
+set completion-prefix-display-length 2
+set revert-all-at-newline on
