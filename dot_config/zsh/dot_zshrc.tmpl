@@ -21,9 +21,9 @@ autoload -U compinit promptinit
 autoload -Uz vcs_info
 
 {{- if eq .chezmoi.os "darwin" }}
-compinit -i
+compinit -i -d "${XDG_STATE_HOME}/zsh/zcompdump"
 {{- else }}
-compinit
+compinit -d "${XDG_STATE_HOME}/zsh/zcompdump"
 {{- end }}
 promptinit
 
