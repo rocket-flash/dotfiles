@@ -8,9 +8,10 @@ update_zsh_history_location() {
     local src dst temp
     src="${XDG_CONFIG_HOME}/zsh/history"
     dst="${XDG_STATE_HOME}/zsh/history"
-    temp="$(mktemp)"
 
-    [[ -e "${src}" ]] || return
+    [[ -e "${src}" ]] || return 0
+
+    temp="$(mktemp)"
 
     info "Moving ${src} -> ${dst}"
 
