@@ -7,7 +7,6 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'scrooloose/nerdcommenter'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'mhinz/vim-signify'
-Plug 'nathanaelkane/vim-indent-guides'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'jiangmiao/auto-pairs'
@@ -28,6 +27,10 @@ if !&diff
     if has('nvim') || has('patch-8.0-1453')
         Plug 'neoclide/coc.nvim', {'branch': 'release'}
     endif
+endif
+
+if !exists('g:vscode')
+    Plug 'nathanaelkane/vim-indent-guides'
 endif
 
 " Colorschemes

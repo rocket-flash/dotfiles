@@ -1,0 +1,22 @@
+{
+    "editor.fontFamily": "'InputMono Nerd Font', 'Noto Sans Mono', monospace",
+    "workbench.colorTheme": "Zenburn",
+    "python.venvFolders": [
+        ".cache/pypoetry/virtualenvs"
+    ],
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/.coverage": true,
+        "**/.pytest_cache": true
+    },
+    "files.trimTrailingWhitespace": true,
+    "files.trimFinalNewlines": true,
+    "files.insertFinalNewline": true,
+    "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
+    "files.autoSave": "afterDelay",
+    "terminal.integrated.env.linux": {
+        "ZSH_TMUX_AUTOSTART": "false"
+    },
+    "terminal.integrated.sendKeybindingsToShell": true,
+    "editor.scrollBeyondLastLine": false
+}
