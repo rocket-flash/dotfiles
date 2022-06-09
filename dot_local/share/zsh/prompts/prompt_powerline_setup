@@ -66,7 +66,7 @@ prompt_status() {
 }
 
 prompt_host() {
-    if [[ -n "$SSH_CLIENT" ]]; then
+    if [[ -n "${SSH_CLIENT:-}" ]]; then
         fg="${bright_yellow}"
     else
         fg="${bright_green}"
@@ -134,18 +134,18 @@ prompt_git_branch() {
 
 prompt_venv() {
     # Strip out the path and just leave the env name
-    [[ -n "$VIRTUAL_ENV" ]] && rprompt_segment ${magenta} ${black} "${VIRTUAL_ENV##*/}"
+    [[ -n "${VIRTUAL_ENV:-}" ]] && rprompt_segment ${magenta} ${black} "${VIRTUAL_ENV##*/}"
 }
 
 prompt_nvm() {
     # extract dirname -> basename
-    [[ -n "$NVM_BIN" ]] && rprompt_segment ${black} ${magenta} "node ${${NVM_BIN%/*}##*/}"
+    [[ -n "${NVM_BIN:-}" ]] && rprompt_segment ${black} ${magenta} "node ${${NVM_BIN%/*}##*/}"
 }
 
 prompt_shell_lvl() {
     ((lvl = ${SHLVL} - 1))
-    [[ -n "${TMUX}" ]] && ((lvl--))
-    [[ -n "${POETRY_ACTIVE}" ]] && ((lvl--))
+    [[ -n "${TMUX:-}" ]] && ((lvl--))
+    [[ -n "${POETRY_ACTIVE:-}" ]] && ((lvl--))
     [[ ${lvl} -gt 0 ]] && rprompt_segment ${red} ${black} "Subshell ${lvl}"
 }
 

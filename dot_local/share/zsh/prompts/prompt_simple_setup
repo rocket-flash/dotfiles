@@ -53,7 +53,7 @@ prompt_status() {
 }
 
 prompt_host() {
-    if [[ -n "$SSH_CLIENT" ]]; then
+    if [[ -n "${SSH_CLIENT:-}" ]]; then
         fg="${yellow}"
     else
         fg="%(!.${red}.${green})"
@@ -106,12 +106,12 @@ prompt_git_branch() {
 
 prompt_venv() {
     # Strip out the path and just leave the env name
-    [[ -n "$VIRTUAL_ENV" ]] && printc ${cyan} "[${VIRTUAL_ENV##*/}]"
+    [[ -n "${VIRTUAL_ENV:-}" ]] && printc ${cyan} "[${VIRTUAL_ENV##*/}]"
 }
 
 prompt_nvm() {
     # extract dirname -> basename
-    [[ -n "$NVM_BIN" ]] && printc ${magenta} "[node ${${NVM_BIN%/*}##*/}]"
+    [[ -n "${NVM_BIN:-}" ]] && printc ${magenta} "[node ${${NVM_BIN%/*}##*/}]"
 }
 
 rprompt_end() {

@@ -12,7 +12,7 @@ prompt_basic_setup() {
 
     prompt_venv() {
         # Strip out the path and just leave the env name
-        [[ -n "$VIRTUAL_ENV" ]] && printc ${cyan} "[${VIRTUAL_ENV##*/}] "
+        [[ -n "${VIRTUAL_ENV:-}" ]] && printc ${cyan} "[${VIRTUAL_ENV##*/}] "
     }
 
     prompt_status() {
@@ -23,7 +23,7 @@ prompt_basic_setup() {
     }
 
     prompt_host() {
-        if [[ -n "$SSH_CLIENT" ]]; then
+        if [[ -n "${SSH_CLIENT:-}" ]]; then
             fg="${yellow}"
         else
             fg="%(!.${red}.${green})"
