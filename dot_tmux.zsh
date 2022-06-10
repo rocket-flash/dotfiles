@@ -1,6 +1,6 @@
 # Only run if tmux is actually installed
-if ! which tmux &> /dev/null; then
-    return
+if ! command -v tmux &> /dev/null; then
+    return 0
 fi
 
 # xfce4-terminal sets TERM to "xterm"
@@ -8,7 +8,7 @@ fi
 
 # Disable autostart from ssh connections or from virtual terminal
 # Disable also for root as it's probably from sudo, which would result in nested tmux
-if [[ -n "$SSH_CLIENT" || "$TERMINAL_EMULATOR" = *JetBrains* || "$TERM" = "linux" || $EUID -eq 0 ]]; then
+if [[ -n "$SSH_CLIENT" || "$TERM" = "linux" || $EUID -eq 0 ]]; then
     export ZSH_TMUX_AUTOSTART=false
 fi
 
