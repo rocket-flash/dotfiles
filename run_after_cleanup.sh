@@ -23,17 +23,20 @@ update_zsh_history_location() {
     chmod 600 "${dst}"
 }
 
-remove_file() {
-    local file
-    file="${1:?}"
+remove() {
+    local path
+    path="${1:?}"
 
-    [[ -e "${file}" ]] || return 0
-    info "Removing ${file}"
-    rm "${file}"
+    [[ -e "${path}" ]] || return 0
+    info "Removing ${path}"
+    rm -rf "${path}"
 }
 
 update_zsh_history_location
-remove_file "${XDG_CONFIG_HOME}/zsh/.zcompdump"
-remove_file "${HOME}/.tmux.zsh"
+remove "${XDG_CONFIG_HOME}/zsh/.zcompdump"
+remove "${HOME}/.tmux.zsh"
+remove "${HOME}/.inputrc"
+remove "${HOME}/.java"
+remove "${HOME}/.ideavimrc"
 
 # vi: ft=sh
