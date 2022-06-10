@@ -23,17 +23,17 @@ update_zsh_history_location() {
     chmod 600 "${dst}"
 }
 
-remove_old_zsh_compdump() {
+remove_file() {
     local file
-    file="${XDG_CONFIG_HOME}/zsh/.zcompdump"
+    file="${1:?}"
 
-    if [[ -e "${file}" ]]; then
-        info "Removing ${file}"
-        rm "${file}"
-    fi
+    [[ -e "${file}" ]] || return 0
+    info "Removing ${file}"
+    rm "${file}"
 }
 
 update_zsh_history_location
-remove_old_zsh_compdump
+remove_file "${XDG_CONFIG_HOME}/zsh/.zcompdump"
+remove_file "${HOME}/.tmux.zsh"
 
 # vi: ft=sh

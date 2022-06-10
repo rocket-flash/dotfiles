@@ -27,7 +27,7 @@ compinit -d "${XDG_STATE_HOME}/zsh/zcompdump"
 {{- end }}
 promptinit
 
-[[ -e $HOME/.tmux.zsh ]] && source $HOME/.tmux.zsh
+[[ -e "${HOME}/.local/share/zsh/tmux.zsh" ]] && . "${HOME}/.local/share/zsh/tmux.zsh"
 
 # ]]]
 
