@@ -164,7 +164,7 @@ fi
 export CFLAGS="-O2 -march=native -fstack-protector-strong"
 
 # Remove / from WORDCHARS, ie. make / a word delimiter
-export WORDCHARS=${WORDCHARS/\//}
+export WORDCHARS="${WORDCHARS/\//}"
 
 {{- if eq .chezmoi.os "darwin" }}
 
@@ -178,13 +178,6 @@ export VIRTUAL_ENV_DISABLE_PROMPT=1
 if [[ "${XDG_SESSION_TYPE}" = "tty" ]]; then
     # Fix GPG pinentry
     GPG_TTY=$(tty); export GPG_TTY
-fi
-
-# Android
-ANDROID_SDK_ROOT="$HOME/Android/Sdk"
-if [ -d "$ANDROID_SDK_ROOT" ]; then
-    export ANDROID_SDK_ROOT
-    export PATH="$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools:$PATH"
 fi
 
 # Python
