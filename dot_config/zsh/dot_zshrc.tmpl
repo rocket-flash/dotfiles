@@ -44,7 +44,7 @@ setopt extendedglob      # Treat the `#', `~' and `^' characters as part of patt
 # Helper functions [[[
 
 installed() {
-    type "$1" &> /dev/null
+    command -v "$1" &> /dev/null
     return $?
 }
 
@@ -153,6 +153,11 @@ if installed nvim; then
     export EDITOR="nvim"
 else
     export EDITOR="vim"
+fi
+
+if installed bat; then
+    export MANPAGER="sh -c 'col -bx | bat --no-config -l man -p --theme Dracula'"
+    export MANROFFOPT="-c"
 fi
 
 # Default cflags
