@@ -151,8 +151,10 @@ ulimit -c unlimited
 # Setup default apps
 if installed nvim; then
     export EDITOR="nvim"
+    export VISUAL="nvim"
 else
     export EDITOR="vim"
+    export VISUAL="vim"
 fi
 
 if installed bat; then

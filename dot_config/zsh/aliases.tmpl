@@ -84,11 +84,6 @@ elif installed exo-open; then
 fi
 {{- end}}
 
-if installed nvim; then
-    alias vim='nvim'
-    alias vimdiff='nvim -d'
-fi
-
 if installed colordiff; then
     alias diff='colordiff -u'
 else
