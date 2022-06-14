@@ -42,7 +42,11 @@ function remove_ext() {
 }
 
 function clip() {
-    cat "$1" | {{ .command.clip }}
+    if [[ $# -ge 1 ]]; then
+        command cat "$1" | {{ .command.clip }}
+    else
+        {{ .command.clip }}
+    fi
 }
 
 function fix-perm {
