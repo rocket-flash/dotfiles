@@ -18,5 +18,6 @@
         "ZSH_TMUX_AUTOSTART": "false"
     },
     "terminal.integrated.sendKeybindingsToShell": true,
-    "editor.scrollBeyondLastLine": false
+    "editor.scrollBeyondLastLine": false,
+    "workbench.list.openMode": "doubleClick"
 }
