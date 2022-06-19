@@ -41,7 +41,7 @@ alias f='open .'
 
 if installed brew; then
     alias pm='brew'
-    alias up='brew upgrade && brew cask upgrade'
+    alias up='brew upgrade && brew upgrade --cask'
 fi
 
 GNU_UTILS=(
@@ -61,16 +61,16 @@ GNU_UTILS=(
 )
 
 # Replace utils by their gnu coreutils counterparts
-if installed gls; then
-    if ! installed 'exa'; then
-        alias ls='gls --color=auto -v --group-directories-first'
-    fi
+for i in ${GNU_UTILS[@]}; do
+    installed "g${i}" && alias $i="g$i"
+done
 
-    for i in ${GNU_UTILS[@]}; do
-        alias $i="g$i"
-    done
-else
-    alias ls='ls -G'
+if ! installed 'exa'; then
+    if installed gls; then
+        alias ls='gls --color=auto -v --group-directories-first'
+    else
+        alias ls='ls -G'
+    fi
 fi
 {{- else}}
 alias jdmesg='journalctl --dmesg -o short-monotonic --no-hostname --no-pager'

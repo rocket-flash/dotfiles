@@ -1,15 +1,22 @@
-# vim:fileencoding=utf-8:foldmethod=marker
+# vim:fileencoding=utf-8:foldmethod=marker:foldmarker=[[[,]]]
 
-#: Fonts {{{
+#: Fonts [[[
 
 #: kitty has very powerful font management. You can configure
 #: individual font faces and even specify special fonts for particular
 #: characters.
 
+{{- if eq .chezmoi.os "darwin" }}
+font_family      InputMono Nerd Font
+bold_font        InputMono Nerd Font Bold
+italic_font      InputMono Nerd Font Italic
+bold_italic_font InputMono Nerd Font Bold Italic
+{{- else }}
 font_family      InputMono Nerd Font Complete
 bold_font        InputMono Bold Nerd Font Complete
 italic_font      InputMono Italic Nerd Font Complete
 bold_italic_font InputMono BoldIta Nerd Font Complete
+{{- end }}
 
 #: You can specify different fonts for the bold/italic/bold-italic
 #: variants. To get a full list of supported fonts use the `kitty
@@ -179,9 +186,9 @@ box_drawing_scale 0.001, 1, 1.5, 2
 #: monitor DPI to arrive at a pixel value. There must be four values
 #: corresponding to thin, normal, thick, and very thick lines.
 
-#: }}}
+#: ]]]
 
-#: Cursor customization {{{
+#: Cursor customization [[[
 
 cursor #d9d9d9
 
@@ -231,9 +238,9 @@ cursor_stop_blinking_after 15.0
 #: Stop blinking cursor after the specified number of seconds of
 #: keyboard inactivity.  Set to zero to never stop blinking.
 
-#: }}}
+#: ]]]
 
-#: Scrollback {{{
+#: Scrollback [[[
 
 scrollback_lines 2000
 
@@ -299,9 +306,9 @@ touch_scroll_multiplier 1.0
 #: for high precision scrolling devices on platforms such as macOS and
 #: Wayland. Use negative numbers to change scroll direction.
 
-#: }}}
+#: ]]]
 
-#: Mouse {{{
+#: Mouse [[[
 
 mouse_hide_wait 3.0
 
@@ -395,7 +402,7 @@ pointer_shape_when_dragging beam
 #: The default shape of the mouse pointer when dragging across text.
 #: Valid values are: arrow, beam and hand
 
-#: Mouse actions {{{
+#: Mouse actions [[[
 
 #: Mouse buttons can be remapped to perform arbitrary actions. The
 #: syntax for doing so is:
@@ -545,11 +552,11 @@ mouse_map ctrl+shift+right press ungrabbed mouse_show_command_output
 #::  Requires https://sw.kovidgoyal.net/kitty/shell-integration/ to
 #::  work
 
-#: }}}
+#: ]]]
 
-#: }}}
+#: ]]]
 
-#: Performance tuning {{{
+#: Performance tuning [[[
 
 repaint_delay 10
 
@@ -578,9 +585,9 @@ sync_to_monitor yes
 #: keyboard repeat rate, you may notice some slight input latency. If
 #: so, set this to no.
 
-#: }}}
+#: ]]]
 
-#: Terminal bell {{{
+#: Terminal bell [[[
 
 enable_audio_bell no
 
@@ -627,9 +634,9 @@ bell_path none
 #: the operating systems sound API, such as WAV or OGA on Linux
 #: (libcanberra) or AIFF, MP3 or WAV on macOS (NSSound)
 
-#: }}}
+#: ]]]
 
-#: Window layout {{{
+#: Window layout [[[
 
 remember_window_size  yes
 initial_window_width  640
@@ -802,9 +809,9 @@ confirm_os_window_close 1
 #: https://sw.kovidgoyal.net/kitty/actions/#close-window-with-
 #: confirmation action.
 
-#: }}}
+#: ]]]
 
-#: Tab bar {{{
+#: Tab bar [[[
 
 tab_bar_edge top
 
@@ -938,9 +945,9 @@ tab_bar_margin_color none
 #: Color for the tab bar margin area. Defaults to using the terminal
 #: background color.
 
-#: }}}
+#: ]]]
 
-#: Color scheme {{{
+#: Color scheme [[[
 
 foreground #dcdccc
 background #3f3f3f
@@ -1014,7 +1021,7 @@ selection_background #101010
 #: to be used unchanged. Note that these colors can be overridden by
 #: the program running in the terminal.
 
-#: The color table {{{
+#: The color table [[[
 
 #: The 256 terminal colors. There are 8 basic colors, each color has a
 #: dull and bright version, for the first 16 colors. You can set the
@@ -1075,11 +1082,11 @@ mark3_background #f274bc
 
 #: Color for marks of type 3 (violet)
 
-#: }}}
+#: ]]]
 
-#: }}}
+#: ]]]
 
-#: Advanced {{{
+#: Advanced [[[
 
 shell .
 
@@ -1257,9 +1264,9 @@ term xterm-kitty
 #: work. Changing this option by reloading the config will only affect
 #: newly created windows.
 
-#: }}}
+#: ]]]
 
-#: OS specific tweaks {{{
+#: OS specific tweaks [[[
 
 wayland_titlebar_color background
 
@@ -1351,9 +1358,9 @@ linux_display_server auto
 #: to x11 or wayland to force the choice. Changing this setting by
 #: reloading the config is not supported.
 
-#: }}}
+#: ]]]
 
-#: Keyboard shortcuts {{{
+#: Keyboard shortcuts [[[
 
 #: Keys are identified simply by their lowercase unicode characters.
 #: For example: ``a`` for the A key, ``[`` for the left square bracket
@@ -1461,7 +1468,7 @@ kitten_alias
 #: cause all invocations of the hints kitten to have the --hints-
 #: offset=0 option applied.
 
-#: Clipboard {{{
+#: Clipboard [[[
 
 #: Copy to clipboard
 
@@ -1499,9 +1506,9 @@ map kitty_mod+o pass_selection_to_program
 
 #::      map kitty_mod+y new_window less @selection
 
-#: }}}
+#: ]]]
 
-#: Scrolling {{{
+#: Scrolling [[[
 
 #: Scroll line up
 
@@ -1590,9 +1597,9 @@ map kitty_mod+g show_last_command_output
 #::  Requires https://sw.kovidgoyal.net/kitty/shell-integration/ to
 #::  work.
 
-#: }}}
+#: ]]]
 
-#: Window management {{{
+#: Window management [[[
 
 #: New window
 
@@ -1720,9 +1727,9 @@ map kitty_mod+f7 focus_visible_window
 
 map kitty_mod+f8 swap_with_window
 
-#: }}}
+#: ]]]
 
-#: Tab management {{{
+#: Tab management [[[
 
 #: Next tab
 
@@ -1777,9 +1784,9 @@ map shift+cmd+i     set_tab_title
 #: the current tab rather than at the end of the tabs list, use::
 
 #:     map ctrl+t new_tab !neighbor [optional cmd to run]
-#: }}}
+#: ]]]
 
-#: Layout management {{{
+#: Layout management [[[
 
 #: Next layout
 
@@ -1801,9 +1808,9 @@ map kitty_mod+l next_layout
 #: stack layout::
 
 #:     map ctrl+alt+z toggle_layout stack
-#: }}}
+#: ]]]
 
-#: Font sizes {{{
+#: Font sizes [[[
 
 #: You can change the font size for all top-level kitty OS windows at
 #: a time or only the current one.
@@ -1838,9 +1845,9 @@ map cmd+0               change_font_size all 0
 #: size::
 
 #:     map kitty_mod+f6 change_font_size current 10.0
-#: }}}
+#: ]]]
 
-#: Select and act on visible text {{{
+#: Select and act on visible text [[[
 
 #: Use the hints kitten to select text and either pass it to an
 #: external program or insert it into the terminal or copy it to the
@@ -1905,9 +1912,9 @@ map kitty_mod+p>y kitten hints --type hyperlink
 
 #: The hints kitten has many more modes of operation that you can map
 #: to different shortcuts. For a full description see kittens/hints.
-#: }}}
+#: ]]]
 
-#: Miscellaneous {{{
+#: Miscellaneous [[[
 
 #: Toggle fullscreen
 
@@ -2044,7 +2051,7 @@ map opt+cmd+,    debug_config
 #::      map ctrl+alt+a send_text normal Word\x1b[H
 #::      map ctrl+alt+a send_text application Word\x1bOH
 
-#: }}}
+#: ]]]
 
-#: }}}
+#: ]]]
 
