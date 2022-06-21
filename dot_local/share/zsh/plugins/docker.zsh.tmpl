@@ -4,7 +4,7 @@ function docker-grep-rmi() {
 
     local images
 
-    images=$(docker images --format="{{.Repository}}:{{.Tag}}" | grep -- "${select_pattern}")
+    images=$(docker images --format={{ "\"{{.Repository}}:{{.Tag}}\"" }} | grep -- "${select_pattern}")
     if [ -n "${ignore_pattern}" ]; then
         images=$(echo "${images}" | grep -v -- "${ignore_pattern}")
     fi
@@ -34,21 +34,21 @@ function docker-cleanup() {
     docker container prune -f
     docker image prune -f
     docker volume ls -qf dangling=true \
-        | xargs -r docker inspect \
+        | {{ .command.xargs }} docker inspect \
         | jq -r '.[] | select((.Labels | has("com.docker.compose.project") | not) and (.Labels | has("org.acidrain.pipeline_runner.project") | not)).Name' \
-        | xargs -r docker volume rm
+        | {{ .command.xargs }} docker volume rm
 }
 
 function docker-kill-all() {
-    docker ps -q | xargs -r docker kill
+    docker ps -q | {{ .command.xargs }} docker kill
 }
 
 function dps() {
-    docker ps --format "table {{.Names}}\t{{.Command}}\t{{.Status}}\t{{printf \"%.65s\" .Image }}" $@
+    docker ps --format {{ "\"table {{.Names}}\\t{{.Command}}\\t{{.Status}}\\t{{printf \\\"%.65s\\\" .Image }}\"" }} $@
 }
 
 function dimg() {
-    docker images --format "table {{.Repository}}:{{.Tag}}\t{{.Size}}" $@
+    docker images --format {{ "\"table {{.Repository}}:{{.Tag}}\\t{{.Size}}\"" }} $@
 }
 
 export DOCKER_BUILDKIT=1

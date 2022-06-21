@@ -11,4 +11,4 @@ branches=$(git branch -a | grep -Ev "(^\*| -> )" | awk '{$1=$1};1' | sort | uniq
 echo "${branches}" \
     | fzf-tmux ${FZF_TMUX_OPTS} -q "${@:-}" --preview 'git log --color -n 50 {} | head -200' \
     | sed 's@^remotes/origin/@@' \
-    | xargs -r git switch
+    | {{ .command.xargs }} git switch

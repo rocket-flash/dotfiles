@@ -33,8 +33,10 @@
 [data.command]
     {{- if eq .chezmoi.os "darwin" }}
     clip = "pbcopy"
+    xargs = "xargs"
     {{- else }}
     clip = "xsel --clipboard"
+    xargs = "xargs -r"
     {{- end }}
 
 [data.path]
