@@ -32,7 +32,8 @@ if command -v dotenv &> /dev/null; then
     function dotenv() {
         case "$1" in
             load)
-                . <(dotenv list | sed -E 's/^([^=]+)=(.*)/export \1="\2"/')
+                shift 1
+                . <(dotenv "$@" list | sed -E 's/^([^=]+)=(.*)/export \1="\2"/')
                 ;;
             *)
                 command dotenv "$@"
