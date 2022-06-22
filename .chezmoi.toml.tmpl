@@ -16,7 +16,7 @@
 {{- if hasKey . "makejobs" -}}
 {{-   $makejobs = .makejobs -}}
 {{- else -}}
-{{-   $makejobs = promptInt "Number of Parallel Make Jobs" -}}
+{{-   $makejobs = promptInt "Number of Parallel Make Jobs" 4 -}}
 {{- end -}}
 
 {{- $osid := .chezmoi.os -}}
