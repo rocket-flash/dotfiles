@@ -124,7 +124,7 @@ function aws-sso-login() {
     local last_check_file ttl
 
     last_check_file="${XDG_CACHE_HOME:-${HOME}/.cache}/aws/last_sso_check"
-    ttl=$((60*12))
+    ttl=$((60*8))
 
     if [[ "${1:-}" != "-f" ]] && [[ -e "${last_check_file}" ]] && [[ -z "$(find "${last_check_file}" -mmin "+${ttl}" 2>/dev/null)" ]]; then
         return
