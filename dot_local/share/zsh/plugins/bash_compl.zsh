@@ -1,9 +1,7 @@
 autoload bashcompinit
 bashcompinit
 
-files=(
-    "/usr/share/bash-completion/completions/vagrant"
-)
+files=()
 
 for f in "${files[@]}"; do
     [[ -f "$f" ]] && source "$f"
