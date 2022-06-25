@@ -1,23 +1,39 @@
 {
-    "editor.fontFamily": "'InputMono Nerd Font', 'Noto Sans Mono', monospace",
-    "workbench.colorTheme": "Zenburn",
-    "python.venvFolders": [
-        ".cache/pypoetry/virtualenvs"
+  "[dart]": {
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.rulers": [
+      80
     ],
-    "files.exclude": {
-        "**/__pycache__": true,
-        "**/.coverage": true,
-        "**/.pytest_cache": true
-    },
-    "files.trimTrailingWhitespace": true,
-    "files.trimFinalNewlines": true,
-    "files.insertFinalNewline": true,
-    "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
-    "files.autoSave": "afterDelay",
-    "terminal.integrated.env.linux": {
-        "ZSH_TMUX_AUTOSTART": "false"
-    },
-    "terminal.integrated.sendKeybindingsToShell": true,
-    "editor.scrollBeyondLastLine": false,
-    "workbench.list.openMode": "doubleClick"
+    "editor.selectionHighlight": false,
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "editor.suggestSelection": "first",
+    "editor.tabCompletion": "onlySnippets",
+    "editor.wordBasedSuggestions": false
+  },
+  "dart.flutterHotRestartOnSave": false,
+  "dart.flutterSdkPath": "/home/mathieu/.local/opt/flutter",
+  "editor.fontFamily": "'InputMono Nerd Font', 'Noto Sans Mono', monospace",
+  "editor.scrollBeyondLastLine": false,
+  "explorer.confirmDelete": false,
+  "files.autoSave": "afterDelay",
+  "files.exclude": {
+    "**/.coverage": true,
+    "**/.pytest_cache": true,
+    "**/__pycache__": true
+  },
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+  "python.venvFolders": [
+    ".cache/pypoetry/virtualenvs"
+  ],
+  "simpleIcons.hideArrows": false,
+  "terminal.integrated.env.linux": {
+    "ZSH_TMUX_AUTOSTART": "false"
+  },
+  "terminal.integrated.sendKeybindingsToShell": true,
+  "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
+  "workbench.colorTheme": "Zenburn",
+  "workbench.iconTheme": "minimalistic-icons"
 }
