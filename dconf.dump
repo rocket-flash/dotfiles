@@ -1,0 +1,44 @@
+[org/gnome/desktop/interface]
+clock-show-seconds=true
+clock-show-weekday=true
+color-scheme='prefer-dark'
+enable-hot-corners=false
+show-battery-percentage=false
+
+[org/gnome/desktop/sound]
+event-sounds=false
+
+[org/gnome/desktop/wm/preferences]
+button-layout='close,minimize,maximize:appmenu'
+
+[org/gnome/meld]
+highlight-current-line=true
+highlight-syntax=true
+indent-width=4
+insert-spaces-instead-of-tabs=true
+show-line-numbers=true
+style-scheme='meld-dark'
+wrap-mode='none'
+
+[org/gnome/nautilus/list-view]
+default-zoom-level='small'
+use-tree-view=true
+
+[org/gnome/nautilus/preferences]
+default-folder-viewer='list-view'
+
+[org/gnome/settings-daemon/plugins/media-keys]
+custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/']
+
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0]
+binding='<Control><Alt>t'
+command='kitty'
+name='Terminal'
+
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1]
+binding='<Shift><Control><Alt>t'
+command='env ZSH_TMUX_AUTOSTART=false kitty'
+name='Terminal (Disable tmux)'
+
+[org/gnome/tweaks]
+show-extensions-notice=false

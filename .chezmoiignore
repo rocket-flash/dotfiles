@@ -1,6 +1,7 @@
 misc/
 terminfo/
 crontab
+dconf.dump
 vimplug.lock
 
 {{- if ne .osid "linux-arch" }}
