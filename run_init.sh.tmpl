@@ -100,17 +100,6 @@ install_crontab() {
     crontab "{{ .chezmoi.sourceDir }}/crontab"
 }
 
-rebuild_font_cache() {
-    if ! command -v fc-cache &> /dev/null; then
-        warning "$0: fc-cache not installed: skipping"
-        return
-    fi
-
-    if ask_yes_no "Update font cache [y/N]?" "n"; then
-        fc-cache -f
-    fi
-}
-
 build_bat_cache() {
     if ! command -v bat &> /dev/null; then
         warning "$0: bat not installed: skipping"
@@ -132,15 +121,73 @@ compile_terminfo_entries() {
     done
 }
 
+rebuild_font_cache() {
+    if ! command -v fc-cache &> /dev/null; then
+        warning "$0: fc-cache not installed: skipping"
+        return
+    fi
+
+    if ask_yes_no "Update font cache [y/N]?" "n"; then
+        fc-cache -f
+    fi
+}
+
+_update_setting() {
+    path="${1}"
+    key="${2}"
+    value="${3}"
+
+    if ! gsettings writable "${path}" "${key}" &>/dev/null; then
+        warning "Can't write to ${path} ${key}"
+        return
+    fi
+
+    gsettings set "${path}" "${key}" "${value}"
+}
+
+apply_gnome_tweaks() {
+    if ! command -v gsettings &> /dev/null; then
+        warning "$0: gsettings not installed: skipping"
+        return
+    fi
+
+    _update_setting org.gnome.desktop.interface clock-show-seconds true
+    _update_setting org.gnome.desktop.sound event-sounds false
+    _update_setting org.gnome.desktop.wm.preferences button-layout 'close,minimize,maximize:appmenu'
+
+    _update_setting org.gnome.meld highlight-current-line true
+    _update_setting org.gnome.meld highlight-syntax true
+    _update_setting org.gnome.meld indent-width 4
+    _update_setting org.gnome.meld insert-spaces-instead-of-tabs true
+    _update_setting org.gnome.meld show-line-numbers true
+    _update_setting org.gnome.meld style-scheme 'meld-dark'
+
+    _update_setting org.gnome.nautilus.list-view default-zoom-level 'small'
+    _update_setting org.gnome.nautilus.list-view use-tree-view true
+    _update_setting org.gnome.nautilus.preferences default-folder-viewer 'list-view'
+
+    _update_setting org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding '<Control><Alt>t'
+    _update_setting org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command 'kitty'
+    _update_setting org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name 'Terminal'
+    _update_setting org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ binding '<Shift><Control><Alt>t'
+    _update_setting org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ command 'env ZSH_TMUX_AUTOSTART=false kitty'
+    _update_setting org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ name 'Terminal (Disable tmux)'
+
+    _update_setting org.gnome.tweaks show-extensions-notice false
+
+    # TODO: Add org.gnome.shell.extensions.dash-to-dock
+}
+
 install_nvim_plugins
 install_pyenv_latest
 install_tmux_plugin_manager
 install_cmus_notify
 install_crontab
-{{- if eq .chezmoi.os "linux" }}
-rebuild_font_cache
-{{- end }}
 build_bat_cache
 compile_terminfo_entries
+{{- if eq .chezmoi.os "linux" }}
+rebuild_font_cache
+apply_gnome_tweaks
+{{- end }}
 
 # vi: ft=sh
