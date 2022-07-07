@@ -46,6 +46,12 @@
     pyenv_completion = ""  # TODO
     virtualenvwrapper_lazy = "/usr/local/bin/virtualenvwrapper_lazy.sh"
     zsh_syntax_highlighting = "/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+    {{- else if eq .osid "linux-fedora" }}
+    fzf_completion = "/usr/share/zsh/site-functions/fzf"
+    fzf_key_bindings = "/usr/share/fzf/shell/key-bindings.zsh"
+    pyenv_completion = ""  # TODO
+    virtualenvwrapper_lazy = "/usr/bin/virtualenvwrapper_lazy.sh"
+    zsh_syntax_highlighting = "/usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
     {{- else }}
     fzf_completion = "/usr/share/fzf/completion.zsh"
     fzf_key_bindings = "/usr/share/fzf/key-bindings.zsh"
