@@ -19,6 +19,13 @@
 {{-   $makejobs = promptInt "Number of Parallel Make Jobs" 4 -}}
 {{- end -}}
 
+{{- $pipewire_clock_rate := "" -}}
+{{- if hasKey . "pipewire_clock_rate" -}}
+{{-   $pipewire_clock_rate = .pipewire_clock_rate -}}
+{{- else -}}
+{{-   $pipewire_clock_rate = promptInt "Pipewire Clock Rate" 48000 -}}
+{{- end -}}
+
 {{- $osid := .chezmoi.os -}}
 {{- if hasKey .chezmoi.osRelease "id" -}}
 {{-   $osid = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
@@ -28,6 +35,7 @@
     email = {{ $email | quote }}
     signingkey = {{ $signingkey | quote }}
     makejobs = {{ $makejobs }}
+    pipewire_clock_rate = {{ $pipewire_clock_rate }}
     osid = {{ $osid | quote }}
 
 [data.command]
