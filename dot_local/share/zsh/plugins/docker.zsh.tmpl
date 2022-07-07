@@ -31,12 +31,32 @@ function docker-grep-rmi() {
 }
 
 function docker-cleanup() {
+    local prune_all
+
+    prune_all=0
+
+    for arg in "$@"; do
+        case "${arg}" in
+            -a|--all)
+                prune_all=1
+                ;;
+            *)
+                echo "Unrecognized arg: ${arg}"
+                ;;
+        esac
+    done
+
     docker container prune -f
     docker image prune -f
-    docker volume ls -qf dangling=true \
-        | {{ .command.xargs }} docker inspect \
-        | jq -r '.[] | select((.Labels | has("com.docker.compose.project") | not) and (.Labels | has("org.acidrain.pipeline_runner.project") | not)).Name' \
-        | {{ .command.xargs }} docker volume rm
+
+    if [[ "${prune_all}" -ne 0 ]]; then
+        docker volume prune -f
+    else
+        docker volume ls -qf dangling=true \
+            | {{ .command.xargs }} docker inspect \
+            | jq -r '.[] | select((.Labels | has("com.docker.compose.project") | not) and (.Labels | has("org.acidrain.pipeline_runner.project") | not)).Name' \
+            | {{ .command.xargs }} docker volume rm
+    fi
 }
 
 function docker-kill-all() {
