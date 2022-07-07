@@ -1,11 +1,17 @@
 if command -v kubectl &>/dev/null; then
-    function kctl() {
-        local args
+    if command -v kubecolor &>/dev/null; then
+        function kctl() {
+            aws-sso-login
 
-        aws-sso-login
+            kubecolor "$@"
+        }
+    else
+        function kctl() {
+            aws-sso-login
 
-        kubectl "$@"
-    }
+            kubectl "$@"
+        }
+    fi
 
     compdef kctl='kubectl'
 fi
