@@ -1,4 +1,4 @@
-HISTFILE="${XDG_STATE_HOME}/zsh/history"
+HISTFILE="${XDG_STATE_HOME:-"${HOME}/.local/state"}/zsh/history"
 HISTSIZE=25000
 SAVEHIST=25000
 
