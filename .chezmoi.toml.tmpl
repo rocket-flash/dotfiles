@@ -19,13 +19,6 @@
 {{-   $makejobs = promptInt "Number of Parallel Make Jobs" 4 -}}
 {{- end -}}
 
-{{- $pipewire_clock_rate := "" -}}
-{{- if hasKey . "pipewire_clock_rate" -}}
-{{-   $pipewire_clock_rate = .pipewire_clock_rate -}}
-{{- else -}}
-{{-   $pipewire_clock_rate = promptInt "Pipewire Clock Rate" 48000 -}}
-{{- end -}}
-
 {{- $osid := .chezmoi.os -}}
 {{- if hasKey .chezmoi.osRelease "id" -}}
 {{-   $osid = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
@@ -35,7 +28,6 @@
     email = {{ $email | quote }}
     signingkey = {{ $signingkey | quote }}
     makejobs = {{ $makejobs }}
-    pipewire_clock_rate = {{ $pipewire_clock_rate }}
     osid = {{ $osid | quote }}
 
 [data.command]
@@ -68,4 +60,16 @@
     zsh_syntax_highlighting = "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
     {{- end }}
 
+[data.pipewire]
+{{- if eq .chezmoi.hostname "xenomorph" }}
+clock_rate = 96000
+quantum = 2048
+min_quantum = 2048
+max_quantum = 8192
+{{- else }}
+clock_rate = 48000
+quantum = 1024
+min_quantum = 16
+max_quantum = 2048
+{{- end }}
 # vim: ft=toml

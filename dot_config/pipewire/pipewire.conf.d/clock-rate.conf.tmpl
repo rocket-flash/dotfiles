@@ -1,6 +1,4 @@
 context.properties = {
-    ## Properties for the DSP configuration.
-    default.clock.rate          = {{ .pipewire_clock_rate }}
-    default.clock.allowed-rates = [ {{ .pipewire_clock_rate }} ]
+    default.clock.rate          = {{ .pipewire.clock_rate }}
+    default.clock.allowed-rates = [ {{ .pipewire.clock_rate }} ]
 }
-
