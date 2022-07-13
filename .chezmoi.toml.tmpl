@@ -25,40 +25,40 @@
 {{- end -}}
 
 [data]
-    email = {{ $email | quote }}
-    signingkey = {{ $signingkey | quote }}
-    makejobs = {{ $makejobs }}
-    osid = {{ $osid | quote }}
+email = {{ $email | quote }}
+signingkey = {{ $signingkey | quote }}
+makejobs = {{ $makejobs }}
+osid = {{ $osid | quote }}
 
 [data.command]
-    {{- if eq .chezmoi.os "darwin" }}
-    clip = "pbcopy"
-    xargs = "xargs"
-    {{- else }}
-    clip = "xsel --clipboard"
-    xargs = "xargs -r"
-    {{- end }}
+{{- if eq .chezmoi.os "darwin" }}
+clip = "pbcopy"
+xargs = "xargs"
+{{- else }}
+clip = "xsel --clipboard"
+xargs = "xargs -r"
+{{- end }}
 
 [data.path]
-    {{- if eq .chezmoi.os "darwin" }}
-    fzf_completion = "/usr/local/opt/fzf/shell/completion.zsh"
-    fzf_key_bindings = "/usr/local/opt/fzf/shell/key-bindings.zsh"
-    pyenv_completion = ""  # TODO
-    virtualenvwrapper_lazy = "/usr/local/bin/virtualenvwrapper_lazy.sh"
-    zsh_syntax_highlighting = "/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-    {{- else if eq .osid "linux-fedora" }}
-    fzf_completion = "/usr/share/zsh/site-functions/fzf"
-    fzf_key_bindings = "/usr/share/fzf/shell/key-bindings.zsh"
-    pyenv_completion = ""  # TODO
-    virtualenvwrapper_lazy = "/usr/bin/virtualenvwrapper_lazy.sh"
-    zsh_syntax_highlighting = "/usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-    {{- else }}
-    fzf_completion = "/usr/share/fzf/completion.zsh"
-    fzf_key_bindings = "/usr/share/fzf/key-bindings.zsh"
-    pyenv_completion = "/usr/share/zsh/site-functions/_pyenv"
-    virtualenvwrapper_lazy = "/usr/bin/virtualenvwrapper_lazy.sh"
-    zsh_syntax_highlighting = "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-    {{- end }}
+{{- if eq .chezmoi.os "darwin" }}
+fzf_completion = "/usr/local/opt/fzf/shell/completion.zsh"
+fzf_key_bindings = "/usr/local/opt/fzf/shell/key-bindings.zsh"
+pyenv_completion = ""  # TODO
+virtualenvwrapper_lazy = "/usr/local/bin/virtualenvwrapper_lazy.sh"
+zsh_syntax_highlighting = "/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+{{- else if eq .osid "linux-fedora" }}
+fzf_completion = "/usr/share/zsh/site-functions/fzf"
+fzf_key_bindings = "/usr/share/fzf/shell/key-bindings.zsh"
+pyenv_completion = ""  # TODO
+virtualenvwrapper_lazy = "/usr/bin/virtualenvwrapper_lazy.sh"
+zsh_syntax_highlighting = "/usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+{{- else }}
+fzf_completion = "/usr/share/fzf/completion.zsh"
+fzf_key_bindings = "/usr/share/fzf/key-bindings.zsh"
+pyenv_completion = "/usr/share/zsh/site-functions/_pyenv"
+virtualenvwrapper_lazy = "/usr/bin/virtualenvwrapper_lazy.sh"
+zsh_syntax_highlighting = "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+{{- end }}
 
 [data.pipewire]
 {{- if eq .chezmoi.hostname "xenomorph" }}
