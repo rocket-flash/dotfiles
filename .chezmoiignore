@@ -4,7 +4,14 @@ crontab
 dconf.dump
 vimplug.lock
 
+{{- if ne .chezmoi.os "linux" }}
+.config/cmus
+.config/pipewire
+.config/wireplumber
+{{- end }}
 {{- if ne .osid "linux-arch" }}
+.config/paru
+.config/yay
 .local/share/zsh/plugins/arch.zsh
 {{- end }}
 {{- if ne .chezmoi.os "darwin" }}
