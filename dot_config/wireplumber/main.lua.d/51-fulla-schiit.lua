@@ -6,11 +6,12 @@ table.insert(alsa_monitor.rules, {
     },
   },
   apply_properties = {
-    ["node.pause-on-idle"] = false,
-    ["api.alsa.headroom"]  = 1024,
-    ["api.alsa.headroom"]  = 1024,
-    --["audio.format"]       = "S16LE",
-    --["audio.rate"]         = 192000,
+    ["audio.format"]         = "S24_3LE",
+    ["audio.rate"]           = 96000,
+    ["api.alsa.headroom"]    = 1024,
+    -- Following value should be doubled until audio doesn't cut out or other issues stop occurring
+    ["api.alsa.period-size"] = 128,
+    ["node.pause-on-idle"]   = false,
   },
 })
 
