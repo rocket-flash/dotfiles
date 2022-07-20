@@ -11,9 +11,13 @@
     "editor.tabCompletion": "onlySnippets",
     "editor.wordBasedSuggestions": false
   },
+  "[python]": {
+    "editor.formatOnType": true
+  },
   "dart.flutterHotRestartOnSave": false,
   "dart.flutterSdkPath": "/home/mathieu/.local/opt/flutter",
   "editor.fontFamily": "'InputMono Nerd Font', 'Noto Sans Mono', monospace",
+  "editor.formatOnSave": true,
   "editor.scrollBeyondLastLine": false,
   "explorer.confirmDelete": false,
   "files.autoSave": "afterDelay",
@@ -25,6 +29,12 @@
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
+  "python.formatting.blackPath": "/usr/bin/black",
+  "python.formatting.provider": "black",
+  "python.linting.flake8Enabled": true,
+  "python.linting.flake8Path": "/usr/bin/flake8",
+  "python.linting.mypyEnabled": true,
+  "python.linting.mypyPath": "/usr/bin/mypy",
   "python.venvFolders": [
     ".cache/pypoetry/virtualenvs"
   ],
