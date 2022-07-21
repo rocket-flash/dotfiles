@@ -26,6 +26,33 @@ update_zsh_history_location() {
     chmod 600 "${dst}"
 }
 
+update_neovim_undo_location() {
+    local src1 src2 dst
+    src1="${XDG_CONFIG_HOME}/nvim/undo"
+    src2="${HOME}/.vim/undo"
+    dst="${XDG_STATE_HOME}/nvim/undo"
+
+    if [[ ! -e "${src1}" ]] && [[ ! -e "${src2}" ]]; then
+        return 0
+    fi
+
+    mkdir -p "${dst}"
+
+    files=$(shopt -s nullglob dotglob; echo "${src1}"/*)
+    if (( ${#files} )); then
+        info "Moving ${src1} -> ${dst}"
+        mv "${src1}"/* "${dst}"
+    fi
+    [[ -d "${src1}" ]] && rmdir "${src1}"
+
+    files=$(shopt -s nullglob dotglob; echo "${src2}"/*)
+    if (( ${#files} )); then
+        info "Moving ${src2} -> ${dst}"
+        mv "${src2}"/* "${dst}"
+    fi
+    [[ -d "${src2}" ]] && rmdir "${src2}"
+}
+
 remove() {
     local path
     path="${1:?}"
@@ -36,6 +63,7 @@ remove() {
 }
 
 update_zsh_history_location
+update_neovim_undo_location
 remove "${XDG_CONFIG_HOME}/zsh/.zcompdump"
 remove "${HOME}/.tmux.zsh"
 remove "${HOME}/.inputrc"
