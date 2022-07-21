@@ -6,6 +6,7 @@ vimplug.lock
 
 {{- if ne .chezmoi.os "linux" }}
 .config/cmus
+.config/fontconfig
 .config/pipewire
 .config/wireplumber
 {{- end }}
