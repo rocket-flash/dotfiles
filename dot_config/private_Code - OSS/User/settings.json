@@ -20,9 +20,12 @@
   "editor.formatOnSave": true,
   "editor.scrollBeyondLastLine": false,
   "explorer.confirmDelete": false,
+  "explorer.excludeGitIgnore": true,
   "files.autoSave": "afterDelay",
   "files.exclude": {
     "**/.coverage": true,
+    "**/.idea": true,
+    "**/.mypy_cache": true,
     "**/.pytest_cache": true,
     "**/__pycache__": true
   },
