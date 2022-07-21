@@ -23,10 +23,7 @@ Plug 'Glench/Vim-Jinja2-Syntax'
 
 if !&diff
     Plug 'junegunn/vim-peekaboo'
-
-    if has('nvim') || has('patch-8.0-1453')
-        Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    endif
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
 endif
 
 if !exists('g:vscode')
@@ -127,18 +124,16 @@ nnoremap <leader>jt :%!jq<CR>
 " XML Tidy: Reformat XML file
 nnoremap <leader>xt :%!tidy -xml -i -w 2048 2>/dev/null<CR>
 
-if has('nvim')
-    " Send all/line to terminal
-    nnoremap <leader>sa ggyG<C-w>wpi<CR><C-\><C-n><C-w>p``
-    nnoremap <leader>sl yy<C-w>wpi<CR><C-\><C-n><C-w>p
-    inoremap <leader>sa <ESC>ggyG<C-w>wpi<CR><C-\><C-n><C-w>p``a
-    inoremap <leader>sl <ESC>yy<C-w>wpi<CR><C-\><C-n><C-w>pa
+" Send all/line to terminal
+nnoremap <leader>sa ggyG<C-w>wpi<CR><C-\><C-n><C-w>p``
+nnoremap <leader>sl yy<C-w>wpi<CR><C-\><C-n><C-w>p
+inoremap <leader>sa <ESC>ggyG<C-w>wpi<CR><C-\><C-n><C-w>p``a
+inoremap <leader>sl <ESC>yy<C-w>wpi<CR><C-\><C-n><C-w>pa
 
-    " Send current selection to terminal
-    vnoremap <leader>ss y<C-w>wpi<CR><C-\><C-n><C-w>p
+" Send current selection to terminal
+vnoremap <leader>ss y<C-w>wpi<CR><C-\><C-n><C-w>p
 
-    tnoremap <ESC><ESC> <C-\><C-n>
-endif
+tnoremap <ESC><ESC> <C-\><C-n>
 
 " Syntaxes
 syntax enable
@@ -182,11 +177,8 @@ if exists('$TMUX')
 endif
 
 if substitute(system('tput colors'), '\n', '', '') == "256"
-    if has('nvim')
-        set termguicolors
-        set guicursor=n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20
-    endif
-
+    set termguicolors
+    set guicursor=n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20
     set bg=dark
     colorscheme zenburn
 else
@@ -358,11 +350,7 @@ function! s:check_back_space() abort
 endfunction
 
 " Use <c-space> to trigger completion.
-if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
-else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
+inoremap <silent><expr> <c-space> coc#refresh()
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
 " position. Coc only does snippet and additional edit on confirm.
