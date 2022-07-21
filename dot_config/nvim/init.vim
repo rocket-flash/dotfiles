@@ -20,6 +20,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'cespare/vim-toml', { 'branch': 'main' }
 Plug 'NoahTheDuke/vim-just'
 Plug 'Glench/Vim-Jinja2-Syntax'
+Plug 'gpanders/editorconfig.nvim'
 
 if !&diff
     Plug 'junegunn/vim-peekaboo'
