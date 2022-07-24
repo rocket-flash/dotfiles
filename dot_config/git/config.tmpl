@@ -6,9 +6,13 @@
 [user]
 	name = Mathieu Lemay
 	email = {{ .email }}
+	{{- if ne .signingkey "" }}
 	signingkey = {{ .signingkey }}
+	{{- end}}
 [commit]
+	{{- if ne .signingkey "" }}
 	gpgsign = true
+	{{- end}}
 [fetch]
 	prune = true
 [pull]

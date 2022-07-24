@@ -155,4 +155,8 @@ rebuild_font_cache
 apply_dconf_config
 {{- end }}
 
+{{- if eq .signingkey "" }}
+warning "No GPG signing key set: git commit signature disabled"
+{{- end }}
+
 # vi: ft=sh
