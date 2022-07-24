@@ -44,27 +44,6 @@ if installed brew; then
     alias up='brew upgrade && brew upgrade --cask'
 fi
 
-GNU_UTILS=(
-    'cp'
-    'find'
-    'head'
-    'md5sum'
-    'mkdir'
-    'readlink'
-    'rm'
-    'sed'
-    'sha1sum'
-    'sha256sum'
-    'shred'
-    'tail'
-    'zcat'
-)
-
-# Replace utils by their gnu coreutils counterparts
-for i in ${GNU_UTILS[@]}; do
-    installed "g${i}" && alias $i="g$i"
-done
-
 if ! installed 'exa'; then
     if installed gls; then
         alias ls='gls --color=auto -v --group-directories-first'

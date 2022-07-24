@@ -2,8 +2,14 @@ if ! installed brew; then
     return
 fi
 
-BREW_PREFIX="/usr/local"
+BREW_PREFIX="$(brew --prefix)"
 export PATH="$PATH:${BREW_PREFIX}/sbin"
+
+# GNU utilities
+for pkg in "coreutils" "findutils" "gnu-sed"; do
+    gnubin="${BREW_PREFIX}/opt/${pkg}/libexec/gnubin"
+    [[ -d "${gnubin}" ]] && export PATH="${gnubin}:${PATH}"
+done
 
 # OpenSSL
 OPENSSL_PATH="${BREW_PREFIX}/opt/openssl"

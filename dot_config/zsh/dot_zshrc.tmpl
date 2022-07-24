@@ -170,6 +170,9 @@ export WORDCHARS="${WORDCHARS/\//}"
 
 {{- if eq .chezmoi.os "darwin" }}
 
+# Ensure ~/.local/bin is prioritized in PATH
+export PATH="${HOME}/.local/bin:${PATH}"
+
 # Use Python3 for virtualenvwrapper
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
 {{- end}}
