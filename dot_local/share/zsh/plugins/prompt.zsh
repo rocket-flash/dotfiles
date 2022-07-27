@@ -35,7 +35,9 @@ function zle-keymap-select {
 
 zle -N zle-keymap-select
 
-if [[ $(tput colors) -lt 256 ]]; then
+if [[ -n "${ZSH_PROMPT:-}" ]]; then
+    prompt "${ZSH_PROMPT}"
+elif [[ $(tput colors) -lt 256 ]]; then
     prompt simple
 else
     prompt powerline
