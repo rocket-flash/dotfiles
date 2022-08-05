@@ -67,7 +67,7 @@ cmd-rmi() {
     select_pattern="${1:?Pattern not specified}"
     ignore_pattern="${2:-}"
 
-    images=$(_select images "{{.Repository}}:{{.Tag}}" "${select_pattern}" "${ignore_pattern}")
+    images=$(_select image "{{.Repository}}:{{.Tag}}" "${select_pattern}" "${ignore_pattern}")
 
     if [[ -z "${images}" ]]; then
         echo "Nothing to delete"
