@@ -29,7 +29,7 @@ _select() {
     select_pattern="${3}"
     ignore_pattern="${4:-}"
 
-    values=$(docker "${docker_cmd}" ls --format="${docker_fmt}" | grep -- "${select_pattern}" || true)
+    values=$(docker "${docker_cmd}" ls -a --format="${docker_fmt}" | grep -- "${select_pattern}" || true)
 
     if [ -n "${ignore_pattern}" ]; then
         values=$(echo "${values}" | grep -v -- "${ignore_pattern}" || true)
