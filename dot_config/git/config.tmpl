@@ -37,11 +37,13 @@
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset %C(bold magenta)(%G?)%Creset' --abbrev-commit
 	cia = commit --amend
 	fixup = commit --amend --no-edit
-	fnv = commit --amend --no-edit --no-verify
-	edit = "!vim `git ls-files -m`"
-	pnv = push --no-verify
+	wip = commit --no-verify --message WIP
 	pf = push --force-with-lease
+	fnv = commit --amend --no-edit --no-verify
+	cinv = commit --no-verify
+	pnv = push --no-verify
 	pfnv = push --force-with-lease --no-verify
+	edit = "!vim `git ls-files -m`"
 	track = update-index --no-assume-unchanged
 	untrack = update-index --assume-unchanged
 
@@ -57,6 +59,8 @@
 	unpublish = "!git push origin :$(git branch-name)"
 
 	exclude = "!sh -c 'echo "$1" >> .git/info/exclude' -"
+
+	sync = "!git pull && git forget"
 [color]
 	diff = auto
 	status = auto
