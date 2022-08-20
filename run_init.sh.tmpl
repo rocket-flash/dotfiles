@@ -80,6 +80,17 @@ install_tmux_plugin_manager() {
     fi
 }
 
+install_fzf_git() {
+    if ! command -v fzf &> /dev/null; then
+        warning "$0: fzf not installed: skipping"
+        return
+    fi
+
+    info "Installing fzf-git"
+    mkdir -p "${HOME}/.local/share/fzf"
+    curl -sSL "https://raw.githubusercontent.com/junegunn/fzf-git.sh/main/fzf-git.sh" -o "${HOME}/.local/share/fzf/fzf-git.sh"
+}
+
 install_cmus_notify() {
     if ! command -v cargo &> /dev/null; then
         warning "$0: cargo not installed: skipping"
@@ -146,6 +157,7 @@ apply_dconf_config() {
 install_nvim_plugins
 install_pyenv_latest
 install_tmux_plugin_manager
+install_fzf_git
 install_cmus_notify
 install_crontab
 build_bat_cache

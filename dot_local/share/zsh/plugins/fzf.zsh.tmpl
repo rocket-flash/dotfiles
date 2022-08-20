@@ -1,7 +1,16 @@
 command -v fzf &> /dev/null || return
 
 . "{{ .path.fzf_key_bindings }}"
-[[ $- == *i* ]] && . "{{ .path.fzf_completion }}" 2> /dev/null
+. "{{ .path.fzf_completion }}"
+
+# TODO: Install this script with system's package manager
+if [[ -e "${HOME}/.local/share/fzf/fzf-git.sh" ]]; then
+    . "${HOME}/.local/share/fzf/fzf-git.sh"
+    bindkey -r '^g'  # Unbind this (list-expand) as it interferes with fzf-git
+
+    # fzf-git overrides style from bat's config. Override the override.
+    command -v bat &>/dev/null && _fzf_git_cat="bat --color=always"
+fi
 
 rg_opts="--files --follow --hidden --glob '!.git/*'"
 preview_window_opts="--preview-window hidden --bind '?:toggle-preview'"
@@ -18,7 +27,7 @@ export FZF_ALT_C_COMMAND="fd --type=d"
 export FZF_ALT_C_OPTS="--tiebreak=end --preview 'tree -C {} | head -200' ${=preview_window_opts}"
 [[ -n "${TMUX:-}" ]] && export FZF_TMUX_OPTS="-p 75%,75%"
 
-unset preview_window_opts
+unset rg_opts preview_window_opts
 
 # Use ripgrep instead of the default find command for listing path candidates.
 # - The first argument to the function ($1) is the base path to start traversal
