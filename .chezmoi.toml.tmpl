@@ -1,23 +1,7 @@
-{{- $email := "" -}}
-{{- if hasKey . "email" -}}
-{{-   $email = .email -}}
-{{- else -}}
-{{-   $email = promptString "Email Address" "acidrain1@gmail.com" -}}
-{{- end -}}
-
-{{- $signingkey := "" -}}
-{{- if hasKey . "signingkey" -}}
-{{-   $signingkey = .signingkey -}}
-{{- else -}}
-{{-   $signingkey = promptString "GPG Signing Key" -}}
-{{- end -}}
-
-{{- $makejobs := "" -}}
-{{- if hasKey . "makejobs" -}}
-{{-   $makejobs = .makejobs -}}
-{{- else -}}
-{{-   $makejobs = promptInt "Number of Parallel Make Jobs" 4 -}}
-{{- end -}}
+{{- $email := promptStringOnce . "email" "Email Address" "acidrain1@gmail.com" -}}
+{{- $signingkey := promptStringOnce . "signingkey" "GPG Signing Key" -}}
+{{- $makejobs := promptIntOnce . "makejobs" "Number of Parallel Make Jobs" 4 -}}
+{{- $enable_coc_nvim := promptBoolOnce .neovim "enable_coc_nvim" "Enable coc.nvim" true -}}
 
 {{- $osid := .chezmoi.os -}}
 {{- if hasKey .chezmoi.osRelease "id" -}}
@@ -74,5 +58,6 @@ max_quantum = 2048
 {{- end }}
 
 [data.neovim]
-enable_coc_nvim = true
+enable_coc_nvim = {{ $enable_coc_nvim }}
+
 # vim: ft=toml
