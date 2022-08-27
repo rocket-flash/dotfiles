@@ -67,7 +67,7 @@ paths=(
     "${POETRY_HOME}/bin"
     "${PIPX_BIN_DIR}"
 )
-for p in ${paths}; do
+for p in "${paths[@]}"; do
     if [[ -d "${p}" ]] && [[ ":${PATH}:" != *":${p}:"* ]]; then
         export PATH="${p}:${PATH}"
     fi
@@ -82,7 +82,7 @@ fi
 {{- end }}
 
 # Firefox on Wayland
-MOZ_ENABLE_WAYLAND=1
+export MOZ_ENABLE_WAYLAND=1
 
 # Set an invalid default prefix to ensure wine is always called with a non default prefix
 export WINEPREFIX=/dev/null
