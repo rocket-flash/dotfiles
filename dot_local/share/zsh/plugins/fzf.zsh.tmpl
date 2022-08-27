@@ -8,6 +8,12 @@ if [[ -e "${HOME}/.local/share/fzf/fzf-git.sh" ]]; then
     . "${HOME}/.local/share/fzf/fzf-git.sh"
     bindkey -r '^g'  # Unbind this (list-expand) as it interferes with fzf-git
 
+    functions[_fzf_git_branches_orig]=$functions[_fzf_git_branches]
+
+    _fzf_git_branches () {
+        _fzf_git_branches_orig --preview-window=right,rounded,50%
+    }
+
     # fzf-git overrides style from bat's config. Override the override.
     command -v bat &>/dev/null && _fzf_git_cat="bat --color=always"
 fi
