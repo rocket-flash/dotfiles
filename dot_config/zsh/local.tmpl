@@ -1,9 +1,0 @@
-{{- if eq .chezmoi.hostname "xenomorph" }}
-export SETUPTOOLS_USE_DISTUTILS=stdlib
-
-if [[ -d "${HOME}/.local/share/poetry/bin" ]] && [[ ":${PATH}:" != *":${HOME}/.local/share/poetry/bin:"* ]]; then
-    export PATH="${HOME}/.local/share/poetry/bin:${PATH}"
-fi
-{{- end }}
-
-# vim: ft=zsh

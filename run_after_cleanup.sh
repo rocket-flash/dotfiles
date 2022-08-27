@@ -69,5 +69,6 @@ remove "${HOME}/.tmux.zsh"
 remove "${HOME}/.inputrc"
 remove "${HOME}/.java"
 remove "${HOME}/.ideavimrc"
+remove "${HOME}/.config/zsh/local"
 
 # vi: ft=sh
