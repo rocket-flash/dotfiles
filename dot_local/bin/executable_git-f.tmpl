@@ -7,6 +7,6 @@ set -eu -o pipefail
 command -v fzf &>/dev/null || fatal "fzf not installed"
 
 git branch -a | grep -Ev "(^\*| -> )" | awk '{$1=$1};1' | sort | uniq \
-    | fzf-tmux ${FZF_TMUX_OPTS} -q "${@:-}" --preview 'git log --color -n 50 {} | head -200' \
+    | fzf-tmux ${FZF_TMUX_OPTS:-} -q "${@:-}" --preview 'git log --color -n 50 {} | head -200' \
     | sed 's@^remotes/origin/@@' \
     | {{ .command.xargs }} git switch
