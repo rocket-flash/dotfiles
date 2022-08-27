@@ -16,7 +16,7 @@
   },
   "dart.flutterHotRestartOnSave": false,
   "dart.flutterSdkPath": "/home/mathieu/.local/opt/flutter",
-  "editor.fontFamily": "'InputMono Nerd Font', 'Noto Sans Mono', monospace",
+  "editor.fontFamily": "'InputMono Nerd Font Mono', 'Noto Sans Mono', monospace",
   "editor.formatOnSave": true,
   "editor.scrollBeyondLastLine": false,
   "explorer.confirmDelete": false,

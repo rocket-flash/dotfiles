@@ -154,6 +154,11 @@ apply_dconf_config() {
     # TODO: Add org.gnome.shell.extensions.dash-to-dock
 }
 
+sync_library_fonts() {
+    info "Syncing ~/.local/share/fonts to ~/Library/Fonts"
+    rsync -a --delete ~/.local/share/fonts/ Library/Fonts
+}
+
 install_nvim_plugins
 install_pyenv_latest
 install_tmux_plugin_manager
@@ -165,6 +170,8 @@ compile_terminfo_entries
 {{- if eq .chezmoi.os "linux" }}
 rebuild_font_cache
 apply_dconf_config
+{{- else if eq .chezmoi.os "darwin" }}
+sync_library_fonts
 {{- end }}
 
 {{- if eq .signingkey "" }}
