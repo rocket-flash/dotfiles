@@ -41,6 +41,7 @@
   "python.venvFolders": [
     ".cache/pypoetry/virtualenvs"
   ],
+  "python.venvPath": "~/.cache/pypoetry/virtualenvs",
   "simpleIcons.hideArrows": false,
   "terminal.integrated.env.linux": {
     "ZSH_TMUX_AUTOSTART": "false"

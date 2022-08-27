@@ -48,5 +48,41 @@ binding='<Shift><Control><Alt>t'
 command='env ZSH_TMUX_AUTOSTART=false kitty'
 name='Terminal (Disable tmux)'
 
+[org/gnome/terminal/legacy/profiles:]
+default='7829b842-1334-4079-bec1-9a8b057e4e52'
+list=['7829b842-1334-4079-bec1-9a8b057e4e52', 'c6435ecf-9c5b-4bc8-894d-67e68ba25d10']
+
+[org/gnome/terminal/legacy/profiles:/:7829b842-1334-4079-bec1-9a8b057e4e52]
+background-color='rgb(63,63,63)'
+custom-command='/bin/bash'
+default-size-columns=240
+default-size-rows=72
+exit-action='close'
+font='InputMono Nerd Font Mono 10'
+foreground-color='rgb(220,220,204)'
+login-shell=true
+palette=['rgb(49,49,49)', 'rgb(220,163,163)', 'rgb(127,159,127)', 'rgb(239,220,188)', 'rgb(155,176,175)', 'rgb(176,102,152)', 'rgb(124,181,181)', 'rgb(217,217,217)', 'rgb(99,99,99)', 'rgb(236,188,188)', 'rgb(143,175,159)', 'rgb(240,223,175)', 'rgb(171,194,193)', 'rgb(236,147,211)', 'rgb(140,208,211)', 'rgb(247,247,247)']
+use-custom-command=true
+use-system-font=false
+use-theme-colors=false
+visible-name='Bash'
+
+[org/gnome/terminal/legacy/profiles:/:c6435ecf-9c5b-4bc8-894d-67e68ba25d10]
+background-color='rgb(63,63,63)'
+bold-color-same-as-fg=true
+custom-command='/bin/bash'
+default-size-columns=240
+default-size-rows=72
+exit-action='close'
+font='InputMono Nerd Font Mono 10'
+foreground-color='rgb(220,220,204)'
+login-shell=true
+palette=['rgb(49,49,49)', 'rgb(220,163,163)', 'rgb(127,159,127)', 'rgb(239,220,188)', 'rgb(155,176,175)', 'rgb(176,102,152)', 'rgb(124,181,181)', 'rgb(217,217,217)', 'rgb(99,99,99)', 'rgb(236,188,188)', 'rgb(143,175,159)', 'rgb(240,223,175)', 'rgb(171,194,193)', 'rgb(236,147,211)', 'rgb(140,208,211)', 'rgb(247,247,247)']
+use-custom-command=false
+use-system-font=false
+use-theme-colors=false
+visible-name='Zsh'
+
+
 [org/gnome/tweaks]
 show-extensions-notice=false
