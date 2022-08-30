@@ -1,4 +1,5 @@
-AWS_PROFILE_CACHE_FILE="$HOME/.cache/zsh/aws-profile"
+AWS_PROFILE_CACHE_FILE="${XDG_CACHE_HOME:-${HOME}/.cache}/aws/profile"
+AWS_SSO_CHECK_FILE="${XDG_CACHE_HOME:-${HOME}/.cache}/aws/last_sso_check"
 
 [[ -d "$(dirname "${AWS_PROFILE_CACHE_FILE}")" ]] || mkdir -p "$(dirname "${AWS_PROFILE_CACHE_FILE}")"
 
@@ -6,7 +7,7 @@ if [ -e "${AWS_PROFILE_CACHE_FILE}" ]; then
     export AWS_PROFILE="$(< "${AWS_PROFILE_CACHE_FILE}")"
 fi
 
-# Profiles {{{
+# Profiles [[[
 
 function aws-current-profile {
     if [[ -n "${AWS_PROFILE}" ]]; then
@@ -35,9 +36,9 @@ function aws-unset-profile {
     unset AWS_PROFILE
 }
 
-# }}}
+# ]]]
 
-# Account Info {{{
+# Account Info [[[
 
 function aws-get-account-id() {
     aws sts get-caller-identity | jq -r '.Account'
@@ -51,9 +52,9 @@ function aws-get-current-region() {
     fi
 }
 
-# }}}
+# ]]]
 
-# Credentials {{{
+# Credentials [[[
 
 function aws-mfa {
     local mfa_code="$(ykman oath code -s broadsign-aws)"
@@ -120,19 +121,24 @@ function aws-eks-get-token() {
     aws eks get-token --cluster-name preprod | jq -r '.status.token'
 }
 
-function aws-sso-login() {
-    local last_check_file ttl
+function aws-sso-session-expired() {
+    local ttl
 
-    last_check_file="${XDG_CACHE_HOME:-${HOME}/.cache}/aws/last_sso_check"
     ttl=$((60*8))
 
-    if [[ "${1:-}" != "-f" ]] && [[ -e "${last_check_file}" ]] && [[ -z "$(find "${last_check_file}" -mmin "+${ttl}" 2>/dev/null)" ]]; then
-        return
+    if [[ -e "${AWS_SSO_CHECK_FILE}" ]] && [[ -z "$(find "${AWS_SSO_CHECK_FILE}" -mmin "+${ttl}" 2>/dev/null)" ]]; then
+        return 1
+    fi
+}
+
+function aws-sso-login() {
+    if [[ "${1:-}" != "-f" ]] && ! aws-sso-session-expired; then
+        return 0
     fi
 
     if aws sso login; then
-        mkdir -p "$(dirname "${last_check_file}")"
-        touch "${last_check_file}"
+        mkdir -p "$(dirname "${AWS_SSO_CHECK_FILE}")"
+        touch "${AWS_SSO_CHECK_FILE}"
     fi
 }
 
@@ -180,9 +186,9 @@ function aws-sso-assume() {
     unset AWS_PROFILE
 }
 
-# }}}
+# ]]]
 
-# Cloud Formation {{{
+# Cloud Formation [[[
 
 function aws-cf-create-stack() {
     local stack_name="${1:?Stack name not specified}"
@@ -239,9 +245,9 @@ function aws-cf-delete-stacks() {
     done
 }
 
-# }}}
+# ]]]
 
-# Misc {{{
+# Misc [[[
 
 function aws-get-ipgranges {
     curl "https://ip-ranges.amazonaws.com/ip-ranges.json" | jq '.prefixes'
@@ -249,14 +255,34 @@ function aws-get-ipgranges {
 
 alias aws-local='aws --profile=default --endpoint-url=http://localhost:4566'
 
-# }}}
+# ]]]
 
-# Completion {{{
+# Completion [[[
 
 autoload bashcompinit
 bashcompinit
 complete -C aws_completer aws
 
-# }}}
+# ]]]
 
-# vim: foldmethod=marker
+{{- if eq .chezmoi.hostname "xenomorph" }}
+
+# Auto Refresh SSO [[[
+
+if [[ -n "${DISPLAY}" ]] && aws-sso-session-expired; then
+    echo -n "AWS SSO session is expired. Refresh? [y/N] "
+    read -r -s -k response
+    echo ""
+
+    response="$(echo "${response:l}")"
+
+    if [[ "${response}" == "y" ]]; then
+        (aws-sso-login &>/dev/null &)
+    fi
+fi
+
+# ]]]
+
+{{- end }}
+
+# vim: ft=zsh foldmethod=marker foldmarker=[[[,]]]
