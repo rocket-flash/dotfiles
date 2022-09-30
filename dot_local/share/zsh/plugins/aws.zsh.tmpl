@@ -267,19 +267,7 @@ complete -C aws_completer aws
 
 {{- if eq .chezmoi.hostname "xenomorph" }}
 
-# Auto Refresh SSO [[[
-
-if [[ -n "${DISPLAY}" ]] && aws-sso-session-expired; then
-    echo -n "AWS SSO session is expired. Refresh? [y/N] "
-    read -r -s -k response
-    echo ""
-
-    response="$(echo "${response:l}")"
-
-    if [[ "${response}" == "y" ]]; then
-        (aws-sso-login &>/dev/null &)
-    fi
-fi
+aws-sso-session-expired && printf "\\e[33m[WARNING]\\e[0m %s\\n" "AWS SSO session is expired" >&2
 
 # ]]]
 
