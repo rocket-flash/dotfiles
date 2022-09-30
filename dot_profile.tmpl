@@ -40,9 +40,10 @@ export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="${XDG_CONFIG_HOME}/java"
 export SETUPTOOLS_USE_DISTUTILS=stdlib
 
 # Set JRE for JetBrains products
-JETBRAINS_JRE="/usr/lib/jvm/jre-jetbrains"
-if [ -d "$JETBRAINS_JRE" ]; then
+JETBRAINS_JRE="{{ .path.jetbrains_jre }}"
+if [ -d "${JETBRAINS_JRE}" ]; then
     export IDEA_JDK="${JETBRAINS_JRE}"
+    export PYCHARM_JDK="${JETBRAINS_JRE}"
     export CLION_JDK="${JETBRAINS_JRE}"
     export DATAGRIP_JDK="${JETBRAINS_JRE}"
     export STUDIO_JDK="${JETBRAINS_JRE}"
