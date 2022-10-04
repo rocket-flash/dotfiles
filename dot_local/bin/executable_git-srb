@@ -1,0 +1,21 @@
+#! /bin/bash -eu
+
+. ~/.local/lib/log.sh
+
+if git rev-parse --verify main &>/dev/null; then
+    main_branch="main"
+elif git rev-parse --verify master &>/dev/null; then
+    main_branch="master"
+else
+    fatal "Can't determine main branch"
+fi
+
+if [[ "$(git describe --all HEAD)" = "heads/${main_branch}" ]]; then
+    fatal "Can't rebase: already on main branch"
+fi
+
+git checkout "${main_branch}"
+git pull
+git forget
+git checkout -
+git rebase -i "${main_branch}"
