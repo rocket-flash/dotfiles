@@ -26,25 +26,25 @@ plugin-metadata() {
 _select() {
     docker_cmd="${1}"
     docker_fmt="${2}"
-    select_pattern="${3}"
-    ignore_pattern="${4:-}"
+    shift 2
+    patterns="$@"
 
-    values=$(docker "${docker_cmd}" ls -a --format="${docker_fmt}" | grep -- "${select_pattern}" || true)
+    grep_args=()
+    for p in "${=patterns}"; do
+        grep_args+=("-e" "${p}")
+    done
 
-    if [ -n "${ignore_pattern}" ]; then
-        values=$(echo "${values}" | grep -v -- "${ignore_pattern}" || true)
-    fi
+    values=$(docker "${docker_cmd}" ls -a --format="${docker_fmt}" | grep "${grep_args[@]}" || true)
 
     echo "${values}"
 }
 
 cmd-rm() {
-    local select_pattern ignore_pattern containers
+    local containers
 
-    select_pattern="${1:?Pattern not specified}"
-    ignore_pattern="${2:-}"
+    [[ $# -lt 1 ]] && fatal "No pattern specified"
 
-    containers=$(_select container "{{.Names}}" "${select_pattern}" "${ignore_pattern}")
+    containers=$(_select container "{{.Names}}" "$@")
 
     if [[ -z "${containers}" ]]; then
         echo "Nothing to delete"
@@ -62,12 +62,11 @@ cmd-rm() {
 }
 
 cmd-rmi() {
-    local select_pattern ignore_pattern images
+    local images
 
-    select_pattern="${1:?Pattern not specified}"
-    ignore_pattern="${2:-}"
+    [[ $# -lt 1 ]] && fatal "No pattern specified"
 
-    images=$(_select image "{{.Repository}}:{{.Tag}}" "${select_pattern}" "${ignore_pattern}")
+    images=$(_select image "{{.Repository}}:{{.Tag}}" "$@")
 
     if [[ -z "${images}" ]]; then
         echo "Nothing to delete"
@@ -85,12 +84,11 @@ cmd-rmi() {
 }
 
 cmd-kill() {
-    local select_pattern ignore_pattern containers
+    local select_pattern containers
 
-    select_pattern="${1:?Pattern not specified}"
-    ignore_pattern="${2:-}"
+    [[ $# -lt 1 ]] && fatal "No pattern specified"
 
-    containers=$(_select container "{{.Names}}" "${select_pattern}" "${ignore_pattern}")
+    containers=$(_select container "{{.Names}}" "$@")
 
     if [[ -z "${containers}" ]]; then
         echo "Nothing to kill"
