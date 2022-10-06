@@ -8,5 +8,6 @@
     "python.linting.mypyEnabled": true,
     "python.venvPath": ".cache/pypoetry/virtualenvs",
     "rust-analyzer.server.path": "/usr/bin/rust-analyzer",
+    "suggest.noselect": true,
     "yaml.customTags": [ "!GetAtt", "!Join", "!Ref", "!Sub" ]
 }
