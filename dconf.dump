@@ -3,6 +3,7 @@ clock-show-seconds=true
 clock-show-weekday=true
 color-scheme='prefer-dark'
 enable-hot-corners=false
+font-antialiasing='rgba'
 monospace-font-name='InputMono Nerd Font Mono 10'
 show-battery-percentage=false
 
@@ -11,6 +12,7 @@ numlock-state=true
 
 [org/gnome/desktop/peripherals/touchpad]
 disable-while-typing=true
+natural-scroll=true
 tap-to-click=true
 two-finger-scrolling-enabled=true
 
@@ -30,11 +32,13 @@ style-scheme='meld-dark'
 wrap-mode='none'
 
 [org/gnome/nautilus/list-view]
+default-visible-columns=['name', 'size', 'type', 'date_modified']
 default-zoom-level='small'
 use-tree-view=true
 
 [org/gnome/nautilus/preferences]
 default-folder-viewer='list-view'
+show-delete-permanently=true
 
 [org/gnome/settings-daemon/plugins/media-keys]
 custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/']
@@ -71,6 +75,7 @@ highlight-colors-set=true
 highlight-foreground-color='rgb(255,255,255)'
 login-shell=true
 palette=['rgb(49,49,49)', 'rgb(220,163,163)', 'rgb(127,159,127)', 'rgb(239,220,188)', 'rgb(149,164,178)', 'rgb(188,108,156)', 'rgb(124,181,181)', 'rgb(217,217,217)', 'rgb(99,99,99)', 'rgb(236,188,188)', 'rgb(143,175,159)', 'rgb(240,223,175)', 'rgb(140,176,211)', 'rgb(236,147,211)', 'rgb(140,208,211)', 'rgb(247,247,247)']
+preserve-working-directory='always'
 use-custom-command=true
 use-system-font=false
 use-theme-colors=false
@@ -94,6 +99,7 @@ highlight-colors-set=true
 highlight-foreground-color='rgb(255,255,255)'
 login-shell=true
 palette=['rgb(49,49,49)', 'rgb(220,163,163)', 'rgb(127,159,127)', 'rgb(239,220,188)', 'rgb(149,164,178)', 'rgb(188,108,156)', 'rgb(124,181,181)', 'rgb(217,217,217)', 'rgb(99,99,99)', 'rgb(236,188,188)', 'rgb(143,175,159)', 'rgb(240,223,175)', 'rgb(140,176,211)', 'rgb(236,147,211)', 'rgb(140,208,211)', 'rgb(247,247,247)']
+preserve-working-directory='always'
 use-custom-command=true
 use-system-font=false
 use-theme-colors=false
