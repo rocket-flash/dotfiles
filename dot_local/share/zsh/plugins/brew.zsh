@@ -11,13 +11,15 @@ for pkg in "coreutils" "findutils" "gnu-sed"; do
     [[ -d "${gnubin}" ]] && export PATH="${gnubin}:${PATH}"
 done
 
-# OpenSSL
-OPENSSL_PATH="${BREW_PREFIX}/opt/openssl"
-if [[ -d "${OPENSSL_PATH}" ]]; then
-    export LDFLAGS="$LDFLAGS -L${OPENSSL_PATH}/lib"
-    export CFLAGS="$CFLAGS -I${OPENSSL_PATH}/include"
-    export PKG_CONFIG_PATH="${OPENSSL_PATH}/lib/pkgconfig:$PKG_CONFIG_PATH"
-fi
+# Lib specific flags
+for lib in 'openssl' 'zlib'; do
+    lib_path="${BREW_PREFIX}/opt/${lib}"
+    if [[ -d "${lib_path}" ]]; then
+        export LDFLAGS="$LDFLAGS -L${lib_path}/lib"
+        export CFLAGS="$CFLAGS -I${lib_path}/include"
+        export PKG_CONFIG_PATH="${lib_path}/lib/pkgconfig:$PKG_CONFIG_PATH"
+    fi
+done
 
 # Qt
 QT_PATH="${BREW_PREFIX}/opt/qt"
