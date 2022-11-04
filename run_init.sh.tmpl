@@ -42,26 +42,6 @@ install_nvim_plugins() {
     fi
 }
 
-install_pyenv_latest() {
-    if ! command -v pyenv &> /dev/null; then
-        warning "$0: pyenv not installed: skipping"
-        return
-    fi
-
-    pyenv_plugin_root="$(pyenv root)/plugins"
-
-    if [ -e "${pyenv_plugin_root}/xxenv-latest" ]; then
-        info "Updating pyenv-latest plugin"
-        pushd "${pyenv_plugin_root}/xxenv-latest" > /dev/null
-        git pull
-        popd > /dev/null
-    else
-        info "Installing pyenv-latest plugin"
-        [[ -d "$pyenv_plugin_root" ]] || mkdir -p "$pyenv_plugin_root"
-        git clone https://github.com/momo-lab/xxenv-latest.git "${pyenv_plugin_root}/xxenv-latest"
-    fi
-}
-
 install_tmux_plugin_manager() {
     if ! command -v tmux &> /dev/null; then
         warning "$0: tmux not installed: skipping"
@@ -160,7 +140,6 @@ sync_library_fonts() {
 }
 
 install_nvim_plugins
-install_pyenv_latest
 install_tmux_plugin_manager
 install_fzf_git
 install_cmus_notify

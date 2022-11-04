@@ -72,4 +72,8 @@ remove "${HOME}/.ideavimrc"
 remove "${HOME}/.config/zsh/local"
 remove "${HOME}/.local/share/zsh/plugins/ssh.zsh"
 
+if command -v pyenv &> /dev/null; then
+    remove "$(pyenv root)/plugins/xxenv-latest"
+fi
+
 # vi: ft=sh
