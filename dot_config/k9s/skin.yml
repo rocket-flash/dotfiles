@@ -1,0 +1,101 @@
+# OneDark presets
+foreground: &foreground "#dcdccc"
+background: &background "#3f3f3f"
+black: &black "#313131"
+blue: &blue "#95a4b2"
+green: &green "#7f9f7f"
+grey: &grey "#d9d9d9"
+orange: &orange "#ffcfaf"
+purple: &purple "#bc6c9c"
+red: &red "#dca3a3"
+yellow: &yellow "#efdcbc"
+yellow_bright: &yellow_bright "#f0dfaf"
+
+k9s:
+  body:
+    fgColor: *foreground
+    bgColor: *background
+    logoColor: *green
+  prompt:
+    fgColor: *foreground
+    bgColor: *background
+    suggestColor: *orange
+  info:
+    fgColor: *grey
+    sectionColor: *green
+  dialog:
+    fgColor: *black
+    bgColor: *background
+    buttonFgColor: *foreground
+    buttonBgColor: *green
+    buttonFocusFgColor: *black
+    buttonFocusBgColor: *blue
+    labelFgColor: *orange
+    fieldFgColor: *blue
+  frame:
+    border:
+      fgColor: *green
+      focusColor: *green
+    menu:
+      fgColor: *grey
+      keyColor: *yellow
+      numKeyColor: *yellow
+    crumbs:
+      fgColor: *black
+      bgColor: *green
+      activeColor: *yellow
+    status:
+      newColor: *blue
+      modifyColor: *green
+      addColor: *grey
+      pendingColor: *orange
+      errorColor: *red
+      highlightColor: *yellow
+      killColor: *purple
+      completedColor: *grey
+    title:
+      fgColor: *blue
+      bgColor: *background
+      highlightColor: *purple
+      counterColor: *foreground
+      filterColor: *blue
+  views:
+    charts:
+      bgColor: *background
+      defaultDialColors:
+        - *green
+        - *red
+      defaultChartColors:
+        - *green
+        - *red
+    table:
+      fgColor: *yellow
+      bgColor: *background
+      cursorFgColor: *black
+      cursorBgColor: *blue
+      markColor: *yellow_bright
+      header:
+        fgColor: *grey
+        bgColor: *background
+        sorterColor: *orange
+    xray:
+      fgColor: *blue
+      bgColor: *background
+      cursorColor: *foreground
+      graphicColor: *yellow_bright
+      showIcons: false
+    yaml:
+      keyColor: *red
+      colonColor: *grey
+      valueColor: *grey
+    logs:
+      fgColor: *grey
+      bgColor: *background
+      indicator:
+        fgColor: *blue
+        bgColor: *background
+    help:
+      fgColor: *grey
+      bgColor: *background
+      indicator:
+        fgColor: *blue
