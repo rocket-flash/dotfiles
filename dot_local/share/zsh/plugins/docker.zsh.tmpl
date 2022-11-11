@@ -33,12 +33,12 @@ function docker-grep-rmi() {
 function docker-cleanup() {
     local prune_all
 
-    prune_all=0
+    keep=0
 
     for arg in "$@"; do
         case "${arg}" in
-            -a|--all)
-                prune_all=1
+            -k|--keep)
+                keep=1
                 ;;
             *)
                 echo "Unrecognized arg: ${arg}"
@@ -49,14 +49,16 @@ function docker-cleanup() {
     docker container prune -f
     docker image prune -f
 
-    if [[ "${prune_all}" -ne 0 ]]; then
+    if [[ "${keep}" -eq 0 ]]; then
         docker volume prune -f
     else
         docker volume ls -qf dangling=true \
             | {{ .command.xargs }} docker inspect \
-            | jq -r '.[] | select((.Labels | has("com.docker.compose.project") | not) and (.Labels | has("org.acidrain.pipeline_runner.project") | not)).Name' \
+            | jq -r '.[] | select(.Labels | has("org.acidrain.no-prune") | not).Name' \
             | {{ .command.xargs }} docker volume rm
     fi
+
+    docker network prune -f
 }
 
 function docker-kill-all() {
