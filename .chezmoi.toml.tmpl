@@ -1,7 +1,7 @@
 {{- $email := promptStringOnce . "email" "Email Address" "acidrain1@gmail.com" -}}
 {{- $signingkey := promptStringOnce . "signingkey" "GPG Signing Key" -}}
 {{- $makejobs := promptIntOnce . "makejobs" "Number of Parallel Make Jobs" 4 -}}
-{{- $enable_coc_nvim := promptBoolOnce .neovim "enable_coc_nvim" "Enable coc.nvim" true -}}
+{{- $nvim_enable_coc := promptBoolOnce . "nvim_enable_coc" "Enable coc.nvim" true -}}
 
 {{- $osid := .chezmoi.os -}}
 {{- if (and (ne .chezmoi.osRelease nil) (hasKey .chezmoi.osRelease "id")) -}}
@@ -12,6 +12,7 @@
 email = {{ $email | quote }}
 signingkey = {{ $signingkey | quote }}
 makejobs = {{ $makejobs }}
+nvim_enable_coc = {{ $nvim_enable_coc }}
 osid = {{ $osid | quote }}
 
 [data.command]
@@ -63,8 +64,5 @@ quantum = 1024
 min_quantum = 16
 max_quantum = 2048
 {{- end }}
-
-[data.neovim]
-enable_coc_nvim = {{ $enable_coc_nvim }}
 
 # vim: ft=toml

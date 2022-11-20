@@ -24,7 +24,7 @@ Plug 'gpanders/editorconfig.nvim'
 
 if !&diff
     Plug 'junegunn/vim-peekaboo'
-    {{- if eq .neovim.enable_coc_nvim true }}
+    {{- if eq .nvim_enable_coc true }}
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     {{- end }}
 endif
@@ -289,7 +289,7 @@ let g:airline_section_z="%#__accent_bold#%4l/%L%#__restore__# :%3v"
 let g:peekaboo_window='topleft new'
 " ]]]
 
-{{- if eq .neovim.enable_coc_nvim true }}
+{{- if eq .nvim_enable_coc true }}
 
 " Coc.nvim [[[
 let g:coc_global_extensions = [
