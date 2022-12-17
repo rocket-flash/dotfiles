@@ -19,7 +19,7 @@ function w() {
 
     prj=$(find "${=searchdirs}" -maxdepth 1 -mindepth 1 -type d -print \
         | sed "s@^${srcdir}/@@" \
-        | fzf-tmux "${=FZF_TMUX_OPTS:-}" -q "${@:-}")
+        | $(__fzfcmd) -q "${@:-}")
 
     if [[ -z "${prj}" ]]; then
         echo "No project selected" 1>&2
