@@ -10,7 +10,7 @@ else
     fatal "Can't determine main branch"
 fi
 
-if [[ "$(git describe --all HEAD)" = "heads/${main_branch}" ]]; then
+if [[ "$(git branch --show-current)" = "${main_branch}" ]]; then
     fatal "Can't rebase: already on main branch"
 fi
 
