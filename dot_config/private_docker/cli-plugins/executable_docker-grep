@@ -57,7 +57,7 @@ cmd-rm() {
     done
 
     if [[ -n "${noconfirm:-}" ]] || prompt-confirmation "Delete containers" "y"; then
-        echo "${containers}" | xargs docker rm "${force}"
+        echo "${containers}" | xargs docker rm "${force}" --volumes
     fi
 }
 
