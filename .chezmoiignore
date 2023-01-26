@@ -9,6 +9,7 @@ vimplug.lock
 .config/fontconfig
 .config/pipewire
 .config/wireplumber
+hide-lsp-plugins.sh
 {{- end }}
 {{- if ne .osid "linux-arch" }}
 .config/paru
