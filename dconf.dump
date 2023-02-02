@@ -13,6 +13,7 @@ numlock-state=true
 [org/gnome/desktop/peripherals/touchpad]
 disable-while-typing=true
 natural-scroll=true
+send-events='disabled-on-external-mouse'
 tap-to-click=true
 two-finger-scrolling-enabled=true
 
